@@ -18,18 +18,18 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
           let iconName;
 
           if (route.name === "MyGarden") {
-            return <Ionicons name="ios-home" size={size} color={color} />;
+            return <Ionicons name="ios-leaf" size={size} color={color} />;
           } else if (route.name === "Search") {
-            return <Ionicons name="ios-search" size={size} color={color} />;
+            return <Ionicons name="ios-book" size={size} color={color} />;
           } else if (route.name === "Profile") {
-            return <Ionicons name="ios-person" size={size} color={color} />;
+            return <Ionicons name="ios-settings" size={size} color={color} />;
           }
 
           // You can return any component that you like here!
         },
       })}
       tabBarOptions={{
-        activeTintColor: "rgb(10, 132, 255)",
+        activeTintColor: "rgb(128, 237, 197)",
         inactiveTintColor: "rgb(142, 142, 147)",
       }}
     >
