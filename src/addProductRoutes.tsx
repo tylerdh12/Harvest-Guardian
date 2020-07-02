@@ -3,6 +3,7 @@ import { StackNavigationOptions } from "@react-navigation/stack";
 import { StackNavigationEventMap } from "@react-navigation/stack/lib/typescript/src/types";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Text } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import {
   MyGardenParamList,
   MyGardenStackNavProps,
@@ -13,7 +14,12 @@ import { Center } from "./StyledContainers/Center";
 function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
   return (
     <Center>
-      <Text>{route.params.name}</Text>
+      <ScrollView style={{
+        
+      }}>
+        <Text>Plant Name: </Text>
+        <Text></Text>
+      </ScrollView>
       <Button
         title="Edit this product"
         onPress={() => {

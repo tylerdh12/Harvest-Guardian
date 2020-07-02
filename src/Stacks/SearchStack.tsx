@@ -22,12 +22,16 @@ function Search({ navigation }: any) {
           return (
             <TouchableOpacity
               style={{
-                alignItems: "center",
                 justifyContent: "center",
                 padding: 30,
-                margin: 10,
-                backgroundColor: "rgb(128, 237, 197)",
-                borderRadius: 10,
+                margin: 12,
+                backgroundColor: "rgb(251, 252, 252)",
+                borderRadius: 30,
+                shadowColor: "#000",
+                shadowOffset: { width: 6, height: 5 },
+                shadowOpacity: 0.2,
+                shadowRadius: 4,
+                elevation: 5,
               }}
               onPress={() => {
                 navigation.navigate("Product", { name: item });
@@ -47,7 +51,19 @@ function Search({ navigation }: any) {
 export const SearchStack: React.FC<SearchStackProps> = ({}) => {
   return (
     <Stack.Navigator initialRouteName="Search">
-      <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen
+        name="Search"
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(83, 151, 221)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+        component={Search}
+      />
       {addProductRoutes(Stack)}
     </Stack.Navigator>
   );
