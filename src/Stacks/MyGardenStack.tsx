@@ -26,9 +26,9 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
               style={{
                 alignItems: "center",
                 justifyContent: "center",
-                padding: 15,
+                padding: 30,
                 margin: 10,
-                backgroundColor: "lightblue",
+                backgroundColor: "rgb(128, 237, 197)",
                 borderRadius: 10,
               }}
               onPress={() => {
@@ -45,6 +45,8 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
     </Center>
   );
 }
+
+export const PlantDetails = () => {};
 
 export const MyGardenStack: React.FC<MyGardenStackProps> = ({}) => {
   return (
