@@ -1,4 +1,6 @@
 import { StackNavigationState, TypedNavigator } from "@react-navigation/native";
+import { StackNavigationOptions } from "@react-navigation/stack";
+import { StackNavigationEventMap } from "@react-navigation/stack/lib/typescript/src/types";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Text } from "react-native";
 import {
@@ -56,8 +58,8 @@ export const addProductRoutes = (
   Stack: TypedNavigator<
     MyGardenParamList | SearchParamList,
     StackNavigationState,
-    any,
-    any,
+    StackNavigationOptions,
+    StackNavigationEventMap,
     any
   >
 ) => {
