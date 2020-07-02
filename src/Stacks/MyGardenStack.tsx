@@ -4,16 +4,16 @@ import React from "react";
 import { FlatList, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { addProductRoutes } from "../addProductRoutes";
-import { Center } from "../StyledContainers/Center";
 import {
-  HomeParamList,
-  HomeStackNavProps,
-} from "./../ParamLists/HomeParamList";
+  MyGardenParamList,
+  MyGardenStackNavProps,
+} from "../ParamLists/MyGardenParamList";
+import { Center } from "../StyledContainers/Center";
 
-interface HomeStackProps {}
-const Stack = createStackNavigator<HomeParamList>();
+interface MyGardenStackProps {}
+const Stack = createStackNavigator<MyGardenParamList>();
 
-function Feed({ navigation }: HomeStackNavProps<"Feed">) {
+function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
   return (
     <Center>
       <FlatList
@@ -46,10 +46,16 @@ function Feed({ navigation }: HomeStackNavProps<"Feed">) {
   );
 }
 
-export const HomeStack: React.FC<HomeStackProps> = ({}) => {
+export const MyGardenStack: React.FC<MyGardenStackProps> = ({}) => {
   return (
-    <Stack.Navigator initialRouteName="Feed">
-      <Stack.Screen name="Feed" component={Feed} />
+    <Stack.Navigator initialRouteName="MyGarden">
+      <Stack.Screen
+        name="MyGarden"
+        options={{
+          headerTitle: "My Garden",
+        }}
+        component={MyGarden}
+      />
       {addProductRoutes(Stack)}
     </Stack.Navigator>
   );

@@ -1,11 +1,14 @@
 import { StackNavigationState, TypedNavigator } from "@react-navigation/native";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Text } from "react-native";
-import { HomeParamList, HomeStackNavProps } from "./ParamLists/HomeParamList";
+import {
+  MyGardenParamList,
+  MyGardenStackNavProps,
+} from "./ParamLists/MyGardenParamList";
 import { SearchParamList } from "./ParamLists/SearchParamList";
 import { Center } from "./StyledContainers/Center";
 
-function Product({ route, navigation }: HomeStackNavProps<"Product">) {
+function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
   return (
     <Center>
       <Text>{route.params.name}</Text>
@@ -25,7 +28,10 @@ function apiCall(x: any) {
   return x;
 }
 
-function EditProduct({ route, navigation }: HomeStackNavProps<"EditProduct">) {
+function EditProduct({
+  route,
+  navigation,
+}: MyGardenStackNavProps<"EditProduct">) {
   const [formState] = useState();
   const submit = useRef(() => {});
 
@@ -48,7 +54,7 @@ function EditProduct({ route, navigation }: HomeStackNavProps<"EditProduct">) {
 
 export const addProductRoutes = (
   Stack: TypedNavigator<
-    HomeParamList | SearchParamList,
+    MyGardenParamList | SearchParamList,
     StackNavigationState,
     any,
     any,
