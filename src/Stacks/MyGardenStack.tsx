@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import faker from "faker";
 import React from "react";
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { addProductRoutes } from "../addProductRoutes";
 import {
@@ -16,6 +16,19 @@ const Stack = createStackNavigator<MyGardenParamList>();
 function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
   return (
     <Center>
+      <View
+        style={{
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 30,
+          marginTop: 0,
+          marginBottom: 10,
+          backgroundColor: "rgb(128, 237, 197)",
+        }}
+      >
+        <Text>Weather</Text>
+      </View>
       <FlatList
         style={{
           width: "100%",
