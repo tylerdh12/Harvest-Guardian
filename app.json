@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Expo Native App Boilerplate",
-    "slug": "Starter",
+    "name": "Harvest Guardian",
+    "slug": "Harvest_Guardian",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
