@@ -1,4 +1,4 @@
-# Expo Boilerplate
+# Harvest Guardian
 
 ---
 
@@ -16,15 +16,15 @@ You're sections headers will be used to reference location of destination.
 
 ## Description
 
-The Project here was covered in Ben Awad's youtube video showing how to use React Native Navigation v5. That video can be found [here](https://www.youtube.com/watch?v=Hln37dE19bs). I have decided to use this boilerplate code in future projects, so I added it here on github so I can modify the boilerplate as I develope more understanding of the TypeScript language and React Native. This is a good starting point to begin a project that requires routing. I will go back to the code to revise this project to guide users of this boilerplate where and what should be changed to build their own application. I would really like to thank Ben Awad for providing this video content to many to demonstrate the usage of React Native Navigation. Thank You!
+Harvest Guardian is a gardening application to help track your plants and will also help teach you gardening tips. 
 
 #### Technologies
 
 - TypeScript
+- Use of GQL Api
 - Yarn
 - React Native
 - Expo
-- Faker
 - Expo Vector Icons "React Native Vector Icons"
 - React Native Screens
 
@@ -38,7 +38,6 @@ To get started download the project. Then Use Yarn install inside the project fo
 
 ## Additional Resources
 
-- [YouTube Video - Ben Awad](https://www.youtube.com/watch?v=Hln37dE19bs)
 - [React Navigation Docs](https://reactnavigation.org/)
 
 [Back To The Top](#table-of-contents)
@@ -49,7 +48,7 @@ To get started download the project. Then Use Yarn install inside the project fo
 
 MIT License
 
-Copyright (c) [2020][tyler harper dba jsstack development]
+Copyright (c) [2020][Tyler Harper DBA JSStack Development]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -74,8 +73,6 @@ SOFTWARE.
 ---
 
 ## Author Info
-
-- Original Author [Ben Awad](https://www.youtube.com/watch?v=Hln37dE19bs)
 
 Future support for this Boilerplate will be supported by:
 Tyler Harper
