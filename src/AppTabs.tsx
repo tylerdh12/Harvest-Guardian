@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { MyGardenStack } from "./Stacks/MyGardenStack";
-import { SearchStack } from "./Stacks/SearchStack";
+import { SeedLibraryStack } from "./Stacks/SeedLibraryStack";
 import { SettingsStack } from "./Stacks/SettingsStack";
 
 interface AppTabsProps {}
@@ -17,11 +17,11 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
         tabBarIcon: ({ color, size }) => {
           let iconName;
 
-          if (route.name === "MyGarden") {
+          if (route.name === "My Garden") {
             return <Ionicons name="ios-leaf" size={size} color={color} />;
-          } else if (route.name === "Search") {
+          } else if (route.name === "Seed Library") {
             return <Ionicons name="ios-book" size={size} color={color} />;
-          } else if (route.name === "Profile") {
+          } else if (route.name === "Settings") {
             return <Ionicons name="ios-settings" size={size} color={color} />;
           }
 
@@ -33,9 +33,9 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
         inactiveTintColor: "rgb(142, 142, 147)",
       }}
     >
-      <Tabs.Screen name="MyGarden" component={MyGardenStack} />
-      <Tabs.Screen name="Search" component={SearchStack} />
-      <Tabs.Screen name="Profile" component={SettingsStack} />
+      <Tabs.Screen name="My Garden" component={MyGardenStack} />
+      <Tabs.Screen name="Seed Library" component={SeedLibraryStack} />
+      <Tabs.Screen name="Settings" component={SettingsStack} />
     </Tabs.Navigator>
   );
 };
