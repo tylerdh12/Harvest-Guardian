@@ -1,5 +1,7 @@
 # Harvest Guardian
 
+Garden Smarter
+
 ### Table of Contents
 
 You're sections headers will be used to reference location of destination.
@@ -72,7 +74,7 @@ SOFTWARE.
 
 ## Author Info
 
-Future support for this Boilerplate will be supported by:
+Future support for this application will be supported by:
 Tyler Harper
 
 - Twitter - [@jsstackdev](https://twitter.com/jsstackdev)
