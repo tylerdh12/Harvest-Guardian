@@ -21,8 +21,6 @@ const Stack = createStackNavigator<SeedLibraryParamList>();
 function SeedLibrary({ navigation }: any) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [title, setTitle] = useState([]);
-  const [show, setShow] = useState(false);
 
   useEffect(() => {
     axios

@@ -71,7 +71,7 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
             style={{
               width: "100%",
             }}
-            renderItem={({ item }) => {
+            renderItem={({ item }: any) => {
               return (
                 <TouchableOpacity
                   style={{
@@ -152,7 +152,7 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={(product, idx) => product + idx}
+            keyExtractor={(product: any, idx) => product + idx}
             data={data}
           />
         </View>
