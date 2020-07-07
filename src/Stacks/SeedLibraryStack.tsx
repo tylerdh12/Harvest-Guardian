@@ -51,7 +51,7 @@ function SeedLibrary({ navigation }: any) {
         setData(res.data.data.allSeeds.data);
       })
       .catch((error) => alert(error))
-      .finally(setLoading(false));
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -91,7 +91,7 @@ function SeedLibrary({ navigation }: any) {
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={(product, idx) => product + idx}
+            keyExtractor={(product: any, idx) => product + idx}
             data={data}
           />
         </View>

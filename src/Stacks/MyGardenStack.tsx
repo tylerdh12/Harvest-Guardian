@@ -56,7 +56,7 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
         setData(res.data.data.allPlants.data);
       })
       .catch((error) => alert(error))
-      .finally(setLoading(false));
+      .finally(() => setLoading(false));
   }, []);
 
   return (
