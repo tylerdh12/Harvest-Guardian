@@ -15,10 +15,16 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.jsstack.harvest_guardian",
+      "buildNumber": "0.0.1",
       "supportsTablet": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.jsstack.harvest_guardian",
+      "versionCode": 1
     }
   }
 }
