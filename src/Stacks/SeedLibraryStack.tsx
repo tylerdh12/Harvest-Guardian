@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,6 +12,7 @@ import {
 import config from "../../config.js";
 import { addProductRoutes } from "../addProductRoutes";
 import { SeedLibraryParamList } from "../ParamLists/SeedLibraryParamList";
+import { Center } from "../StyledContainers/Center";
 
 interface SeedLibraryStackProps {}
 
@@ -73,64 +73,62 @@ function SeedLibrary({ navigation }: any) {
   }, []);
 
   return (
-    <SafeAreaView style={styles.center}>
+    <Center>
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
-        <View>
-          <FlatList
-            style={{
-              width: "100%",
-            }}
-            renderItem={({ item }: any) => {
-              return (
-                <TouchableOpacity
-                  style={{
-                    justifyContent: "center",
-                    padding: 30,
-                    margin: 12,
-                    backgroundColor: "rgb(251, 252, 252)",
-                    borderRadius: 30,
-                    shadowColor: "#000",
-                    shadowOffset: { width: 6, height: 5 },
-                    shadowOpacity: 0.2,
-                    shadowRadius: 4,
-                    elevation: 5,
-                  }}
-                  onPress={() => {
-                    navigation.navigate("Product", {
-                      data: item,
-                      type: "seed",
-                    });
-                  }}
-                >
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ width: "50%" }}>
-                      <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                        {item.species}
-                      </Text>
-                    </View>
-                    <View style={{ width: "50%" }}>
-                      <Text
-                        style={{
-                          textAlign: "right",
-                          marginTop: 2,
-                          fontWeight: "500",
-                        }}
-                      >
-                        Harvest in {item.daysToHarvest}
-                      </Text>
-                    </View>
+        <FlatList
+          style={{
+            width: "100%",
+          }}
+          renderItem={({ item }: any) => {
+            return (
+              <TouchableOpacity
+                style={{
+                  justifyContent: "center",
+                  padding: 30,
+                  margin: 12,
+                  backgroundColor: "rgb(251, 252, 252)",
+                  borderRadius: 30,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 6, height: 5 },
+                  shadowOpacity: 0.2,
+                  shadowRadius: 4,
+                  elevation: 5,
+                }}
+                onPress={() => {
+                  navigation.navigate("Product", {
+                    data: item,
+                    type: "seed",
+                  });
+                }}
+              >
+                <View style={{ flexDirection: "row" }}>
+                  <View style={{ width: "50%" }}>
+                    <Text style={{ fontSize: 18, fontWeight: "600" }}>
+                      {item.species}
+                    </Text>
                   </View>
-                </TouchableOpacity>
-              );
-            }}
-            keyExtractor={(product: any, idx) => product + idx}
-            data={data}
-          />
-        </View>
+                  <View style={{ width: "50%" }}>
+                    <Text
+                      style={{
+                        textAlign: "right",
+                        marginTop: 2,
+                        fontWeight: "500",
+                      }}
+                    >
+                      Harvest in {item.daysToHarvest}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+          keyExtractor={(product: any, idx) => product + idx}
+          data={data}
+        />
       )}
-    </SafeAreaView>
+    </Center>
   );
 }
 

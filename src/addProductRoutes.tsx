@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
   Image,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -20,177 +19,166 @@ import { Center } from "./StyledContainers/Center";
 
 function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.scrollView}>
-        <Image
-          style={{ width: "100%", height: 300 }}
-          source={{
-            uri:
-              "https://d2ebzu6go672f3.cloudfront.net/media/content/images/p7_Broccoli_HH1812_gi905351392.jpg",
+    <ScrollView style={styles.scrollView}>
+      <Image
+        style={{ width: "100%", height: 300 }}
+        source={{
+          uri:
+            "https://d2ebzu6go672f3.cloudfront.net/media/content/images/p7_Broccoli_HH1812_gi905351392.jpg",
+        }}
+      />
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Species: </Text>
+        <Text style={styles.dataText}>{route.params.data.species}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Variety: </Text>
+        <Text style={styles.dataText}>{route.params.data.variety}</Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Date Planted: </Text>
+        <Text style={styles.dataText}>{route.params.data.datePlanted}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Description: </Text>
+        <Text style={styles.dataText}>{route.params.data.description}</Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Days To Harvest: </Text>
+        <Text style={styles.dataText}>{route.params.data.daysToHarvest}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Anti-Companion Plants: </Text>
+        <Text style={styles.dataText}>
+          {route.params.data.antiCompanionPlants}
+        </Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Sun Requirements: </Text>
+        <Text style={styles.dataText}>{route.params.data.sunRequirements}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Soil TemperatureHigh: </Text>
+        <Text style={styles.dataText}>
+          {route.params.data.soilTemperatureHigh}
+        </Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Sowing Method: </Text>
+        <Text style={styles.dataText}>{route.params.data.sowingMethod}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Binomial Name: </Text>
+        <Text style={styles.dataText}>{route.params.data.binomialName}</Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Plant Height: </Text>
+        <Text style={styles.dataText}>{route.params.data.plantHeight}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Seed Depth: </Text>
+        <Text style={styles.dataText}>{route.params.data.seedDepth}</Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Seed Spacing: </Text>
+        <Text style={styles.dataText}>{route.params.data.seedSpacing}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Days To Germinate: </Text>
+        <Text style={styles.dataText}>{route.params.data.daysToGerminate}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Water Requirements: </Text>
+        <Text style={styles.dataText}>
+          {route.params.data.waterRequirements}
+        </Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Planting Months: </Text>
+        <Text style={styles.dataText}>{route.params.data.plantingMonths}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Nutrient Requirements: </Text>
+        <Text style={styles.dataText}>
+          {route.params.data.nutrientRequirements}
+        </Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Soil Temperature Low: </Text>
+        <Text style={styles.dataText}>
+          {route.params.data.soilTemperatureLow}
+        </Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Feeds On: </Text>
+        <Text style={styles.dataText}>{route.params.data.feedsOn}</Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Byproduct: </Text>
+        <Text style={styles.dataText}>{route.params.data.byproduct}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Companion Plants: </Text>
+        <Text style={styles.dataText}>{route.params.data.companionPlants}</Text>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
+        <Text style={styles.labelText}>Images: </Text>
+        <Text style={styles.dataText}>{route.params.data.images}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Complete Data:</Text>
+        <Text style={styles.dataText}>{route.params.data.completeData}</Text>
+      </View>
+      {route.params.type === "plant" ? (
+        <View
+          style={{
+            justifyContent: "space-around",
+            alignItems: "center",
+            flexDirection: "row",
+            padding: 15,
           }}
-        />
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Species: </Text>
-          <Text style={styles.dataText}>{route.params.data.species}</Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Variety: </Text>
-          <Text style={styles.dataText}>{route.params.data.variety}</Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Date Planted: </Text>
-          <Text style={styles.dataText}>{route.params.data.datePlanted}</Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Description: </Text>
-          <Text style={styles.dataText}>{route.params.data.description}</Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Days To Harvest: </Text>
-          <Text style={styles.dataText}>{route.params.data.daysToHarvest}</Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Anti-Companion Plants: </Text>
-          <Text style={styles.dataText}>
-            {route.params.data.antiCompanionPlants}
-          </Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Sun Requirements: </Text>
-          <Text style={styles.dataText}>
-            {route.params.data.sunRequirements}
-          </Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Soil TemperatureHigh: </Text>
-          <Text style={styles.dataText}>
-            {route.params.data.soilTemperatureHigh}
-          </Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Sowing Method: </Text>
-          <Text style={styles.dataText}>{route.params.data.sowingMethod}</Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Binomial Name: </Text>
-          <Text style={styles.dataText}>{route.params.data.binomialName}</Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Plant Height: </Text>
-          <Text style={styles.dataText}>{route.params.data.plantHeight}</Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Seed Depth: </Text>
-          <Text style={styles.dataText}>{route.params.data.seedDepth}</Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Seed Spacing: </Text>
-          <Text style={styles.dataText}>{route.params.data.seedSpacing}</Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Days To Germinate: </Text>
-          <Text style={styles.dataText}>
-            {route.params.data.daysToGerminate}
-          </Text>
-        </View>
-
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Water Requirements: </Text>
-          <Text style={styles.dataText}>
-            {route.params.data.waterRequirements}
-          </Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Planting Months: </Text>
-          <Text style={styles.dataText}>
-            {route.params.data.plantingMonths}
-          </Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Nutrient Requirements: </Text>
-          <Text style={styles.dataText}>
-            {route.params.data.nutrientRequirements}
-          </Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Soil Temperature Low: </Text>
-          <Text style={styles.dataText}>
-            {route.params.data.soilTemperatureLow}
-          </Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Feeds On: </Text>
-          <Text style={styles.dataText}>{route.params.data.feedsOn}</Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Byproduct: </Text>
-          <Text style={styles.dataText}>{route.params.data.byproduct}</Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Companion Plants: </Text>
-          <Text style={styles.dataText}>
-            {route.params.data.companionPlants}
-          </Text>
-        </View>
-        <View style={styles.detailItemContainerOdd}>
-          <Text style={styles.labelText}>Images: </Text>
-          <Text style={styles.dataText}>{route.params.data.images}</Text>
-        </View>
-        <View style={styles.detailItemContainerEven}>
-          <Text style={styles.labelText}>Complete Data:</Text>
-          <Text style={styles.dataText}>{route.params.data.completeData}</Text>
-        </View>
-        {route.params.type === "plant" ? (
-          <View
-            style={{
-              justifyContent: "space-around",
-              alignItems: "center",
-              flexDirection: "row",
-              padding: 15,
+        >
+          <Button
+            title="Edit"
+            onPress={() => {
+              navigation.navigate("EditProduct", {
+                name: route.params.data.species,
+              });
             }}
-          >
-            <Button
-              title="Edit"
-              onPress={() => {
-                navigation.navigate("EditProduct", {
-                  name: route.params.data.species,
-                });
-              }}
-            />
-            <Button
-              title="Delete"
-              color="red"
-              onPress={() => {
-                alert("Plant Removed");
-              }}
-            />
-          </View>
-        ) : (
-          <View
-            style={{
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              flexDirection: "row",
-              padding: 15,
+          />
+          <Button
+            title="Delete"
+            color="red"
+            onPress={() => {
+              alert("Plant Removed");
             }}
-          >
-            <Button
-              title="Edit"
-              onPress={() => {
-                navigation.navigate("EditProduct", {
-                  name: route.params.data.species,
-                });
-              }}
-            />
-            <Button
-              title="Add to Garden"
-              color="rgb(148, 224, 136)"
-              onPress={() => alert("Seed Added to My Garden")}
-            />
-          </View>
-        )}
-      </ScrollView>
-    </SafeAreaView>
+          />
+        </View>
+      ) : (
+        <View
+          style={{
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            flexDirection: "row",
+            padding: 15,
+          }}
+        >
+          <Button
+            title="Edit"
+            onPress={() => {
+              navigation.navigate("EditProduct", {
+                name: route.params.data.species,
+              });
+            }}
+          />
+          <Button
+            title="Add to Garden"
+            color="rgb(148, 224, 136)"
+            onPress={() => alert("Seed Added to My Garden")}
+          />
+        </View>
+      )}
+    </ScrollView>
   );
 }
 

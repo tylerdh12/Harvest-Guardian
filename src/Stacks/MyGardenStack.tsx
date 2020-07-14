@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -16,6 +15,7 @@ import {
   MyGardenParamList,
   MyGardenStackNavProps,
 } from "../ParamLists/MyGardenParamList";
+import { Center } from "../StyledContainers/Center";
 import config from "./../../config";
 
 interface MyGardenStackProps {}
@@ -79,102 +79,100 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
   }, []);
 
   return (
-    <SafeAreaView style={styles.center}>
+    <Center style={styles.center}>
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
-        <View>
-          <FlatList
-            style={{
-              width: "100%",
-            }}
-            renderItem={({ item }: any) => {
-              return (
-                <TouchableOpacity
+        <FlatList
+          style={{
+            width: "100%",
+          }}
+          renderItem={({ item }: any) => {
+            return (
+              <TouchableOpacity
+                style={{
+                  justifyContent: "center",
+                  padding: 30,
+                  margin: 12,
+                  backgroundColor: "rgb(251, 252, 252)",
+                  borderRadius: 30,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 6, height: 5 },
+                  shadowOpacity: 0.2,
+                  shadowRadius: 4,
+                  elevation: 5,
+                }}
+                onPress={() => {
+                  navigation.navigate("Product", {
+                    data: item,
+                    type: "plant",
+                  });
+                }}
+              >
+                <Text style={{ fontSize: 18, fontWeight: "600" }}>
+                  {item.species}
+                </Text>
+                <View
                   style={{
-                    justifyContent: "center",
-                    padding: 30,
-                    margin: 12,
-                    backgroundColor: "rgb(251, 252, 252)",
-                    borderRadius: 30,
-                    shadowColor: "#000",
-                    shadowOffset: { width: 6, height: 5 },
-                    shadowOpacity: 0.2,
-                    shadowRadius: 4,
-                    elevation: 5,
-                  }}
-                  onPress={() => {
-                    navigation.navigate("Product", {
-                      data: item,
-                      type: "plant",
-                    });
+                    marginTop: 10,
+                    backgroundColor: "transparent",
+                    borderStyle: "solid",
+                    borderWidth: 1,
+                    borderColor: "rgb(148, 224, 136)",
+                    borderRadius: 10,
+                    width: "100%",
                   }}
                 >
-                  <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                    {item.species}
-                  </Text>
                   <View
                     style={{
-                      marginTop: 10,
-                      backgroundColor: "transparent",
-                      borderStyle: "solid",
-                      borderWidth: 1,
-                      borderColor: "rgb(148, 224, 136)",
+                      height: 8,
+                      backgroundColor: "rgb(148, 224, 136)",
                       borderRadius: 10,
-                      width: "100%",
+                      width: "20%",
+                      flex: 1,
                     }}
-                  >
-                    <View
+                  ></View>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                  <View style={{ width: "50%" }}>
+                    <Text
                       style={{
-                        height: 8,
-                        backgroundColor: "rgb(148, 224, 136)",
-                        borderRadius: 10,
-                        width: "20%",
-                        flex: 1,
+                        textAlign: "left",
+                        marginTop: 10,
+                        marginBottom: 5,
+                        fontWeight: "500",
                       }}
-                    ></View>
+                    >
+                      Date Planted
+                    </Text>
+                    <Text style={{ textAlign: "left" }}>
+                      {item.datePlanted}
+                    </Text>
                   </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ width: "50%" }}>
-                      <Text
-                        style={{
-                          textAlign: "left",
-                          marginTop: 10,
-                          marginBottom: 5,
-                          fontWeight: "500",
-                        }}
-                      >
-                        Date Planted
-                      </Text>
-                      <Text style={{ textAlign: "left" }}>
-                        {item.datePlanted}
-                      </Text>
-                    </View>
-                    <View style={{ width: "50%" }}>
-                      <Text
-                        style={{
-                          textAlign: "right",
-                          marginTop: 10,
-                          marginBottom: 5,
-                          fontWeight: "500",
-                        }}
-                      >
-                        Days Until Harvest
-                      </Text>
-                      <Text style={{ textAlign: "right" }}>
-                        {item.daysToHarvest}
-                      </Text>
-                    </View>
+                  <View style={{ width: "50%" }}>
+                    <Text
+                      style={{
+                        textAlign: "right",
+                        marginTop: 10,
+                        marginBottom: 5,
+                        fontWeight: "500",
+                      }}
+                    >
+                      Days Until Harvest
+                    </Text>
+                    <Text style={{ textAlign: "right" }}>
+                      {item.daysToHarvest}
+                    </Text>
                   </View>
-                </TouchableOpacity>
-              );
-            }}
-            keyExtractor={(plant: any, idx) => plant + idx}
-            data={data}
-          />
-        </View>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+          keyExtractor={(plant: any, idx) => plant + idx}
+          data={data}
+        />
       )}
-    </SafeAreaView>
+    </Center>
   );
 }
 
@@ -204,7 +202,7 @@ export const MyGardenStack: React.FC<MyGardenStackProps> = ({ navigation }) => {
           headerTintColor: "#fff",
           headerTitleStyle: {
             fontWeight: "700",
-            fontSize: 20
+            fontSize: 20,
           },
         }}
         component={MyGarden}
