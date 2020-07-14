@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   FlatList,
   SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -15,7 +16,6 @@ import {
   MyGardenParamList,
   MyGardenStackNavProps,
 } from "../ParamLists/MyGardenParamList";
-import { Center } from "../StyledContainers/Center";
 import config from "./../../config";
 
 interface MyGardenStackProps {}
@@ -41,6 +41,25 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
                 variety
                 species
                 plantingMonths
+                species
+                antiCompanionPlants
+                sunRequirements
+                soilTemperatureHigh
+                sowingMethod
+                binomialName
+                plantHeight
+                description
+                completeData
+                seedDepth
+                seedSpacing
+                daysToGerminate
+                waterRequirements
+                nutrientRequirements
+                soilTemperatureLow
+                feedsOn
+                byproduct
+                companionPlants
+                images
               }
             }
           }
@@ -60,11 +79,9 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.center}>
       {isLoading ? (
-        <Center>
-          <ActivityIndicator size="large" />
-        </Center>
+        <ActivityIndicator size="large" />
       ) : (
         <View>
           <FlatList
@@ -90,6 +107,7 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
                     navigation.navigate("Product", {
                       name: item.species,
                       plantId: item._id,
+                      data: item,
                     });
                   }}
                 >
@@ -195,3 +213,11 @@ export const MyGardenStack: React.FC<MyGardenStackProps> = ({ navigation }) => {
     </Stack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+});
