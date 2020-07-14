@@ -6,7 +6,7 @@ import { SettingsParamList } from "../ParamLists/SettingsParamList";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
 
-interface SettingsStackProps { }
+interface SettingsStackProps {}
 
 const Stack = createStackNavigator<SettingsParamList>();
 
@@ -145,16 +145,107 @@ function About({ navigation }: any) {
   );
 }
 
-export const SettingsStack: React.FC<SettingsStackProps> = ({ }) => {
+export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Security" component={Security} />
-      <Stack.Screen name="Notifications" component={Notifications} />
-      <Stack.Screen name="Preferences" component={Preferences} />
-      <Stack.Screen name="Privacy" component={Privacy} />
-      <Stack.Screen name="About" component={About} />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Security"
+        component={Security}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Preferences"
+        component={Preferences}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Privacy"
+        component={Privacy}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="About"
+        component={About}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
