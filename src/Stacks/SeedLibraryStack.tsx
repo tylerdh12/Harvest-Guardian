@@ -36,6 +36,24 @@ function SeedLibrary({ navigation }: any) {
                 variety
                 plantingMonths
                 daysToHarvest
+                antiCompanionPlants
+                sunRequirements
+                soilTemperatureHigh
+                sowingMethod
+                binomialName
+                plantHeight
+                description
+                completeData
+                seedDepth
+                seedSpacing
+                daysToGerminate
+                waterRequirements
+                nutrientRequirements
+                soilTemperatureLow
+                feedsOn
+                byproduct
+                companionPlants
+                images
               }
             }
           }
@@ -80,7 +98,10 @@ function SeedLibrary({ navigation }: any) {
                     elevation: 5,
                   }}
                   onPress={() => {
-                    navigation.navigate("Product", { name: item.species });
+                    navigation.navigate("Product", {
+                      data: item,
+                      type: "seed",
+                    });
                   }}
                 >
                   <View style={{ flexDirection: "row" }}>
@@ -120,11 +141,12 @@ export const SeedLibraryStack: React.FC<SeedLibraryStackProps> = ({}) => {
         name="SeedLibrary"
         options={{
           headerStyle: {
-            backgroundColor: "rgb(83, 151, 221)",
+            backgroundColor: "rgb(148, 224, 136)",
           },
           headerTintColor: "#fff",
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: "700",
+            fontSize: 20,
           },
         }}
         component={SeedLibrary}
