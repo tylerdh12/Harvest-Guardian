@@ -140,30 +140,55 @@ function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
           <Text style={styles.labelText}>Complete Data:</Text>
           <Text style={styles.dataText}>{route.params.data.completeData}</Text>
         </View>
-        <View
-          style={{
-            justifyContent: "space-around",
-            alignItems: "center",
-            flexDirection: "row",
-            padding: 15,
-          }}
-        >
-          <Button
-            title="Edit"
-            onPress={() => {
-              navigation.navigate("EditProduct", {
-                name: route.params.name,
-              });
+        {route.params.type === "plant" ? (
+          <View
+            style={{
+              justifyContent: "space-around",
+              alignItems: "center",
+              flexDirection: "row",
+              padding: 15,
             }}
-          />
-          <Button
-            title="Delete"
-            color="red"
-            onPress={() => {
-              alert("Plant Removed");
+          >
+            <Button
+              title="Edit"
+              onPress={() => {
+                navigation.navigate("EditProduct", {
+                  name: route.params.data.species,
+                });
+              }}
+            />
+            <Button
+              title="Delete"
+              color="red"
+              onPress={() => {
+                alert("Plant Removed");
+              }}
+            />
+          </View>
+        ) : (
+          <View
+            style={{
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              flexDirection: "row",
+              padding: 15,
             }}
-          />
-        </View>
+          >
+            <Button
+              title="Edit"
+              onPress={() => {
+                navigation.navigate("EditProduct", {
+                  name: route.params.data.species,
+                });
+              }}
+            />
+            <Button
+              title="Add to Garden"
+              color="rgb(148, 224, 136)"
+              onPress={() => alert("Seed Added to My Garden")}
+            />
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -209,7 +234,17 @@ export const addProductRoutes = (
   return (
     <>
       <Stack.Screen
-        options={({ route }: any) => ({ headerTitle: route.params.name })}
+        options={({ route }: any) => ({
+          headerTitle: route.params.data.species,
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        })}
         name="Product"
         component={Product}
       />
@@ -224,6 +259,14 @@ export const addProductRoutes = (
               }}
             />
           ),
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
         })}
         name="EditProduct"
         component={EditProduct}

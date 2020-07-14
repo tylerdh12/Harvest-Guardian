@@ -1,4 +1,4 @@
 export type ProductParamList = {
-  Product: { name: string };
+  Product: { data: any; type: String };
   EditProduct: { name: string; submit?: React.MutableRefObject<() => void> };
 };

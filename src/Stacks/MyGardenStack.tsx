@@ -105,9 +105,8 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
                   }}
                   onPress={() => {
                     navigation.navigate("Product", {
-                      name: item.species,
-                      plantId: item._id,
                       data: item,
+                      type: "plant",
                     });
                   }}
                 >
@@ -170,7 +169,7 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={(product: any, idx) => product + idx}
+            keyExtractor={(plant: any, idx) => plant + idx}
             data={data}
           />
         </View>
@@ -200,11 +199,12 @@ export const MyGardenStack: React.FC<MyGardenStackProps> = ({ navigation }) => {
             />
           ),
           headerStyle: {
-            backgroundColor: "rgb(83, 151, 221)",
+            backgroundColor: "rgb(148, 224, 136)",
           },
           headerTintColor: "#fff",
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: "700",
+            fontSize: 20
           },
         }}
         component={MyGarden}
