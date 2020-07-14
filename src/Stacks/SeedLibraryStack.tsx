@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   FlatList,
   SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -12,7 +13,6 @@ import {
 import config from "../../config.js";
 import { addProductRoutes } from "../addProductRoutes";
 import { SeedLibraryParamList } from "../ParamLists/SeedLibraryParamList";
-import { Center } from "../StyledContainers/Center";
 
 interface SeedLibraryStackProps {}
 
@@ -32,10 +32,10 @@ function SeedLibrary({ navigation }: any) {
             allSeeds {
               data {
                 _id
-                daysToHarvest
+                species
                 variety
                 plantingMonths
-                species
+                daysToHarvest
               }
             }
           }
@@ -55,18 +55,16 @@ function SeedLibrary({ navigation }: any) {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.center}>
       {isLoading ? (
-        <Center>
-          <ActivityIndicator size="large" />
-        </Center>
+        <ActivityIndicator size="large" />
       ) : (
-        <View style={{ width: "100%" }}>
+        <View>
           <FlatList
             style={{
               width: "100%",
             }}
-            renderItem={({ item }) => {
+            renderItem={({ item }: any) => {
               return (
                 <TouchableOpacity
                   style={{
@@ -85,9 +83,24 @@ function SeedLibrary({ navigation }: any) {
                     navigation.navigate("Product", { name: item.species });
                   }}
                 >
-                  <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                    {item.species}
-                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <View style={{ width: "50%" }}>
+                      <Text style={{ fontSize: 18, fontWeight: "600" }}>
+                        {item.species}
+                      </Text>
+                    </View>
+                    <View style={{ width: "50%" }}>
+                      <Text
+                        style={{
+                          textAlign: "right",
+                          marginTop: 2,
+                          fontWeight: "500",
+                        }}
+                      >
+                        Harvest in {item.daysToHarvest}
+                      </Text>
+                    </View>
+                  </View>
                 </TouchableOpacity>
               );
             }}
@@ -120,3 +133,11 @@ export const SeedLibraryStack: React.FC<SeedLibraryStackProps> = ({}) => {
     </Stack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+});
