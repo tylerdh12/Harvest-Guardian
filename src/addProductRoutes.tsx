@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { StackNavigationState, TypedNavigator } from "@react-navigation/native";
 import { StackNavigationOptions } from "@react-navigation/stack";
 import { StackNavigationEventMap } from "@react-navigation/stack/lib/typescript/src/types";
@@ -18,30 +19,55 @@ import { SeedLibraryParamList } from "./ParamLists/SeedLibraryParamList";
 import { Center } from "./StyledContainers/Center";
 
 function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
+  const [favorite, setFave] = useState(false);
+
   return (
     <ScrollView style={styles.scrollView}>
       <Image
         style={{ width: "100%", height: 300 }}
         source={{
-          uri:
-            "https://d2ebzu6go672f3.cloudfront.net/media/content/images/p7_Broccoli_HH1812_gi905351392.jpg",
+          uri: `${route.params.data.images[0]}`,
         }}
       />
-      <View style={styles.detailItemContainerOdd}>
-        <Text style={styles.labelText}>Species: </Text>
-        <Text style={styles.dataText}>{route.params.data.species}</Text>
-      </View>
       <View style={styles.detailItemContainerEven}>
+        <View style={styles.speciesContainer}>
+          <Text style={(styles.dataText, styles.species)}>
+            {route.params.data.species}
+          </Text>
+        </View>
+        <View style={styles.heartButtonContainer}>
+          {favorite ? (
+            <Ionicons
+              name="md-heart"
+              size={26}
+              color="red"
+              onPress={() => setFave(false)}
+            />
+          ) : (
+            <Ionicons
+              name="md-heart-empty"
+              size={26}
+              color="white"
+              onPress={() => setFave(true)}
+            />
+          )}
+        </View>
+      </View>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Variety: </Text>
         <Text style={styles.dataText}>{route.params.data.variety}</Text>
       </View>
-      <View style={styles.detailItemContainerOdd}>
+      <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Date Planted: </Text>
         <Text style={styles.dataText}>{route.params.data.datePlanted}</Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Description: </Text>
         <Text style={styles.dataText}>{route.params.data.description}</Text>
+      </View>
+      <View style={styles.detailItemContainerEven}>
+        <Text style={styles.labelText}>Days To Germinate: </Text>
+        <Text style={styles.dataText}>{route.params.data.daysToGerminate}</Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Days To Harvest: </Text>
@@ -58,7 +84,7 @@ function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
         <Text style={styles.dataText}>{route.params.data.sunRequirements}</Text>
       </View>
       <View style={styles.detailItemContainerEven}>
-        <Text style={styles.labelText}>Soil TemperatureHigh: </Text>
+        <Text style={styles.labelText}>Soil Temperature High: </Text>
         <Text style={styles.dataText}>
           {route.params.data.soilTemperatureHigh}
         </Text>
@@ -82,10 +108,6 @@ function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Seed Spacing: </Text>
         <Text style={styles.dataText}>{route.params.data.seedSpacing}</Text>
-      </View>
-      <View style={styles.detailItemContainerEven}>
-        <Text style={styles.labelText}>Days To Germinate: </Text>
-        <Text style={styles.dataText}>{route.params.data.daysToGerminate}</Text>
       </View>
       <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Water Requirements: </Text>
@@ -269,27 +291,46 @@ const styles = StyleSheet.create({
   },
   detailItemContainerOdd: {
     flexDirection: "row",
-    padding: 10,
+    paddingTop: 18,
+    paddingBottom: 18,
     backgroundColor: "#323030",
   },
   detailItemContainerEven: {
     flexDirection: "row",
-    padding: 10,
+    paddingTop: 18,
+    paddingBottom: 18,
     backgroundColor: "#403D3D",
   },
   labelText: {
-    width: "50%",
+    width: "35%",
     textAlign: "left",
     paddingLeft: 12,
     color: "white",
-    fontSize: 14,
-    fontWeight: "600",
+    fontSize: 15,
+    fontWeight: "500",
   },
   dataText: {
     textAlign: "right",
     paddingRight: 12,
-    width: "50%",
+    width: "65%",
     color: "white",
-    fontSize: 14,
+    fontSize: 15,
+    fontWeight: "300",
+  },
+  speciesContainer: {
+    width: "80%",
+  },
+  species: {
+    paddingLeft: 12,
+    width: "65%",
+    color: "white",
+    fontSize: 24,
+    fontWeight: "600",
+  },
+  heartButtonContainer: {
+    width: "20%",
+    textAlign: "right",
+    alignItems: "flex-end",
+    paddingRight: 12,
   },
 });
