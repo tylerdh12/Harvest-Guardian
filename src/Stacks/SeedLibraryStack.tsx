@@ -108,12 +108,17 @@ function SeedLibrary({ navigation }: any) {
                     <Text style={{ fontSize: 18, fontWeight: "600" }}>
                       {item.species}
                     </Text>
+                    <Text style={{ fontSize: 15, fontWeight: "400" }}>
+                      {item.variety}
+                    </Text>
                   </View>
                   <View style={{ width: "50%" }}>
                     <Text
                       style={{
                         textAlign: "right",
-                        marginTop: 2,
+                        marginTop: 8,
+                        alignItems: "center",
+                        justifyContent: "center",
                         fontWeight: "500",
                       }}
                     >
@@ -121,6 +126,16 @@ function SeedLibrary({ navigation }: any) {
                     </Text>
                   </View>
                 </View>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontWeight: "500",
+                    padding: 6,
+                    marginTop: 8,
+                  }}
+                >
+                  {item.plantingMonths}
+                </Text>
               </TouchableOpacity>
             );
           }}
