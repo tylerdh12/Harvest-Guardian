@@ -1,6 +1,6 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { ProductParamList } from "./ProductParamList";
+import { ProductParamList } from "./DetailsParamList";
 
 export type SeedLibraryParamList = {
   SeedLibrary: undefined;

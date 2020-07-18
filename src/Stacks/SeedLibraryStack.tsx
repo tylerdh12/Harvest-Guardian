@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 import config from "../../config.js";
-import { addProductRoutes } from "../addProductRoutes";
+import { DetailsRoutes } from "../Details";
 import { SeedLibraryParamList } from "../ParamLists/SeedLibraryParamList";
 import { Center } from "../StyledContainers/Center";
 
@@ -164,7 +164,7 @@ export const SeedLibraryStack: React.FC<SeedLibraryStackProps> = ({}) => {
         }}
         component={SeedLibrary}
       />
-      {addProductRoutes(Stack)}
+      {DetailsRoutes(Stack)}
     </Stack.Navigator>
   );
 };

@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { addProductRoutes } from "../addProductRoutes";
+import { DetailsRoutes } from "../Details";
 import {
   MyGardenParamList,
   MyGardenStackNavProps,
@@ -207,7 +207,7 @@ export const MyGardenStack: React.FC<MyGardenStackProps> = ({ navigation }) => {
         }}
         component={MyGarden}
       />
-      {addProductRoutes(Stack)}
+      {DetailsRoutes(Stack)}
     </Stack.Navigator>
   );
 };

@@ -9,16 +9,16 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View,
+  View
 } from "react-native";
 import {
   MyGardenParamList,
-  MyGardenStackNavProps,
+  MyGardenStackNavProps
 } from "./ParamLists/MyGardenParamList";
 import { SeedLibraryParamList } from "./ParamLists/SeedLibraryParamList";
 import { Center } from "./StyledContainers/Center";
 
-function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
+function Details({ route, navigation }: MyGardenStackNavProps<"Details">) {
   const [favorite, setFave] = useState(false);
 
   return (
@@ -26,7 +26,7 @@ function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
       <Image
         style={{ width: "100%", height: 300 }}
         source={{
-          uri: `${route.params.data.images[0]}`,
+          uri: `${route.params.data.images}`,
         }}
       />
       <View style={styles.detailItemContainerEven}>
@@ -163,7 +163,7 @@ function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
           <Button
             title="Edit"
             onPress={() => {
-              navigation.navigate("EditProduct", {
+              navigation.navigate("EditDetails", {
                 name: route.params.data.species,
               });
             }}
@@ -188,7 +188,7 @@ function Product({ route, navigation }: MyGardenStackNavProps<"Product">) {
           <Button
             title="Edit"
             onPress={() => {
-              navigation.navigate("EditProduct", {
+              navigation.navigate("EditDetails", {
                 name: route.params.data.species,
               });
             }}
@@ -208,10 +208,10 @@ function apiCall(x: any) {
   return x;
 }
 
-function EditProduct({
+function EditDetails({
   route,
   navigation,
-}: MyGardenStackNavProps<"EditProduct">) {
+}: MyGardenStackNavProps<"EditDetails">) {
   const [formState] = useState();
   const submit = useRef(() => {});
 
@@ -232,7 +232,7 @@ function EditProduct({
   );
 }
 
-export const addProductRoutes = (
+export const DetailsRoutes = (
   Stack: TypedNavigator<
     MyGardenParamList | SeedLibraryParamList,
     StackNavigationState,
@@ -255,8 +255,8 @@ export const addProductRoutes = (
             fontSize: 20,
           },
         })}
-        name="Product"
-        component={Product}
+        name="Details"
+        component={Details}
       />
       <Stack.Screen
         options={({ route }: any) => ({
@@ -278,8 +278,8 @@ export const addProductRoutes = (
             fontSize: 20,
           },
         })}
-        name="EditProduct"
-        component={EditProduct}
+        name="EditDetails"
+        component={EditDetails}
       />
     </>
   );

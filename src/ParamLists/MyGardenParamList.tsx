@@ -1,11 +1,11 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { ProductParamList } from "./ProductParamList";
+import { DetailsParamList } from "./DetailsParamList";
 
 export type MyGardenParamList = {
   MyGarden: undefined;
   PlantDetails: undefined;
-} & ProductParamList;
+} & DetailsParamList;
 
 export type MyGardenStackNavProps<T extends keyof MyGardenParamList> = {
   navigation: StackNavigationProp<MyGardenParamList, T>;
