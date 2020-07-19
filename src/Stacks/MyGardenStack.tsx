@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { encode } from "base-64";
+import React, { useContext, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -15,67 +16,41 @@ import {
   MyGardenParamList,
   MyGardenStackNavProps,
 } from "../ParamLists/MyGardenParamList";
+import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
-import config from "./../../config";
 
 interface MyGardenStackProps {}
 const Stack = createStackNavigator<MyGardenParamList>();
 
-function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
+function MyGarden(
+  this: any,
+  { navigation }: MyGardenStackNavProps<"MyGarden">
+) {
+  const value = useContext(AuthContext);
+
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios
-      .post(
-        "https://graphql.fauna.com/graphql",
-        {
-          query: `
-          query {
-            allPlants {
-              data {
-                _id
-                datePlanted
-                daysToHarvest
-                daysToGerminate
-                variety
-                species
-                plantingMonths
-                species
-                antiCompanionPlants
-                sunRequirements
-                soilTemperatureHigh
-                sowingMethod
-                binomialName
-                plantHeight
-                description
-                completeData
-                seedDepth
-                seedSpacing
-                daysToGerminate
-                waterRequirements
-                nutrientRequirements
-                soilTemperatureLow
-                feedsOn
-                byproduct
-                companionPlants
-                images
-              }
-            }
-          }
-        `,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${config.FAUNA_SECRET_KEY}`,
-          },
-        }
-      )
+  React.useEffect(() => {
+    const encoded = encode(`${value.user.username}:${value.user.password}`);
+    const auth = "Basic " + encoded;
+
+    axios({
+      method: "get",
+      url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
+      headers: {
+        Authorization: auth,
+      },
+    })
       .then((res) => {
-        setData(res.data.data.allPlants.data);
+        if (res.status === 401) {
+          console.log("Response 401");
+          console.log(res);
+        } else {
+          setData(res.data);
+        }
       })
-      .catch((error) => alert(error))
-      .finally(() => setLoading(false));
+      .then(() => setLoading(false));
   }, []);
 
   return (
@@ -146,7 +121,7 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
                       Date Planted
                     </Text>
                     <Text style={{ textAlign: "left" }}>
-                      {item.datePlanted}
+                      {item.date_planted.slice(0, 10)}
                     </Text>
                   </View>
                   <View style={{ width: "50%" }}>
@@ -161,7 +136,7 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
                       Days Until Harvest
                     </Text>
                     <Text style={{ textAlign: "right" }}>
-                      {item.daysToHarvest}
+                      {item.days_to_harvest}
                     </Text>
                   </View>
                 </View>
@@ -178,7 +153,9 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
 
 export const PlantDetails = () => {};
 
-export const MyGardenStack: React.FC<MyGardenStackProps> = ({ navigation }) => {
+export const MyGardenStack: React.FC<MyGardenStackProps> = ({
+  navigation,
+}: any) => {
   return (
     <Stack.Navigator initialRouteName="MyGarden">
       <Stack.Screen
@@ -193,7 +170,7 @@ export const MyGardenStack: React.FC<MyGardenStackProps> = ({ navigation }) => {
               name="ios-notifications-outline"
               size={24}
               color="white"
-              onPress={() => navigation.navigate({ screen: "Notifications"})}
+              onPress={() => navigation.navigate({ screen: "Notifications" })}
             />
           ),
           headerStyle: {

@@ -5,7 +5,7 @@ type User = null | { username: string };
 
 export const AuthContext = React.createContext<{
   user: User;
-  login: () => void;
+  login: (username, password) => void;
   logout: () => void;
 }>({
   user: null,
@@ -21,10 +21,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
-        login: () => {
-          const fakeUser = { username: "Bob" };
-          setUser(fakeUser);
-          AsyncStorage.setItem("user", JSON.stringify(fakeUser));
+        login: (username, password) => {
+          const User = {
+            username,
+            password,
+          };
+          setUser(User);
+          AsyncStorage.setItem("user", JSON.stringify(User));
         },
         logout: () => {
           setUser(null);

@@ -1,4 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import axios from "axios";
+import { encode } from "base-64";
 import React, { useContext } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -11,14 +13,31 @@ interface AuthStackProps {}
 const Stack = createStackNavigator<AuthParamList>();
 
 function Login({ navigation }: AuthNavProps<"Login">) {
+  const [user, setUser] = React.useState({});
   const { login } = useContext(AuthContext);
   const [Email, changeEmail] = React.useState("");
   const [password, changePassword] = React.useState("");
   const [errors, setErrors] = React.useState([]);
 
+  const logIn = (username, password) => {
+    const token = encode(`${username}:${password}`);
+    const auth = "Basic " + token;
+
+    axios({
+      method: "get",
+      url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
+      headers: {
+        Authorization: auth,
+      },
+    })
+      .then((res) => setUser(res.data))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Center>
       <Text style={styles.heading1}>Login</Text>
+
       <Text style={styles.inputLabel}>Email</Text>
 
       <TextInput
@@ -32,7 +51,6 @@ function Login({ navigation }: AuthNavProps<"Login">) {
 
       <TextInput
         style={styles.textInput}
-        autoCompleteType="password"
         secureTextEntry={true}
         onChangeText={(password) => changePassword(password)}
         value={password}
@@ -41,7 +59,7 @@ function Login({ navigation }: AuthNavProps<"Login">) {
         <TouchableOpacity
           style={styles.buttonSpacing}
           onPress={() => {
-            login();
+            login(Email, password);
           }}
         >
           <Text style={styles.buttonText}>Login</Text>

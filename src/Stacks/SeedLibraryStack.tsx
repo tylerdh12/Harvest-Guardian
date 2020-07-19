@@ -9,10 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import config from "../../config.js";
 import { DetailsRoutes } from "../Details";
 import { SeedLibraryParamList } from "../ParamLists/SeedLibraryParamList";
-import { Center } from "../StyledContainers/Center";
+import { Center } from "./../StyledContainers/Center";
 
 interface SeedLibraryStackProps {}
 
@@ -24,49 +23,9 @@ function SeedLibrary({ navigation }: any) {
 
   useEffect(() => {
     axios
-      .post(
-        "https://graphql.fauna.com/graphql",
-        {
-          query: `
-          query {
-            allSeeds {
-              data {
-                _id
-                species
-                variety
-                plantingMonths
-                daysToHarvest
-                antiCompanionPlants
-                sunRequirements
-                soilTemperatureHigh
-                sowingMethod
-                binomialName
-                plantHeight
-                description
-                completeData
-                seedDepth
-                seedSpacing
-                daysToGerminate
-                waterRequirements
-                nutrientRequirements
-                soilTemperatureLow
-                feedsOn
-                byproduct
-                companionPlants
-                images
-              }
-            }
-          }
-        `,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${config.FAUNA_SECRET_KEY}`,
-          },
-        }
-      )
+      .get("https://harvestguardian-rest-api.herokuapp.com/v1/seeds")
       .then((res) => {
-        setData(res.data.data.allSeeds.data);
+        setData(res.data);
       })
       .catch((error) => alert(error))
       .finally(() => setLoading(false));
@@ -96,12 +55,12 @@ function SeedLibrary({ navigation }: any) {
                   shadowRadius: 4,
                   elevation: 5,
                 }}
-                onPress={() => {
+                onPress={() =>
                   navigation.navigate("Details", {
                     data: item,
                     type: "seed",
-                  });
-                }}
+                  })
+                }
               >
                 <View style={{ flexDirection: "row" }}>
                   <View style={{ width: "50%" }}>
@@ -151,7 +110,7 @@ export const SeedLibraryStack: React.FC<SeedLibraryStackProps> = ({}) => {
   return (
     <Stack.Navigator initialRouteName="SeedLibrary">
       <Stack.Screen
-        name="SeedLibrary"
+        name="Seed Library"
         options={{
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",

@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext } from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SettingsParamList } from "../ParamLists/SettingsParamList";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
@@ -98,9 +98,15 @@ function Settings({ navigation }: any) {
 }
 
 function Profile({ navigation }: any) {
+  const { user } = useContext(AuthContext);
+
   return (
     <Center>
       <Text>Profile</Text>
+      <View style={{ padding: 10, flexDirection: "row" }}>
+        <Text style={{ fontWeight: "500" }}>Username: </Text>
+        <Text>{user.username}</Text>
+      </View>
     </Center>
   );
 }
