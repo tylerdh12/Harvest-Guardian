@@ -103,7 +103,7 @@ function MyGarden({ navigation }: MyGardenStackNavProps<"MyGarden">) {
                   elevation: 5,
                 }}
                 onPress={() => {
-                  navigation.navigate("Product", {
+                  navigation.navigate("Details", {
                     data: item,
                     type: "plant",
                   });
@@ -193,7 +193,7 @@ export const MyGardenStack: React.FC<MyGardenStackProps> = ({ navigation }) => {
               name="ios-notifications-outline"
               size={24}
               color="white"
-              onPress={() => navigation.navigate("Notifications")}
+              onPress={() => navigation.navigate({ screen: "Notifications"})}
             />
           ),
           headerStyle: {

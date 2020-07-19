@@ -97,7 +97,7 @@ function SeedLibrary({ navigation }: any) {
                   elevation: 5,
                 }}
                 onPress={() => {
-                  navigation.navigate("Product", {
+                  navigation.navigate("Details", {
                     data: item,
                     type: "seed",
                   });
@@ -139,7 +139,7 @@ function SeedLibrary({ navigation }: any) {
               </TouchableOpacity>
             );
           }}
-          keyExtractor={(product: any, idx) => product + idx}
+          keyExtractor={(detail: any, idx) => detail + idx}
           data={data}
         />
       )}

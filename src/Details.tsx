@@ -9,11 +9,11 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
 import {
   MyGardenParamList,
-  MyGardenStackNavProps
+  MyGardenStackNavProps,
 } from "./ParamLists/MyGardenParamList";
 import { SeedLibraryParamList } from "./ParamLists/SeedLibraryParamList";
 import { Center } from "./StyledContainers/Center";
