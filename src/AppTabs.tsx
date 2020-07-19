@@ -1,4 +1,8 @@
-import { Ionicons } from "@expo/vector-icons";
+import {
+  FontAwesome5,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { MyGardenStack } from "./Stacks/MyGardenStack";
@@ -18,9 +22,15 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
           let iconName;
 
           if (route.name === "My Garden") {
-            return <Ionicons name="ios-leaf" size={size} color={color} />;
+            return <FontAwesome5 name="seedling" size={size} color={color} />;
           } else if (route.name === "Seed Library") {
-            return <Ionicons name="ios-book" size={size} color={color} />;
+            return (
+              <MaterialCommunityIcons
+                name="seed-outline"
+                size={size}
+                color={color}
+              />
+            );
           } else if (route.name === "Settings") {
             return <Ionicons name="ios-settings" size={size} color={color} />;
           }
