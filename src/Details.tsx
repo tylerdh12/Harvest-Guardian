@@ -1,4 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
 import { StackNavigationState, TypedNavigator } from "@react-navigation/native";
 import { StackNavigationOptions } from "@react-navigation/stack";
 import { StackNavigationEventMap } from "@react-navigation/stack/lib/typescript/src/types";
@@ -35,7 +34,7 @@ function Details({ route, navigation }: MyGardenStackNavProps<"Details">) {
             {route.params.data.species}
           </Text>
         </View>
-        <View style={styles.heartButtonContainer}>
+        {/* <View style={styles.heartButtonContainer}>
           {favorite ? (
             <Ionicons
               name="md-heart"
@@ -51,69 +50,67 @@ function Details({ route, navigation }: MyGardenStackNavProps<"Details">) {
               onPress={() => setFave(true)}
             />
           )}
-        </View>
+        </View> */}
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Variety: </Text>
         <Text style={styles.dataText}>{route.params.data.variety}</Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
-        <Text style={styles.labelText}>Date Planted: </Text>
-        <Text style={styles.dataText}>{route.params.data.datePlanted}</Text>
-      </View>
+      {route.params.data.date_planted ? (
+        <View style={styles.detailItemContainerEven}>
+          <Text style={styles.labelText}>Date Planted: </Text>
+          <Text style={styles.dataText}>
+            {route.params.data.date_planted.slice(0, 10)}
+          </Text>
+        </View>
+      ) : null}
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Description: </Text>
         <Text style={styles.dataText}>{route.params.data.description}</Text>
       </View>
       <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Days To Germinate: </Text>
-        <Text style={styles.dataText}>{route.params.data.daysToGerminate}</Text>
+        <Text style={styles.dataText}>
+          {route.params.data.days_to_germinate}
+        </Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Days To Harvest: </Text>
-        <Text style={styles.dataText}>{route.params.data.daysToHarvest}</Text>
+        <Text style={styles.dataText}>{route.params.data.days_to_harvest}</Text>
       </View>
       <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Anti-Companion Plants: </Text>
         <Text style={styles.dataText}>
-          {route.params.data.antiCompanionPlants}
+          {route.params.data.non_companions.join(", ")}
         </Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Sun Requirements: </Text>
-        <Text style={styles.dataText}>{route.params.data.sunRequirements}</Text>
+        <Text style={styles.dataText}>{route.params.data.sun}</Text>
       </View>
       <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Soil Temperature High: </Text>
-        <Text style={styles.dataText}>
-          {route.params.data.soilTemperatureHigh}
-        </Text>
+        <Text style={styles.dataText}>{route.params.data.soil_temp_high}</Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Sowing Method: </Text>
-        <Text style={styles.dataText}>{route.params.data.sowingMethod}</Text>
-      </View>
-      <View style={styles.detailItemContainerEven}>
-        <Text style={styles.labelText}>Binomial Name: </Text>
-        <Text style={styles.dataText}>{route.params.data.binomialName}</Text>
+        <Text style={styles.dataText}>{route.params.data.sow}</Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Plant Height: </Text>
-        <Text style={styles.dataText}>{route.params.data.plantHeight}</Text>
+        <Text style={styles.dataText}>{route.params.data.height}</Text>
       </View>
       <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Seed Depth: </Text>
-        <Text style={styles.dataText}>{route.params.data.seedDepth}</Text>
+        <Text style={styles.dataText}>{route.params.data.depth}</Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Seed Spacing: </Text>
-        <Text style={styles.dataText}>{route.params.data.seedSpacing}</Text>
+        <Text style={styles.dataText}>{route.params.data.spacing}</Text>
       </View>
       <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Water Requirements: </Text>
-        <Text style={styles.dataText}>
-          {route.params.data.waterRequirements}
-        </Text>
+        <Text style={styles.dataText}>{route.params.data.water}</Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Planting Months: </Text>
@@ -122,26 +119,24 @@ function Details({ route, navigation }: MyGardenStackNavProps<"Details">) {
       <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Nutrient Requirements: </Text>
         <Text style={styles.dataText}>
-          {route.params.data.nutrientRequirements}
+          {route.params.data.nutrient.join(", ")}
         </Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Soil Temperature Low: </Text>
-        <Text style={styles.dataText}>
-          {route.params.data.soilTemperatureLow}
-        </Text>
-      </View>
-      <View style={styles.detailItemContainerEven}>
-        <Text style={styles.labelText}>Feeds On: </Text>
-        <Text style={styles.dataText}>{route.params.data.feedsOn}</Text>
+        <Text style={styles.dataText}>{route.params.data.soil_temp_low}</Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Byproduct: </Text>
-        <Text style={styles.dataText}>{route.params.data.byproduct}</Text>
+        <Text style={styles.dataText}>
+          {route.params.data.byproducts.join(", ")}
+        </Text>
       </View>
       <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Companion Plants: </Text>
-        <Text style={styles.dataText}>{route.params.data.companionPlants}</Text>
+        <Text style={styles.dataText}>
+          {route.params.data.companions.join(", ")}
+        </Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Images: </Text>
@@ -149,7 +144,7 @@ function Details({ route, navigation }: MyGardenStackNavProps<"Details">) {
       </View>
       <View style={styles.detailItemContainerEven}>
         <Text style={styles.labelText}>Complete Data:</Text>
-        <Text style={styles.dataText}>{route.params.data.completeData}</Text>
+        <Text style={styles.dataText}>{route.params.data.complete}</Text>
       </View>
       {route.params.type === "plant" ? (
         <View
@@ -249,7 +244,7 @@ export const DetailsRoutes = (
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,
