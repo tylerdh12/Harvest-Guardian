@@ -12,24 +12,28 @@ const Stack = createStackNavigator<AuthParamList>();
 
 function Login({ navigation }: AuthNavProps<"Login">) {
   const { login } = useContext(AuthContext);
-  const [username, changeUsername] = React.useState("");
+  const [Email, changeEmail] = React.useState("");
   const [password, changePassword] = React.useState("");
+  const [errors, setErrors] = React.useState([]);
 
   return (
     <Center>
       <Text style={styles.heading1}>Login</Text>
-      <Text style={styles.inputLabel}>Username</Text>
+      <Text style={styles.inputLabel}>Email</Text>
 
       <TextInput
         style={styles.textInput}
+        keyboardType="email-address"
         autoFocus={true}
-        onChangeText={(username) => changeUsername(username)}
-        value={username}
+        onChangeText={(Email) => changeEmail(Email)}
+        value={Email}
       />
       <Text style={styles.inputLabel}>Password</Text>
 
       <TextInput
         style={styles.textInput}
+        autoCompleteType="password"
+        secureTextEntry={true}
         onChangeText={(password) => changePassword(password)}
         value={password}
       />
@@ -58,7 +62,8 @@ function Login({ navigation }: AuthNavProps<"Login">) {
 function Register({ navigation }: AuthNavProps<"Register">) {
   const [firstName, changeFirstName] = React.useState("");
   const [lastName, changeLastName] = React.useState("");
-  const [username, changeUsername] = React.useState("");
+  const [zipCode, changeZipCode] = React.useState("");
+  const [Email, changeEmail] = React.useState("");
   const [password, changePassword] = React.useState("");
   const [reenterpassword, changeReenterPassword] = React.useState("");
 
@@ -78,15 +83,24 @@ function Register({ navigation }: AuthNavProps<"Register">) {
         onChangeText={(lastName) => changeLastName(lastName)}
         value={lastName}
       />
-      <Text style={styles.inputLabel}>Username</Text>
+      <Text style={styles.inputLabel}>Zip Code</Text>
       <TextInput
         style={styles.textInput}
-        onChangeText={(username) => changeUsername(username)}
-        value={username}
+        keyboardType="number-pad"
+        onChangeText={(zipCode) => changeZipCode(zipCode)}
+        value={zipCode}
+      />
+      <Text style={styles.inputLabel}>Email</Text>
+      <TextInput
+        style={styles.textInput}
+        keyboardType="email-address"
+        onChangeText={(Email) => changeEmail(Email)}
+        value={Email}
       />
       <Text style={styles.inputLabel}>Password</Text>
       <TextInput
         style={styles.textInput}
+        secureTextEntry={true}
         onChangeText={(password) => changePassword(password)}
         value={password}
       />
