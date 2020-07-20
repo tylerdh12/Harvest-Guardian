@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SettingsParamList } from "../ParamLists/SettingsParamList";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
@@ -98,14 +98,32 @@ function Settings({ navigation }: any) {
 }
 
 function Profile({ navigation }: any) {
-  const { user } = useContext(AuthContext);
+  const { authBasic, user } = useContext(AuthContext);
 
   return (
     <Center>
       <Text>Profile</Text>
       <View style={{ padding: 10, flexDirection: "row" }}>
         <Text style={{ fontWeight: "500" }}>Username: </Text>
-        <Text>{user.username}</Text>
+        <Text>{authBasic.username.toLowerCase()}</Text>
+      </View>
+      <View style={{ padding: 10, flexDirection: "row" }}>
+        <Text style={{ fontWeight: "500" }}>Zip Code: </Text>
+        <Text>{user.zip_code}</Text>
+      </View>
+      <View
+        style={{
+          padding: 10,
+          flexDirection: "row",
+        }}
+      >
+        <Button
+          title="Delete Account"
+          color="red"
+          onPress={() => {
+            alert("Delete Button Pressed");
+          }}
+        />
       </View>
     </Center>
   );
@@ -180,6 +198,14 @@ export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
             fontWeight: "700",
             fontSize: 20,
           },
+          headerRight: () => (
+            <Button
+              title="Edit"
+              onPress={() => {
+                alert("Edit Profile Button pressed");
+              }}
+            />
+          ),
         }}
       />
       <Stack.Screen
