@@ -32,7 +32,7 @@ function MyGarden(
   const [data, setData] = useState([]);
 
   React.useEffect(() => {
-    const encoded = encode(`${value.user.username}:${value.user.password}`);
+    const encoded = encode(`${value.authBasic.username}:${value.authBasic.password}`);
     const auth = "Basic " + encoded;
 
     axios({
