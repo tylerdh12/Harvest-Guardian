@@ -26,21 +26,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>(null);
   const [authBasic, setAuthBasic] = useState<AuthBasic>(null);
 
-  async function getUserData(User) {
-    setAuthBasic(User);
-    const token = encode(`${User.username}:${User.password}`);
-    const auth = "Basic " + token;
+  // async function getUserData(User) {
+  //   setAuthBasic(User);
+  //   const token = encode(`${User.username}:${User.password}`);
+  //   const auth = "Basic " + token;
 
-    await axios({
-      method: "get",
-      url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
-      headers: {
-        Authorization: auth,
-      },
-    })
-      .then((res) => setUser(res.data))
-      .catch((err) => console.log(err));
-  }
+  //   await axios({
+  //     method: "get",
+  //     url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
+  //     headers: {
+  //       Authorization: auth,
+  //     },
+  //   })
+  //     .then((res) => setUser(res.data))
+  //     .catch((err) => console.log(err));
+  // }
 
   return (
     <AuthContext.Provider
