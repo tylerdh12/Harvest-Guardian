@@ -26,16 +26,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>(null);
   const [authBasic, setAuthBasic] = useState<AuthBasic>(null);
 
-  async function getUserData(User) {
-    setAuthBasic(User);
-    const token = encode(`${User.username}:${User.password}`);
-    const auth = "Basic " + token;
-
+  async function getUserData(authBasic) {
     await axios({
       method: "get",
       url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
       headers: {
-        Authorization: auth,
+        Authorization: authBasic,
       },
     })
       .then((res) => setUser(res.data))
@@ -48,12 +44,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         user,
         authBasic,
         login: (username, password) => {
-          const User = {
-            username,
-            password,
-          };
-          getUserData(User);
-          AsyncStorage.setItem("user", JSON.stringify(User));
+          const token = encode(`${username}:${password}`);
+          const authBasic = "Basic " + token;
+          setAuthBasic(authBasic);
+          getUserData(authBasic);
+          AsyncStorage.setItem("auth", JSON.stringify(authBasic));
         },
         logout: () => {
           setUser(null);

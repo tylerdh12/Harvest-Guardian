@@ -1,7 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
-import { encode } from "base-64";
 import React, { useContext, useState } from "react";
 import {
   ActivityIndicator,
@@ -26,20 +25,17 @@ function MyGarden(
   this: any,
   { navigation }: MyGardenStackNavProps<"MyGarden">
 ) {
-  const value = useContext(AuthContext);
+  const { authBasic } = useContext(AuthContext);
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   React.useEffect(() => {
-    const encoded = encode(`${value.authBasic.username}:${value.authBasic.password}`);
-    const auth = "Basic " + encoded;
-
     axios({
       method: "get",
       url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
       headers: {
-        Authorization: auth,
+        Authorization: authBasic,
       },
     })
       .then((res) => {

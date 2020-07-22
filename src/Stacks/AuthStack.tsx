@@ -1,70 +1,104 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useContext, useState } from "react";
+import React, { useContext, useReducer } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AuthNavProps, AuthParamList } from "../ParamLists/AuthParamList";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
-interface AuthStackProps {}
+
+function loginReducer(state, action) {
+  switch (action.type) {
+    case "field": {
+      return {
+        ...state,
+        [action.field]: action.value,
+      };
+    }
+    case "login": {
+      return {
+        ...state,
+        isLoading: true,
+        error: [],
+      };
+    }
+    case "logout": {
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
+        user: [],
+        error: [],
+        username: "",
+        password: "",
+      };
+    }
+    case "success": {
+      return {
+        ...state,
+        user: action.payload,
+        isLoggedIn: true,
+        isLoading: false,
+        username: "",
+        password: "",
+      };
+    }
+    case "error": {
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
+        error: action.payload,
+      };
+    }
+    case "alreadyAuth": {
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
+        authData: action.username,
+      };
+    }
+    default:
+      break;
+  }
+  return state;
+}
 
 const Stack = createStackNavigator<AuthParamList>();
 
-function Login({ navigation }: AuthNavProps<"Login">) {
+function Login({ navigation }) {
   const { login } = useContext(AuthContext);
 
-  const [username, changeUsername] = useState("");
-  const [password, changePassword] = useState("");
-  const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState({});
-  const [user, setUser] = useState(null);
-
-  // const onSubmit = async (username, password) => {
-  //   (() => {
-  //     setLoading(true);
-  //     setError({});
-
-  //     const token = encode(`${username}:${password}`);
-  //     const auth = "Basic " + token;
-
-  //     axios({
-  //       method: "get",
-  //       url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
-  //       headers: {
-  //         Authorization: auth,
-  //       },
-  //     })
-  //       .then((res) => setUser(res.data))
-  //       .catch((err) => setError(err.response))
-  //       .then(() => {
-  //         setLoading(false);
-  //         navigation.navigate("Settings");
-  //       });
-  //   })();
-  // };
+  const [
+    { username, password, isLoading, error, user, isLoggedIn },
+    dispatch,
+  ] = useReducer(loginReducer, {
+    username: "",
+    password: "",
+    isLoading: false,
+    error: [],
+    user: {},
+    authData: "",
+    isLoggedIn: false,
+  });
 
   return (
     <Center>
       <Text style={styles.heading1}>Login</Text>
 
-      <Text
-        style={
-          error.status === 401
-            ? {
-                color: "#721c24",
-                backgroundColor: "#f8d7da",
-                padding: 10,
-                borderRadius: 5,
-                margin: 5,
-              }
-            : {
-                backgroundColor: "rgba(0, 0, 0, .0)",
-                padding: 10,
-                margin: 5,
-              }
-        }
-      >
-        {error.status === 401 ? "Username or Password Incorrect" : ` `}
-      </Text>
+      {error === 401 ? (
+        <Text
+          style={{
+            color: "#721c24",
+            backgroundColor: "#f8d7da",
+            padding: 10,
+            borderRadius: 5,
+            margin: 10,
+          }}
+        >
+          Username or Password Incorrect
+        </Text>
+      ) : null}
 
       <Text style={styles.inputLabel}>Email</Text>
 
@@ -72,7 +106,9 @@ function Login({ navigation }: AuthNavProps<"Login">) {
         style={styles.textInput}
         keyboardType="email-address"
         autoFocus={true}
-        onChangeText={(e) => changeUsername(e)}
+        onChangeText={(e) =>
+          dispatch({ type: "field", field: "username", value: e })
+        }
         value={username}
       />
       <Text style={styles.inputLabel}>Password</Text>
@@ -80,7 +116,9 @@ function Login({ navigation }: AuthNavProps<"Login">) {
       <TextInput
         style={styles.textInput}
         secureTextEntry={true}
-        onChangeText={(p) => changePassword(p)}
+        onChangeText={(e) =>
+          dispatch({ type: "field", field: "password", value: e })
+        }
         value={password}
       />
       <View style={styles.buttonView}>
