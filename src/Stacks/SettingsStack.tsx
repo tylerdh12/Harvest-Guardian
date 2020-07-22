@@ -2,16 +2,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SettingsParamList } from "../ParamLists/SettingsParamList";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
 
 interface SettingsStackProps {}
 
-const Stack = createStackNavigator<SettingsParamList>();
+const Stack = createStackNavigator();
 
-function Settings({ navigation }: any) {
-  const { logout } = useContext(AuthContext);
+function Settings({ navigation }) {
+  const { logout, userData } = useContext(AuthContext);
 
   return (
     <Center>
@@ -97,21 +96,39 @@ function Settings({ navigation }: any) {
   );
 }
 
-function Profile({ navigation }: any) {
-  const { user } = useContext(AuthContext);
+function Profile({ navigation }) {
+  const { userData } = useContext(AuthContext);
 
   return (
     <Center>
-      <Text>Profile</Text>
-      <View style={{ padding: 10, flexDirection: "row" }}>
-        <Text style={{ fontWeight: "500" }}>Username: </Text>
-        <Text>{user.username}</Text>
+      <Text style={styles.linkTitle}>Profile</Text>
+      <View style={{ alignItems: "center" }}>
+        <View
+          style={{ padding: 10, flexDirection: "row", textAlign: "center" }}
+        >
+          <Text style={{ fontWeight: "500" }}>Name: </Text>
+          <Text>
+            {userData.first_name} {userData.last_name}
+          </Text>
+        </View>
+        <View
+          style={{ padding: 10, flexDirection: "row", textAlign: "center" }}
+        >
+          <Text style={{ fontWeight: "500" }}>Username: </Text>
+          <Text>{userData.email}</Text>
+        </View>
+        <View
+          style={{ padding: 10, flexDirection: "row", textAlign: "center" }}
+        >
+          <Text style={{ fontWeight: "500" }}>Zip Code: </Text>
+          <Text>{userData.zip_code}</Text>
+        </View>
       </View>
     </Center>
   );
 }
 
-function Security({ navigation }: any) {
+function Security({ navigation }) {
   return (
     <Center>
       <Text>Security</Text>
