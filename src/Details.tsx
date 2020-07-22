@@ -1,6 +1,3 @@
-import { StackNavigationState, TypedNavigator } from "@react-navigation/native";
-import { StackNavigationOptions } from "@react-navigation/stack";
-import { StackNavigationEventMap } from "@react-navigation/stack/lib/typescript/src/types";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
@@ -10,14 +7,9 @@ import {
   Text,
   View,
 } from "react-native";
-import {
-  MyGardenParamList,
-  MyGardenStackNavProps,
-} from "./ParamLists/MyGardenParamList";
-import { SeedLibraryParamList } from "./ParamLists/SeedLibraryParamList";
 import { Center } from "./StyledContainers/Center";
 
-function Details({ route, navigation }: MyGardenStackNavProps<"Details">) {
+function Details({ route, navigation }) {
   const [favorite, setFave] = useState(false);
 
   return (
@@ -203,10 +195,7 @@ function apiCall(x: any) {
   return x;
 }
 
-function EditDetails({
-  route,
-  navigation,
-}: MyGardenStackNavProps<"EditDetails">) {
+function EditDetails({ route, navigation }) {
   const [formState] = useState();
   const submit = useRef(() => {});
 
@@ -227,15 +216,7 @@ function EditDetails({
   );
 }
 
-export const DetailsRoutes = (
-  Stack: TypedNavigator<
-    MyGardenParamList | SeedLibraryParamList,
-    StackNavigationState,
-    StackNavigationOptions,
-    StackNavigationEventMap,
-    any
-  >
-) => {
+export const DetailsRoutes = (Stack) => {
   return (
     <>
       <Stack.Screen
@@ -254,7 +235,7 @@ export const DetailsRoutes = (
         component={Details}
       />
       <Stack.Screen
-        options={({ route }: any) => ({
+        options={({ route }) => ({
           headerTitle: `Edit: ${route.params.name}`,
           headerRight: () => (
             <Button

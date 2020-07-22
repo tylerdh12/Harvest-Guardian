@@ -15,7 +15,7 @@ import { Center } from "../StyledContainers/Center";
 
 const Stack = createStackNavigator();
 
-function MyGarden(this: any, { navigation }) {
+function MyGarden({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 

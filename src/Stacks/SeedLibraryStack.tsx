@@ -10,12 +10,11 @@ import {
   View,
 } from "react-native";
 import { DetailsRoutes } from "../Details";
-import { SeedLibraryParamList } from "../ParamLists/SeedLibraryParamList";
 import { Center } from "./../StyledContainers/Center";
 
-const Stack = createStackNavigator<SeedLibraryParamList>();
+const Stack = createStackNavigator();
 
-function SeedLibrary({ navigation }: any) {
+function SeedLibrary({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
