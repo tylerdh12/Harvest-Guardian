@@ -1,8 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useContext, useReducer } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { encode } from "base-64";
+import React, { useContext, useEffect, useReducer } from "react";
+import { AsyncStorage, StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { AuthNavProps, AuthParamList } from "../ParamLists/AuthParamList";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
 
@@ -64,7 +64,7 @@ function loginReducer(state, action) {
   return state;
 }
 
-const Stack = createStackNavigator<AuthParamList>();
+const Stack = createStackNavigator();
 
 function Login({ navigation }) {
   const { login } = useContext(AuthContext);
@@ -78,9 +78,30 @@ function Login({ navigation }) {
     isLoading: false,
     error: [],
     user: {},
-    authData: "",
+    authBasic: "",
     isLoggedIn: false,
   });
+
+  useEffect(() => {
+    AsyncStorage.getItem("authBasic")
+      .then((authBasic) => {
+        if (authBasic) {
+          //decode is
+          login(authBasic);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  async function loginWithUserPass(username, password) {
+    const token = encode(`${username}:${password}`);
+    const authBasic = "Basic " + token;
+    await AsyncStorage.setItem("authBasic", authBasic).then(() => {
+      login(authBasic);
+    });
+  }
 
   return (
     <Center>
@@ -126,7 +147,7 @@ function Login({ navigation }) {
           style={styles.buttonSpacing}
           disabled={isLoading}
           onPress={() => {
-            login(username, password);
+            loginWithUserPass(username, password);
           }}
         >
           {isLoading ? (
@@ -148,7 +169,7 @@ function Login({ navigation }) {
   );
 }
 
-function Register({ navigation }: AuthNavProps<"Register">) {
+function Register({ navigation }) {
   const [firstName, changeFirstName] = React.useState("");
   const [lastName, changeLastName] = React.useState("");
   const [zipCode, changeZipCode] = React.useState("");
@@ -224,7 +245,7 @@ function Register({ navigation }: AuthNavProps<"Register">) {
   );
 }
 
-export const AuthStack: React.FC<AuthStackProps> = ({}) => {
+export const AuthStack = ({}) => {
   return (
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen

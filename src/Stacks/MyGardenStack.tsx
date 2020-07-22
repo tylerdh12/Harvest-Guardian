@@ -1,56 +1,47 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  AsyncStorage,
   FlatList,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
 import { DetailsRoutes } from "../Details";
-import {
-  MyGardenParamList,
-  MyGardenStackNavProps,
-} from "../ParamLists/MyGardenParamList";
-import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
 
-interface MyGardenStackProps {}
-const Stack = createStackNavigator<MyGardenParamList>();
+const Stack = createStackNavigator();
 
-function MyGarden(
-  this: any,
-  { navigation }: MyGardenStackNavProps<"MyGarden">
-) {
-  const { authBasic } = useContext(AuthContext);
-
+function MyGarden(this: any, { navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  React.useEffect(() => {
-    axios({
-      method: "get",
-      url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
-      headers: {
-        Authorization: authBasic,
-      },
-    })
-      .then((res) => {
-        if (res.status === 401) {
-          console.log("Response 401");
-          console.log(res);
-        } else {
-          setData(res.data);
-        }
+  useEffect(() => {
+    AsyncStorage.getItem("authBasic").then((authBasic) => {
+      axios({
+        method: "get",
+        url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
+        headers: {
+          Authorization: authBasic,
+        },
       })
-      .then(() => setLoading(false));
+        .then((res) => {
+          if (res.status === 401) {
+            console.log("Response 401");
+            console.log(res);
+          } else {
+            setData(res.data);
+          }
+        })
+        .then(() => setLoading(false));
+    });
   }, []);
 
   return (
-    <Center style={styles.center}>
+    <Center>
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
@@ -149,9 +140,7 @@ function MyGarden(
 
 export const PlantDetails = () => {};
 
-export const MyGardenStack: React.FC<MyGardenStackProps> = ({
-  navigation,
-}: any) => {
+export const MyGardenStack = ({ navigation }) => {
   return (
     <Stack.Navigator initialRouteName="MyGarden">
       <Stack.Screen
@@ -184,11 +173,3 @@ export const MyGardenStack: React.FC<MyGardenStackProps> = ({
     </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  center: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-});

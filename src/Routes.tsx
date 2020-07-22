@@ -8,16 +8,16 @@ import { Center } from "./StyledContainers/Center";
 
 interface RoutesProps {}
 
-export const Routes: React.FC<RoutesProps> = ({}) => {
-  const { user, login } = useContext(AuthContext);
+export const Routes = ({}) => {
+  const { login, userData, authBasic } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AsyncStorage.getItem("user")
+    AsyncStorage.getItem("authBasic")
       .then((userString) => {
         if (userString) {
           //decode is
-          login();
+          login(authBasic);
         }
         setLoading(false);
       })
@@ -37,7 +37,7 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
 
   return (
     <NavigationContainer>
-      {user ? <AppTabs /> : <AuthStack />}
+      {userData ? <AppTabs /> : <AuthStack />}
     </NavigationContainer>
   );
 };

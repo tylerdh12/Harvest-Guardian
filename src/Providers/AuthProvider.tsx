@@ -1,30 +1,20 @@
 import axios from "axios";
-import { encode } from "base-64";
 import React, { useState } from "react";
 import { AsyncStorage } from "react-native";
 
-type User = null | { username: string };
-type AuthBasic = null | string;
-
-export const AuthContext = React.createContext<{
-  user: User;
-  authBasic: AuthBasic;
-  login: (username, password) => void;
-  logout: () => void;
-}>({
+export const AuthContext = React.createContext({
   authBasic: null,
-  user: null,
-  login: () => {},
+  userData: null,
+  login: (authBasic) => {},
   logout: () => {},
 });
 
-interface AuthProviderProps {}
-
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User>(null);
-  const [authBasic, setAuthBasic] = useState<AuthBasic>(null);
+export const AuthProvider = ({ children }) => {
+  const [userData, setUserData] = useState(null);
+  const [authBasic, setAuthBasic] = useState(null);
 
   async function getUserData(authBasic) {
+    setAuthBasic(authBasic);
     await axios({
       method: "get",
       url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
@@ -32,25 +22,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         Authorization: authBasic,
       },
     })
-      .then((res) => setUser(res.data))
+      .then((res) => {
+        setUserData(res.data);
+        AsyncStorage.setItem("userData", JSON.stringify(res.data));
+      })
       .catch((err) => console.log(err));
   }
 
   return (
     <AuthContext.Provider
       value={{
-        user,
         authBasic,
-        login: (username, password) => {
-          const token = encode(`${username}:${password}`);
-          const authBasic = "Basic " + token;
-          setAuthBasic(authBasic);
-          getUserData(authBasic);
-          AsyncStorage.setItem("auth", JSON.stringify(authBasic));
+        userData,
+        login: (authBasic) => {
+          return getUserData(authBasic);
         },
         logout: () => {
-          setUser(null);
-          AsyncStorage.removeItem("user");
+          setUserData(null);
+          AsyncStorage.removeItem("authBasic");
+          AsyncStorage.removeItem("userData");
         },
       }}
     >

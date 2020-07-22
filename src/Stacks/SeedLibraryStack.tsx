@@ -13,8 +13,6 @@ import { DetailsRoutes } from "../Details";
 import { SeedLibraryParamList } from "../ParamLists/SeedLibraryParamList";
 import { Center } from "./../StyledContainers/Center";
 
-interface SeedLibraryStackProps {}
-
 const Stack = createStackNavigator<SeedLibraryParamList>();
 
 function SeedLibrary({ navigation }: any) {
@@ -106,7 +104,7 @@ function SeedLibrary({ navigation }: any) {
   );
 }
 
-export const SeedLibraryStack: React.FC<SeedLibraryStackProps> = ({}) => {
+export const SeedLibraryStack = ({}) => {
   return (
     <Stack.Navigator initialRouteName="SeedLibrary">
       <Stack.Screen
