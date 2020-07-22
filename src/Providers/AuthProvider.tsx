@@ -4,17 +4,15 @@ import React, { useState } from "react";
 import { AsyncStorage } from "react-native";
 
 type User = null | { username: string };
+type AuthBasic = null | string;
 
 export const AuthContext = React.createContext<{
   user: User;
-  authBasic: (username, password) => void;
+  authBasic: AuthBasic;
   login: (username, password) => void;
   logout: () => void;
 }>({
-  authBasic: {
-    username: null,
-    password: null,
-  },
+  authBasic: null,
   user: null,
   login: () => {},
   logout: () => {},
