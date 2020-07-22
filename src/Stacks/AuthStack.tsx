@@ -1,45 +1,46 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import axios from "axios";
-import { encode } from "base-64";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AuthNavProps, AuthParamList } from "../ParamLists/AuthParamList";
+import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
 interface AuthStackProps {}
 
 const Stack = createStackNavigator<AuthParamList>();
 
 function Login({ navigation }: AuthNavProps<"Login">) {
+  const { login } = useContext(AuthContext);
+
   const [username, changeUsername] = useState("");
   const [password, changePassword] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState({});
   const [user, setUser] = useState(null);
 
-  const onSubmit = async (username, password) => {
-    (() => {
-      setLoading(true);
-      setError({});
+  // const onSubmit = async (username, password) => {
+  //   (() => {
+  //     setLoading(true);
+  //     setError({});
 
-      const token = encode(`${username}:${password}`);
-      const auth = "Basic " + token;
+  //     const token = encode(`${username}:${password}`);
+  //     const auth = "Basic " + token;
 
-      axios({
-        method: "get",
-        url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
-        headers: {
-          Authorization: auth,
-        },
-      })
-        .then((res) => setUser(res.data))
-        .catch((err) => setError(err.response))
-        .then(() => {
-          setLoading(false)
-          navigation.navigate("Settings");
-        });
-    })();
-  };
+  //     axios({
+  //       method: "get",
+  //       url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
+  //       headers: {
+  //         Authorization: auth,
+  //       },
+  //     })
+  //       .then((res) => setUser(res.data))
+  //       .catch((err) => setError(err.response))
+  //       .then(() => {
+  //         setLoading(false);
+  //         navigation.navigate("Settings");
+  //       });
+  //   })();
+  // };
 
   return (
     <Center>
@@ -87,7 +88,7 @@ function Login({ navigation }: AuthNavProps<"Login">) {
           style={styles.buttonSpacing}
           disabled={isLoading}
           onPress={() => {
-            onSubmit(username, password);
+            login(username, password);
           }}
         >
           {isLoading ? (
