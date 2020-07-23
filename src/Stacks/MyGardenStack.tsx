@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -39,6 +40,21 @@ function MyGarden({ navigation }) {
         .then(() => setLoading(false));
     });
   }, []);
+
+  const datePlanted = (date_planted) => {
+    return moment(date_planted).format("l");
+  };
+
+  function harvestProgress(date_planted, days_to_harvest) {
+    const daysPlantedToNow = moment().diff(date_planted, "days");
+    return (daysPlantedToNow / parseInt(days_to_harvest)) * 100;
+  }
+
+  function dateToBeHarvested(date_planted, days_to_harvest) {
+    const daysFromPlanted = parseInt(days_to_harvest);
+    const dateToHarvest = moment(date_planted).add(daysFromPlanted, "days");
+    return moment(dateToHarvest).format("l");
+  }
 
   return (
     <Center>
@@ -90,7 +106,10 @@ function MyGarden({ navigation }) {
                       height: 8,
                       backgroundColor: "rgb(148, 224, 136)",
                       borderRadius: 10,
-                      width: "20%",
+                      width: `${harvestProgress(
+                        item.date_planted,
+                        item.days_to_harvest
+                      )}%`,
                       flex: 1,
                     }}
                   ></View>
@@ -108,7 +127,7 @@ function MyGarden({ navigation }) {
                       Date Planted
                     </Text>
                     <Text style={{ textAlign: "left" }}>
-                      {item.date_planted.slice(0, 10)}
+                      {datePlanted(item.date_planted)}
                     </Text>
                   </View>
                   <View style={{ width: "50%" }}>
@@ -123,7 +142,10 @@ function MyGarden({ navigation }) {
                       Days Until Harvest
                     </Text>
                     <Text style={{ textAlign: "right" }}>
-                      {item.days_to_harvest}
+                      {dateToBeHarvested(
+                        item.date_planted,
+                        item.days_to_harvest
+                      )}
                     </Text>
                   </View>
                 </View>
