@@ -7,10 +7,12 @@ import {
   ActivityIndicator,
   AsyncStorage,
   FlatList,
+  RefreshControl,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { DetailsRoutes } from "../Details";
 import { Center } from "../StyledContainers/Center";
 
@@ -19,8 +21,13 @@ const Stack = createStackNavigator();
 function MyGarden({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
+    getPlants();
+  }, []);
+
+  function getPlants() {
     AsyncStorage.getItem("authBasic").then((authBasic) => {
       axios({
         method: "get",
@@ -39,7 +46,7 @@ function MyGarden({ navigation }) {
         })
         .then(() => setLoading(false));
     });
-  });
+  }
 
   const datePlanted = (date_planted) => {
     return moment(date_planted).format("l");
@@ -58,106 +65,119 @@ function MyGarden({ navigation }) {
     return moment(dateToHarvest).format("l");
   }
 
+  function onRefresh() {
+    setRefreshing: true;
+    getPlants();
+    setRefreshing: false;
+  }
+
   return (
     <Center>
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
-        <FlatList
-          style={{
-            width: "100%",
-          }}
-          renderItem={({ item }: any) => {
-            return (
-              <TouchableOpacity
-                style={{
-                  justifyContent: "center",
-                  padding: 30,
-                  margin: 12,
-                  backgroundColor: "rgb(251, 252, 252)",
-                  borderRadius: 30,
-                  shadowColor: "#000",
-                  shadowOffset: { width: 6, height: 5 },
-                  shadowOpacity: 0.2,
-                  shadowRadius: 4,
-                  elevation: 5,
-                }}
-                onPress={() => {
-                  navigation.navigate("Details", {
-                    data: item,
-                    type: "plant",
-                  });
-                }}
-              >
-                <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                  {item.species}
-                </Text>
-                <View
+        <ScrollView
+          style={{ width: "100%" }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <FlatList
+            style={{
+              width: "100%",
+            }}
+            renderItem={({ item }: any) => {
+              return (
+                <TouchableOpacity
                   style={{
-                    marginTop: 10,
-                    height: 10,
-                    backgroundColor: "transparent",
-                    borderStyle: "solid",
-                    borderWidth: 1,
-                    borderColor: "rgb(148, 224, 136)",
-                    borderRadius: 10,
-                    width: "100%",
+                    justifyContent: "center",
+                    padding: 30,
+                    margin: 12,
+                    backgroundColor: "rgb(251, 252, 252)",
+                    borderRadius: 30,
+                    shadowColor: "#000",
+                    shadowOffset: { width: 6, height: 5 },
+                    shadowOpacity: 0.2,
+                    shadowRadius: 4,
+                    elevation: 5,
+                  }}
+                  onPress={() => {
+                    navigation.navigate("Details", {
+                      data: item,
+                      type: "plant",
+                    });
                   }}
                 >
+                  <Text style={{ fontSize: 18, fontWeight: "600" }}>
+                    {item.species}
+                  </Text>
                   <View
                     style={{
-                      height: 8,
-                      backgroundColor: "rgb(148, 224, 136)",
+                      marginTop: 10,
+                      height: 10,
+                      backgroundColor: "transparent",
+                      borderStyle: "solid",
+                      borderWidth: 1,
+                      borderColor: "rgb(148, 224, 136)",
                       borderRadius: 10,
-                      width: `${harvestProgress(
-                        item.date_planted,
-                        item.days_to_harvest
-                      )}%`,
-                      flex: 1,
+                      width: "100%",
                     }}
-                  ></View>
-                </View>
-                <View style={{ flexDirection: "row" }}>
-                  <View style={{ width: "50%" }}>
-                    <Text
+                  >
+                    <View
                       style={{
-                        textAlign: "left",
-                        marginTop: 10,
-                        marginBottom: 5,
-                        fontWeight: "500",
+                        height: 8,
+                        backgroundColor: "rgb(148, 224, 136)",
+                        borderRadius: 10,
+                        width: `${harvestProgress(
+                          item.date_planted,
+                          item.days_to_harvest
+                        )}%`,
+                        flex: 1,
                       }}
-                    >
-                      Date Planted
-                    </Text>
-                    <Text style={{ textAlign: "left" }}>
-                      {datePlanted(item.date_planted)}
-                    </Text>
+                    ></View>
                   </View>
-                  <View style={{ width: "50%" }}>
-                    <Text
-                      style={{
-                        textAlign: "right",
-                        marginTop: 10,
-                        marginBottom: 5,
-                        fontWeight: "500",
-                      }}
-                    >
-                      Day to Harvest
-                    </Text>
-                    <Text style={{ textAlign: "right" }}>
-                      {dateToBeHarvested(
-                        item.date_planted,
-                        item.days_to_harvest
-                      )}
-                    </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <View style={{ width: "50%" }}>
+                      <Text
+                        style={{
+                          textAlign: "left",
+                          marginTop: 10,
+                          marginBottom: 5,
+                          fontWeight: "500",
+                        }}
+                      >
+                        Date Planted
+                      </Text>
+                      <Text style={{ textAlign: "left" }}>
+                        {datePlanted(item.date_planted)}
+                      </Text>
+                    </View>
+                    <View style={{ width: "50%" }}>
+                      <Text
+                        style={{
+                          textAlign: "right",
+                          marginTop: 10,
+                          marginBottom: 5,
+                          fontWeight: "500",
+                        }}
+                      >
+                        Day to Harvest
+                      </Text>
+                      <Text style={{ textAlign: "right" }}>
+                        {dateToBeHarvested(
+                          item.date_planted,
+                          item.days_to_harvest
+                        )}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
-          keyExtractor={(plant: any, idx) => plant + idx}
-          data={data}
-        />
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={(plant: any, idx) => plant + idx}
+            data={data}
+          />
+        </ScrollView>
       )}
     </Center>
   );
@@ -186,7 +206,7 @@ export const MyGardenStack = ({ navigation }) => {
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,

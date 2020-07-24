@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import {
+  Alert,
   AsyncStorage,
   Button,
   Image,
   ScrollView,
   StyleSheet,
   Text,
-  View,
+  View
 } from "react-native";
 import { Center } from "./StyledContainers/Center";
 
@@ -25,10 +26,34 @@ function addSeedToMyGarden({ route }) {
         console.log("Response 401");
         console.log(res);
       } else {
-        res.data;
+        Alert.alert(
+          "Seed Planted",
+          `${route.params.data.species} - ${route.params.data.variety} has been added to My Garden`,
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
       }
     });
   });
+}
+
+function deletePlantAlert({ route }) {
+  Alert.alert(
+    "Are you sure?",
+    `Would you still like to remove ${route.params.data.species} ${route.params.data.variety} from My Garden`,
+    [
+      {
+        text: "Yes - Remove Please",
+        onPress: () => deletePlantFromMyGarden({ route }),
+      },
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+    ],
+    { cancelable: false }
+  );
 }
 
 function deletePlantFromMyGarden({ route }) {
@@ -45,9 +70,7 @@ function deletePlantFromMyGarden({ route }) {
         console.log(res);
       } else if (res.status === 200) {
         res.data.deletedCount === 1
-          ? alert(
-              `${route.params.data.species} ${route.params.data.variety} has been removed from My Garden`
-            )
+          ? Alert.alert("Plant Has Been Removed")
           : alert("Error Deleting Plant");
       }
     });
@@ -204,7 +227,7 @@ function Details({ route, navigation }) {
             title="Delete"
             color="red"
             onPress={() => {
-              deletePlantFromMyGarden({ route });
+              deletePlantAlert({ route });
             }}
           />
         </View>
@@ -293,7 +316,7 @@ export const DetailsRoutes = (Stack) => {
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,

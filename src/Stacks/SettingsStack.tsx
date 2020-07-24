@@ -178,7 +178,7 @@ export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,
@@ -192,7 +192,7 @@ export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,
@@ -206,7 +206,7 @@ export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,
@@ -220,7 +220,7 @@ export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,
@@ -234,7 +234,7 @@ export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,
@@ -248,7 +248,7 @@ export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,
@@ -262,7 +262,7 @@ export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#403D3D",
           headerTitleStyle: {
             fontWeight: "700",
             fontSize: 20,
