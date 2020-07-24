@@ -39,7 +39,7 @@ function MyGarden({ navigation }) {
         })
         .then(() => setLoading(false));
     });
-  }, []);
+  });
 
   const datePlanted = (date_planted) => {
     return moment(date_planted).format("l");
