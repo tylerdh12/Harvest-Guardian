@@ -93,6 +93,7 @@ function MyGarden({ navigation }) {
                 <View
                   style={{
                     marginTop: 10,
+                    height: 10,
                     backgroundColor: "transparent",
                     borderStyle: "solid",
                     borderWidth: 1,
