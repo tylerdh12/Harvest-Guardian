@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import {
+  AsyncStorage,
   Button,
   Image,
   ScrollView,
@@ -8,6 +10,49 @@ import {
   View,
 } from "react-native";
 import { Center } from "./StyledContainers/Center";
+
+function addSeedToMyGarden({ route }) {
+  AsyncStorage.getItem("authBasic").then((authBasic) => {
+    axios({
+      method: "post",
+      url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
+      headers: {
+        Authorization: authBasic,
+      },
+      data: route.params.data,
+    }).then((res) => {
+      if (res.status === 401) {
+        console.log("Response 401");
+        console.log(res);
+      } else {
+        res.data;
+      }
+    });
+  });
+}
+
+function deletePlantFromMyGarden({ route }) {
+  AsyncStorage.getItem("authBasic").then((authBasic) => {
+    axios({
+      method: "delete",
+      url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${route.params.data._id}`,
+      headers: {
+        Authorization: authBasic,
+      },
+    }).then((res) => {
+      if (res.status === 401) {
+        console.log("Response 401");
+        console.log(res);
+      } else if (res.status === 200) {
+        res.data.deletedCount === 1
+          ? alert(
+              `${route.params.data.species} ${route.params.data.variety} has been removed from My Garden`
+            )
+          : alert("Error Deleting Plant");
+      }
+    });
+  });
+}
 
 function Details({ route, navigation }) {
   const [favorite, setFave] = useState(false);
@@ -159,7 +204,7 @@ function Details({ route, navigation }) {
             title="Delete"
             color="red"
             onPress={() => {
-              alert("Plant Removed");
+              deletePlantFromMyGarden({ route });
             }}
           />
         </View>
@@ -183,7 +228,7 @@ function Details({ route, navigation }) {
           <Button
             title="Add to Garden"
             color="rgb(148, 224, 136)"
-            onPress={() => alert("Seed Added to My Garden")}
+            onPress={() => addSeedToMyGarden({ route })}
           />
         </View>
       )}
