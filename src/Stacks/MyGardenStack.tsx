@@ -51,8 +51,10 @@ function MyGarden({ navigation }) {
   }
 
   function dateToBeHarvested(date_planted, days_to_harvest) {
-    const daysFromPlanted = parseInt(days_to_harvest);
-    const dateToHarvest = moment(date_planted).add(daysFromPlanted, "days");
+    const dateToHarvest = moment(date_planted).add(
+      parseInt(days_to_harvest),
+      "days"
+    );
     return moment(dateToHarvest).format("l");
   }
 
@@ -140,7 +142,7 @@ function MyGarden({ navigation }) {
                         fontWeight: "500",
                       }}
                     >
-                      Days Until Harvest
+                      Day to Harvest
                     </Text>
                     <Text style={{ textAlign: "right" }}>
                       {dateToBeHarvested(
