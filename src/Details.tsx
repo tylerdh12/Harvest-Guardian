@@ -8,7 +8,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
 import { Center } from "./StyledContainers/Center";
 
@@ -115,7 +115,7 @@ function Details({ route, navigation }) {
         <Text style={styles.dataText}>{route.params.data.variety}</Text>
       </View>
       {route.params.data.date_planted ? (
-        <View style={styles.detailItemContainerEven}>
+        <View style={styles.detailItemContainerOdd}>
           <Text style={styles.labelText}>Date Planted: </Text>
           <Text style={styles.dataText}>
             {route.params.data.date_planted.slice(0, 10)}
@@ -126,7 +126,7 @@ function Details({ route, navigation }) {
         <Text style={styles.labelText}>Description: </Text>
         <Text style={styles.dataText}>{route.params.data.description}</Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Days To Germinate: </Text>
         <Text style={styles.dataText}>
           {route.params.data.days_to_germinate}
@@ -136,7 +136,7 @@ function Details({ route, navigation }) {
         <Text style={styles.labelText}>Days To Harvest: </Text>
         <Text style={styles.dataText}>{route.params.data.days_to_harvest}</Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Anti-Companion Plants: </Text>
         <Text style={styles.dataText}>
           {route.params.data.non_companions.join(", ")}
@@ -146,7 +146,7 @@ function Details({ route, navigation }) {
         <Text style={styles.labelText}>Sun Requirements: </Text>
         <Text style={styles.dataText}>{route.params.data.sun}</Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Soil Temperature High: </Text>
         <Text style={styles.dataText}>{route.params.data.soil_temp_high}</Text>
       </View>
@@ -158,7 +158,7 @@ function Details({ route, navigation }) {
         <Text style={styles.labelText}>Plant Height: </Text>
         <Text style={styles.dataText}>{route.params.data.height}</Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Seed Depth: </Text>
         <Text style={styles.dataText}>{route.params.data.depth}</Text>
       </View>
@@ -166,7 +166,7 @@ function Details({ route, navigation }) {
         <Text style={styles.labelText}>Seed Spacing: </Text>
         <Text style={styles.dataText}>{route.params.data.spacing}</Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Water Requirements: </Text>
         <Text style={styles.dataText}>{route.params.data.water}</Text>
       </View>
@@ -174,7 +174,7 @@ function Details({ route, navigation }) {
         <Text style={styles.labelText}>Planting Months: </Text>
         <Text style={styles.dataText}>{route.params.data.plantingMonths}</Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Nutrient Requirements: </Text>
         <Text style={styles.dataText}>
           {route.params.data.nutrient.join(", ")}
@@ -190,7 +190,7 @@ function Details({ route, navigation }) {
           {route.params.data.byproducts.join(", ")}
         </Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Companion Plants: </Text>
         <Text style={styles.dataText}>
           {route.params.data.companions.join(", ")}
@@ -200,7 +200,7 @@ function Details({ route, navigation }) {
         <Text style={styles.labelText}>Images: </Text>
         <Text style={styles.dataText}>{route.params.data.images}</Text>
       </View>
-      <View style={styles.detailItemContainerEven}>
+      <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Complete Data:</Text>
         <Text style={styles.dataText}>{route.params.data.complete}</Text>
       </View>
@@ -331,17 +331,19 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: "#323030",
   },
-  detailItemContainerOdd: {
+  detailItemContainerEven: {
     flexDirection: "row",
     paddingTop: 18,
     paddingBottom: 18,
     backgroundColor: "#323030",
   },
-  detailItemContainerEven: {
+  detailItemContainerOdd: {
     flexDirection: "row",
     paddingTop: 18,
     paddingBottom: 18,
     backgroundColor: "#403D3D",
+    borderBottomWidth: 4,
+    borderBottomColor: "#323030",
   },
   labelText: {
     width: "35%",
