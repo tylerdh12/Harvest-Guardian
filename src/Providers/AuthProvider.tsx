@@ -5,12 +5,15 @@ import { AsyncStorage } from "react-native";
 export const AuthContext = React.createContext({
   authBasic: null,
   userData: null,
+  errorMessage: "",
+  setErrorMessage: "",
   login: (authBasic) => {},
   logout: () => {},
 });
 
 export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const [authBasic, setAuthBasic] = useState(null);
 
   async function getUserData(authBasic) {
@@ -26,7 +29,11 @@ export const AuthProvider = ({ children }) => {
         setUserData(res.data);
         AsyncStorage.setItem("userData", JSON.stringify(res.data));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err) {
+          setErrorMessage(err.response.status);
+        }
+      });
   }
 
   return (
@@ -34,6 +41,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         authBasic,
         userData,
+        errorMessage,
+        setErrorMessage,
         login: (authBasic) => {
           return getUserData(authBasic);
         },

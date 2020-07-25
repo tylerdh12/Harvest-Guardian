@@ -1,3 +1,9 @@
+/* -------------------------------------------------------------------------- */
+/*                            Authentication Stack                           */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------- Imports and Includes -------------------------- */
+
 import { createStackNavigator } from "@react-navigation/stack";
 import { encode } from "base-64";
 import React, { useContext, useEffect, useReducer } from "react";
@@ -5,6 +11,12 @@ import { AsyncStorage, StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
+
+/* ------------------------------ Define Stack ------------------------------ */
+
+const Stack = createStackNavigator();
+
+/* --------------------------- Login Stack Reducer -------------------------- */
 
 function loginReducer(state, action) {
   switch (action.type) {
@@ -18,7 +30,8 @@ function loginReducer(state, action) {
       return {
         ...state,
         isLoading: true,
-        error: [],
+        isLoggedIn: false,
+        error: "",
       };
     }
     case "logout": {
@@ -26,8 +39,8 @@ function loginReducer(state, action) {
         ...state,
         isLoading: false,
         isLoggedIn: false,
-        user: [],
-        error: [],
+        user: {},
+        error: "",
         username: "",
         password: "",
       };
@@ -47,7 +60,7 @@ function loginReducer(state, action) {
         ...state,
         isLoading: false,
         isLoggedIn: false,
-        error: action.payload,
+        error: action.message,
       };
     }
     case "alreadyAuth": {
@@ -64,10 +77,14 @@ function loginReducer(state, action) {
   return state;
 }
 
-const Stack = createStackNavigator();
+/* ---------------------- Primary Login Function Stack ---------------------- */
 
 function Login({ navigation }) {
-  const { login } = useContext(AuthContext);
+  /* -- Import useContext from Auth Context to Use login() and Error Reports -- */
+
+  const { login, errorMessage, setErrorMessage } = useContext(AuthContext);
+
+  /* ------------------- Reducer Variables to Control State ------------------- */
 
   const [
     { username, password, isLoading, error, user, isLoggedIn },
@@ -76,38 +93,58 @@ function Login({ navigation }) {
     username: "",
     password: "",
     isLoading: false,
-    error: [],
+    error: "",
     user: {},
     authBasic: "",
     isLoggedIn: false,
   });
 
+  /* --------- useEffect Calls Auto Login if authBasic in AsyncStorage -------- */
+
   useEffect(() => {
-    AsyncStorage.getItem("authBasic")
-      .then((authBasic) => {
-        if (authBasic) {
-          //decode is
-          login(authBasic);
+
+    AsyncStorage.getItem("userData").then((userData) => {
+      if (userData !== null) {
+        try {
+          AsyncStorage.getItem("authBasic").then((authBasic) => {
+            login(authBasic);
+          });
+        } catch (error) {
+          console.log(error);
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    });
+    
   }, []);
 
+  /* ------- Primary Login Function Handler requires username, password ------- */
+
   async function loginWithUserPass(username, password) {
+    dispatch({ type: "login" });
     const token = encode(`${username}:${password}`);
     const authBasic = "Basic " + token;
-    await AsyncStorage.setItem("authBasic", authBasic).then(() => {
-      login(authBasic);
+    try {
+      await AsyncStorage.setItem("authBasic", authBasic);
+    } catch (error) {
+      console.log(error);
+    }
+
+    await login(authBasic);
+
+    AsyncStorage.getItem("userData").then((userData) => {
+      if (userData === null) {
+        dispatch({ type: "error", message: "Invalid Email or Password" });
+      }
     });
   }
+
+  /* ------------------------- Return for Login Stack ------------------------- */
 
   return (
     <Center>
       <Text style={styles.heading1}>Login</Text>
 
-      {error === 401 ? (
+      {error !== "" ? (
         <Text
           style={{
             color: "#721c24",
@@ -117,7 +154,7 @@ function Login({ navigation }) {
             margin: 10,
           }}
         >
-          Username or Password Incorrect
+          {error}
         </Text>
       ) : null}
 
@@ -167,7 +204,11 @@ function Login({ navigation }) {
       </View>
     </Center>
   );
+
+  /* --------------------------- End of Login Stack --------------------------- */
 }
+
+/* ----------------------------- Register Stack ----------------------------- */
 
 function Register({ navigation }) {
   const [firstName, changeFirstName] = React.useState("");
