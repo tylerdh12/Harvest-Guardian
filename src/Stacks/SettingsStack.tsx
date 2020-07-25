@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useContext } from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
@@ -98,6 +99,13 @@ function Settings({ navigation }) {
 
 function Profile({ navigation }) {
   const { userData } = useContext(AuthContext);
+  const [zone, setZone] = useState("");
+
+  (() => {
+    axios
+      .get(`https://phzmapi.org/${userData.zip_code}.json`)
+      .then((res) => setZone(res.data.zone));
+  })();
 
   return (
     <Center>
@@ -123,6 +131,10 @@ function Profile({ navigation }) {
           <Text style={{ fontWeight: "500" }}>Zip Code: </Text>
           <Text>{userData.zip_code}</Text>
         </View>
+      </View>
+      <View style={{ padding: 10, flexDirection: "row", textAlign: "center" }}>
+        <Text style={{ fontWeight: "500" }}>Growing Zone: </Text>
+        <Text>{zone}</Text>
       </View>
     </Center>
   );

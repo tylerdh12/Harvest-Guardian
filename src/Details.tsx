@@ -70,7 +70,7 @@ function deletePlantFromMyGarden({ route }) {
         console.log(res);
       } else if (res.status === 200) {
         res.data.deletedCount === 1
-          ? Alert.alert("Plant Has Been Removed")
+          ? alert("Plant Has Been Removed")
           : alert("Error Deleting Plant");
       }
     });
@@ -78,8 +78,6 @@ function deletePlantFromMyGarden({ route }) {
 }
 
 function Details({ route, navigation }) {
-  const [favorite, setFave] = useState(false);
-
   return (
     <ScrollView style={styles.scrollView}>
       <Image
