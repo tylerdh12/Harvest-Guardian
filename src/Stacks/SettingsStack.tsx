@@ -1,12 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
-import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Center } from "../StyledContainers/Center";
-
-interface SettingsStackProps {}
 
 const Stack = createStackNavigator();
 
@@ -99,13 +96,6 @@ function Settings({ navigation }) {
 
 function Profile({ navigation }) {
   const { userData } = useContext(AuthContext);
-  const [zone, setZone] = useState("");
-
-  (() => {
-    axios
-      .get(`https://phzmapi.org/${userData.zip_code}.json`)
-      .then((res) => setZone(res.data.zone));
-  })();
 
   return (
     <Center>
@@ -134,7 +124,7 @@ function Profile({ navigation }) {
       </View>
       <View style={{ padding: 10, flexDirection: "row", textAlign: "center" }}>
         <Text style={{ fontWeight: "500" }}>Growing Zone: </Text>
-        <Text>{zone}</Text>
+        <Text>{userData.zone}</Text>
       </View>
     </Center>
   );
@@ -180,7 +170,7 @@ function About({ navigation }: any) {
   );
 }
 
-export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
+export const SettingsStack = ({}) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
