@@ -98,8 +98,7 @@ function Profile({ navigation }) {
   const { userData } = useContext(AuthContext);
 
   return (
-    <Center>
-      <Text style={styles.linkTitle}>Profile</Text>
+    <View style={{ alignItems: "center", paddingTop: 30 }}>
       <View style={{ alignItems: "center" }}>
         <View
           style={{ padding: 10, flexDirection: "row", textAlign: "center" }}
@@ -121,52 +120,82 @@ function Profile({ navigation }) {
           <Text style={{ fontWeight: "500" }}>Zip Code: </Text>
           <Text>{userData.zip_code}</Text>
         </View>
+        <View
+          style={{ padding: 10, flexDirection: "row", textAlign: "center" }}
+        >
+          <Text style={{ fontWeight: "500" }}>Growing Zone: </Text>
+          <Text>{userData.zone}</Text>
+        </View>
       </View>
-      <View style={{ padding: 10, flexDirection: "row", textAlign: "center" }}>
-        <Text style={{ fontWeight: "500" }}>Growing Zone: </Text>
-        <Text>{userData.zone}</Text>
-      </View>
-    </Center>
+    </View>
   );
 }
 
 function Security({ navigation }) {
   return (
-    <Center>
-      <Text>Security</Text>
-    </Center>
+    <View style={{ alignItems: "center", paddingTop: 30 }}>
+      <View style={{ width: "70%" }}>
+        <Text style={{ textAlign: "center", fontSize: 16 }}>Security</Text>
+      </View>
+    </View>
   );
 }
 
 function Notifications({ navigation }: any) {
   return (
-    <Center>
-      <Text>Notifications</Text>
-    </Center>
+    <View style={{ alignItems: "center", paddingTop: 30 }}>
+      <View style={{ width: "70%" }}>
+        <Text style={{ textAlign: "center", fontSize: 16 }}>Notifications</Text>
+      </View>
+    </View>
   );
 }
 
 function Preferences({ navigation }: any) {
   return (
-    <Center>
-      <Text>Preferences</Text>
-    </Center>
+    <View style={{ alignItems: "center", paddingTop: 30 }}>
+      <View style={{ width: "70%" }}>
+        <Text style={{ textAlign: "center", fontSize: 16 }}>Preferences</Text>
+      </View>
+    </View>
   );
 }
 
 function Privacy({ navigation }: any) {
   return (
-    <Center>
-      <Text>Privacy</Text>
-    </Center>
+    <View style={{ alignItems: "center", paddingTop: 30 }}>
+      <View style={{ width: "70%" }}>
+        <Text style={{ textAlign: "center", fontSize: 16 }}>Privacy</Text>
+      </View>
+    </View>
   );
 }
 
 function About({ navigation }: any) {
   return (
-    <Center>
-      <Text>About</Text>
-    </Center>
+    <View style={{ alignItems: "center", paddingTop: 30 }}>
+      <View style={{ width: "70%" }}>
+        <Text style={{ textAlign: "center", fontSize: 16 }}>
+          Harvest Guardian is an application that hopes to help you gardening
+          experience by helping you keep track of your plants and by helping
+          provide knowledge and tips for a greener more bountiful garden.
+        </Text>
+      </View>
+      <View
+        style={{
+          width: "80%",
+          borderWidth: 1,
+          borderColor: "lightgrey",
+          marginTop: 30,
+          marginBottom: 30,
+        }}
+      ></View>
+      <View style={{ width: "70%" }}>
+        <Text style={{ textAlign: "center", fontSize: 16 }}>
+          Please view the github repo to request changes and features.
+        </Text>
+      </View>
+    </View>
   );
 }
 

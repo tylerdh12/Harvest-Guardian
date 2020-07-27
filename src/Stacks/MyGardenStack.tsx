@@ -178,8 +178,6 @@ function MyGarden({ navigation }) {
   );
 }
 
-export const PlantDetails = () => {};
-
 export const MyGardenStack = ({ navigation }) => {
   return (
     <Stack.Navigator initialRouteName="MyGarden">
