@@ -8,7 +8,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View,
+  View
 } from "react-native";
 import { Center } from "./StyledContainers/Center";
 
@@ -77,6 +77,7 @@ function deletePlantFromMyGarden({ route }) {
   });
 }
 
+  // TODO Add dynamic value for zone
 function Details({ route, navigation }) {
   return (
     <ScrollView style={styles.scrollView}>
@@ -92,23 +93,6 @@ function Details({ route, navigation }) {
             {route.params.data.species}
           </Text>
         </View>
-        {/* <View style={styles.heartButtonContainer}>
-          {favorite ? (
-            <Ionicons
-              name="md-heart"
-              size={26}
-              color="red"
-              onPress={() => setFave(false)}
-            />
-          ) : (
-            <Ionicons
-              name="md-heart-empty"
-              size={26}
-              color="white"
-              onPress={() => setFave(true)}
-            />
-          )}
-        </View> */}
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Variety: </Text>
@@ -172,7 +156,7 @@ function Details({ route, navigation }) {
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Planting Months: </Text>
-        <Text style={styles.dataText}>{route.params.data.plantingMonths}</Text>
+        <Text style={styles.dataText}>{route.params.data.zone._8b.join(", ")}</Text>
       </View>
       <View style={styles.detailItemContainerOdd}>
         <Text style={styles.labelText}>Nutrient Requirements: </Text>
