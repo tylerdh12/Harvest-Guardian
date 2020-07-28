@@ -99,30 +99,22 @@ function Profile({ navigation }) {
 
   return (
     <View style={{ alignItems: "center", paddingTop: 30 }}>
-      <View style={{ alignItems: "center" }}>
-        <View
-          style={{ padding: 10, flexDirection: "row", textAlign: "center" }}
-        >
+      <View style={{ alignItems: "center", textAlign: "center" }}>
+        <View style={{ padding: 10, flexDirection: "row" }}>
           <Text style={{ fontWeight: "500" }}>Name: </Text>
           <Text>
             {userData.first_name} {userData.last_name}
           </Text>
         </View>
-        <View
-          style={{ padding: 10, flexDirection: "row", textAlign: "center" }}
-        >
+        <View style={{ padding: 10, flexDirection: "row" }}>
           <Text style={{ fontWeight: "500" }}>Username: </Text>
           <Text>{userData.email}</Text>
         </View>
-        <View
-          style={{ padding: 10, flexDirection: "row", textAlign: "center" }}
-        >
+        <View style={{ padding: 10, flexDirection: "row" }}>
           <Text style={{ fontWeight: "500" }}>Zip Code: </Text>
           <Text>{userData.zip_code}</Text>
         </View>
-        <View
-          style={{ padding: 10, flexDirection: "row", textAlign: "center" }}
-        >
+        <View style={{ padding: 10, flexDirection: "row" }}>
           <Text style={{ fontWeight: "500" }}>Growing Zone: </Text>
           <Text>{userData.zone}</Text>
         </View>

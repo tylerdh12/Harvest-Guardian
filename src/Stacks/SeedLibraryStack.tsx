@@ -81,6 +81,7 @@ function SeedLibrary({ navigation }) {
                     width: "100%",
                     height: 160,
                     borderRadius: 30,
+                    marginBottom: -30,
                     borderBottomLeftRadius: 0,
                     borderBottomRightRadius: 0,
                     alignContent: "center",
@@ -88,49 +89,51 @@ function SeedLibrary({ navigation }) {
                 />
                 <View
                   style={{
-                    flexDirection: "row",
                     padding: 30,
                     borderRadius: 30,
                     marginTop: -30,
+                    marginBottom: -30,
                     backgroundColor: "rgb(251, 252, 252)",
                     shadowColor: "#000",
-                    shadowOffset: { width: -6, height: -6 },
+                    shadowOffset: { width: 6, height: 5 },
                     shadowOpacity: 0.2,
                     shadowRadius: 4,
                   }}
                 >
-                  <View style={{ width: "50%" }}>
-                    <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                      {item.species}
-                    </Text>
-                    <Text style={{ fontSize: 15, fontWeight: "400" }}>
-                      {item.variety}
-                    </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <View style={{ width: "50%" }}>
+                      <Text style={{ fontSize: 18, fontWeight: "600" }}>
+                        {item.species}
+                      </Text>
+                      <Text style={{ fontSize: 15, fontWeight: "400" }}>
+                        {item.variety}
+                      </Text>
+                    </View>
+                    <View style={{ width: "50%" }}>
+                      <Text
+                        style={{
+                          textAlign: "right",
+                          marginTop: 8,
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Harvest in {item.days_to_harvest}
+                      </Text>
+                    </View>
                   </View>
-                  <View style={{ width: "50%" }}>
-                    <Text
-                      style={{
-                        textAlign: "right",
-                        marginTop: 8,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontWeight: "500",
-                      }}
-                    >
-                      Harvest in {item.daysToHarvest}
-                    </Text>
-                  </View>
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontWeight: "500",
+                      padding: 6,
+                      marginTop: 8,
+                    }}
+                  >
+                    {item.zone._8b.join(", ")}
+                  </Text>
                 </View>
-                <Text
-                  style={{
-                    textAlign: "center",
-                    fontWeight: "500",
-                    padding: 6,
-                    marginTop: 8,
-                  }}
-                >
-                  {item.plantingMonths}
-                </Text>
               </TouchableOpacity>
             );
           }}
