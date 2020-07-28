@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
+  Image,
   RefreshControl,
   StyleSheet,
   Text,
@@ -57,9 +58,7 @@ function SeedLibrary({ navigation }) {
               <TouchableOpacity
                 style={{
                   justifyContent: "center",
-                  padding: 30,
                   margin: 12,
-                  backgroundColor: "rgb(251, 252, 252)",
                   borderRadius: 30,
                   shadowColor: "#000",
                   shadowOffset: { width: 6, height: 5 },
@@ -74,7 +73,32 @@ function SeedLibrary({ navigation }) {
                   })
                 }
               >
-                <View style={{ flexDirection: "row" }}>
+                <Image
+                  source={{
+                    uri: `${item.images}`,
+                  }}
+                  style={{
+                    width: "100%",
+                    height: 160,
+                    borderRadius: 30,
+                    borderBottomLeftRadius: 0,
+                    borderBottomRightRadius: 0,
+                    alignContent: "center",
+                  }}
+                />
+                <View
+                  style={{
+                    flexDirection: "row",
+                    padding: 30,
+                    borderRadius: 30,
+                    marginTop: -30,
+                    backgroundColor: "rgb(251, 252, 252)",
+                    shadowColor: "#000",
+                    shadowOffset: { width: -6, height: -6 },
+                    shadowOpacity: 0.2,
+                    shadowRadius: 4,
+                  }}
+                >
                   <View style={{ width: "50%" }}>
                     <Text style={{ fontSize: 18, fontWeight: "600" }}>
                       {item.species}

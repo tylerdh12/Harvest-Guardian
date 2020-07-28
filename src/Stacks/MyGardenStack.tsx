@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   AsyncStorage,
   FlatList,
+  Image,
   RefreshControl,
   Text,
   TouchableOpacity,
@@ -87,7 +88,6 @@ function MyGarden({ navigation }) {
               <TouchableOpacity
                 style={{
                   justifyContent: "center",
-                  padding: 30,
                   margin: 12,
                   backgroundColor: "rgb(251, 252, 252)",
                   borderRadius: 30,
@@ -104,67 +104,93 @@ function MyGarden({ navigation }) {
                   });
                 }}
               >
-                <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                  {item.species}
-                </Text>
+                <Image
+                  source={{
+                    uri: `${item.images}`,
+                  }}
+                  style={{
+                    width: "100%",
+                    height: 160,
+                    borderRadius: 30,
+                    borderBottomLeftRadius: 0,
+                    borderBottomRightRadius: 0,
+                    alignContent: "center",
+                  }}
+                />
                 <View
                   style={{
-                    marginTop: 10,
-                    height: 10,
-                    backgroundColor: "transparent",
-                    borderStyle: "solid",
-                    borderWidth: 1,
-                    borderColor: "rgb(148, 224, 136)",
-                    borderRadius: 10,
-                    width: "100%",
+                    padding: 30,
+                    borderRadius: 30,
+                    marginTop: -30,
+                    backgroundColor: "rgb(251, 252, 252)",
+                    shadowColor: "#000",
+                    shadowOffset: { width: -6, height: -6 },
+                    shadowOpacity: 0.2,
+                    shadowRadius: 4,
                   }}
                 >
+                  <Text style={{ fontSize: 18, fontWeight: "600" }}>
+                    {item.species}
+                  </Text>
                   <View
                     style={{
-                      height: 8,
-                      backgroundColor: "rgb(148, 224, 136)",
+                      marginTop: 10,
+                      height: 10,
+                      backgroundColor: "transparent",
+                      borderStyle: "solid",
+                      borderWidth: 1,
+                      borderColor: "rgb(148, 224, 136)",
                       borderRadius: 10,
-                      width: `${harvestProgress(
-                        item.date_planted,
-                        item.days_to_harvest
-                      )}%`,
-                      flex: 1,
+                      width: "100%",
                     }}
-                  ></View>
-                </View>
-                <View style={{ flexDirection: "row" }}>
-                  <View style={{ width: "50%" }}>
-                    <Text
+                  >
+                    <View
                       style={{
-                        textAlign: "left",
-                        marginTop: 10,
-                        marginBottom: 5,
-                        fontWeight: "500",
+                        height: 8,
+                        backgroundColor: "rgb(148, 224, 136)",
+                        borderRadius: 10,
+                        width: `${harvestProgress(
+                          item.date_planted,
+                          item.days_to_harvest
+                        )}%`,
+                        flex: 1,
                       }}
-                    >
-                      Date Planted
-                    </Text>
-                    <Text style={{ textAlign: "left" }}>
-                      {datePlanted(item.date_planted)}
-                    </Text>
+                    ></View>
                   </View>
-                  <View style={{ width: "50%" }}>
-                    <Text
-                      style={{
-                        textAlign: "right",
-                        marginTop: 10,
-                        marginBottom: 5,
-                        fontWeight: "500",
-                      }}
-                    >
-                      Day to Harvest
-                    </Text>
-                    <Text style={{ textAlign: "right" }}>
-                      {dateToBeHarvested(
-                        item.date_planted,
-                        item.days_to_harvest
-                      )}
-                    </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <View style={{ width: "50%" }}>
+                      <Text
+                        style={{
+                          textAlign: "left",
+                          marginTop: 10,
+                          marginBottom: 5,
+                          fontWeight: "500",
+                        }}
+                      >
+                        Date Planted
+                      </Text>
+                      <Text style={{ textAlign: "left" }}>
+                        {datePlanted(item.date_planted)}
+                      </Text>
+                    </View>
+                    <View style={{ width: "50%" }}>
+                      <Text
+                        style={{
+                          textAlign: "right",
+                          marginTop: 10,
+                          marginBottom: 5,
+                          fontWeight: "500",
+                        }}
+                      >
+                        Day to Harvest
+                      </Text>
+                      <Text style={{ textAlign: "right" }}>
+                        {dateToBeHarvested(
+                          item.date_planted,
+                          item.days_to_harvest
+                        )}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </TouchableOpacity>
