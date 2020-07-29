@@ -106,7 +106,7 @@ function MyGarden({ navigation }) {
               >
                 <Image
                   source={{
-                    uri: `${item.images}`,
+                    uri: `${item.seed.images}`,
                   }}
                   style={{
                     width: "100%",
@@ -114,7 +114,6 @@ function MyGarden({ navigation }) {
                     borderRadius: 30,
                     borderBottomLeftRadius: 0,
                     borderBottomRightRadius: 0,
-                    alignContent: "center",
                   }}
                 />
                 <View
@@ -130,7 +129,7 @@ function MyGarden({ navigation }) {
                   }}
                 >
                   <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                    {item.species}
+                    {item.seed.species}
                   </Text>
                   <View
                     style={{
@@ -150,8 +149,8 @@ function MyGarden({ navigation }) {
                         backgroundColor: "rgb(148, 224, 136)",
                         borderRadius: 10,
                         width: `${harvestProgress(
-                          item.date_planted,
-                          item.days_to_harvest
+                          item.seed.date_planted,
+                          item.seed.days_to_harvest
                         )}%`,
                         flex: 1,
                       }}
@@ -170,7 +169,7 @@ function MyGarden({ navigation }) {
                         Date Planted
                       </Text>
                       <Text style={{ textAlign: "left" }}>
-                        {datePlanted(item.date_planted)}
+                        {datePlanted(item.seed.date_planted)}
                       </Text>
                     </View>
                     <View style={{ width: "50%" }}>
@@ -186,8 +185,8 @@ function MyGarden({ navigation }) {
                       </Text>
                       <Text style={{ textAlign: "right" }}>
                         {dateToBeHarvested(
-                          item.date_planted,
-                          item.days_to_harvest
+                          item.seed.date_planted,
+                          item.seed.days_to_harvest
                         )}
                       </Text>
                     </View>
@@ -204,7 +203,7 @@ function MyGarden({ navigation }) {
   );
 }
 
-export const MyGardenStack = ({ navigation }) => {
+export const MyGardenStack = ({ route, navigation }) => {
   return (
     <Stack.Navigator initialRouteName="MyGarden">
       <Stack.Screen

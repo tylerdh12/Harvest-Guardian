@@ -21,7 +21,7 @@ function addSeedToMyGarden({ route }) {
       headers: {
         Authorization: authBasic,
       },
-      data: route.params.data,
+      data: route.params.data._id,
     }).then((res) => {
       if (res.status === 401) {
         console.log("Response 401");
@@ -41,7 +41,7 @@ function addSeedToMyGarden({ route }) {
 function deletePlantAlert({ route }) {
   Alert.alert(
     "Are you sure?",
-    `Would you still like to remove ${route.params.data.species} ${route.params.data.variety} from My Garden`,
+    `Would you still like to remove ${route.params.data.seed.species} ${route.params.data.seed.variety} from My Garden`,
     [
       {
         text: "Yes - Remove Please",
@@ -85,7 +85,7 @@ function Details({ route, navigation }) {
       <Image
         style={{ width: "100%", height: 300 }}
         source={{
-          uri: `${route.params.data.images}`,
+          uri: `${route.params.data.seed.images}`,
         }}
       />
       <View
@@ -99,103 +99,107 @@ function Details({ route, navigation }) {
       >
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Variety: </Text>
-          <Text style={styles.dataText}>{route.params.data.variety}</Text>
+          <Text style={styles.dataText}>{route.params.data.seed.variety}</Text>
         </View>
-        {route.params.data.date_planted ? (
+        {route.params.data.seed.date_planted ? (
           <View style={styles.detailItemContainer}>
             <Text style={styles.labelText}>Date Planted: </Text>
             <Text style={styles.dataText}>
-              {route.params.data.date_planted.slice(0, 10)}
+              {route.params.data.seed.date_planted.slice(0, 10)}
             </Text>
           </View>
         ) : null}
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Description: </Text>
-          <Text style={styles.dataText}>{route.params.data.description}</Text>
+          <Text style={styles.dataText}>
+            {route.params.data.seed.description}
+          </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Days To Germinate: </Text>
           <Text style={styles.dataText}>
-            {route.params.data.days_to_germinate}
+            {route.params.data.seed.days_to_germinate}
           </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Days To Harvest: </Text>
           <Text style={styles.dataText}>
-            {route.params.data.days_to_harvest}
+            {route.params.data.seed.days_to_harvest}
           </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Anti-Companion Plants: </Text>
           <Text style={styles.dataText}>
-            {route.params.data.non_companions.join(", ")}
+            {route.params.data.seed.non_companions.join(", ")}
           </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Sun Requirements: </Text>
-          <Text style={styles.dataText}>{route.params.data.sun}</Text>
+          <Text style={styles.dataText}>{route.params.data.seed.sun}</Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Soil Temperature High: </Text>
           <Text style={styles.dataText}>
-            {route.params.data.soil_temp_high}
+            {route.params.data.seed.soil_temp_high}
           </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Sowing Method: </Text>
-          <Text style={styles.dataText}>{route.params.data.sow}</Text>
+          <Text style={styles.dataText}>{route.params.data.seed.sow}</Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Plant Height: </Text>
-          <Text style={styles.dataText}>{route.params.data.height}</Text>
+          <Text style={styles.dataText}>{route.params.data.seed.height}</Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Seed Depth: </Text>
-          <Text style={styles.dataText}>{route.params.data.depth}</Text>
+          <Text style={styles.dataText}>{route.params.data.seed.depth}</Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Seed Spacing: </Text>
-          <Text style={styles.dataText}>{route.params.data.spacing}</Text>
+          <Text style={styles.dataText}>{route.params.data.seed.spacing}</Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Water Requirements: </Text>
-          <Text style={styles.dataText}>{route.params.data.water}</Text>
+          <Text style={styles.dataText}>{route.params.data.seed.water}</Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Planting Months: </Text>
           <Text style={styles.dataText}>
-            {route.params.data.zone._8b.join(", ")}
+            {route.params.data.seed.zone._8b.join(", ")}
           </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Nutrient Requirements: </Text>
           <Text style={styles.dataText}>
-            {route.params.data.nutrient.join(", ")}
+            {route.params.data.seed.nutrient.join(", ")}
           </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Soil Temperature Low: </Text>
-          <Text style={styles.dataText}>{route.params.data.soil_temp_low}</Text>
+          <Text style={styles.dataText}>
+            {route.params.data.seed.soil_temp_low}
+          </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Byproduct: </Text>
           <Text style={styles.dataText}>
-            {route.params.data.byproducts.join(", ")}
+            {route.params.data.seed.byproducts.join(", ")}
           </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Companion Plants: </Text>
           <Text style={styles.dataText}>
-            {route.params.data.companions.join(", ")}
+            {route.params.data.seed.companions.join(", ")}
           </Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Images: </Text>
-          <Text style={styles.dataText}>{route.params.data.images}</Text>
+          <Text style={styles.dataText}>{route.params.data.seed.images}</Text>
         </View>
         <View style={styles.detailItemContainer}>
           <Text style={styles.labelText}>Complete Data:</Text>
-          <Text style={styles.dataText}>{route.params.data.complete}</Text>
+          <Text style={styles.dataText}>{route.params.data.seed.complete}</Text>
         </View>
         {route.params.type === "plant" ? (
           <View
@@ -210,7 +214,7 @@ function Details({ route, navigation }) {
               title="Edit"
               onPress={() => {
                 navigation.navigate("EditDetails", {
-                  name: route.params.data.species,
+                  name: route.params.data.seed.species,
                 });
               }}
             />
@@ -235,7 +239,7 @@ function Details({ route, navigation }) {
               title="Edit"
               onPress={() => {
                 navigation.navigate("EditDetails", {
-                  name: route.params.data.species,
+                  name: route.params.data.seed.species,
                 });
               }}
             />
@@ -281,7 +285,7 @@ export const DetailsRoutes = (Stack) => {
     <>
       <Stack.Screen
         options={({ route }: any) => ({
-          headerTitle: route.params.data.species,
+          headerTitle: route.params.data.seed.species,
           headerStyle: {
             backgroundColor: theme.COLORS.PRIMARY,
           },
