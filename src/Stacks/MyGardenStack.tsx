@@ -2,19 +2,24 @@ import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   AsyncStorage,
+  Button,
   FlatList,
   Image,
   RefreshControl,
+  ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import { DetailsRoutes } from "../Details";
 import { Center } from "../StyledContainers/Center";
+import DetailListItem from "./../Components/DetailListItem";
+import theme from "./../theme";
 
 const Stack = createStackNavigator();
 
@@ -203,6 +208,173 @@ function MyGarden({ navigation }) {
   );
 }
 
+// TODO Add dynamic value for zone
+function Details({ route, navigation }) {
+  const [data, setData] = useState(route.params.data);
+
+  function deletePlantAlert({ data }) {
+    Alert.alert(
+      "Are you sure?",
+      `Would you still like to remove ${data.seed.species} ${data.seed.variety} from My Garden`,
+      [
+        {
+          text: "Yes - Remove Please",
+          onPress: () => deletePlantFromMyGarden({ data }),
+        },
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+      ],
+      { cancelable: false }
+    );
+  }
+
+  function deletePlantFromMyGarden({ data }) {
+    AsyncStorage.getItem("authBasic").then((authBasic) => {
+      axios({
+        method: "delete",
+        url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${data._id}`,
+        headers: {
+          Authorization: authBasic,
+        },
+      }).then((res) => {
+        if (res.status === 401) {
+          console.log("Response 401");
+          console.log(res);
+        } else if (res.status === 200) {
+          res.data.deletedCount === 1
+            ? alert("Plant Has Been Removed")
+            : alert("Error Deleting Plant");
+        }
+      });
+    });
+  }
+
+  return (
+    <ScrollView style={styles.scrollView}>
+      <Image
+        style={{ width: "100%", height: 300 }}
+        source={{
+          uri: `${data.seed.images}`,
+        }}
+      />
+      <View
+        style={{
+          paddingTop: 25,
+          backgroundColor: "#403D3D",
+          borderTopRightRadius: 30,
+          borderTopLeftRadius: 30,
+          marginTop: -30,
+        }}
+      >
+        <DetailListItem label="Variety" dataText={data.seed.variety} />
+        <DetailListItem
+          label="Date Planted"
+          dataText={data.date_planted.slice(0, 10)}
+        />
+        <DetailListItem label="Description" dataText={data.seed.description} />
+        <DetailListItem
+          label="Days To Germinate"
+          dataText={data.seed.days_to_germinate}
+        />
+        <DetailListItem
+          label="Days To Harvest"
+          dataText={data.seed.days_to_harvest}
+        />
+        <DetailListItem
+          label="Anti-Companion Plants"
+          dataText={data.seed.non_companions.join(", ")}
+        />
+        <DetailListItem label="Sun Requirements" dataText={data.seed.sun} />
+        <DetailListItem
+          label="Soil Temperature High"
+          dataText={data.seed.soil_temp_high}
+        />
+        <DetailListItem label="Sowing Method" dataText={data.seed.sow} />
+        <DetailListItem label="Plant Height" dataText={data.seed.height} />
+        <DetailListItem label="Seed Depth" dataText={data.seed.depth} />
+        <DetailListItem label="Seed Spacing" dataText={data.seed.spacing} />
+        <DetailListItem label="Water Requirements" dataText={data.seed.water} />
+        <DetailListItem
+          label="Planting Months"
+          dataText={data.seed.zone._8b.join(", ")}
+        />
+        <DetailListItem
+          label="Nutrient Requirements"
+          dataText={data.seed.nutrient.join(", ")}
+        />
+        <DetailListItem
+          label="Soil Temperature Low"
+          dataText={data.seed.soil_temp_low}
+        />
+        <DetailListItem
+          label="Byproduct"
+          dataText={data.seed.byproducts.join(", ")}
+        />
+        <DetailListItem
+          label="Companion Plants"
+          dataText={data.seed.companions.join(", ")}
+        />
+        <DetailListItem label="Images" dataText={data.seed.images} />
+        <DetailListItem label="Complete Data" dataText={data.seed.complete} />
+        <View
+          style={{
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            flexDirection: "row",
+            padding: 15,
+          }}
+        >
+          <Button
+            title="Edit"
+            onPress={() => {
+              navigation.navigate("EditPlantDetails", {
+                data: data,
+              });
+            }}
+          />
+          <Button
+            title="Delete"
+            color="red"
+            onPress={() => {
+              deletePlantAlert({ data });
+            }}
+          />
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
+
+function EditPlantDetails({ route, navigation }) {
+  const [data, setData] = useState(route.params.data);
+
+  function apiCall(x: any) {
+    return x;
+  }
+
+  const [formState] = useState();
+  const submit = useRef(() => {});
+
+  submit.current = () => {
+    // api call with new form state
+    apiCall(formState);
+    navigation.goBack();
+  };
+
+  useEffect(() => {
+    navigation.setParams({ submit });
+  }, []);
+
+  return (
+    <Center>
+      <Text>Edit {data.seed.species}</Text>
+    </Center>
+  );
+}
+
 export const MyGardenStack = ({ route, navigation }) => {
   return (
     <Stack.Navigator initialRouteName="MyGarden">
@@ -232,7 +404,95 @@ export const MyGardenStack = ({ route, navigation }) => {
         }}
         component={MyGarden}
       />
-      {DetailsRoutes(Stack)}
+      <Stack.Screen
+        options={({ route }: any) => ({
+          headerTitle: route.params.data.species,
+          headerStyle: {
+            backgroundColor: theme.COLORS.PRIMARY,
+          },
+          headerTintColor: theme.COLORS.HEADERTINT,
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        })}
+        name="Details"
+        component={Details}
+      />
+      <Stack.Screen
+        options={({ route }: any) => ({
+          headerTitle: `Edit: ${route.params.data.species}`,
+          headerRight: () => (
+            <Button
+              title="Done"
+              onPress={({ route }: any) => {
+                route.params.submit?.current();
+              }}
+            />
+          ),
+          headerStyle: {
+            backgroundColor: theme.COLORS.PRIMARY,
+          },
+          headerTintColor: "#403D3D",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        })}
+        name="EditPlantDetails"
+        component={EditPlantDetails}
+      />
     </Stack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+  scrollView: {
+    backgroundColor: "#323030",
+  },
+  detailItemContainer: {
+    flexDirection: "row",
+    paddingTop: 18,
+    paddingBottom: 18,
+    backgroundColor: "#403D3D",
+    borderBottomWidth: 4,
+    borderBottomColor: "#323030",
+  },
+  labelText: {
+    width: "35%",
+    textAlign: "left",
+    paddingLeft: 12,
+    color: "white",
+    fontSize: 15,
+    fontWeight: "500",
+  },
+  dataText: {
+    textAlign: "right",
+    paddingRight: 12,
+    width: "65%",
+    color: "white",
+    fontSize: 15,
+    fontWeight: "300",
+  },
+  speciesContainer: {
+    width: "80%",
+  },
+  species: {
+    paddingLeft: 12,
+    width: "65%",
+    color: "white",
+    fontSize: 24,
+    fontWeight: "600",
+  },
+  heartButtonContainer: {
+    width: "20%",
+    textAlign: "right",
+    alignItems: "flex-end",
+    paddingRight: 12,
+  },
+});

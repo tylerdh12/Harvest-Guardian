@@ -196,12 +196,6 @@ function Details({ route, navigation }) {
         }}
       >
         <DetailListItem label="Variety" dataText={data.variety} />
-        {data.date_planted ? (
-          <DetailListItem
-            label="Date Planted"
-            dataText={data.date_planted.slice(0, 10)}
-          />
-        ) : null}
         <DetailListItem label="Description" dataText={data.description} />
         <DetailListItem
           label="Days To Germinate"
@@ -280,7 +274,6 @@ function EditSeedDetails({ route, navigation }) {
   function apiCall(x: any) {
     return x;
   }
-  console.log(data);
 
   const [formState] = useState();
   const submit = useRef(() => {});
