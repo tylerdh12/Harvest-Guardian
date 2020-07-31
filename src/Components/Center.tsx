@@ -1,7 +1,9 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
 
-interface CenterProps {}
+interface CenterProps {
+  children: any;
+}
 
 export const Center: React.FC<CenterProps> = ({ children }) => {
   return (
