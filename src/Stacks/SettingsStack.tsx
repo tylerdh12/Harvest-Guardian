@@ -1,96 +1,133 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Center } from "../components/Center";
+import { Switch, TouchableOpacity, View } from "react-native";
+import styled from "styled-components/native";
 import { AuthContext } from "../providers/AuthProvider";
+import { useTheme } from "../themes";
 
 const Stack = createStackNavigator();
+
+const Container = styled.View`
+  flex: 1;
+  background: ${(props) => props.theme.background};
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+`;
+
+const Title = styled.Text`
+  font-size: 24px;
+  text-align: center;
+  color: ${(props) => props.theme.text};
+`;
+
+const Label = styled.Text`
+  font-size: 16px;
+  text-align: center;
+  padding-right: 18px;
+  font-weight: 600;
+  color: ${(props) => props.theme.text};
+`;
+const BasicText = styled.Text`
+  font-size: 16px;
+  text-align: center;
+  padding-right: 18px;
+  color: ${(props) => props.theme.text};
+`;
+
+const LinkTitle = styled.Text`
+  text-align: center;
+  font-size: 20px;
+  padding: 16px;
+  font-weight: 500;
+  color: ${(props) => props.theme.text};
+`;
 
 function Settings({ navigation }) {
   const { logout, userData } = useContext(AuthContext);
 
   return (
-    <Center>
+    <Container>
       <TouchableOpacity
-        style={styles.touchableLinks}
+        style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("Profile");
         }}
       >
-        <Text style={styles.linkTitle}>
+        <LinkTitle>
           <Ionicons name="ios-person" size={22} />
           {"  "}
           Profile
-        </Text>
+        </LinkTitle>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.touchableLinks}
+        style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("Security");
         }}
       >
-        <Text style={styles.linkTitle}>
+        <LinkTitle>
           <Ionicons name="ios-key" size={22} />
           {"  "}Security
-        </Text>
+        </LinkTitle>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.touchableLinks}
+        style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("Notifications");
         }}
       >
-        <Text style={styles.linkTitle}>
+        <LinkTitle>
           <Ionicons name="ios-notifications" size={22} />
           {"  "}Notifications
-        </Text>
+        </LinkTitle>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.touchableLinks}
+        style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("Preferences");
         }}
       >
-        <Text style={styles.linkTitle}>
+        <LinkTitle>
           <Ionicons name="ios-options" size={22} />
           {"  "}Preferences
-        </Text>
+        </LinkTitle>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.touchableLinks}
+        style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("Privacy");
         }}
       >
-        <Text style={styles.linkTitle}>
+        <LinkTitle>
           <Ionicons name="ios-lock" size={22} />
           {"  "}Privacy
-        </Text>
+        </LinkTitle>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.touchableLinks}
+        style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("About");
         }}
       >
-        <Text style={styles.linkTitle}>
+        <LinkTitle>
           <Ionicons name="ios-information-circle-outline" size={22} />
           {"  "}About
-        </Text>
+        </LinkTitle>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.touchableLinks}
+        style={{ padding: 5 }}
         onPress={() => {
           logout();
         }}
       >
-        <Text style={styles.linkTitle}>
+        <LinkTitle>
           <Ionicons name="ios-power" size={22} />
           {"  "}Logout
-        </Text>
+        </LinkTitle>
       </TouchableOpacity>
-    </Center>
+    </Container>
   );
 }
 
@@ -98,80 +135,100 @@ function Profile({ navigation }) {
   const { userData } = useContext(AuthContext);
 
   return (
-    <View style={{ alignItems: "center", paddingTop: 30 }}>
+    <Container>
       <View style={{ alignItems: "center", textAlign: "center" }}>
         <View style={{ padding: 10, flexDirection: "row" }}>
-          <Text style={{ fontWeight: "500" }}>Name: </Text>
-          <Text>
+          <Label>Name: </Label>
+          <BasicText>
             {userData.first_name} {userData.last_name}
-          </Text>
+          </BasicText>
         </View>
         <View style={{ padding: 10, flexDirection: "row" }}>
-          <Text style={{ fontWeight: "500" }}>Username: </Text>
-          <Text>{userData.email}</Text>
+          <Label>Username: </Label>
+          <BasicText>{userData.email}</BasicText>
         </View>
         <View style={{ padding: 10, flexDirection: "row" }}>
-          <Text style={{ fontWeight: "500" }}>Zip Code: </Text>
-          <Text>{userData.zip_code}</Text>
+          <Label>Zip Code: </Label>
+          <BasicText>{userData.zip_code}</BasicText>
         </View>
         <View style={{ padding: 10, flexDirection: "row" }}>
-          <Text style={{ fontWeight: "500" }}>Growing Zone: </Text>
-          <Text>{userData.zone}</Text>
+          <Label>Growing Zone: </Label>
+          <BasicText>{userData.zone}</BasicText>
         </View>
       </View>
-    </View>
+    </Container>
   );
 }
 
 function Security({ navigation }) {
   return (
-    <View style={{ alignItems: "center", paddingTop: 30 }}>
-      <View style={{ width: "70%" }}>
-        <Text style={{ textAlign: "center", fontSize: 16 }}>Security</Text>
-      </View>
-    </View>
+    <Container>
+      <Title>Security</Title>
+    </Container>
   );
 }
 
 function Notifications({ navigation }: any) {
   return (
-    <View style={{ alignItems: "center", paddingTop: 30 }}>
-      <View style={{ width: "70%" }}>
-        <Text style={{ textAlign: "center", fontSize: 16 }}>Notifications</Text>
-      </View>
-    </View>
+    <Container>
+      <BasicText>Notifications</BasicText>
+    </Container>
   );
 }
 
 function Preferences({ navigation }: any) {
+  const theme = useTheme();
+
   return (
-    <View style={{ alignItems: "center", paddingTop: 30 }}>
+    <Container>
       <View style={{ width: "70%" }}>
-        <Text style={{ textAlign: "center", fontSize: 16 }}>Preferences</Text>
+        <Title>Preferences</Title>
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 10,
+          }}
+        >
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "space-evenly",
+              flexDirection: "row",
+            }}
+          >
+            <Label>Light / Dark Mode:</Label>
+            <Switch
+              // trackColor={{ false: "#767577", true: "#81b0ff" }}
+              // thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+              // ios_backgroundColor="#3e3e3e"
+              onValueChange={(value) => theme.setMode(value ? "dark" : "light")}
+              value={theme.mode === "dark"}
+            />
+          </View>
+        </View>
       </View>
-    </View>
+    </Container>
   );
 }
 
 function Privacy({ navigation }: any) {
   return (
-    <View style={{ alignItems: "center", paddingTop: 30 }}>
-      <View style={{ width: "70%" }}>
-        <Text style={{ textAlign: "center", fontSize: 16 }}>Privacy</Text>
-      </View>
-    </View>
+    <Container>
+      <Title>Privacy</Title>
+    </Container>
   );
 }
 
 function About({ navigation }: any) {
   return (
-    <View style={{ alignItems: "center", paddingTop: 30 }}>
+    <Container>
       <View style={{ width: "70%" }}>
-        <Text style={{ textAlign: "center", fontSize: 16 }}>
+        <BasicText>
           Harvest Guardian is an application that hopes to help you gardening
           experience by helping you keep track of your plants and by helping
           provide knowledge and tips for a greener more bountiful garden.
-        </Text>
+        </BasicText>
       </View>
       <View
         style={{
@@ -183,11 +240,11 @@ function About({ navigation }: any) {
         }}
       ></View>
       <View style={{ width: "70%" }}>
-        <Text style={{ textAlign: "center", fontSize: 16 }}>
+        <BasicText>
           Please view the github repo to request changes and features.
-        </Text>
+        </BasicText>
       </View>
-    </View>
+    </Container>
   );
 }
 
@@ -295,24 +352,3 @@ export const SettingsStack = ({}) => {
     </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  contentContainer: {
-    paddingTop: 5,
-    justifyContent: "center",
-    marginTop: 15,
-  },
-  touchableLinks: {
-    padding: 5,
-  },
-  linkTitle: {
-    textAlign: "center",
-    fontSize: 20,
-    padding: 10,
-    fontWeight: "500",
-  },
-});
