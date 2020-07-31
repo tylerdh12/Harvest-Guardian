@@ -42,5 +42,14 @@
     "react-native-dotenv": "^0.2.0",
     "typescript": "~3.9.5"
   },
-  "private": true
+  "private": true,
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "yarn",
+    "peerDependencies": {
+      "react": ">=16.9.0",
+      "react-dom": ">=16.9.0"
+    }
+  }
 }

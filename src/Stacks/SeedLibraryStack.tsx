@@ -15,9 +15,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import DetailListItem from "./../Components/DetailListItem";
-import { Center } from "./../StyledContainers/Center";
-import theme from "./../theme";
+import DetailListItem from "../components/DetailListItem";
+import { Center } from "../components/Center";
+import theme from "../theme";
 
 const Stack = createStackNavigator();
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export const DetailListItem = (_props) => {
+export const DetailListItem = (_props: any) => {
   return (
     <View style={styles.detailItemContainer}>
       <Text style={styles.labelText}>{_props.label}: </Text>

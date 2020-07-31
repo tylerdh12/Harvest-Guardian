@@ -2,8 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { AuthContext } from "../Providers/AuthProvider";
-import { Center } from "../StyledContainers/Center";
+import { Center } from "../components/Center";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Stack = createStackNavigator();
 

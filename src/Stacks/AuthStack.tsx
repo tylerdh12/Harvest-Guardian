@@ -9,8 +9,8 @@ import { encode } from "base-64";
 import React, { useContext, useEffect, useReducer } from "react";
 import { AsyncStorage, StyleSheet, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { AuthContext } from "../Providers/AuthProvider";
-import { Center } from "../StyledContainers/Center";
+import { Center } from "../components/Center";
+import { AuthContext } from "../providers/AuthProvider";
 
 /* ------------------------------ Define Stack ------------------------------ */
 
@@ -102,7 +102,6 @@ function Login({ navigation }) {
   /* --------- useEffect Calls Auto Login if authBasic in AsyncStorage -------- */
 
   useEffect(() => {
-
     AsyncStorage.getItem("userData").then((userData) => {
       if (userData !== null) {
         try {
@@ -114,7 +113,6 @@ function Login({ navigation }) {
         }
       }
     });
-    
   }, []);
 
   /* ------- Primary Login Function Handler requires username, password ------- */

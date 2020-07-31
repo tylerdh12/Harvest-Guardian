@@ -12,14 +12,13 @@ import {
   Image,
   RefreshControl,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import { Center } from "../StyledContainers/Center";
-import DetailListItem from "./../Components/DetailListItem";
-import theme from "./../theme";
+import { Center } from "../components/Center";
+import DetailListItem from "../components/DetailListItem";
+import theme from "../theme";
 
 const Stack = createStackNavigator();
 
@@ -253,7 +252,7 @@ function Details({ route, navigation }) {
   }
 
   return (
-    <ScrollView style={styles.scrollView}>
+    <ScrollView style={{ backgroundColor: "#323030" }}>
       <Image
         style={{ width: "100%", height: 300 }}
         source={{
@@ -445,54 +444,3 @@ export const MyGardenStack = ({ route, navigation }) => {
     </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  center: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  scrollView: {
-    backgroundColor: "#323030",
-  },
-  detailItemContainer: {
-    flexDirection: "row",
-    paddingTop: 18,
-    paddingBottom: 18,
-    backgroundColor: "#403D3D",
-    borderBottomWidth: 4,
-    borderBottomColor: "#323030",
-  },
-  labelText: {
-    width: "35%",
-    textAlign: "left",
-    paddingLeft: 12,
-    color: "white",
-    fontSize: 15,
-    fontWeight: "500",
-  },
-  dataText: {
-    textAlign: "right",
-    paddingRight: 12,
-    width: "65%",
-    color: "white",
-    fontSize: 15,
-    fontWeight: "300",
-  },
-  speciesContainer: {
-    width: "80%",
-  },
-  species: {
-    paddingLeft: 12,
-    width: "65%",
-    color: "white",
-    fontSize: 24,
-    fontWeight: "600",
-  },
-  heartButtonContainer: {
-    width: "20%",
-    textAlign: "right",
-    alignItems: "flex-end",
-    paddingRight: 12,
-  },
-});
