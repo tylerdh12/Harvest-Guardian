@@ -1,23 +1,19 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
+import styled from "styled-components/native";
 
 interface CenterProps {
   children: any;
 }
 
+const ThemedSafeAreaView = styled.SafeAreaView`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background: ${(props) => props.theme.background};
+  width: 100%;
+  height: 100%;
+`;
+
 export const Center: React.FC<CenterProps> = ({ children }) => {
-  return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "white",
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      {children}
-    </SafeAreaView>
-  );
+  return <ThemedSafeAreaView>{children}</ThemedSafeAreaView>;
 };
