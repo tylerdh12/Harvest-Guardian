@@ -22,21 +22,57 @@ import theme from "../theme";
 
 const Stack = createStackNavigator();
 
-const StyledCardContainer = styled.View`
+const StyledCardContainer = styled.TouchableOpacity`
   justify-content: center;
   margin: 12px;
   border-radius: 30px;
-  box-shadow: 3px 2px 4px;
+  box-shadow: 1px 1px 6px;
   background: ${(props) => props.theme.backgroundAlt};
 `;
 
 const StyledDetailsCardContainer = styled.View`
   justify-content: center;
   margin-top: -30px;
-  padding: 20px;
-  box-shadow: -.5px -.5px 2px;
+  padding: 30px;
+  box-shadow: 0px 0px 1px;
   background: ${(props) => props.theme.backgroundAlt};
   border-radius: 30px;
+`;
+
+const Title = styled.Text`
+  color: ${(props) => props.theme.text};
+  font-size: 18px;
+  font-weight: 600;
+`;
+
+const HeadingLeft = styled.Text`
+  text-align: left;
+  margin-top: 15px;
+  margin-bottom: 5;
+  font-weight: 500;
+  color: ${(props) => props.theme.text};
+`;
+
+const TextLeft = styled.Text`
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5;
+  color: ${(props) => props.theme.text};
+`;
+
+const HeadingRight = styled.Text`
+  text-align: right;
+  margin-top: 15px;
+  margin-bottom: 5;
+  font-weight: 500;
+  color: ${(props) => props.theme.text};
+`;
+
+const TextRight = styled.Text`
+  text-align: right;
+  margin-top: 5px;
+  margin-bottom: 5;
+  color: ${(props) => props.theme.text};
 `;
 
 function MyGarden({ navigation }) {
@@ -127,9 +163,7 @@ function MyGarden({ navigation }) {
                   }}
                 />
                 <StyledDetailsCardContainer>
-                  <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                    {item.seed.species}
-                  </Text>
+                  <Title>{item.seed.species}</Title>
                   <View
                     style={{
                       marginTop: 10,
@@ -157,37 +191,17 @@ function MyGarden({ navigation }) {
                   </View>
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ width: "50%" }}>
-                      <Text
-                        style={{
-                          textAlign: "left",
-                          marginTop: 10,
-                          marginBottom: 5,
-                          fontWeight: "500",
-                        }}
-                      >
-                        Date Planted
-                      </Text>
-                      <Text style={{ textAlign: "left" }}>
-                        {datePlanted(item.seed.date_planted)}
-                      </Text>
+                      <HeadingLeft>Date Planted</HeadingLeft>
+                      <TextLeft>{datePlanted(item.seed.date_planted)}</TextLeft>
                     </View>
                     <View style={{ width: "50%" }}>
-                      <Text
-                        style={{
-                          textAlign: "right",
-                          marginTop: 10,
-                          marginBottom: 5,
-                          fontWeight: "500",
-                        }}
-                      >
-                        Day to Harvest
-                      </Text>
-                      <Text style={{ textAlign: "right" }}>
+                      <HeadingRight>Day to Harvest</HeadingRight>
+                      <TextRight>
                         {dateToBeHarvested(
                           item.seed.date_planted,
                           item.seed.days_to_harvest
                         )}
-                      </Text>
+                      </TextRight>
                     </View>
                   </View>
                 </StyledDetailsCardContainer>
