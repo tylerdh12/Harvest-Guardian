@@ -14,6 +14,10 @@ export const ViewAlt = styled.View`
   background: ${(props) => props.theme.viewAlt};
 `;
 
+export const ScrollView = styled.ScrollView`
+  background: ${(props) => props.theme.background};
+`;
+
 export const BottomBorderView = styled.View`
   background: ${(props) => props.theme.backgroundAlt};
   border-bottom-color: ${(props) => props.theme.border};

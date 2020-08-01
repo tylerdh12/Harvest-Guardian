@@ -11,12 +11,16 @@ import {
   FlatList,
   Image,
   RefreshControl,
-  ScrollView,
 } from "react-native";
 import { Center } from "../components/Center";
 import DetailListItem from "../components/DetailListItem";
 import theme from "../theme";
-import { Text, TouchableOpacity, View } from "./../components/Styles";
+import {
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "./../components/Styles";
 
 const Stack = createStackNavigator();
 
@@ -255,7 +259,7 @@ function Details({ route, navigation }) {
   }
 
   return (
-    <ScrollView style={{ backgroundColor: "#323030" }}>
+    <ScrollView>
       <Image
         style={{ width: "100%", height: 300 }}
         source={{

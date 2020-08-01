@@ -9,14 +9,13 @@ import {
   FlatList,
   Image,
   RefreshControl,
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import { Center } from "../components/Center";
 import DetailListItem from "../components/DetailListItem";
 import theme from "../theme";
-import { Text, View } from "./../components/Styles";
+import { ScrollView, Text, View } from "./../components/Styles";
 
 const Stack = createStackNavigator();
 
@@ -177,7 +176,7 @@ function Details({ route, navigation }) {
   }
 
   return (
-    <ScrollView style={styles.scrollView}>
+    <ScrollView>
       <Image
         style={{ width: "100%", height: 300 }}
         source={{
@@ -356,9 +355,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-  },
-  scrollView: {
-    backgroundColor: "#323030",
   },
   detailItemContainer: {
     flexDirection: "row",
