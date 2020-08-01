@@ -7,10 +7,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { encode } from "base-64";
 import React, { useContext, useEffect, useReducer } from "react";
-import { AsyncStorage, StyleSheet, Text, TextInput, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { AsyncStorage, StyleSheet, TextInput } from "react-native";
 import { Center } from "../components/Center";
 import { AuthContext } from "../providers/AuthProvider";
+import { Text, TouchableOpacityButton, ViewAlt } from "./../components/Styles";
 
 /* ------------------------------ Define Stack ------------------------------ */
 
@@ -140,7 +140,9 @@ function Login({ navigation }) {
 
   return (
     <Center>
-      <Text style={styles.heading1}>Login</Text>
+      <Text style={{ fontWeight: "700", fontSize: 22, marginBottom: 10 }}>
+        Login
+      </Text>
 
       {error !== "" ? (
         <Text
@@ -156,10 +158,19 @@ function Login({ navigation }) {
         </Text>
       ) : null}
 
-      <Text style={styles.inputLabel}>Email</Text>
+      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>Email</Text>
 
       <TextInput
-        style={styles.textInput}
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 2,
+          borderRadius: 5,
+          padding: 5,
+          marginBottom: 10,
+          width: "60%",
+          maxWidth: 300,
+        }}
         keyboardType="email-address"
         autoFocus={true}
         onChangeText={(e) =>
@@ -167,39 +178,69 @@ function Login({ navigation }) {
         }
         value={username}
       />
-      <Text style={styles.inputLabel}>Password</Text>
+      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
+        Password
+      </Text>
 
       <TextInput
-        style={styles.textInput}
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 2,
+          borderRadius: 5,
+          padding: 5,
+          marginBottom: 10,
+          width: "60%",
+          maxWidth: 300,
+        }}
         secureTextEntry={true}
         onChangeText={(e) =>
           dispatch({ type: "field", field: "password", value: e })
         }
         value={password}
       />
-      <View style={styles.buttonView}>
-        <TouchableOpacity
-          style={styles.buttonSpacing}
+      <ViewAlt
+        style={{
+          marginTop: 10,
+          alignItems: "center",
+          flexDirection: "column",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <TouchableOpacityButton
+          style={{ margin: 10 }}
           disabled={isLoading}
           onPress={() => {
             loginWithUserPass(username, password);
           }}
         >
           {isLoading ? (
-            <Text style={styles.buttonText}>Logging In...</Text>
+            <Text
+              style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
+            >
+              Logging In...
+            </Text>
           ) : (
-            <Text style={styles.buttonText}>Log In</Text>
+            <Text
+              style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
+            >
+              Log In
+            </Text>
           )}
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.buttonSpacing}
+        </TouchableOpacityButton>
+        <TouchableOpacityButton
+          style={{ margin: 10 }}
           onPress={() => {
             navigation.navigate("Register");
           }}
         >
-          <Text style={styles.buttonText}>Don't have an account?</Text>
-        </TouchableOpacity>
-      </View>
+          <Text
+            style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
+          >
+            Don't have an account?
+          </Text>
+        </TouchableOpacityButton>
+      </ViewAlt>
     </Center>
   );
 
@@ -218,68 +259,149 @@ function Register({ navigation }) {
 
   return (
     <Center>
-      <Text style={styles.heading1}>Create a New Account</Text>
-      <Text style={styles.inputLabel}>First Name</Text>
+      <Text style={{ fontWeight: "700", fontSize: 22, marginBottom: 10 }}>
+        Create a New Account
+      </Text>
+      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
+        First Name
+      </Text>
       <TextInput
-        style={styles.textInput}
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 2,
+          borderRadius: 5,
+          padding: 5,
+          marginBottom: 10,
+          width: "60%",
+          maxWidth: 300,
+        }}
         autoFocus={true}
         onChangeText={(firstName) => changeFirstName(firstName)}
         value={firstName}
       />
-      <Text style={styles.inputLabel}>Last Name</Text>
+      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
+        Last Name
+      </Text>
       <TextInput
-        style={styles.textInput}
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 2,
+          borderRadius: 5,
+          padding: 5,
+          marginBottom: 10,
+          width: "60%",
+          maxWidth: 300,
+        }}
         onChangeText={(lastName) => changeLastName(lastName)}
         value={lastName}
       />
-      <Text style={styles.inputLabel}>Zip Code</Text>
+      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
+        Zip Code
+      </Text>
       <TextInput
-        style={styles.textInput}
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 2,
+          borderRadius: 5,
+          padding: 5,
+          marginBottom: 10,
+          width: "60%",
+          maxWidth: 300,
+        }}
         keyboardType="number-pad"
         onChangeText={(zipCode) => changeZipCode(zipCode)}
         value={zipCode}
       />
-      <Text style={styles.inputLabel}>Email</Text>
+      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>Email</Text>
       <TextInput
-        style={styles.textInput}
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 2,
+          borderRadius: 5,
+          padding: 5,
+          marginBottom: 10,
+          width: "60%",
+          maxWidth: 300,
+        }}
         keyboardType="email-address"
         onChangeText={(Email) => changeEmail(Email)}
         value={Email}
       />
-      <Text style={styles.inputLabel}>Password</Text>
+      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
+        Password
+      </Text>
       <TextInput
-        style={styles.textInput}
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 2,
+          borderRadius: 5,
+          padding: 5,
+          marginBottom: 10,
+          width: "60%",
+          maxWidth: 300,
+        }}
         secureTextEntry={true}
         onChangeText={(password) => changePassword(password)}
         value={password}
       />
-      <Text style={styles.inputLabel}>Re-enter Password</Text>
+      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
+        Re-enter Password
+      </Text>
       <TextInput
-        style={styles.textInput}
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 2,
+          borderRadius: 5,
+          padding: 5,
+          marginBottom: 10,
+          width: "60%",
+          maxWidth: 300,
+        }}
         onChangeText={(reenterPassword) =>
           changeReenterPassword(reenterPassword)
         }
         value={reenterpassword}
       />
       <Stack.Screen name="Login" component={Login} />
-      <View style={styles.buttonView}>
-        <TouchableOpacity
-          style={styles.buttonSpacing}
+      <ViewAlt
+        style={{
+          marginTop: 10,
+          alignItems: "center",
+          flexDirection: "column",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <TouchableOpacityButton
+          style={{ margin: 10 }}
           onPress={() => {
             alert("User has been Registered");
           }}
         >
-          <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.buttonSpacing}
+          <Text
+            style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
+          >
+            Register
+          </Text>
+        </TouchableOpacityButton>
+        <TouchableOpacityButton
+          style={{ margin: 10 }}
           onPress={() => {
             navigation.navigate("Login");
           }}
         >
-          <Text style={styles.buttonText}>Already have an account?</Text>
-        </TouchableOpacity>
-      </View>
+          <Text
+            style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
+          >
+            Already have an account?
+          </Text>
+        </TouchableOpacityButton>
+      </ViewAlt>
     </Center>
   );
 }
@@ -306,35 +428,6 @@ export const AuthStack = ({}) => {
 };
 
 const styles = StyleSheet.create({
-  heading1: {
-    fontWeight: "700",
-    fontSize: 22,
-    marginBottom: 10,
-  },
-  inputLabel: {
-    padding: 4,
-    fontWeight: "400",
-    fontSize: 16,
-  },
-  textInput: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 2,
-    borderRadius: 5,
-    padding: 5,
-    marginBottom: 10,
-    width: "60%",
-    maxWidth: 300,
-  },
-  buttonView: {
-    marginTop: 10,
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-  },
-  buttonSpacing: {
-    margin: 10,
-  },
   buttonText: {
     fontSize: 16,
     fontWeight: "500",

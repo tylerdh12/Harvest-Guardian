@@ -1,40 +1,40 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { BottomBorderView, Text } from "./../components/Styles";
 
 export const DetailListItem = (_props: any) => {
   return (
-    <View style={styles.detailItemContainer}>
-      <Text style={styles.labelText}>{_props.label}: </Text>
-      <Text style={styles.dataText}>{_props.dataText}</Text>
-    </View>
+    <BottomBorderView
+      style={{
+        flexDirection: "row",
+        paddingTop: 18,
+        paddingBottom: 18,
+        borderBottomWidth: 4,
+      }}
+    >
+      <Text
+        style={{
+          width: "35%",
+          textAlign: "left",
+          paddingLeft: 12,
+          fontSize: 15,
+          fontWeight: "500",
+        }}
+      >
+        {_props.label}:{" "}
+      </Text>
+      <Text
+        style={{
+          textAlign: "right",
+          paddingRight: 12,
+          width: "65%",
+          fontSize: 15,
+          fontWeight: "300",
+        }}
+      >
+        {_props.dataText}
+      </Text>
+    </BottomBorderView>
   );
 };
-
-const styles = StyleSheet.create({
-  detailItemContainer: {
-    flexDirection: "row",
-    paddingTop: 18,
-    paddingBottom: 18,
-    backgroundColor: "#403D3D",
-    borderBottomWidth: 4,
-    borderBottomColor: "#323030",
-  },
-  labelText: {
-    width: "35%",
-    textAlign: "left",
-    paddingLeft: 12,
-    color: "white",
-    fontSize: 15,
-    fontWeight: "500",
-  },
-  dataText: {
-    textAlign: "right",
-    paddingRight: 12,
-    width: "65%",
-    color: "white",
-    fontSize: 15,
-    fontWeight: "300",
-  },
-});
 
 export default DetailListItem;

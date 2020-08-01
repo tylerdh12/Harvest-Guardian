@@ -12,66 +12,13 @@ import {
   Image,
   RefreshControl,
   ScrollView,
-  Text,
-  View,
 } from "react-native";
-import styled from "styled-components/native";
 import { Center } from "../components/Center";
 import DetailListItem from "../components/DetailListItem";
 import theme from "../theme";
+import { Text, TouchableOpacity, View } from "./../components/Styles";
 
 const Stack = createStackNavigator();
-
-const StyledCardContainer = styled.TouchableOpacity`
-  justify-content: center;
-  margin: 12px;
-  border-radius: 30px;
-  box-shadow: 1px 1px 6px;
-  background: ${(props) => props.theme.backgroundAlt};
-`;
-
-const StyledDetailsCardContainer = styled.View`
-  justify-content: center;
-  margin-top: -30px;
-  padding: 30px;
-  box-shadow: 0px 0px 1px;
-  background: ${(props) => props.theme.backgroundAlt};
-  border-radius: 30px;
-`;
-
-const Title = styled.Text`
-  color: ${(props) => props.theme.text};
-  font-size: 18px;
-  font-weight: 600;
-`;
-
-const HeadingLeft = styled.Text`
-  text-align: left;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  font-weight: 500;
-  color: ${(props) => props.theme.text};
-`;
-
-const TextLeft = styled.Text`
-  text-align: left;
-  margin-top: 5px;
-  color: ${(props) => props.theme.text};
-`;
-
-const HeadingRight = styled.Text`
-  text-align: right;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  font-weight: 500;
-  color: ${(props) => props.theme.text};
-`;
-
-const TextRight = styled.Text`
-  text-align: right;
-  margin-top: 5px;
-  color: ${(props) => props.theme.text};
-`;
 
 function MyGarden({ navigation }) {
   const [isLoading, setLoading] = useState(true);
@@ -140,7 +87,17 @@ function MyGarden({ navigation }) {
           }
           renderItem={({ item }: any) => {
             return (
-              <StyledCardContainer
+              <TouchableOpacity
+                style={{
+                  justifyContent: "center",
+                  margin: 12,
+                  borderRadius: 30,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 6, height: 5 },
+                  shadowOpacity: 0.2,
+                  shadowRadius: 4,
+                  elevation: 5,
+                }}
                 onPress={() => {
                   navigation.navigate("Details", {
                     data: item,
@@ -160,8 +117,20 @@ function MyGarden({ navigation }) {
                     borderBottomRightRadius: 0,
                   }}
                 />
-                <StyledDetailsCardContainer>
-                  <Title>{item.seed.species}</Title>
+                <View
+                  style={{
+                    padding: 30,
+                    borderRadius: 30,
+                    marginTop: -30,
+                    shadowColor: "#000",
+                    shadowOffset: { width: -6, height: -6 },
+                    shadowOpacity: 0.2,
+                    shadowRadius: 4,
+                  }}
+                >
+                  <Text style={{ fontSize: 18, fontWeight: "600" }}>
+                    {item.seed.species}
+                  </Text>
                   <View
                     style={{
                       marginTop: 10,
@@ -189,21 +158,48 @@ function MyGarden({ navigation }) {
                   </View>
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ width: "50%" }}>
-                      <HeadingLeft>Date Planted</HeadingLeft>
-                      <TextLeft>{datePlanted(item.date_planted)}</TextLeft>
+                      <Text
+                        style={{
+                          textAlign: "left",
+                          marginTop: 15,
+                          marginBottom: 5,
+                          fontWeight: "500",
+                        }}
+                      >
+                        Date Planted
+                      </Text>
+                      <Text style={{ textAlign: "left", marginTop: 5 }}>
+                        {datePlanted(item.date_planted)}
+                      </Text>
                     </View>
                     <View style={{ width: "50%" }}>
-                      <HeadingRight>Day to Harvest</HeadingRight>
-                      <TextRight>
+                      <Text
+                        style={{
+                          textAlign: "right",
+                          marginTop: 15,
+                          marginBottom: 5,
+                          fontWeight: "500",
+                        }}
+                      >
+                        Day to Harvest
+                      </Text>
+                      <Text
+                        style={{
+                          textAlign: "right",
+                          marginTop: 5,
+                          marginBottom: 5,
+                          fontWeight: "500",
+                        }}
+                      >
                         {dateToBeHarvested(
                           item.date_planted,
                           item.seed.days_to_harvest
                         )}
-                      </TextRight>
+                      </Text>
                     </View>
                   </View>
-                </StyledDetailsCardContainer>
-              </StyledCardContainer>
+                </View>
+              </TouchableOpacity>
             );
           }}
           keyExtractor={(plant: any, idx) => plant + idx}
@@ -269,7 +265,6 @@ function Details({ route, navigation }) {
       <View
         style={{
           paddingTop: 25,
-          backgroundColor: "#403D3D",
           borderTopRightRadius: 30,
           borderTopLeftRadius: 30,
           marginTop: -30,
@@ -376,7 +371,7 @@ function EditPlantDetails({ route, navigation }) {
 
   return (
     <Center>
-      <Text>Edit {data.seed.species}</Text>
+      <Text style={{ fontSize: 18 }}>Edit {data.seed.species}</Text>
     </Center>
   );
 }
@@ -427,7 +422,7 @@ export const MyGardenStack = ({ route, navigation }) => {
       />
       <Stack.Screen
         options={({ route }: any) => ({
-          headerTitle: `Edit: ${route.params.data.species}`,
+          headerTitle: `Edit: ${route.params.data.seed.species}`,
           headerRight: () => (
             <Button
               title="Done"

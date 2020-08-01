@@ -41,6 +41,9 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
       tabBarOptions={{
         activeTintColor: "rgb(148, 224, 136)",
         inactiveTintColor: "rgb(142, 142, 147)",
+        style: {
+          backgroundColor: `${(props) => props.theme.background}`,
+        },
       }}
     >
       <Tabs.Screen name="My Garden" component={MyGardenStack} />

@@ -1,5 +1,5 @@
-import { Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import { Text } from "./../components/Styles";
 
 interface DetailViewProps {}
 

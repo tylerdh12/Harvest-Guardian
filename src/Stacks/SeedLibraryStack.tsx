@@ -11,13 +11,12 @@ import {
   RefreshControl,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
 } from "react-native";
-import DetailListItem from "../components/DetailListItem";
 import { Center } from "../components/Center";
+import DetailListItem from "../components/DetailListItem";
 import theme from "../theme";
+import { Text, View } from "./../components/Styles";
 
 const Stack = createStackNavigator();
 
@@ -96,7 +95,6 @@ function SeedLibrary({ navigation }) {
                     borderRadius: 30,
                     marginTop: -30,
                     marginBottom: -30,
-                    backgroundColor: "rgb(251, 252, 252)",
                     shadowColor: "#000",
                     shadowOffset: { width: 6, height: 5 },
                     shadowOpacity: 0.2,
@@ -189,7 +187,6 @@ function Details({ route, navigation }) {
       <View
         style={{
           paddingTop: 25,
-          backgroundColor: "#403D3D",
           borderTopRightRadius: 30,
           borderTopLeftRadius: 30,
           marginTop: -30,
