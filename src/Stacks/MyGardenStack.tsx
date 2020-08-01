@@ -13,14 +13,31 @@ import {
   RefreshControl,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
+import styled from "styled-components/native";
 import { Center } from "../components/Center";
 import DetailListItem from "../components/DetailListItem";
 import theme from "../theme";
 
 const Stack = createStackNavigator();
+
+const StyledCardContainer = styled.View`
+  justify-content: center;
+  margin: 12px;
+  border-radius: 30px;
+  box-shadow: 3px 2px 4px;
+  background: ${(props) => props.theme.backgroundAlt};
+`;
+
+const StyledDetailsCardContainer = styled.View`
+  justify-content: center;
+  margin-top: -30px;
+  padding: 20px;
+  box-shadow: -.5px -.5px 2px;
+  background: ${(props) => props.theme.backgroundAlt};
+  border-radius: 30px;
+`;
 
 function MyGarden({ navigation }) {
   const [isLoading, setLoading] = useState(true);
@@ -89,18 +106,7 @@ function MyGarden({ navigation }) {
           }
           renderItem={({ item }: any) => {
             return (
-              <TouchableOpacity
-                style={{
-                  justifyContent: "center",
-                  margin: 12,
-                  backgroundColor: "rgb(251, 252, 252)",
-                  borderRadius: 30,
-                  shadowColor: "#000",
-                  shadowOffset: { width: 6, height: 5 },
-                  shadowOpacity: 0.2,
-                  shadowRadius: 4,
-                  elevation: 5,
-                }}
+              <StyledCardContainer
                 onPress={() => {
                   navigation.navigate("Details", {
                     data: item,
@@ -120,18 +126,7 @@ function MyGarden({ navigation }) {
                     borderBottomRightRadius: 0,
                   }}
                 />
-                <View
-                  style={{
-                    padding: 30,
-                    borderRadius: 30,
-                    marginTop: -30,
-                    backgroundColor: "rgb(251, 252, 252)",
-                    shadowColor: "#000",
-                    shadowOffset: { width: -6, height: -6 },
-                    shadowOpacity: 0.2,
-                    shadowRadius: 4,
-                  }}
-                >
+                <StyledDetailsCardContainer>
                   <Text style={{ fontSize: 18, fontWeight: "600" }}>
                     {item.seed.species}
                   </Text>
@@ -195,8 +190,8 @@ function MyGarden({ navigation }) {
                       </Text>
                     </View>
                   </View>
-                </View>
-              </TouchableOpacity>
+                </StyledDetailsCardContainer>
+              </StyledCardContainer>
             );
           }}
           keyExtractor={(plant: any, idx) => plant + idx}
