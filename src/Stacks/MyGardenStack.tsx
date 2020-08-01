@@ -48,7 +48,7 @@ const Title = styled.Text`
 const HeadingLeft = styled.Text`
   text-align: left;
   margin-top: 15px;
-  margin-bottom: 5;
+  margin-bottom: 5px;
   font-weight: 500;
   color: ${(props) => props.theme.text};
 `;
@@ -56,14 +56,13 @@ const HeadingLeft = styled.Text`
 const TextLeft = styled.Text`
   text-align: left;
   margin-top: 5px;
-  margin-bottom: 5;
   color: ${(props) => props.theme.text};
 `;
 
 const HeadingRight = styled.Text`
   text-align: right;
   margin-top: 15px;
-  margin-bottom: 5;
+  margin-bottom: 5px;
   font-weight: 500;
   color: ${(props) => props.theme.text};
 `;
@@ -71,7 +70,6 @@ const HeadingRight = styled.Text`
 const TextRight = styled.Text`
   text-align: right;
   margin-top: 5px;
-  margin-bottom: 5;
   color: ${(props) => props.theme.text};
 `;
 
@@ -182,7 +180,7 @@ function MyGarden({ navigation }) {
                         backgroundColor: "rgb(148, 224, 136)",
                         borderRadius: 10,
                         width: `${harvestProgress(
-                          item.seed.date_planted,
+                          item.date_planted,
                           item.seed.days_to_harvest
                         )}%`,
                         flex: 1,
@@ -192,13 +190,13 @@ function MyGarden({ navigation }) {
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ width: "50%" }}>
                       <HeadingLeft>Date Planted</HeadingLeft>
-                      <TextLeft>{datePlanted(item.seed.date_planted)}</TextLeft>
+                      <TextLeft>{datePlanted(item.date_planted)}</TextLeft>
                     </View>
                     <View style={{ width: "50%" }}>
                       <HeadingRight>Day to Harvest</HeadingRight>
                       <TextRight>
                         {dateToBeHarvested(
-                          item.seed.date_planted,
+                          item.date_planted,
                           item.seed.days_to_harvest
                         )}
                       </TextRight>
