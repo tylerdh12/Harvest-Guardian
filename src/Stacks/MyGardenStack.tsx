@@ -77,7 +77,7 @@ function MyGarden({ navigation }) {
     } else if (daysPlantedToNow <= parseInt(days_to_harvest)) {
       return "rgb(148, 224, 136)";
     } else {
-      return "red";
+      return "tomato";
     }
   }
 
@@ -86,7 +86,12 @@ function MyGarden({ navigation }) {
       parseInt(days_to_harvest),
       "days"
     );
-    return moment(dateToHarvest).format("l");
+    const numberOfDays = moment().diff(dateToHarvest, "days");
+    if (Math.sign(numberOfDays) == -1) {
+      return moment(dateToHarvest).format("l");
+    } else {
+      return "Ready";
+    }
   }
 
   function onRefresh() {
