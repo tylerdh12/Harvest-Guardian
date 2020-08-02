@@ -60,7 +60,25 @@ function MyGarden({ navigation }) {
 
   function harvestProgress(date_planted, days_to_harvest) {
     const daysPlantedToNow = moment().diff(date_planted, "days");
-    return (daysPlantedToNow / parseInt(days_to_harvest)) * 100;
+
+    return (daysPlantedToNow / parseInt(days_to_harvest)) * 100 < 100
+      ? (daysPlantedToNow / parseInt(days_to_harvest)) * 100
+      : 100;
+  }
+
+  function harvestProgressColor(
+    date_planted,
+    days_to_harvest,
+    days_to_germinate
+  ) {
+    const daysPlantedToNow = moment().diff(date_planted, "days");
+    if (daysPlantedToNow <= parseInt(days_to_germinate)) {
+      return "yellow";
+    } else if (daysPlantedToNow <= parseInt(days_to_harvest)) {
+      return "rgb(148, 224, 136)";
+    } else {
+      return "red";
+    }
   }
 
   function dateToBeHarvested(date_planted, days_to_harvest) {
@@ -142,7 +160,11 @@ function MyGarden({ navigation }) {
                       backgroundColor: "transparent",
                       borderStyle: "solid",
                       borderWidth: 1,
-                      borderColor: "rgb(148, 224, 136)",
+                      borderColor: harvestProgressColor(
+                        item.date_planted,
+                        item.seed.days_to_harvest,
+                        item.seed.days_to_germinate
+                      ),
                       borderRadius: 10,
                       width: "100%",
                     }}
@@ -150,7 +172,11 @@ function MyGarden({ navigation }) {
                     <View
                       style={{
                         height: 8,
-                        backgroundColor: "rgb(148, 224, 136)",
+                        backgroundColor: harvestProgressColor(
+                          item.date_planted,
+                          item.seed.days_to_harvest,
+                          item.seed.days_to_germinate
+                        ),
                         borderRadius: 10,
                         width: `${harvestProgress(
                           item.date_planted,
