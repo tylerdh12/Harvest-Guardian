@@ -9,11 +9,9 @@ import { MyGardenStack } from "./stacks/MyGardenStack";
 import { SeedLibraryStack } from "./stacks/SeedLibraryStack";
 import { SettingsStack } from "./stacks/SettingsStack";
 
-interface AppTabsProps {}
-
 const Tabs = createBottomTabNavigator();
 
-export const AppTabs: React.FC<AppTabsProps> = ({}) => {
+export const AppTabs = ({}) => {
   return (
     <Tabs.Navigator
       initialRouteName="MyGarden"
@@ -39,10 +37,10 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: "rgb(148, 224, 136)",
-        inactiveTintColor: "rgb(142, 142, 147)",
+        activeTintColor: "#403D3D",
+        inactiveTintColor: "#6e6f73",
         style: {
-          backgroundColor: `${(props) => props.theme.background}`,
+          backgroundColor: "rgb(148, 224, 136)",
         },
       }}
     >
