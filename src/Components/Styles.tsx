@@ -49,3 +49,24 @@ export const StyledCardContainer = styled.TouchableOpacity`
 export const StyledDetailsCardContainer = styled.View`
   background: ${(props) => props.theme.backgroundAlt};
 `;
+
+/* -------------------------- Custom Form Elements -------------------------- */
+
+export const Label = styled.Text`
+  color: ${(props) => props.theme.text};
+  text-align: left;
+  padding: 8px;
+  font-weight: 400;
+  font-size: 16px;
+`;
+
+export const TextInput = styled.TextInput`
+  border-color: ${(props) => props.theme.border};
+  border-width: 2px;
+  border-radius: 5px;
+  height: 40px;
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 60%;
+  max-width: 300px;
+`;

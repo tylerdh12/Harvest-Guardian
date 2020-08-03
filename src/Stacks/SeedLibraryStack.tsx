@@ -9,17 +9,23 @@ import {
   FlatList,
   Image,
   RefreshControl,
-  StyleSheet,
-  TouchableOpacity,
 } from "react-native";
 import { Center } from "../components/Center";
 import DetailListItem from "../components/DetailListItem";
 import theme from "../theme";
-import { ScrollView, Text, View } from "./../components/Styles";
+import {
+  Label,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "./../components/Styles";
 
 const Stack = createStackNavigator();
 
 function SeedLibrary({ navigation }) {
+  const [search, updateSearch] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState([]);
@@ -49,6 +55,45 @@ function SeedLibrary({ navigation }) {
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
+        // <>
+        //   <View
+        //     style={{
+        //       flexDirection: "row",
+        //       marginTop: 30,
+        //       marginBottom: 20,
+        //       borderRadius: 30,
+        //       shadowColor: "#000",
+        //       shadowOffset: { width: 6, height: 5 },
+        //       shadowOpacity: 0.2,
+        //       shadowRadius: 4,
+        //       elevation: 5,
+        //       width: "95%",
+        //       padding: 0,
+        //     }}
+        //   >
+        //     <TextInput
+        //       style={{
+        //         height: "100%",
+        //         borderWidth: 0,
+        //         borderTopLeftRadius: 30,
+        //         borderBottomLeftRadius: 30,
+        //         width: "78%",
+        //         margin: 0,
+        //         color: "black",
+        //         backgroundColor: "white",
+        //         paddingLeft: 15,
+        //         fontSize: 16,
+        //       }}
+        //       onChangeText={(text) => updateSearch(text)}
+        //       value={search}
+        //     />
+        //     <Button
+        //       title="Submit"
+        //       onPress={() => {
+        //         console.log(search);
+        //       }}
+        //     />
+        //   </View>
         <FlatList
           style={{
             width: "100%",
@@ -93,9 +138,8 @@ function SeedLibrary({ navigation }) {
                     padding: 30,
                     borderRadius: 30,
                     marginTop: -30,
-                    marginBottom: -30,
                     shadowColor: "#000",
-                    shadowOffset: { width: 6, height: 5 },
+                    shadowOffset: { width: -6, height: -6 },
                     shadowOpacity: 0.2,
                     shadowRadius: 4,
                   }}
@@ -140,7 +184,30 @@ function SeedLibrary({ navigation }) {
           keyExtractor={(detail: any, idx) => detail + idx}
           data={data}
         />
+        // </>
       )}
+    </Center>
+  );
+}
+
+function Create({ route, navigation }) {
+  const [species, updateSpecies] = useState("");
+  const [variety, updateVariety] = useState("");
+  const [isLoading, updateIsLoading] = useState("");
+  const [error, updateError] = useState("");
+
+  return (
+    <Center>
+      <Label>Species:</Label>
+      <TextInput onChangeText={(text) => updateSpecies(text)} value={species} />
+      <Label>Vairety:</Label>
+      <TextInput onChangeText={(text) => updateVariety(text)} value={variety} />
+      <Button
+        onPress={() => {
+          console.log("submit button pressed");
+        }}
+        title="Submit"
+      />
     </Center>
   );
 }
@@ -325,6 +392,21 @@ export const SeedLibraryStack = ({ route, navigation }) => {
       />
       <Stack.Screen
         options={({ route }: any) => ({
+          headerTitle: `New Seed`,
+          headerStyle: {
+            backgroundColor: theme.COLORS.PRIMARY,
+          },
+          headerTintColor: "#403D3D",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        })}
+        name="Create"
+        component={Create}
+      />
+      <Stack.Screen
+        options={({ route }: any) => ({
           headerTitle: `Edit: ${route.params.data.species}`,
           headerRight: () => (
             <Button
@@ -349,51 +431,3 @@ export const SeedLibraryStack = ({ route, navigation }) => {
     </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  center: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  detailItemContainer: {
-    flexDirection: "row",
-    paddingTop: 18,
-    paddingBottom: 18,
-    backgroundColor: "#403D3D",
-    borderBottomWidth: 4,
-    borderBottomColor: "#323030",
-  },
-  labelText: {
-    width: "35%",
-    textAlign: "left",
-    paddingLeft: 12,
-    color: "white",
-    fontSize: 15,
-    fontWeight: "500",
-  },
-  dataText: {
-    textAlign: "right",
-    paddingRight: 12,
-    width: "65%",
-    color: "white",
-    fontSize: 15,
-    fontWeight: "300",
-  },
-  speciesContainer: {
-    width: "80%",
-  },
-  species: {
-    paddingLeft: 12,
-    width: "65%",
-    color: "white",
-    fontSize: 24,
-    fontWeight: "600",
-  },
-  heartButtonContainer: {
-    width: "20%",
-    textAlign: "right",
-    alignItems: "flex-end",
-    paddingRight: 12,
-  },
-});
