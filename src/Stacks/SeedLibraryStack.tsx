@@ -277,7 +277,12 @@ function Details({ route, navigation }) {
           label="Soil Temperature High"
           dataText={data.soil_temp_high}
         />
-        <DetailListItem label="Sowing Method" dataText={data.sow} />
+        {data.sow_indoor !== "" ? (
+          <DetailListItem label="Sowing Indoor" dataText={data.sow_indoor} />
+        ) : null}
+        {data.sow_outdoor !== "" ? (
+          <DetailListItem label="Sowing Outdoor" dataText={data.sow_outdoor} />
+        ) : null}
         <DetailListItem label="Plant Height" dataText={data.height} />
         <DetailListItem label="Seed Depth" dataText={data.depth} />
         <DetailListItem label="Seed Spacing" dataText={data.spacing} />
