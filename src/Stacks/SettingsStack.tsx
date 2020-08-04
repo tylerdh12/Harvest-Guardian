@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useContext } from "react";
+import { default as React, useContext } from "react";
 import { Switch, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 import { AuthContext } from "../providers/AuthProvider";
@@ -70,17 +70,6 @@ function Settings({ navigation }) {
         <LinkTitle>
           <Ionicons name="ios-key" size={22} />
           {"  "}Security
-        </LinkTitle>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{ padding: 5 }}
-        onPress={() => {
-          navigation.navigate("Notifications");
-        }}
-      >
-        <LinkTitle>
-          <Ionicons name="ios-notifications" size={22} />
-          {"  "}Notifications
         </LinkTitle>
       </TouchableOpacity>
       <TouchableOpacity
@@ -164,14 +153,6 @@ function Security({ navigation }) {
   return (
     <Container>
       <Title>Security</Title>
-    </Container>
-  );
-}
-
-function Notifications({ navigation }: any) {
-  return (
-    <Container>
-      <BasicText>Notifications</BasicText>
     </Container>
   );
 }
@@ -282,20 +263,6 @@ export const SettingsStack = ({}) => {
       <Stack.Screen
         name="Security"
         component={Security}
-        options={{
-          headerStyle: {
-            backgroundColor: "rgb(148, 224, 136)",
-          },
-          headerTintColor: "#403D3D",
-          headerTitleStyle: {
-            fontWeight: "700",
-            fontSize: 20,
-          },
-        }}
-      />
-      <Stack.Screen
-        name="Notifications"
-        component={Notifications}
         options={{
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",

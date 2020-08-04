@@ -1,4 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
 import moment from "moment";
@@ -14,6 +13,7 @@ import {
 } from "react-native";
 import { Center } from "../components/Center";
 import DetailListItem from "../components/DetailListItem";
+import ModalWindow from "../components/ModalWindow";
 import theme from "../theme";
 import {
   ScrollView,
@@ -462,22 +462,15 @@ function EditPlantDetails({ route, navigation }) {
 }
 
 export const MyGardenStack = ({ route, navigation }) => {
+  const notificationsList = ["Test Notifications", "Second Notification"];
   return (
     <Stack.Navigator initialRouteName="MyGarden">
       <Stack.Screen
         name="MyGarden"
         options={{
           headerTitle: "My Garden",
-          headerRight: () => (
-            <Ionicons
-              style={{
-                paddingRight: 15,
-              }}
-              name="ios-notifications-outline"
-              size={24}
-              color="white"
-              onPress={() => navigation.navigate({ screen: "Notifications" })}
-            />
+          headerRight: (notificationsList) => (
+            <ModalWindow notify={notificationsList} />
           ),
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
