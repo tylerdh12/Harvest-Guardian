@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Alert, Modal, TouchableHighlight } from "react-native";
 import { Text, TouchableOpacity, View } from "./Styles";
 
-const ModalWindow = ({ title, children }) => {
+const ModalWindow = ({ title, children, size, space, color }) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={{ backgroundColor: "transparent" }}>
@@ -54,7 +54,7 @@ const ModalWindow = ({ title, children }) => {
                 X
               </Text>
             </TouchableHighlight>
-            <Text>{title}</Text>
+            <Text style={{ fontSize: 18, fontWeight: "700" }}>{title}</Text>
             {children}
           </View>
         </View>
@@ -66,7 +66,9 @@ const ModalWindow = ({ title, children }) => {
           setModalVisible(true);
         }}
       >
-        <Text>{title}</Text>
+        <Text style={{ fontSize: size, padding: space, color: color }}>
+          {title}
+        </Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,11 +1,20 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
-import { default as React, useContext } from "react";
-import { Switch, TouchableOpacity, View } from "react-native";
+import axios from "axios";
+import { default as React, useContext, useState } from "react";
+import {
+  ActivityIndicator,
+  AsyncStorage,
+  Button,
+  Switch,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import styled from "styled-components/native";
 import ModalWindow from "../components/ModalWindow";
 import { AuthContext } from "../providers/AuthProvider";
 import { useTheme } from "../themes";
+import { ErrorText, Text, TextInput } from "./../components/Styles";
 
 const Stack = createStackNavigator();
 
@@ -122,7 +131,49 @@ function Settings({ navigation }) {
 }
 
 function Profile({ navigation }) {
-  const { userData } = useContext(AuthContext);
+  const { logout, userData } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [password, changePassword] = useState("");
+  const [retypePassword, changeRetypePassword] = useState("");
+
+  function changeUserPassword() {
+    setIsLoading(true);
+    AsyncStorage.getItem("authBasic").then((authBasic) => {
+      axios({
+        method: "patch",
+        url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+        headers: {
+          Authorization: authBasic,
+        },
+        data: {
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          email: userData.email,
+          password: password,
+          zip_code: userData.zip_code,
+          account_type: userData.account_type,
+          zone: userData.zone,
+          active: true,
+        },
+      })
+        .then((res) => {
+          if (res.status === 401) {
+            console.log("Response 401");
+            console.log(res);
+          } else {
+            logout();
+          }
+        })
+        .then(() => setIsLoading(false));
+    });
+  }
+
+  function SubmitHandler() {
+    password === retypePassword
+      ? changeUserPassword()
+      : setError("Passwords Don't Match");
+  }
 
   return (
     <Container>
@@ -145,7 +196,78 @@ function Profile({ navigation }) {
           <Label>Growing Zone: </Label>
           <BasicText>{userData.zone}</BasicText>
         </View>
-        <ModalWindow title="Change Password" notify={["One", "Two"]} />
+        <ModalWindow title="Change Password" size={18} space={15} color="red">
+          {isLoading ? (
+            <View style={{ padding: 25 }}>
+              <Text style={{ marginBottom: 5, textAlign: "center" }}>
+                Changing Password
+              </Text>
+              <Text style={{ marginBottom: 25, textAlign: "center" }}>
+                Please Wait...
+              </Text>
+              <ActivityIndicator size="large" />
+            </View>
+          ) : (
+            <>
+              <Text
+                style={{
+                  padding: 4,
+                  fontWeight: "400",
+                  fontSize: 16,
+                  marginTop: 20,
+                }}
+              >
+                Password
+              </Text>
+              <TextInput
+                style={{
+                  height: 40,
+                  borderColor: "gray",
+                  borderWidth: 2,
+                  borderRadius: 5,
+                  padding: 5,
+                  marginBottom: 10,
+                  width: "60%",
+                  maxWidth: 300,
+                }}
+                secureTextEntry={true}
+                onChangeText={(password) => changePassword(password)}
+                value={password}
+              />
+              <Text
+                style={{
+                  padding: 4,
+                  fontWeight: "400",
+                  fontSize: 16,
+                }}
+              >
+                Retype Password
+              </Text>
+              <TextInput
+                style={{
+                  height: 40,
+                  borderColor: "gray",
+                  borderWidth: 2,
+                  borderRadius: 5,
+                  padding: 5,
+                  marginBottom: 10,
+                  width: "60%",
+                  maxWidth: 300,
+                }}
+                secureTextEntry={true}
+                onChangeText={(password) => changeRetypePassword(password)}
+                value={retypePassword}
+              />
+              {error !== "" ? <ErrorText>{error}</ErrorText> : null}
+              <Button
+                title="Change Password"
+                onPress={SubmitHandler}
+                color="green"
+                accessibilityLabel="Submit a new password"
+              />
+            </>
+          )}
+        </ModalWindow>
       </View>
     </Container>
   );

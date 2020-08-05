@@ -8,6 +8,7 @@ const dark = {
     buttonBackground: "transparent",
     buttonBackgroundAlt: "transparent",
     viewAlt: "transparent",
+    errorText: "tomato",
   },
 };
 

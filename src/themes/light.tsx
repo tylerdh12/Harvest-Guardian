@@ -7,7 +7,8 @@ const light = {
     text: "#171717",
     buttonBackground: "transparent",
     buttonBackgroundAlt: "transparent",
-    viewAlt: "transparent"
+    viewAlt: "transparent",
+    errorText: "tomato",
   },
 };
 

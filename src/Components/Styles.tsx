@@ -6,6 +6,10 @@ export const Text = styled.Text`
   color: ${(props) => props.theme.text};
 `;
 
+export const ErrorText = styled.Text`
+  color: ${(props) => props.theme.errorText};
+`;
+
 export const View = styled.View`
   background: ${(props) => props.theme.backgroundAlt};
 `;
