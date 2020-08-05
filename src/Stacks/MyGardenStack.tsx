@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { Center } from "../components/Center";
 import DetailListItem from "../components/DetailListItem";
-import ModalWindow from "../components/ModalWindow";
+import NotificationModal from "../components/NotificationModal";
 import theme from "../theme";
 import {
   ScrollView,
@@ -470,7 +470,7 @@ export const MyGardenStack = ({ route, navigation }) => {
         options={{
           headerTitle: "My Garden",
           headerRight: (notificationsList) => (
-            <ModalWindow notify={notificationsList} />
+            <NotificationModal notify={notificationsList} />
           ),
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",

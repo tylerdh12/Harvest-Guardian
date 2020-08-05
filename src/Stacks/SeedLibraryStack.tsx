@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { Center } from "../components/Center";
 import DetailListItem from "../components/DetailListItem";
+import { AuthContext } from "../providers/AuthProvider";
 import theme from "../theme";
 import {
   Label,
@@ -29,6 +30,7 @@ function SeedLibrary({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState([]);
+  const { userData } = useContext(AuthContext);
 
   function getSeeds() {
     axios

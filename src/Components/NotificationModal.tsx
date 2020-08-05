@@ -1,8 +1,9 @@
+import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Alert, Modal, TouchableHighlight } from "react-native";
 import { Text, TouchableOpacity, View } from "./Styles";
 
-const ModalWindow = ({ title, children }) => {
+const NotificationModal = (notify) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={{ backgroundColor: "transparent" }}>
@@ -54,8 +55,12 @@ const ModalWindow = ({ title, children }) => {
                 X
               </Text>
             </TouchableHighlight>
-            <Text>{title}</Text>
-            {children}
+            <Text>Notifications</Text>
+            {notify.length >= 0
+              ? notify.forEach((notification) => {
+                  return <Text>{notification}</Text>;
+                })
+              : null}
           </View>
         </View>
       </Modal>
@@ -66,10 +71,15 @@ const ModalWindow = ({ title, children }) => {
           setModalVisible(true);
         }}
       >
-        <Text>{title}</Text>
+        <Ionicons
+          style={{ paddingRight: 16 }}
+          name="ios-notifications-outline"
+          size={24}
+          color="white"
+        />
       </TouchableOpacity>
     </View>
   );
 };
 
-export default ModalWindow;
+export default NotificationModal;

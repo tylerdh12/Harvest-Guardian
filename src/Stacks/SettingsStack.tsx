@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { default as React, useContext } from "react";
 import { Switch, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
+import ModalWindow from "../components/ModalWindow";
 import { AuthContext } from "../providers/AuthProvider";
 import { useTheme } from "../themes";
 
@@ -144,6 +145,7 @@ function Profile({ navigation }) {
           <Label>Growing Zone: </Label>
           <BasicText>{userData.zone}</BasicText>
         </View>
+        <ModalWindow title="Change Password" notify={["One", "Two"]} />
       </View>
     </Container>
   );
