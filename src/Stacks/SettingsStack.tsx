@@ -74,17 +74,6 @@ function Settings({ navigation }) {
       <TouchableOpacity
         style={{ padding: 5 }}
         onPress={() => {
-          navigation.navigate("Security");
-        }}
-      >
-        <LinkTitle>
-          <Ionicons name="ios-key" size={22} />
-          {"  "}Security
-        </LinkTitle>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{ padding: 5 }}
-        onPress={() => {
           navigation.navigate("Preferences");
         }}
       >
@@ -273,21 +262,12 @@ function Profile({ navigation }) {
   );
 }
 
-function Security({ navigation }) {
-  return (
-    <Container>
-      <Title>Security</Title>
-    </Container>
-  );
-}
-
 function Preferences({ navigation }: any) {
   const theme = useTheme();
 
   return (
     <Container>
       <View style={{ width: "70%" }}>
-        <Title>Preferences</Title>
         <View
           style={{
             alignItems: "center",
@@ -320,7 +300,31 @@ function Preferences({ navigation }: any) {
 function Privacy({ navigation }: any) {
   return (
     <Container>
-      <Title>Privacy</Title>
+      <View
+        style={{
+          width: "85%",
+          marginTop: 15,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <View style={{ padding: 10 }}>
+          <Text style={{ textAlign: "center", fontSize: 15 }}>
+            Harvest Guardian takes you security and privacy very serious. We vow
+            to never sell or use any data you provide for anything besides the
+            use of your data within this application.
+          </Text>
+        </View>
+        <View style={{ padding: 10 }}>
+          <Text style={{ textAlign: "center", fontSize: 15 }}>
+            The data you provide is stored in a database but is secure. We will
+            keep you updated if for any reason any of that information becomes
+            available. We seek the keep trust of our users at all cost. Even if
+            that turns out to be the loss of users. We strive to be completely
+            transparent.
+          </Text>
+        </View>
+      </View>
     </Container>
   );
 }
@@ -373,20 +377,6 @@ export const SettingsStack = ({}) => {
       <Stack.Screen
         name="Profile"
         component={Profile}
-        options={{
-          headerStyle: {
-            backgroundColor: "rgb(148, 224, 136)",
-          },
-          headerTintColor: "#403D3D",
-          headerTitleStyle: {
-            fontWeight: "700",
-            fontSize: 20,
-          },
-        }}
-      />
-      <Stack.Screen
-        name="Security"
-        component={Security}
         options={{
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
