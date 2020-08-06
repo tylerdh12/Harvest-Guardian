@@ -17,8 +17,6 @@ export const AppTabs = ({}) => {
       initialRouteName="MyGarden"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          let iconName;
-
           if (route.name === "My Garden") {
             return <FontAwesome5 name="seedling" size={size} color={color} />;
           } else if (route.name === "Seed Library") {

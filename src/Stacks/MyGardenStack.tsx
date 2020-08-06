@@ -16,10 +16,12 @@ import DetailListItem from "../components/DetailListItem";
 import NotificationModal from "../components/NotificationModal";
 import theme from "../theme";
 import {
+  CardBody,
+  CardWrapper,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
+  ViewAlt,
 } from "./../components/Styles";
 
 const Stack = createStackNavigator();
@@ -114,17 +116,7 @@ function MyGarden({ navigation }) {
           }
           renderItem={({ item }: any) => {
             return (
-              <TouchableOpacity
-                style={{
-                  justifyContent: "center",
-                  margin: 12,
-                  borderRadius: 30,
-                  shadowColor: "#000",
-                  shadowOffset: { width: 6, height: 5 },
-                  shadowOpacity: 0.2,
-                  shadowRadius: 4,
-                  elevation: 5,
-                }}
+              <CardWrapper
                 onPress={() => {
                   navigation.navigate("Details", {
                     data: item,
@@ -144,21 +136,11 @@ function MyGarden({ navigation }) {
                     borderBottomRightRadius: 0,
                   }}
                 />
-                <View
-                  style={{
-                    padding: 30,
-                    borderRadius: 30,
-                    marginTop: -30,
-                    shadowColor: "#000",
-                    shadowOffset: { width: -6, height: -6 },
-                    shadowOpacity: 0.2,
-                    shadowRadius: 4,
-                  }}
-                >
+                <CardBody>
                   <Text style={{ fontSize: 18, fontWeight: "600" }}>
                     {item.seed.species}
                   </Text>
-                  <View
+                  <ViewAlt
                     style={{
                       marginTop: 10,
                       height: 10,
@@ -174,7 +156,7 @@ function MyGarden({ navigation }) {
                       width: "100%",
                     }}
                   >
-                    <View
+                    <ViewAlt
                       style={{
                         height: 8,
                         backgroundColor: harvestProgressColor(
@@ -189,10 +171,10 @@ function MyGarden({ navigation }) {
                         )}%`,
                         flex: 1,
                       }}
-                    ></View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ width: "50%" }}>
+                    ></ViewAlt>
+                  </ViewAlt>
+                  <ViewAlt style={{ flexDirection: "row" }}>
+                    <ViewAlt style={{ width: "50%" }}>
                       <Text
                         style={{
                           textAlign: "left",
@@ -206,8 +188,8 @@ function MyGarden({ navigation }) {
                       <Text style={{ textAlign: "left", marginTop: 5 }}>
                         {datePlanted(item.date_planted)}
                       </Text>
-                    </View>
-                    <View style={{ width: "50%" }}>
+                    </ViewAlt>
+                    <ViewAlt style={{ width: "50%" }}>
                       <Text
                         style={{
                           textAlign: "right",
@@ -231,10 +213,10 @@ function MyGarden({ navigation }) {
                           item.seed.days_to_harvest
                         )}
                       </Text>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
+                    </ViewAlt>
+                  </ViewAlt>
+                </CardBody>
+              </CardWrapper>
             );
           }}
           keyExtractor={(plant: any, idx) => plant + idx}
@@ -297,7 +279,7 @@ function Details({ route, navigation }) {
           uri: `${data.seed.images}`,
         }}
       />
-      <View
+      <ViewAlt
         style={{
           paddingTop: 25,
           borderTopRightRadius: 30,
@@ -308,7 +290,7 @@ function Details({ route, navigation }) {
         <DetailListItem label="Variety" dataText={data.seed.variety} />
         <DetailListItem
           label="Date Planted"
-          dataText={data.date_planted.slice(0, 10)}
+          dataText={moment(data.date_planted).format("l")}
         />
         <DetailListItem label="Description" dataText={data.seed.description} />
         {data.seed.days_to_germinate ? (
@@ -429,7 +411,7 @@ function Details({ route, navigation }) {
             }}
           />
         </View>
-      </View>
+      </ViewAlt>
     </ScrollView>
   );
 }

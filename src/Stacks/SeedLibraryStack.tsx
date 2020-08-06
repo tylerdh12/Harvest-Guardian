@@ -15,12 +15,14 @@ import DetailListItem from "../components/DetailListItem";
 import { AuthContext } from "../providers/AuthProvider";
 import theme from "../theme";
 import {
+  CardBody,
+  CardWrapper,
   Label,
   ScrollView,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
+  ViewAlt,
 } from "./../components/Styles";
 
 const Stack = createStackNavigator();
@@ -105,17 +107,7 @@ function SeedLibrary({ navigation }) {
           }
           renderItem={({ item }: any) => {
             return (
-              <TouchableOpacity
-                style={{
-                  justifyContent: "center",
-                  margin: 12,
-                  borderRadius: 30,
-                  shadowColor: "#000",
-                  shadowOffset: { width: 6, height: 5 },
-                  shadowOpacity: 0.2,
-                  shadowRadius: 4,
-                  elevation: 5,
-                }}
+              <CardWrapper
                 onPress={() =>
                   navigation.navigate("Details", {
                     data: item,
@@ -135,27 +127,17 @@ function SeedLibrary({ navigation }) {
                     borderBottomRightRadius: 0,
                   }}
                 />
-                <View
-                  style={{
-                    padding: 30,
-                    borderRadius: 30,
-                    marginTop: -30,
-                    shadowColor: "#000",
-                    shadowOffset: { width: -6, height: -6 },
-                    shadowOpacity: 0.2,
-                    shadowRadius: 4,
-                  }}
-                >
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ width: "50%" }}>
+                <CardBody>
+                  <ViewAlt style={{ flexDirection: "row" }}>
+                    <ViewAlt style={{ width: "50%" }}>
                       <Text style={{ fontSize: 18, fontWeight: "600" }}>
                         {item.species}
                       </Text>
                       <Text style={{ fontSize: 15, fontWeight: "400" }}>
                         {item.variety}
                       </Text>
-                    </View>
-                    <View style={{ width: "50%" }}>
+                    </ViewAlt>
+                    <ViewAlt style={{ width: "50%" }}>
                       <Text
                         style={{
                           textAlign: "right",
@@ -167,8 +149,8 @@ function SeedLibrary({ navigation }) {
                       >
                         Harvest in {item.days_to_harvest}
                       </Text>
-                    </View>
-                  </View>
+                    </ViewAlt>
+                  </ViewAlt>
                   <Text
                     style={{
                       textAlign: "center",
@@ -179,8 +161,8 @@ function SeedLibrary({ navigation }) {
                   >
                     {item.zone._8b.join(", ")}
                   </Text>
-                </View>
-              </TouchableOpacity>
+                </CardBody>
+              </CardWrapper>
             );
           }}
           keyExtractor={(detail: any, idx) => detail + idx}
@@ -252,7 +234,7 @@ function Details({ route, navigation }) {
           uri: `${data.images}`,
         }}
       />
-      <View
+      <ViewAlt
         style={{
           paddingTop: 25,
           borderTopRightRadius: 30,
@@ -374,7 +356,7 @@ function Details({ route, navigation }) {
             onPress={() => addSeedToMyGarden({ data })}
           />
         </View>
-      </View>
+      </ViewAlt>
     </ScrollView>
   );
 }

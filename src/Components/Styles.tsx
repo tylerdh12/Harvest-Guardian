@@ -2,6 +2,8 @@ import styled from "styled-components/native";
 
 /* -------------------- Standard React Native Components -------------------- */
 
+/* ---------------------------------- Text ---------------------------------- */
+
 export const Text = styled.Text`
   color: ${(props) => props.theme.text};
 `;
@@ -10,48 +12,68 @@ export const ErrorText = styled.Text`
   color: ${(props) => props.theme.errorText};
 `;
 
-export const View = styled.View`
-  background: ${(props) => props.theme.backgroundAlt};
-`;
-
-export const ViewAlt = styled.View`
-  background: ${(props) => props.theme.viewAlt};
-`;
-
-export const ScrollView = styled.ScrollView`
-  background: ${(props) => props.theme.background};
-`;
-
-export const BottomBorderView = styled.View`
-  background: ${(props) => props.theme.backgroundAlt};
-  border-bottom-color: ${(props) => props.theme.border};
-`;
-
-export const TouchableOpacity = styled.TouchableOpacity`
-  background: ${(props) => props.theme.backgroundAlt};
-`;
-
-export const TouchableOpacityButtonPrimary = styled.TouchableOpacity`
-  background: ${(props) => props.theme.buttonBackground};
-`;
-
-export const TouchableOpacityButton = styled.TouchableOpacity`
-  background: ${(props) => props.theme.buttonBackgroundAlt};
-`;
+/* ----------------------------- View Components ---------------------------- */
 
 export const SafeAreaView = styled.SafeAreaView`
   flex: 1;
   background: ${(props) => props.theme.background};
 `;
 
-/* ------------------------- Custom Card Components ------------------------- */
+export const View = styled.View`
+  background: ${(props) => props.theme.background};
+`;
 
-export const StyledCardContainer = styled.TouchableOpacity`
+export const ViewAlt = styled.View`
   background: ${(props) => props.theme.backgroundAlt};
 `;
 
-export const StyledDetailsCardContainer = styled.View`
+export const CenterView = styled.View`
+  background: ${(props) => props.theme.background};
+`;
+
+export const CenterViewAlt = styled.View`
   background: ${(props) => props.theme.backgroundAlt};
+`;
+
+export const ScrollView = styled.ScrollView`
+  background: ${(props) => props.theme.background};
+`;
+
+/* ---------------------------- Style Components ---------------------------- */
+
+export const BottomBorderView = styled.View`
+  background: ${(props) => props.theme.backgroundAlt};
+  border-bottom-color: ${(props) => props.theme.border};
+`;
+
+export const Button = styled.TouchableOpacity`
+  background: ${(props) => props.theme.buttonBackgroundAlt};
+`;
+
+export const ButtonPrimary = styled.TouchableOpacity`
+  background: ${(props) => props.theme.buttonBackground};
+`;
+
+export const TouchableOpacity = styled.TouchableOpacity`
+  background: ${(props) => props.theme.backgroundAlt};
+`;
+
+/* ------------------------- Custom Card Components ------------------------- */
+
+export const CardWrapper = styled.TouchableOpacity`
+  background: ${(props) => props.theme.backgroundAlt};
+  justify-content: center;
+  margin: 12px;
+  border-radius: 30px;
+  box-shadow: 2px 3px 2px #000;
+`;
+
+export const CardBody = styled.View`
+  background: ${(props) => props.theme.backgroundAlt};
+  padding: 30px;
+  border-radius: 30px;
+  margin-top: -30px;
+  box-shadow: 0px 0px 6px #000;
 `;
 
 /* -------------------------- Custom Form Elements -------------------------- */

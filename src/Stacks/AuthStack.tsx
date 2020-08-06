@@ -10,7 +10,7 @@ import React, { useContext, useEffect, useReducer } from "react";
 import { AsyncStorage, StyleSheet, TextInput } from "react-native";
 import { Center } from "../components/Center";
 import { AuthContext } from "../providers/AuthProvider";
-import { Text, TouchableOpacityButton, ViewAlt } from "./../components/Styles";
+import { Button, Text, View } from "./../components/Styles";
 
 /* ------------------------------ Define Stack ------------------------------ */
 
@@ -199,7 +199,7 @@ function Login({ navigation }) {
         }
         value={password}
       />
-      <ViewAlt
+      <View
         style={{
           marginTop: 10,
           alignItems: "center",
@@ -207,7 +207,7 @@ function Login({ navigation }) {
           justifyContent: "space-evenly",
         }}
       >
-        <TouchableOpacityButton
+        <Button
           style={{ margin: 10 }}
           disabled={isLoading}
           onPress={() => {
@@ -227,8 +227,8 @@ function Login({ navigation }) {
               Log In
             </Text>
           )}
-        </TouchableOpacityButton>
-        <TouchableOpacityButton
+        </Button>
+        <Button
           style={{ margin: 10 }}
           onPress={() => {
             navigation.navigate("Register");
@@ -239,8 +239,8 @@ function Login({ navigation }) {
           >
             Don't have an account?
           </Text>
-        </TouchableOpacityButton>
-      </ViewAlt>
+        </Button>
+      </View>
     </Center>
   );
 
@@ -377,7 +377,7 @@ function Register({ navigation }) {
           justifyContent: "space-evenly",
         }}
       >
-        <TouchableOpacityButton
+        <Button
           style={{ margin: 10 }}
           onPress={() => {
             alert("User has been Registered");
@@ -388,8 +388,8 @@ function Register({ navigation }) {
           >
             Register
           </Text>
-        </TouchableOpacityButton>
-        <TouchableOpacityButton
+        </Button>
+        <Button
           style={{ margin: 10 }}
           onPress={() => {
             navigation.navigate("Login");
@@ -400,7 +400,7 @@ function Register({ navigation }) {
           >
             Already have an account?
           </Text>
-        </TouchableOpacityButton>
+        </Button>
       </ViewAlt>
     </Center>
   );

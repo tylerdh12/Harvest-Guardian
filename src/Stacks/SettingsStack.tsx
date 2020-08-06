@@ -126,7 +126,7 @@ function Profile({ navigation }) {
   const [password, changePassword] = useState("");
   const [retypePassword, changeRetypePassword] = useState("");
 
-  function changeUserPassword() {
+  function changeUserData() {
     setIsLoading(true);
     AsyncStorage.getItem("authBasic").then((authBasic) => {
       axios({
@@ -150,6 +150,9 @@ function Profile({ navigation }) {
           if (res.status === 401) {
             console.log("Response 401");
             console.log(res);
+          } else if (res.status === 500) {
+            console.log("Response Error 500");
+            console.log(res);
           } else {
             logout();
           }
@@ -160,7 +163,7 @@ function Profile({ navigation }) {
 
   function SubmitHandler() {
     password === retypePassword
-      ? changeUserPassword()
+      ? changeUserData()
       : setError("Passwords Don't Match");
   }
 
