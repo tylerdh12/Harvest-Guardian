@@ -7,10 +7,16 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { encode } from "base-64";
 import React, { useContext, useEffect, useReducer } from "react";
-import { AsyncStorage, StyleSheet, TextInput } from "react-native";
-import { Center } from "../components/Center";
+import { AsyncStorage } from "react-native";
 import { AuthContext } from "../providers/AuthProvider";
-import { Button, Text, View } from "./../components/Styles";
+import {
+  Button,
+  SafeAreaView,
+  Text,
+  TextInput,
+  View,
+  ViewAlt,
+} from "./../components/Styles";
 
 /* ------------------------------ Define Stack ------------------------------ */
 
@@ -139,7 +145,7 @@ function Login({ navigation }) {
   /* ------------------------- Return for Login Stack ------------------------- */
 
   return (
-    <Center>
+    <SafeAreaView>
       <Text style={{ fontWeight: "700", fontSize: 22, marginBottom: 10 }}>
         Login
       </Text>
@@ -161,16 +167,6 @@ function Login({ navigation }) {
       <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>Email</Text>
 
       <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 2,
-          borderRadius: 5,
-          padding: 5,
-          marginBottom: 10,
-          width: "60%",
-          maxWidth: 300,
-        }}
         keyboardType="email-address"
         autoFocus={true}
         onChangeText={(e) =>
@@ -183,16 +179,6 @@ function Login({ navigation }) {
       </Text>
 
       <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 2,
-          borderRadius: 5,
-          padding: 5,
-          marginBottom: 10,
-          width: "60%",
-          maxWidth: 300,
-        }}
         secureTextEntry={true}
         onChangeText={(e) =>
           dispatch({ type: "field", field: "password", value: e })
@@ -241,7 +227,7 @@ function Login({ navigation }) {
           </Text>
         </Button>
       </View>
-    </Center>
+    </SafeAreaView>
   );
 
   /* --------------------------- End of Login Stack --------------------------- */
@@ -258,7 +244,7 @@ function Register({ navigation }) {
   const [reenterpassword, changeReenterPassword] = React.useState("");
 
   return (
-    <Center>
+    <SafeAreaView>
       <Text style={{ fontWeight: "700", fontSize: 22, marginBottom: 10 }}>
         Create a New Account
       </Text>
@@ -266,16 +252,6 @@ function Register({ navigation }) {
         First Name
       </Text>
       <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 2,
-          borderRadius: 5,
-          padding: 5,
-          marginBottom: 10,
-          width: "60%",
-          maxWidth: 300,
-        }}
         autoFocus={true}
         onChangeText={(firstName) => changeFirstName(firstName)}
         value={firstName}
@@ -284,16 +260,6 @@ function Register({ navigation }) {
         Last Name
       </Text>
       <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 2,
-          borderRadius: 5,
-          padding: 5,
-          marginBottom: 10,
-          width: "60%",
-          maxWidth: 300,
-        }}
         onChangeText={(lastName) => changeLastName(lastName)}
         value={lastName}
       />
@@ -317,16 +283,6 @@ function Register({ navigation }) {
       />
       <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>Email</Text>
       <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 2,
-          borderRadius: 5,
-          padding: 5,
-          marginBottom: 10,
-          width: "60%",
-          maxWidth: 300,
-        }}
         keyboardType="email-address"
         onChangeText={(Email) => changeEmail(Email)}
         value={Email}
@@ -335,16 +291,6 @@ function Register({ navigation }) {
         Password
       </Text>
       <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 2,
-          borderRadius: 5,
-          padding: 5,
-          marginBottom: 10,
-          width: "60%",
-          maxWidth: 300,
-        }}
         secureTextEntry={true}
         onChangeText={(password) => changePassword(password)}
         value={password}
@@ -353,16 +299,6 @@ function Register({ navigation }) {
         Re-enter Password
       </Text>
       <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 2,
-          borderRadius: 5,
-          padding: 5,
-          marginBottom: 10,
-          width: "60%",
-          maxWidth: 300,
-        }}
         onChangeText={(reenterPassword) =>
           changeReenterPassword(reenterPassword)
         }
@@ -402,7 +338,7 @@ function Register({ navigation }) {
           </Text>
         </Button>
       </ViewAlt>
-    </Center>
+    </SafeAreaView>
   );
 }
 
@@ -426,11 +362,3 @@ export const AuthStack = ({}) => {
     </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "500",
-    textAlign: "center",
-  },
-});

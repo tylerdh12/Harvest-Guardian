@@ -17,6 +17,10 @@ export const ErrorText = styled.Text`
 export const SafeAreaView = styled.SafeAreaView`
   flex: 1;
   background: ${(props) => props.theme.background};
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 `;
 
 export const View = styled.View`

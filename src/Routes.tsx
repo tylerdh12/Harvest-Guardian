@@ -5,6 +5,7 @@ import { AppTabs } from "./AppTabs";
 import { AuthContext } from "./providers/AuthProvider";
 import { AuthStack } from "./stacks/AuthStack";
 import { Center } from "./components/Center";
+import { SafeAreaView } from "./components/Styles";
 
 interface RoutesProps {}
 
@@ -29,9 +30,9 @@ export const Routes = ({}) => {
 
   if (loading) {
     return (
-      <Center>
+      <SafeAreaView>
         <ActivityIndicator size="large" />
-      </Center>
+      </SafeAreaView>
     );
   }
 

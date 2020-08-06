@@ -10,7 +10,6 @@ import {
   Image,
   RefreshControl,
 } from "react-native";
-import { Center } from "../components/Center";
 import DetailListItem from "../components/DetailListItem";
 import { AuthContext } from "../providers/AuthProvider";
 import theme from "../theme";
@@ -18,6 +17,7 @@ import {
   CardBody,
   CardWrapper,
   Label,
+  SafeAreaView,
   ScrollView,
   Text,
   TextInput,
@@ -55,7 +55,7 @@ function SeedLibrary({ navigation }) {
   }, []);
 
   return (
-    <Center>
+    <SafeAreaView>
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
@@ -170,7 +170,7 @@ function SeedLibrary({ navigation }) {
         />
         // </>
       )}
-    </Center>
+    </SafeAreaView>
   );
 }
 
@@ -181,7 +181,7 @@ function Create({ route, navigation }) {
   const [error, updateError] = useState("");
 
   return (
-    <Center>
+    <SafeAreaView>
       <Label>Species:</Label>
       <TextInput onChangeText={(text) => updateSpecies(text)} value={species} />
       <Label>Vairety:</Label>
@@ -192,7 +192,7 @@ function Create({ route, navigation }) {
         }}
         title="Submit"
       />
-    </Center>
+    </SafeAreaView>
   );
 }
 
@@ -382,9 +382,9 @@ function EditSeedDetails({ route, navigation }) {
   }, []);
 
   return (
-    <Center>
+    <SafeAreaView>
       <Text>Edit {data.species}</Text>
-    </Center>
+    </SafeAreaView>
   );
 }
 

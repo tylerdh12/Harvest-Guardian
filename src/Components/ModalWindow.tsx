@@ -1,21 +1,33 @@
 import React, { useState } from "react";
 import { Alert, Modal, TouchableHighlight } from "react-native";
-import { Text, TouchableOpacity, View } from "./Styles";
+import { Text, TouchableOpacity, View, ViewAlt } from "./Styles";
 
 const ModalWindow = ({ title, children, size, space, color }) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={{ backgroundColor: "transparent" }}>
+    <View>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
         }}
       >
-        <View style={{ backgroundColor: "transparent", marginTop: 20 }}>
-          <View
+        <View
+          style={{
+            marginTop: 20,
+            height: "100%",
+            shadowColor: "grey",
+            shadowRadius: 5,
+            shadowOffset: {
+              height: 0,
+              width: 0,
+            },
+            shadowOpacity: 1,
+          }}
+        >
+          <ViewAlt
             style={{
               margin: 20,
               borderRadius: 20,
@@ -56,7 +68,7 @@ const ModalWindow = ({ title, children, size, space, color }) => {
             </TouchableHighlight>
             <Text style={{ fontSize: 18, fontWeight: "700" }}>{title}</Text>
             {children}
-          </View>
+          </ViewAlt>
         </View>
       </Modal>
 

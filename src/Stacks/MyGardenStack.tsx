@@ -22,6 +22,7 @@ import {
   Text,
   View,
   ViewAlt,
+  SafeAreaView,
 } from "./../components/Styles";
 
 const Stack = createStackNavigator();
@@ -103,7 +104,7 @@ function MyGarden({ navigation }) {
   }
 
   return (
-    <Center>
+    <SafeAreaView>
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
@@ -223,7 +224,7 @@ function MyGarden({ navigation }) {
           data={data}
         />
       )}
-    </Center>
+    </SafeAreaView>
   );
 }
 
@@ -437,9 +438,9 @@ function EditPlantDetails({ route, navigation }) {
   }, []);
 
   return (
-    <Center>
+    <SafeAreaView>
       <Text style={{ fontSize: 18 }}>Edit {data.seed.species}</Text>
-    </Center>
+    </SafeAreaView>
   );
 }
 
