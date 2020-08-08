@@ -4,12 +4,22 @@ import styled from "styled-components/native";
 
 /* ---------------------------------- Text ---------------------------------- */
 
+export const Heading = styled.Text`
+  color: ${(props) => props.theme.text};
+  font-size: 26px;
+  font-weight: 700;
+  padding-top: 30px;
+  margin-bottom: 10px;
+`;
+
 export const Text = styled.Text`
   color: ${(props) => props.theme.text};
 `;
 
 export const ErrorText = styled.Text`
   color: ${(props) => props.theme.errorText};
+  padding: 10px;
+  font-size: 16px;
 `;
 
 /* ----------------------------- View Components ---------------------------- */
@@ -69,7 +79,7 @@ export const CardWrapper = styled.TouchableOpacity`
   justify-content: center;
   margin: 12px;
   border-radius: 30px;
-  box-shadow: 2px 3px 2px #000;
+  box-shadow: 0px 0px 6px ${(props) => props.theme.backgroundAlt};
 `;
 
 export const CardBody = styled.View`
@@ -77,27 +87,38 @@ export const CardBody = styled.View`
   padding: 30px;
   border-radius: 30px;
   margin-top: -30px;
-  box-shadow: 0px 0px 6px #000;
+  box-shadow: 0px 0px 6px ${(props) => props.theme.backgroundAlt};
 `;
 
 /* -------------------------- Custom Form Elements -------------------------- */
 
 export const Label = styled.Text`
   color: ${(props) => props.theme.text};
-  text-align: left;
-  padding: 8px;
-  font-weight: 400;
+  text-align: center;
+  padding: 10px;
+  font-weight: 500;
   font-size: 16px;
+`;
+
+export const LabelLeft = styled.Text`
+  color: ${(props) => props.theme.text};
+  text-align: left;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  width: 100%;
 `;
 
 export const TextInput = styled.TextInput`
   border-color: ${(props) => props.theme.border};
   color: ${(props) => props.theme.text};
   border-width: 2px;
-  border-radius: 5px;
-  height: 40px;
+  border-radius: 10px;
+  height: 45px;
   padding: 5px;
+  text-align: center;
   margin-bottom: 10px;
-  width: 60%;
+  width: 100%;
   max-width: 300px;
 `;

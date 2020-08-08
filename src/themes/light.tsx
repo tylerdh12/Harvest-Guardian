@@ -2,13 +2,13 @@ const light = {
   theme: {
     background: "#ededed",
     border: "#bdbdbd",
-    backgroundAlt: "#eaeaeb",
+    backgroundAlt: "#d3e3da",
     borderAlt: "#bdbdbd",
     text: "#171717",
     buttonBackground: "transparent",
     buttonBackgroundAlt: "transparent",
     viewAlt: "transparent",
-    errorText: "tomato",
+    errorText: "red",
   },
 };
 

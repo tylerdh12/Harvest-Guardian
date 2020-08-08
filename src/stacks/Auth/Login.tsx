@@ -9,6 +9,9 @@ import React, { useContext, useEffect, useReducer } from "react";
 import { AsyncStorage } from "react-native";
 import {
   Button,
+  ErrorText,
+  Heading,
+  Label,
   SafeAreaView,
   Text,
   TextInput,
@@ -140,51 +143,47 @@ function Login({ navigation }) {
 
   return (
     <SafeAreaView>
-      <Text style={{ fontWeight: "700", fontSize: 22, marginBottom: 10 }}>
-        Login
-      </Text>
+      <Heading>Login</Heading>
 
-      {error !== "" ? (
-        <Text
-          style={{
-            color: "#721c24",
-            backgroundColor: "#f8d7da",
-            padding: 10,
-            borderRadius: 5,
-            margin: 10,
-          }}
-        >
-          {error}
-        </Text>
-      ) : null}
-
-      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>Email</Text>
-
-      <TextInput
-        keyboardType="email-address"
-        autoFocus={true}
-        onChangeText={(e) =>
-          dispatch({ type: "field", field: "username", value: e })
-        }
-        value={username}
-      />
-      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
-        Password
-      </Text>
-
-      <TextInput
-        secureTextEntry={true}
-        onChangeText={(e) =>
-          dispatch({ type: "field", field: "password", value: e })
-        }
-        value={password}
-      />
       <View
         style={{
-          marginTop: 10,
+          width: "100%",
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <View style={{ width: "70%" }}>
+          <Label>Email</Label>
+
+          <TextInput
+            keyboardType="email-address"
+            autoFocus={true}
+            onChangeText={(e) =>
+              dispatch({ type: "field", field: "username", value: e })
+            }
+            value={username}
+          />
+        </View>
+        <View style={{ width: "70%" }}>
+          <Label>Password</Label>
+
+          <TextInput
+            secureTextEntry={true}
+            onChangeText={(e) =>
+              dispatch({ type: "field", field: "password", value: e })
+            }
+            value={password}
+          />
+        </View>
+        {error !== "" ? <ErrorText>{error}</ErrorText> : null}
+      </View>
+      <View
+        style={{
           alignItems: "center",
           flexDirection: "column",
           justifyContent: "space-evenly",
+          margin: 15,
         }}
       >
         <Button
