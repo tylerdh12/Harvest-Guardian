@@ -5,17 +5,18 @@
 /* -------------------------- Imports and Includes -------------------------- */
 
 import { createStackNavigator } from "@react-navigation/stack";
+import axios from "axios";
 import { encode } from "base-64";
-import React, { useContext, useEffect, useReducer } from "react";
-import { AsyncStorage } from "react-native";
+import React, { useContext, useEffect, useReducer, useState } from "react";
+import { Alert, AsyncStorage } from "react-native";
 import { AuthContext } from "../providers/AuthProvider";
 import {
   Button,
+  ErrorText,
   SafeAreaView,
   Text,
   TextInput,
   View,
-  ViewAlt,
 } from "./../components/Styles";
 
 /* ------------------------------ Define Stack ------------------------------ */
@@ -236,12 +237,53 @@ function Login({ navigation }) {
 /* ----------------------------- Register Stack ----------------------------- */
 
 function Register({ navigation }) {
-  const [firstName, changeFirstName] = React.useState("");
-  const [lastName, changeLastName] = React.useState("");
-  const [zipCode, changeZipCode] = React.useState("");
-  const [Email, changeEmail] = React.useState("");
-  const [password, changePassword] = React.useState("");
-  const [reenterpassword, changeReenterPassword] = React.useState("");
+  const [firstName, changeFirstName] = useState("");
+  const [lastName, changeLastName] = useState("");
+  const [zipCode, changeZipCode] = useState("");
+  const [email, changeEmail] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [password, changePassword] = useState("");
+  const [reenterpassword, changeReenterPassword] = useState("");
+
+  async function RegisterUser() {
+    if (password === reenterpassword) {
+      const newUser = {
+        first_name: firstName,
+        last_name: lastName,
+        zip_code: zipCode,
+        email: email,
+        password: password,
+        account_type: "user",
+        active: true,
+      };
+
+      axios({
+        method: "post",
+        url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
+
+        data: newUser,
+      }).then((res) => {
+        if (res.status === 401) {
+          console.log("Response 401");
+          console.log(res);
+        } else if (res.status === 201) {
+          Alert.alert(
+            "User Created",
+            "Login?",
+            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+          navigation.navigate("Login");
+        } else {
+          console.log(res);
+        }
+      });
+
+      console.log(newUser);
+    } else {
+      setPasswordError("Passwords Don't Match");
+    }
+  }
 
   return (
     <SafeAreaView>
@@ -267,16 +309,6 @@ function Register({ navigation }) {
         Zip Code
       </Text>
       <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 2,
-          borderRadius: 5,
-          padding: 5,
-          marginBottom: 10,
-          width: "60%",
-          maxWidth: 300,
-        }}
         keyboardType="number-pad"
         onChangeText={(zipCode) => changeZipCode(zipCode)}
         value={zipCode}
@@ -284,9 +316,12 @@ function Register({ navigation }) {
       <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>Email</Text>
       <TextInput
         keyboardType="email-address"
-        onChangeText={(Email) => changeEmail(Email)}
-        value={Email}
+        onChangeText={(email) => changeEmail(email)}
+        value={email}
       />
+      {passwordError !== "" ? (
+        <ErrorText style={{ padding: 10 }}>{passwordError}</ErrorText>
+      ) : null}
       <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
         Password
       </Text>
@@ -299,13 +334,14 @@ function Register({ navigation }) {
         Re-enter Password
       </Text>
       <TextInput
+        secureTextEntry={true}
         onChangeText={(reenterPassword) =>
           changeReenterPassword(reenterPassword)
         }
         value={reenterpassword}
       />
       <Stack.Screen name="Login" component={Login} />
-      <ViewAlt
+      <View
         style={{
           marginTop: 10,
           alignItems: "center",
@@ -316,7 +352,7 @@ function Register({ navigation }) {
         <Button
           style={{ margin: 10 }}
           onPress={() => {
-            alert("User has been Registered");
+            RegisterUser();
           }}
         >
           <Text
@@ -337,7 +373,7 @@ function Register({ navigation }) {
             Already have an account?
           </Text>
         </Button>
-      </ViewAlt>
+      </View>
     </SafeAreaView>
   );
 }
