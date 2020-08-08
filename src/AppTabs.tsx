@@ -5,9 +5,9 @@ import {
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { MyGardenStack } from "./stacks/MyGardenStack";
-import { SeedLibraryStack } from "./stacks/SeedLibraryStack";
-import { SettingsStack } from "./stacks/SettingsStack";
+import { MyGardenStack } from "./stacks/MyGarden/MyGardenStack";
+import { SeedLibraryStack } from "./stacks/SeedLibrary/SeedLibraryStack";
+import { SettingsStack } from "./stacks/Settings/SettingsStack";
 
 const Tabs = createBottomTabNavigator();
 
