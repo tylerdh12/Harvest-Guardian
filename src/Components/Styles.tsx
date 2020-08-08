@@ -92,6 +92,7 @@ export const Label = styled.Text`
 
 export const TextInput = styled.TextInput`
   border-color: ${(props) => props.theme.border};
+  color: ${(props) => props.theme.text};
   border-width: 2px;
   border-radius: 5px;
   height: 40px;
