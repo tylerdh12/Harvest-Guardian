@@ -9,9 +9,14 @@ import React, { useState } from "react";
 import { Alert } from "react-native";
 import {
   Button,
+  ButtonPrimary,
+  ButtonPrimaryText,
+  ButtonText,
   ErrorText,
+  Heading,
+  Label,
   SafeAreaView,
-  Text,
+  ScrollView,
   TextInput,
   View,
 } from "../../components/Styles";
@@ -69,59 +74,71 @@ function Register({ navigation }) {
 
   return (
     <SafeAreaView>
-      <Text style={{ fontWeight: "700", fontSize: 22, marginBottom: 10 }}>
-        Create a New Account
-      </Text>
-      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
-        First Name
-      </Text>
-      <TextInput
-        autoFocus={true}
-        onChangeText={(firstName) => changeFirstName(firstName)}
-        value={firstName}
-      />
-      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
-        Last Name
-      </Text>
-      <TextInput
-        onChangeText={(lastName) => changeLastName(lastName)}
-        value={lastName}
-      />
-      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
-        Zip Code
-      </Text>
-      <TextInput
-        keyboardType="number-pad"
-        onChangeText={(zipCode) => changeZipCode(zipCode)}
-        value={zipCode}
-      />
-      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>Email</Text>
-      <TextInput
-        keyboardType="email-address"
-        onChangeText={(email) => changeEmail(email)}
-        value={email}
-      />
-      {passwordError !== "" ? (
-        <ErrorText style={{ padding: 10 }}>{passwordError}</ErrorText>
-      ) : null}
-      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
-        Password
-      </Text>
-      <TextInput
-        secureTextEntry={true}
-        onChangeText={(password) => changePassword(password)}
-        value={password}
-      />
-      <Text style={{ padding: 4, fontWeight: "400", fontSize: 16 }}>
-        Re-enter Password
-      </Text>
-      <TextInput
-        secureTextEntry={true}
-        onChangeText={(reenterPassword) =>
-          changeReenterPassword(reenterPassword)
-        }
-        value={reenterpassword}
-      />
+      <Heading>Create a New Account</Heading>
+      <ScrollView style={{ width: "100%" }}>
+        <View
+          style={{
+            width: "100%",
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <View style={{ width: "70%" }}>
+            <Label>First Name</Label>
+            <TextInput
+              autoFocus={true}
+              onChangeText={(firstName) => changeFirstName(firstName)}
+              value={firstName}
+            />
+          </View>
+          <View style={{ width: "70%" }}>
+            <Label>Last Name</Label>
+            <TextInput
+              onChangeText={(lastName) => changeLastName(lastName)}
+              value={lastName}
+            />
+          </View>
+          <View style={{ width: "70%" }}>
+            <Label>Zip Code</Label>
+            <TextInput
+              keyboardType="number-pad"
+              onChangeText={(zipCode) => changeZipCode(zipCode)}
+              value={zipCode}
+            />
+          </View>
+          <View style={{ width: "70%" }}>
+            <Label>Email</Label>
+            <TextInput
+              keyboardType="email-address"
+              onChangeText={(email) => changeEmail(email)}
+              value={email}
+            />
+          </View>
+          <View style={{ width: "70%" }}>
+            {passwordError !== "" ? (
+              <ErrorText style={{ padding: 10 }}>{passwordError}</ErrorText>
+            ) : null}
+            <Label>Password</Label>
+            <TextInput
+              secureTextEntry={true}
+              onChangeText={(password) => changePassword(password)}
+              value={password}
+            />
+          </View>
+          <View style={{ width: "70%" }}>
+            <Label>Re-enter Password</Label>
+            <TextInput
+              secureTextEntry={true}
+              onChangeText={(reenterPassword) =>
+                changeReenterPassword(reenterPassword)
+              }
+              value={reenterpassword}
+            />
+          </View>
+        </View>
+      </ScrollView>
+
       <View
         style={{
           marginTop: 10,
@@ -130,29 +147,21 @@ function Register({ navigation }) {
           justifyContent: "space-evenly",
         }}
       >
-        <Button
+        <ButtonPrimary
           style={{ margin: 10 }}
           onPress={() => {
             RegisterUser();
           }}
         >
-          <Text
-            style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
-          >
-            Register
-          </Text>
-        </Button>
+          <ButtonPrimaryText>Register</ButtonPrimaryText>
+        </ButtonPrimary>
         <Button
           style={{ margin: 10 }}
           onPress={() => {
             navigation.navigate("Login");
           }}
         >
-          <Text
-            style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
-          >
-            Already have an account?
-          </Text>
+          <ButtonText>Already have an account?</ButtonText>
         </Button>
       </View>
     </SafeAreaView>

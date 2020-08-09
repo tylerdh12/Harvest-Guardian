@@ -60,12 +60,36 @@ export const BottomBorderView = styled.View`
   border-bottom-color: ${(props) => props.theme.border};
 `;
 
-export const Button = styled.TouchableOpacity`
-  background: ${(props) => props.theme.buttonBackgroundAlt};
+export const ButtonPrimary = styled.TouchableOpacity`
+  background-color: ${(props) => props.theme.buttonPrimary};
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 45px;
+  margin: 10px;
+  border-radius: 8px;
 `;
 
-export const ButtonPrimary = styled.TouchableOpacity`
-  background: ${(props) => props.theme.buttonBackground};
+export const ButtonPrimaryText = styled.Text`
+  color: ${(props) => props.theme.buttonPrimaryText};
+  font-weight: 700;
+  font-size: 16px;
+`;
+
+export const Button = styled.TouchableOpacity`
+  background-color: ${(props) => props.theme.buttonBackground};
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 45px;
+  margin: 10px;
+  border-radius: 8px;
+`;
+
+export const ButtonText = styled.Text`
+  color: ${(props) => props.theme.buttonText};
+  font-weight: 700;
+  font-size: 16px;
 `;
 
 export const TouchableOpacity = styled.TouchableOpacity`
@@ -79,7 +103,6 @@ export const CardWrapper = styled.TouchableOpacity`
   justify-content: center;
   margin: 12px;
   border-radius: 30px;
-  box-shadow: 0px 0px 6px ${(props) => props.theme.backgroundAlt};
 `;
 
 export const CardBody = styled.View`
@@ -87,7 +110,6 @@ export const CardBody = styled.View`
   padding: 30px;
   border-radius: 30px;
   margin-top: -30px;
-  box-shadow: 0px 0px 6px ${(props) => props.theme.backgroundAlt};
 `;
 
 /* -------------------------- Custom Form Elements -------------------------- */

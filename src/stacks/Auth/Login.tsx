@@ -9,11 +9,13 @@ import React, { useContext, useEffect, useReducer } from "react";
 import { AsyncStorage } from "react-native";
 import {
   Button,
+  ButtonPrimary,
+  ButtonPrimaryText,
+  ButtonText,
   ErrorText,
   Heading,
   Label,
   SafeAreaView,
-  Text,
   TextInput,
   View,
 } from "../../components/Styles";
@@ -85,7 +87,7 @@ function loginReducer(state, action) {
 function Login({ navigation }) {
   /* -- Import useContext from Auth Context to Use login() and Error Reports -- */
 
-  const { login, errorMessage, setErrorMessage } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   /* ------------------- Reducer Variables to Control State ------------------- */
 
@@ -186,38 +188,24 @@ function Login({ navigation }) {
           margin: 15,
         }}
       >
-        <Button
-          style={{ margin: 10 }}
+        <ButtonPrimary
           disabled={isLoading}
           onPress={() => {
             loginWithUserPass(username, password);
           }}
         >
           {isLoading ? (
-            <Text
-              style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
-            >
-              Logging In...
-            </Text>
+            <ButtonPrimaryText>Logging In...</ButtonPrimaryText>
           ) : (
-            <Text
-              style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
-            >
-              Log In
-            </Text>
+            <ButtonPrimaryText>Log In</ButtonPrimaryText>
           )}
-        </Button>
+        </ButtonPrimary>
         <Button
-          style={{ margin: 10 }}
           onPress={() => {
             navigation.navigate("Register");
           }}
         >
-          <Text
-            style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
-          >
-            Don't have an account?
-          </Text>
+          <ButtonText>Don't have an account?</ButtonText>
         </Button>
       </View>
     </SafeAreaView>
