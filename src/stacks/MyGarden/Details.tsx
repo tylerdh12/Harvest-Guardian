@@ -83,19 +83,10 @@ function Details({ route, navigation }) {
             dataText={data.seed.days_to_harvest}
           />
         ) : null}
-        {data.seed.non_companions ? (
+        {data.seed.zone._8b ? (
           <DetailListItem
-            label="Anti-Companion Plants"
-            dataText={data.seed.non_companions.join(", ")}
-          />
-        ) : null}
-        {data.seed.sun ? (
-          <DetailListItem label="Sun Requirements" dataText={data.seed.sun} />
-        ) : null}
-        {data.seed.soil_temp_high ? (
-          <DetailListItem
-            label="Soil Temperature High"
-            dataText={data.seed.soil_temp_high}
+            label="Planting Months"
+            dataText={data.seed.zone._8b.join(", ")}
           />
         ) : null}
         {data.seed.sow_indoor !== "" ? (
@@ -108,6 +99,17 @@ function Details({ route, navigation }) {
           <DetailListItem
             label="Sowing Outdoor"
             dataText={data.seed.sow_outdoor}
+          />
+        ) : null}
+        {data.seed.sun ? (
+          <DetailListItem label="Sun Requirements" dataText={data.seed.sun} />
+        ) : null}
+        {data.seed.soil_temp_low || data.seed.soil_temp_high ? (
+          <DetailListItem
+            label="Soil Temperature Range"
+            dataText={
+              data.seed.soil_temp_high + " - " + data.seed.soil_temp_low + " °F"
+            }
           />
         ) : null}
         {data.seed.height ? (
@@ -125,22 +127,10 @@ function Details({ route, navigation }) {
             dataText={data.seed.water}
           />
         ) : null}
-        {data.seed.zone._8b ? (
-          <DetailListItem
-            label="Planting Months"
-            dataText={data.seed.zone._8b.join(", ")}
-          />
-        ) : null}
         {data.seed.nutrient ? (
           <DetailListItem
             label="Nutrient Requirements"
             dataText={data.seed.nutrient.join(", ")}
-          />
-        ) : null}
-        {data.seed.soil_temp_low ? (
-          <DetailListItem
-            label="Soil Temperature Low"
-            dataText={data.seed.soil_temp_low}
           />
         ) : null}
         {data.seed.byproducts ? (
@@ -153,6 +143,12 @@ function Details({ route, navigation }) {
           <DetailListItem
             label="Companion Plants"
             dataText={data.seed.companions.join(", ")}
+          />
+        ) : null}
+        {data.seed.non_companions ? (
+          <DetailListItem
+            label="Anti-Companion Plants"
+            dataText={data.seed.non_companions.join(", ")}
           />
         ) : null}
         {data.seed.complete === true ? (

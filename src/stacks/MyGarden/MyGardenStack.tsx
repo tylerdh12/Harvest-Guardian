@@ -33,7 +33,7 @@ export const MyGardenStack = ({ route, navigation }) => {
       />
       <Stack.Screen
         options={({ route }: any) => ({
-          headerTitle: route.params.data.species,
+          headerTitle: route.params.data.seed.species,
           headerStyle: {
             backgroundColor: theme.COLORS.PRIMARY,
           },
