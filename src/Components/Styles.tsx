@@ -99,7 +99,7 @@ export const TouchableOpacity = styled.TouchableOpacity`
 /* ------------------------- Custom Card Components ------------------------- */
 
 export const CardWrapper = styled.TouchableOpacity`
-  background: ${(props) => props.theme.backgroundAlt};
+  background: ${(props) => props.theme.background};
   justify-content: center;
   margin: 12px;
   border-radius: 30px;

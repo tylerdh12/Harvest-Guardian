@@ -1,18 +1,8 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  RefreshControl,
-} from "react-native";
-import {
-  CardBody,
-  CardWrapper,
-  SafeAreaView,
-  Text,
-  ViewAlt,
-} from "../../components/Styles";
+import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
+import { Card } from "../../components/Card";
+import { SafeAreaView } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
 
 function SeedLibrary({ navigation }) {
@@ -93,66 +83,14 @@ function SeedLibrary({ navigation }) {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
-          renderItem={({ item }: any) => {
-            return (
-              <CardWrapper
-                onPress={() =>
-                  navigation.navigate("Details", {
-                    data: item,
-                    type: "seed",
-                  })
-                }
-              >
-                <Image
-                  source={{
-                    uri: `${item.images}`,
-                  }}
-                  style={{
-                    width: "100%",
-                    height: 160,
-                    borderRadius: 30,
-                    borderBottomLeftRadius: 0,
-                    borderBottomRightRadius: 0,
-                  }}
-                />
-                <CardBody>
-                  <ViewAlt style={{ flexDirection: "row" }}>
-                    <ViewAlt style={{ width: "50%" }}>
-                      <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                        {item.species}
-                      </Text>
-                      <Text style={{ fontSize: 15, fontWeight: "400" }}>
-                        {item.variety}
-                      </Text>
-                    </ViewAlt>
-                    <ViewAlt style={{ width: "50%" }}>
-                      <Text
-                        style={{
-                          textAlign: "right",
-                          marginTop: 8,
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontWeight: "500",
-                        }}
-                      >
-                        Harvest in {item.days_to_harvest}
-                      </Text>
-                    </ViewAlt>
-                  </ViewAlt>
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      fontWeight: "500",
-                      padding: 6,
-                      marginTop: 8,
-                    }}
-                  >
-                    {item.zone._8b.join(", ")}
-                  </Text>
-                </CardBody>
-              </CardWrapper>
-            );
-          }}
+          renderItem={({ item }) => (
+            <Card
+              item={item}
+              navigation={navigation}
+              onLeftPress={() => alert("Seed Added to My Garden!")}
+              onRightPress={() => alert("Pressed Delete!")}
+            />
+          )}
           keyExtractor={(detail: any, idx) => detail + idx}
           data={data}
         />
