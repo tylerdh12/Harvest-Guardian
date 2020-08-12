@@ -8,13 +8,8 @@ import {
   Image,
   RefreshControl,
 } from "react-native";
-import {
-  CardBody,
-  CardWrapper,
-  SafeAreaView,
-  Text,
-  ViewAlt,
-} from "../../components/Styles";
+import { Card } from "../../components/Card";
+import { CardBody, SafeAreaView, Text, ViewAlt } from "../../components/Styles";
 
 function MyGarden({ navigation }) {
   const [isLoading, setLoading] = useState(true);
@@ -106,13 +101,10 @@ function MyGarden({ navigation }) {
           }
           renderItem={({ item }: any) => {
             return (
-              <CardWrapper
-                onPress={() => {
-                  navigation.navigate("Details", {
-                    data: item,
-                    type: "plant",
-                  });
-                }}
+              <Card
+                item={item}
+                navigation={navigation}
+                onRightPress={() => alert("Pressed Delete!")}
               >
                 <Image
                   source={{
@@ -206,7 +198,7 @@ function MyGarden({ navigation }) {
                     </ViewAlt>
                   </ViewAlt>
                 </CardBody>
-              </CardWrapper>
+              </Card>
             );
           }}
           keyExtractor={(plant: any, idx) => plant + idx}

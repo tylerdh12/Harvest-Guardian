@@ -1,7 +1,15 @@
 import React from "react";
-import { Animated, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Animated, StyleSheet, TouchableOpacity } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { CardBody, CardWrapper, Text, ViewAlt } from "./Styles";
+import { CardWrapper, ViewAlt } from "./Styles";
+
+interface CardProps {
+  navigation: any;
+  item: any;
+  onLeftPress?: any;
+  onRightPress?: any;
+  children: any;
+}
 
 const styles = StyleSheet.create({
   leftAction: {
@@ -60,7 +68,13 @@ const RightActions = ({ progress, dragX, onPress }) => {
   );
 };
 
-export const Card = ({ navigation, item, onLeftPress, onRightPress }) => (
+export const Card: React.FC<CardProps> = ({
+  navigation,
+  item,
+  onLeftPress,
+  onRightPress,
+  children,
+}) => (
   <CardWrapper
     onPress={() =>
       navigation.navigate("Details", {
@@ -81,53 +95,7 @@ export const Card = ({ navigation, item, onLeftPress, onRightPress }) => (
         />
       )}
     >
-      <Image
-        source={{
-          uri: `${item.images}`,
-        }}
-        style={{
-          width: "100%",
-          height: 160,
-          borderRadius: 30,
-          borderBottomLeftRadius: 0,
-          borderBottomRightRadius: 0,
-        }}
-      />
-      <CardBody>
-        <ViewAlt style={{ flexDirection: "row" }}>
-          <ViewAlt style={{ width: "50%" }}>
-            <Text style={{ fontSize: 18, fontWeight: "600" }}>
-              {item.species}
-            </Text>
-            <Text style={{ fontSize: 15, fontWeight: "400" }}>
-              {item.variety}
-            </Text>
-          </ViewAlt>
-          <ViewAlt style={{ width: "50%" }}>
-            <Text
-              style={{
-                textAlign: "right",
-                marginTop: 8,
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: "500",
-              }}
-            >
-              Harvest in {item.days_to_harvest}
-            </Text>
-          </ViewAlt>
-        </ViewAlt>
-        <Text
-          style={{
-            textAlign: "center",
-            fontWeight: "500",
-            padding: 6,
-            marginTop: 8,
-          }}
-        >
-          {item.zone._8b.join(", ")}
-        </Text>
-      </CardBody>
+      {children}
     </Swipeable>
   </CardWrapper>
 );
