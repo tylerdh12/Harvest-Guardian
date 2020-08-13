@@ -1,12 +1,14 @@
 const light = {
   theme: {
-    background: "#ededed",
-    border: "#bdbdbd",
+    background: "#acb0a6",
     backgroundAlt: "#d3e3da",
+    border: "#575c66",
     borderAlt: "#bdbdbd",
     text: "#171717",
-    buttonBackground: "transparent",
-    buttonBackgroundAlt: "transparent",
+    buttonPrimary: "rgb(148, 224, 136)",
+    buttonPrimaryText: "white",
+    buttonBackground: "white",
+    buttonText: "black",
     viewAlt: "transparent",
     errorText: "red",
   },
