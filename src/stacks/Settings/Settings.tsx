@@ -1,44 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { default as React, useContext } from "react";
 import { TouchableOpacity } from "react-native";
-import styled from "styled-components/native";
 import { AuthContext } from "../../providers/AuthProvider";
-
-const Container = styled.View`
-  flex: 1;
-  background: ${(props) => props.theme.background};
-  align-items: center;
-  justify-content: center;
-  padding-top: 30px;
-`;
-
-const Title = styled.Text`
-  font-size: 24px;
-  text-align: center;
-  color: ${(props) => props.theme.text};
-`;
-
-const Label = styled.Text`
-  font-size: 16px;
-  text-align: center;
-  padding-right: 18px;
-  font-weight: 600;
-  color: ${(props) => props.theme.text};
-`;
-const BasicText = styled.Text`
-  font-size: 16px;
-  text-align: center;
-  padding-right: 18px;
-  color: ${(props) => props.theme.text};
-`;
-
-const LinkTitle = styled.Text`
-  text-align: center;
-  font-size: 20px;
-  padding: 16px;
-  font-weight: 500;
-  color: ${(props) => props.theme.text};
-`;
+import { Container, LinkTitle } from "./../../components/Styles";
 
 function Settings({ navigation }) {
   const { logout, userData } = useContext(AuthContext);
