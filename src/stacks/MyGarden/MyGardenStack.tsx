@@ -1,7 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { Button } from "react-native";
+import { Text } from "react-native";
 import NotificationModal from "../../components/NotificationModal";
+import { TouchableOpacity } from "../../components/Styles";
 import theme from "../../theme";
 import Details from "./Details";
 import EditPlantDetails from "./Edit";
@@ -50,12 +51,28 @@ export const MyGardenStack = ({ route, navigation }) => {
         options={({ route }: any) => ({
           headerTitle: `Edit: ${route.params.data.seed.species}`,
           headerRight: () => (
-            <Button
-              title="Done"
+            <TouchableOpacity
+              style={{
+                backgroundColor: "transparent",
+                height: 38,
+                width: 75,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
               onPress={({ route }: any) => {
                 route.params.submit?.current();
               }}
-            />
+            >
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 16,
+                  fontWeight: "600",
+                }}
+              >
+                Done
+              </Text>
+            </TouchableOpacity>
           ),
           headerStyle: {
             backgroundColor: theme.COLORS.PRIMARY,

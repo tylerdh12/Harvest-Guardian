@@ -1,8 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Animated, StyleSheet, TouchableOpacity } from "react-native";
+import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableNativeFeedback } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { CardWrapper, ViewAlt } from "./Styles";
+import styled from "styled-components";
+import { RightAction, ViewAlt } from "./Styles";
 
 interface CardProps {
   navigation: any;
@@ -12,15 +14,16 @@ interface CardProps {
   children: any;
 }
 
+export const CardWrapper = styled.TouchableNativeFeedback`
+  background: ${(props) => props.theme.background};
+  justify-content: center;
+  padding: 16px;
+  border-radius: 30px;
+`;
+
 const styles = StyleSheet.create({
-  rightAction: {
-    borderTopRightRadius: 30,
-    borderBottomRightRadius: 30,
-    backgroundColor: "#dd2c00",
-    justifyContent: "center",
-    flex: 1,
-    alignItems: "flex-end",
-  },
+  wrapper: { justifyContent: "center", padding: 16, borderRadius: 30 },
+
   actionText: {
     color: "#fff",
     fontWeight: "700",
@@ -37,11 +40,11 @@ const RightActions = ({ progress, dragX, onPress }) => {
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <ViewAlt style={styles.rightAction}>
+      <RightAction>
         <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
           <Ionicons name="ios-trash" size={70} />
         </Animated.Text>
-      </ViewAlt>
+      </RightAction>
     </TouchableOpacity>
   );
 };
@@ -52,29 +55,32 @@ export const Card: React.FC<CardProps> = ({
   onRightPress,
   children,
 }) => (
-  <CardWrapper
-    onPress={() =>
-      navigation.navigate("Details", {
-        data: item,
-        type: "seed",
-      })
-    }
-    style={{ backgroundColor: "#dd2c00" }}
-  >
-    <Swipeable
-      friction={2}
-      overshootLeft={false}
-      overshootRight={false}
-      rightThreshold={50}
-      renderRightActions={(progress, dragX) => (
-        <RightActions
-          progress={progress}
-          dragX={dragX}
-          onPress={onRightPress}
-        />
-      )}
+  <View style={styles.wrapper}>
+    <TouchableNativeFeedback
+      onPress={() =>
+        navigation.navigate("Details", {
+          data: item,
+          type: "seed",
+        })
+      }
     >
-      {children}
-    </Swipeable>
-  </CardWrapper>
+      <View style={{ backgroundColor: "#dd2c00", borderRadius: 31 }}>
+        <Swipeable
+          friction={2}
+          overshootLeft={false}
+          overshootRight={false}
+          rightThreshold={50}
+          renderRightActions={(progress, dragX) => (
+            <RightActions
+              progress={progress}
+              dragX={dragX}
+              onPress={onRightPress}
+            />
+          )}
+        >
+          <ViewAlt style={{ borderRadius: 31 }}>{children}</ViewAlt>
+        </Swipeable>
+      </View>
+    </TouchableNativeFeedback>
+  </View>
 );

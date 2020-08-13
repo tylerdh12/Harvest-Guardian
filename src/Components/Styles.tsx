@@ -98,10 +98,10 @@ export const TouchableOpacity = styled.TouchableOpacity`
 
 /* ------------------------- Custom Card Components ------------------------- */
 
-export const CardWrapper = styled.TouchableOpacity`
+export const CardWrapper = styled.TouchableHighlight`
   background: ${(props) => props.theme.background};
   justify-content: center;
-  margin: 12px;
+  padding: 16px;
   border-radius: 30px;
 `;
 
@@ -143,4 +143,53 @@ export const TextInput = styled.TextInput`
   margin-bottom: 10px;
   width: 100%;
   max-width: 300px;
+`;
+
+/* ----------------------------- Card Containers ---------------------------- */
+
+export const RightAction = styled.View`
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background: #dd2c00;
+  justify-content: center;
+  flex: 1;
+  align-items: flex-end;
+`;
+
+/* ------------------------------ Settings Page ----------------------------- */
+
+export const Container = styled.View`
+  flex: 1;
+  background: ${(props) => props.theme.background};
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+`;
+
+export const Title = styled.Text`
+  font-size: 24px;
+  text-align: center;
+  color: ${(props) => props.theme.text};
+`;
+
+export const MenuLabel = styled.Text`
+  font-size: 16px;
+  text-align: center;
+  padding-right: 18px;
+  font-weight: 600;
+  color: ${(props) => props.theme.text};
+`;
+export const BasicText = styled.Text`
+  font-size: 16px;
+  text-align: center;
+  padding-right: 18px;
+  color: ${(props) => props.theme.text};
+`;
+
+export const LinkTitle = styled.Text`
+  text-align: center;
+  font-size: 20px;
+  padding: 16px;
+  font-weight: 500;
+  color: ${(props) => props.theme.text};
 `;
