@@ -154,6 +154,8 @@ export const RightAction = styled.View`
   justify-content: center;
   flex: 1;
   align-items: flex-end;
+  margin-left: -30px;
+  padding-left: 30px;
 `;
 
 /* ------------------------------ Settings Page ----------------------------- */

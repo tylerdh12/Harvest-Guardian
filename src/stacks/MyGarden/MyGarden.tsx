@@ -1,15 +1,35 @@
+import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
-import moment from "moment";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  Animated,
   AsyncStorage,
   FlatList,
-  Image,
   RefreshControl,
+  StyleSheet,
+  TouchableOpacity,
 } from "react-native";
-import { Card } from "../../components/Card";
-import { CardBody, SafeAreaView, Text, ViewAlt } from "../../components/Styles";
+import { TouchableNativeFeedback } from "react-native-gesture-handler";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { CardImage } from "../../components/Card/CardImage";
+import ProgressBar from "../../components/Card/ProgressBar";
+import SpeciesTitle from "../../components/Card/SpeciesTitle";
+import {
+  CardBody,
+  RightAction,
+  SafeAreaView,
+  View,
+} from "../../components/Styles";
+import CardDetails from "../../components/Card/CardDetails";
+
+const styles = StyleSheet.create({
+  actionText: {
+    color: "#fff",
+    fontWeight: "700",
+    padding: 20,
+  },
+});
 
 function MyGarden({ navigation }) {
   const [isLoading, setLoading] = useState(true);
@@ -41,51 +61,31 @@ function MyGarden({ navigation }) {
     });
   }
 
-  const datePlanted = (date_planted) => {
-    return moment(date_planted).format("l");
-  };
-
-  function harvestProgress(date_planted, days_to_harvest) {
-    const daysPlantedToNow = moment().diff(date_planted, "days");
-
-    return (daysPlantedToNow / parseInt(days_to_harvest)) * 100 < 100
-      ? (daysPlantedToNow / parseInt(days_to_harvest)) * 100
-      : 100;
-  }
-
-  function harvestProgressColor(
-    date_planted,
-    days_to_harvest,
-    days_to_germinate
-  ) {
-    const daysPlantedToNow = moment().diff(date_planted, "days");
-    if (daysPlantedToNow <= parseInt(days_to_germinate)) {
-      return "yellow";
-    } else if (daysPlantedToNow <= parseInt(days_to_harvest)) {
-      return "rgb(148, 224, 136)";
-    } else {
-      return "tomato";
-    }
-  }
-
-  function dateToBeHarvested(date_planted, days_to_harvest) {
-    const dateToHarvest = moment(date_planted).add(
-      parseInt(days_to_harvest),
-      "days"
-    );
-    const numberOfDays = moment().diff(dateToHarvest, "days");
-    if (Math.sign(numberOfDays) == -1) {
-      return moment(dateToHarvest).format("l");
-    } else {
-      return "Ready";
-    }
-  }
-
   function onRefresh() {
     setRefreshing: true;
     getPlants();
     setRefreshing: false;
   }
+
+  const RightActions = ({ progress, dragX, onPress }) => {
+    const scale = dragX.interpolate({
+      inputRange: [-100, 0],
+      outputRange: [1, 0],
+      extrapolate: "clamp",
+    });
+
+    return (
+      <TouchableOpacity style={{ width: 80 }} onPress={onPress}>
+        <RightAction>
+          <Animated.Text
+            style={[styles.actionText, { transform: [{ scale }] }]}
+          >
+            <Ionicons name="ios-trash" size={70} />
+          </Animated.Text>
+        </RightAction>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <SafeAreaView>
@@ -93,112 +93,54 @@ function MyGarden({ navigation }) {
         <ActivityIndicator size="large" />
       ) : (
         <FlatList
-          style={{
-            width: "100%",
-          }}
+          style={{ marginTop: 8 }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
           renderItem={({ item }: any) => {
             return (
-              <Card
-                item={item}
-                navigation={navigation}
-                onRightPress={() => alert("Pressed Delete!")}
-              >
-                <Image
-                  source={{
-                    uri: `${item.seed.images}`,
-                  }}
-                  style={{
-                    width: "100%",
-                    height: 160,
-                    borderRadius: 30,
-                    borderBottomLeftRadius: 0,
-                    borderBottomRightRadius: 0,
-                  }}
-                />
-                <CardBody>
-                  <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                    {item.seed.species}
-                  </Text>
-                  <ViewAlt
-                    style={{
-                      marginTop: 10,
-                      height: 10,
-                      backgroundColor: "transparent",
-                      borderStyle: "solid",
-                      borderWidth: 1,
-                      borderColor: harvestProgressColor(
-                        item.date_planted,
-                        item.seed.days_to_harvest,
-                        item.seed.days_to_germinate
-                      ),
-                      borderRadius: 10,
-                      width: "100%",
+              <View style={{ padding: 8 }}>
+                <Swipeable
+                  friction={2}
+                  overshootLeft={false}
+                  overshootRight={false}
+                  rightThreshold={50}
+                  renderRightActions={(progress, dragX) => (
+                    <RightActions
+                      progress={progress}
+                      dragX={dragX}
+                      onPress={() => {
+                        alert("Delete Pressed");
+                      }}
+                    />
+                  )}
+                >
+                  <TouchableNativeFeedback
+                    onPress={() => {
+                      navigation.navigate("Details", {
+                        data: item,
+                        type: "seed",
+                      });
                     }}
                   >
-                    <ViewAlt
-                      style={{
-                        height: 8,
-                        backgroundColor: harvestProgressColor(
-                          item.date_planted,
-                          item.seed.days_to_harvest,
-                          item.seed.days_to_germinate
-                        ),
-                        borderRadius: 10,
-                        width: `${harvestProgress(
-                          item.date_planted,
-                          item.seed.days_to_harvest
-                        )}%`,
-                        flex: 1,
-                      }}
-                    ></ViewAlt>
-                  </ViewAlt>
-                  <ViewAlt style={{ flexDirection: "row" }}>
-                    <ViewAlt style={{ width: "50%" }}>
-                      <Text
-                        style={{
-                          textAlign: "left",
-                          marginTop: 15,
-                          marginBottom: 5,
-                          fontWeight: "500",
-                        }}
-                      >
-                        Date Planted
-                      </Text>
-                      <Text style={{ textAlign: "left", marginTop: 5 }}>
-                        {datePlanted(item.date_planted)}
-                      </Text>
-                    </ViewAlt>
-                    <ViewAlt style={{ width: "50%" }}>
-                      <Text
-                        style={{
-                          textAlign: "right",
-                          marginTop: 15,
-                          marginBottom: 5,
-                          fontWeight: "500",
-                        }}
-                      >
-                        Day to Harvest
-                      </Text>
-                      <Text
-                        style={{
-                          textAlign: "right",
-                          marginTop: 5,
-                          marginBottom: 5,
-                          fontWeight: "500",
-                        }}
-                      >
-                        {dateToBeHarvested(
-                          item.date_planted,
-                          item.seed.days_to_harvest
-                        )}
-                      </Text>
-                    </ViewAlt>
-                  </ViewAlt>
-                </CardBody>
-              </Card>
+                    <View style={{ backgroundColor: "transparent" }}>
+                      <CardImage image={item.seed.images} />
+                      <CardBody>
+                        <SpeciesTitle species={item.seed.species} />
+                        <ProgressBar
+                          date_planted={item.date_planted}
+                          days_to_harvest={item.seed.days_to_harvest}
+                          days_to_germinate={item.seed.days_to_germinate}
+                        />
+                        <CardDetails
+                          date_planted={item.date_planted}
+                          days_to_harvest={item.seed.date_to_harvest}
+                        />
+                      </CardBody>
+                    </View>
+                  </TouchableNativeFeedback>
+                </Swipeable>
+              </View>
             );
           }}
           keyExtractor={(plant: any, idx) => plant + idx}

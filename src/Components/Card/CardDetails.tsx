@@ -1,0 +1,74 @@
+import moment from "moment";
+import React from "react";
+import { Text, ViewAlt } from "../Styles";
+
+interface CardDetailsProps {
+  date_planted: any;
+  days_to_harvest: any;
+}
+
+const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
+  date_planted,
+  days_to_harvest,
+}) => {
+  const datePlanted = (date_planted) => {
+    return moment(date_planted).format("l");
+  };
+
+  function dateToBeHarvested(date_planted, days_to_harvest) {
+    const dateToHarvest = moment(date_planted).add(
+      parseInt(days_to_harvest),
+      "days"
+    );
+    const numberOfDays = moment().diff(dateToHarvest, "days");
+    if (Math.sign(numberOfDays) == -1) {
+      return moment(dateToHarvest).format("l");
+    } else {
+      return "Ready";
+    }
+  }
+
+  return (
+    <ViewAlt style={{ flexDirection: "row" }}>
+      <ViewAlt style={{ width: "50%" }}>
+        <Text
+          style={{
+            textAlign: "left",
+            marginTop: 15,
+            marginBottom: 5,
+            fontWeight: "500",
+          }}
+        >
+          Date Planted
+        </Text>
+        <Text style={{ textAlign: "left", marginTop: 5 }}>
+          {datePlanted(date_planted)}
+        </Text>
+      </ViewAlt>
+      <ViewAlt style={{ width: "50%" }}>
+        <Text
+          style={{
+            textAlign: "right",
+            marginTop: 15,
+            marginBottom: 5,
+            fontWeight: "500",
+          }}
+        >
+          Day to Harvest
+        </Text>
+        <Text
+          style={{
+            textAlign: "right",
+            marginTop: 5,
+            marginBottom: 5,
+            fontWeight: "500",
+          }}
+        >
+          {dateToBeHarvested(date_planted, days_to_harvest)}
+        </Text>
+      </ViewAlt>
+    </ViewAlt>
+  );
+};
+
+export default CardDetails;

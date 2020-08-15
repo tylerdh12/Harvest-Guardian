@@ -6,7 +6,7 @@ import {
   Image,
   RefreshControl,
 } from "react-native";
-import { Card } from "../../components/Card";
+import { Card } from "../../components/Card/Card";
 import { SafeAreaView } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
 import { CardBody, Text, ViewAlt } from "./../../components/Styles";
