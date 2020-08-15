@@ -5,8 +5,6 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RightAction, ViewAlt } from "../Styles";
 
 interface CardProps {
-  navigation: any;
-  item: any;
   onLeftPress?: any;
   onRightPress?: any;
   children: any;
@@ -29,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const RightActions = ({ progress, dragX, onPress }) => {
+const RightActions = ({ dragX, onPress }) => {
   const scale = dragX.interpolate({
     inputRange: [-100, 0],
     outputRange: [1, 0],
@@ -47,12 +45,7 @@ const RightActions = ({ progress, dragX, onPress }) => {
   );
 };
 
-export const Card: React.FC<CardProps> = ({
-  navigation,
-  item,
-  onRightPress,
-  children,
-}) => (
+export const Card: React.FC<CardProps> = ({ onRightPress, children }) => (
   <View style={styles.wrapper}>
     <Swipeable
       z-index={10}
@@ -61,11 +54,7 @@ export const Card: React.FC<CardProps> = ({
       overshootRight={false}
       rightThreshold={50}
       renderRightActions={(progress, dragX) => (
-        <RightActions
-          progress={progress}
-          dragX={dragX}
-          onPress={onRightPress}
-        />
+        <RightActions dragX={dragX} onPress={onRightPress} />
       )}
     >
       <ViewAlt

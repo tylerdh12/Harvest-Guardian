@@ -10,18 +10,9 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { TouchableNativeFeedback } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { CardImage } from "../../components/Card/CardImage";
-import ProgressBar from "../../components/Card/ProgressBar";
-import SpeciesTitle from "../../components/Card/SpeciesTitle";
-import {
-  CardBody,
-  RightAction,
-  SafeAreaView,
-  View,
-} from "../../components/Styles";
-import CardDetails from "../../components/Card/CardDetails";
+import CardLayout from "../../components/Card/CardLayout";
+import { RightAction, SafeAreaView, View } from "../../components/Styles";
 
 const styles = StyleSheet.create({
   actionText: {
@@ -115,30 +106,7 @@ function MyGarden({ navigation }) {
                     />
                   )}
                 >
-                  <TouchableNativeFeedback
-                    onPress={() => {
-                      navigation.navigate("Details", {
-                        data: item,
-                        type: "seed",
-                      });
-                    }}
-                  >
-                    <View style={{ backgroundColor: "transparent" }}>
-                      <CardImage image={item.seed.images} />
-                      <CardBody>
-                        <SpeciesTitle species={item.seed.species} />
-                        <ProgressBar
-                          date_planted={item.date_planted}
-                          days_to_harvest={item.seed.days_to_harvest}
-                          days_to_germinate={item.seed.days_to_germinate}
-                        />
-                        <CardDetails
-                          date_planted={item.date_planted}
-                          days_to_harvest={item.seed.date_to_harvest}
-                        />
-                      </CardBody>
-                    </View>
-                  </TouchableNativeFeedback>
+                  <CardLayout {...{ item }} navigation={navigation} />
                 </Swipeable>
               </View>
             );
