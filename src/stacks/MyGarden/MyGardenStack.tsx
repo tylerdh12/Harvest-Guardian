@@ -6,7 +6,7 @@ import { TouchableOpacity } from "../../components/Styles";
 import theme from "../../theme";
 import Details from "./Details";
 import EditPlantDetails from "./Edit";
-import MyGarden from "./MyGarden";
+import { MyGarden } from "./MyGarden";
 
 const Stack = createStackNavigator();
 

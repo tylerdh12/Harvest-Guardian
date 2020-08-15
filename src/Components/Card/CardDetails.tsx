@@ -1,16 +1,25 @@
 import moment from "moment";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 import { Text, ViewAlt } from "../Styles";
+import { Zone } from "./Zone";
 
 interface CardDetailsProps {
-  date_planted: any;
-  days_to_harvest: any;
+  item: any;
+  date_planted?: any;
+  days_to_harvest?: any;
+  type: any;
+  species?: string;
+  variety?: string;
 }
 
 const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
-  date_planted,
-  days_to_harvest,
+  type,
+  item,
 }) => {
+  const { userData } = useContext(AuthContext);
+  const zone = userData.zone;
+
   const datePlanted = (date_planted) => {
     return moment(date_planted).format("l");
   };
@@ -28,7 +37,7 @@ const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
     }
   }
 
-  return (
+  return type === "plant" ? (
     <ViewAlt style={{ flexDirection: "row" }}>
       <ViewAlt style={{ width: "50%" }}>
         <Text
@@ -42,7 +51,7 @@ const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
           Date Planted
         </Text>
         <Text style={{ textAlign: "left", marginTop: 5 }}>
-          {datePlanted(date_planted)}
+          {datePlanted(item.date_planted)}
         </Text>
       </ViewAlt>
       <ViewAlt style={{ width: "50%" }}>
@@ -64,10 +73,46 @@ const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
             fontWeight: "500",
           }}
         >
-          {dateToBeHarvested(date_planted, days_to_harvest)}
+          {dateToBeHarvested(item.date_planted, item.seed.days_to_harvest)}
         </Text>
       </ViewAlt>
     </ViewAlt>
+  ) : (
+    <>
+      <ViewAlt style={{ flexDirection: "row" }}>
+        <ViewAlt style={{ width: "50%" }}>
+          <Text style={{ fontSize: 18, fontWeight: "600" }}>
+            {item.species}
+          </Text>
+          <Text style={{ fontSize: 15, fontWeight: "400" }}>
+            {item.variety}
+          </Text>
+        </ViewAlt>
+        <ViewAlt style={{ width: "50%" }}>
+          <Text
+            style={{
+              textAlign: "right",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: "500",
+            }}
+          >
+            Days to Harvest
+          </Text>
+          <Text
+            style={{
+              textAlign: "right",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: "400",
+            }}
+          >
+            {item.days_to_harvest}
+          </Text>
+        </ViewAlt>
+      </ViewAlt>
+      <Zone item={item} zone={zone} />
+    </>
   );
 };
 

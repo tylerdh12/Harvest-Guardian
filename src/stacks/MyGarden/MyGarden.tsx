@@ -1,28 +1,21 @@
-import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
-  Animated,
   AsyncStorage,
   FlatList,
   RefreshControl,
-  StyleSheet,
-  TouchableOpacity,
 } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import CardLayout from "../../components/Card/CardLayout";
-import { RightAction, SafeAreaView, View } from "../../components/Styles";
+import { CardLayout } from "../../components/Card/CardLayout";
+import { SafeAreaView, View } from "../../components/Styles";
+import { RightActionDelete } from "./../../components/Card/RightActionDelete";
 
-const styles = StyleSheet.create({
-  actionText: {
-    color: "#fff",
-    fontWeight: "700",
-    padding: 20,
-  },
-});
+interface MyGardenProps {
+  navigation: any;
+}
 
-function MyGarden({ navigation }) {
+export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -58,26 +51,6 @@ function MyGarden({ navigation }) {
     setRefreshing: false;
   }
 
-  const RightActions = ({ progress, dragX, onPress }) => {
-    const scale = dragX.interpolate({
-      inputRange: [-100, 0],
-      outputRange: [1, 0],
-      extrapolate: "clamp",
-    });
-
-    return (
-      <TouchableOpacity style={{ width: 80 }} onPress={onPress}>
-        <RightAction>
-          <Animated.Text
-            style={[styles.actionText, { transform: [{ scale }] }]}
-          >
-            <Ionicons name="ios-trash" size={70} />
-          </Animated.Text>
-        </RightAction>
-      </TouchableOpacity>
-    );
-  };
-
   return (
     <SafeAreaView>
       {isLoading ? (
@@ -88,35 +61,35 @@ function MyGarden({ navigation }) {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
-          renderItem={({ item }: any) => {
-            return (
-              <View style={{ padding: 8 }}>
-                <Swipeable
-                  friction={2}
-                  overshootLeft={false}
-                  overshootRight={false}
-                  rightThreshold={50}
-                  renderRightActions={(progress, dragX) => (
-                    <RightActions
-                      progress={progress}
-                      dragX={dragX}
-                      onPress={() => {
-                        alert("Delete Pressed");
-                      }}
-                    />
-                  )}
-                >
-                  <CardLayout {...{ item }} navigation={navigation} />
-                </Swipeable>
-              </View>
-            );
-          }}
+          renderItem={({ item }) => (
+            <View style={{ padding: 8 }}>
+              <Swipeable
+                friction={2}
+                overshootLeft={false}
+                overshootRight={false}
+                rightThreshold={50}
+                renderRightActions={(progress, dragX) => (
+                  <RightActionDelete
+                    progress={progress}
+                    dragX={dragX}
+                    onPress={() => {
+                      alert("Delete Pressed");
+                    }}
+                  />
+                )}
+              >
+                <CardLayout
+                  {...{ item }}
+                  navigation={navigation}
+                  type="plant"
+                />
+              </Swipeable>
+            </View>
+          )}
           keyExtractor={(plant: any, idx) => plant + idx}
           data={data}
         />
       )}
     </SafeAreaView>
   );
-}
-
-export default MyGarden;
+};

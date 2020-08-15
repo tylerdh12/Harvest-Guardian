@@ -5,7 +5,7 @@ import theme from "../../theme";
 import Create from "./Create";
 import SeedDetails from "./Details";
 import EditSeedDetails from "./Edit";
-import SeedLibrary from "./SeedLibrary";
+import { SeedLibrary } from "./SeedLibrary";
 
 const Stack = createStackNavigator();
 

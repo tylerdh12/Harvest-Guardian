@@ -1,22 +1,20 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  RefreshControl,
-} from "react-native";
-import { Card } from "../../components/Card/Card";
-import { SafeAreaView } from "../../components/Styles";
-import { AuthContext } from "../../providers/AuthProvider";
-import { CardBody, Text, ViewAlt } from "./../../components/Styles";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { CardLayout } from "../../components/Card/CardLayout";
+import { RightActionDelete } from "../../components/Card/RightActionDelete";
+import { SafeAreaView, View } from "../../components/Styles";
 
-function SeedLibrary({ navigation }) {
-  const [search, updateSearch] = useState("");
+interface SeedLibraryProps {
+  navigation: any;
+}
+
+export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
+  const [] = useState("");
   const [isLoading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing] = useState(false);
   const [data, setData] = useState([]);
-  const { userData } = useContext(AuthContext);
 
   function getSeeds() {
     axios
@@ -83,75 +81,35 @@ function SeedLibrary({ navigation }) {
         //     />
         //   </View>
         <FlatList
-          style={{
-            width: "100%",
-          }}
+          style={{ marginTop: 8 }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
           renderItem={({ item }) => (
-            <Card
-              item={item}
-              navigation={navigation}
-              onLeftPress={() => alert("Seed Added to My Garden!")}
-              onRightPress={() => alert("Pressed Delete!")}
-            >
-              <Image
-                source={{
-                  uri: `${item.images}`,
-                }}
-                style={{
-                  width: "100%",
-                  height: 160,
-                  borderRadius: 30,
-                  borderBottomLeftRadius: 0,
-                  borderBottomRightRadius: 0,
-                }}
-              />
-              <CardBody>
-                <ViewAlt style={{ flexDirection: "row" }}>
-                  <ViewAlt style={{ width: "50%" }}>
-                    <Text style={{ fontSize: 18, fontWeight: "600" }}>
-                      {item.species}
-                    </Text>
-                    <Text style={{ fontSize: 15, fontWeight: "400" }}>
-                      {item.variety}
-                    </Text>
-                  </ViewAlt>
-                  <ViewAlt style={{ width: "50%" }}>
-                    <Text
-                      style={{
-                        textAlign: "right",
-                        marginTop: 8,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontWeight: "500",
-                      }}
-                    >
-                      Harvest in {item.days_to_harvest}
-                    </Text>
-                  </ViewAlt>
-                </ViewAlt>
-                <Text
-                  style={{
-                    textAlign: "center",
-                    fontWeight: "500",
-                    padding: 6,
-                    marginTop: 8,
-                  }}
-                >
-                  {item.zone._8b.join(", ")}
-                </Text>
-              </CardBody>
-            </Card>
+            <View style={{ padding: 8 }}>
+              <Swipeable
+                friction={2}
+                overshootLeft={false}
+                overshootRight={false}
+                rightThreshold={50}
+                renderRightActions={(progress, dragX) => (
+                  <RightActionDelete
+                    progress={progress}
+                    dragX={dragX}
+                    onPress={() => {
+                      alert("Delete Pressed");
+                    }}
+                  />
+                )}
+              >
+                <CardLayout {...{ item }} navigation={navigation} type="seed" />
+              </Swipeable>
+            </View>
           )}
           keyExtractor={(detail: any, idx) => detail + idx}
           data={data}
         />
-        // </>
       )}
     </SafeAreaView>
   );
-}
-
-export default SeedLibrary;
+};
