@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { CardLayout } from "../../components/Card/CardLayout";
+import { LeftActionAdd } from "../../components/Card/LeftActionAdd";
 import { RightActionDelete } from "../../components/Card/RightActionDelete";
 import { SafeAreaView, View } from "../../components/Styles";
+import { AddSeedToMyGarden } from "../../utils/Utils";
 
 interface SeedLibraryProps {
   navigation: any;
@@ -98,6 +100,21 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
                     dragX={dragX}
                     onPress={() => {
                       alert("Delete Pressed");
+                    }}
+                  />
+                )}
+                leftThreshold={50}
+                renderLeftActions={(progress, dragX) => (
+                  <LeftActionAdd
+                    progress={progress}
+                    dragX={dragX}
+                    onPress={() => {
+                      const data = item;
+                      // console.log({ data });
+                      AddSeedToMyGarden({
+                        data,
+                        navigation,
+                      });
                     }}
                   />
                 )}

@@ -158,6 +158,17 @@ export const RightAction = styled.View`
   padding-left: 30px;
 `;
 
+export const LeftAction = styled.View`
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background: #388e3c;
+  justify-content: center;
+  flex: 1;
+  align-items: flex-end;
+  margin-right: -30px;
+  padding-right: 30px;
+`;
+
 /* ------------------------------ Settings Page ----------------------------- */
 
 export const Container = styled.View`

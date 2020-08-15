@@ -13,7 +13,7 @@ interface CardDetailsProps {
   variety?: string;
 }
 
-const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
+export const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
   type,
   item,
 }) => {
@@ -116,4 +116,3 @@ const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
   );
 };
 
-export default CardDetails;

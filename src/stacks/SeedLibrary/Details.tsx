@@ -1,39 +1,13 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { Alert, AsyncStorage, Button, Image } from "react-native";
-import DetailListItem from "../../components/DetailListItem";
+import { Button, Image } from "react-native";
+import { DetailListItem } from "../../components/DetailListItem";
 import { ScrollView, View, ViewAlt } from "../../components/Styles";
 import theme from "../../theme";
+import { AddSeedToMyGarden } from "../../utils/Utils";
 
 // TODO Add dynamic value for zone
 function SeedDetails({ route, navigation }) {
   const [data, setData] = useState(route.params.data);
-
-  function addSeedToMyGarden({ data }) {
-    AsyncStorage.getItem("authBasic").then((authBasic) => {
-      axios({
-        method: "post",
-        url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
-        headers: {
-          Authorization: authBasic,
-        },
-        data: data,
-      }).then((res) => {
-        if (res.status === 401) {
-          console.log("Response 401");
-          console.log(res);
-        } else {
-          Alert.alert(
-            "Seed Planted",
-            `${data.species} - ${data.variety} has been added to My Garden`,
-            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-            { cancelable: false }
-          );
-          navigation.goBack();
-        }
-      });
-    });
-  }
 
   return (
     <ScrollView>
@@ -162,7 +136,9 @@ function SeedDetails({ route, navigation }) {
           <Button
             title="Add to Garden"
             color={theme.COLORS.PRIMARY}
-            onPress={() => addSeedToMyGarden({ data })}
+            onPress={async () => {
+              await AddSeedToMyGarden({ data, navigation });
+            }}
           />
         </View>
       </ViewAlt>

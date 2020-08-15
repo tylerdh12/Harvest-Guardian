@@ -1,14 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  FlatList,
-  RefreshControl,
-} from "react-native";
+import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { CardLayout } from "../../components/Card/CardLayout";
 import { SafeAreaView, View } from "../../components/Styles";
+import { deletePlantAlert, getPlants } from "../../utils/Utils";
 import { RightActionDelete } from "./../../components/Card/RightActionDelete";
 
 interface MyGardenProps {
@@ -21,33 +16,12 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    getPlants();
+    getPlants(setData, setLoading);
   }, []);
-
-  function getPlants() {
-    AsyncStorage.getItem("authBasic").then((authBasic) => {
-      axios({
-        method: "get",
-        url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
-        headers: {
-          Authorization: authBasic,
-        },
-      })
-        .then((res) => {
-          if (res.status === 401) {
-            console.log("Response 401");
-            console.log(res);
-          } else {
-            setData(res.data);
-          }
-        })
-        .then(() => setLoading(false));
-    });
-  }
 
   function onRefresh() {
     setRefreshing: true;
-    getPlants();
+    getPlants(setData, setLoading);
     setRefreshing: false;
   }
 
@@ -72,8 +46,13 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
                   <RightActionDelete
                     progress={progress}
                     dragX={dragX}
-                    onPress={() => {
-                      alert("Delete Pressed");
+                    onPress={(setData, setLoading) => {
+                      deletePlantAlert({
+                        data: item,
+                        navigation,
+                        setData,
+                        setLoading,
+                      });
                     }}
                   />
                 )}

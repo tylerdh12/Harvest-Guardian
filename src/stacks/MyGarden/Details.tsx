@@ -1,53 +1,13 @@
-import axios from "axios";
 import moment from "moment";
 import React, { useState } from "react";
-import { Alert, AsyncStorage, Button, Image } from "react-native";
-import DetailListItem from "../../components/DetailListItem";
+import { Button, Image } from "react-native";
+import { DetailListItem } from "../../components/DetailListItem";
 import { ScrollView, View, ViewAlt } from "../../components/Styles";
+import { deletePlantAlert } from "../../utils/Utils";
 
 // TODO Add dynamic value for zone
 function Details({ route, navigation }) {
   const [data, setData] = useState(route.params.data);
-
-  function deletePlantAlert({ data }) {
-    Alert.alert(
-      "Are you sure?",
-      `Would you still like to remove ${data.seed.species} ${data.seed.variety} from My Garden`,
-      [
-        {
-          text: "Yes - Remove Please",
-          onPress: () => deletePlantFromMyGarden({ data }),
-        },
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-      ],
-      { cancelable: false }
-    );
-  }
-
-  function deletePlantFromMyGarden({ data }) {
-    AsyncStorage.getItem("authBasic").then((authBasic) => {
-      axios({
-        method: "delete",
-        url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${data._id}`,
-        headers: {
-          Authorization: authBasic,
-        },
-      }).then((res) => {
-        if (res.status === 401) {
-          console.log("Response 401");
-          console.log(res);
-        } else if (res.status === 200) {
-          res.data.deletedCount === 1
-            ? alert("Plant Has Been Removed")
-            : alert("Error Deleting Plant");
-        }
-      });
-    });
-  }
 
   return (
     <ScrollView>
@@ -181,7 +141,7 @@ function Details({ route, navigation }) {
             title="Delete"
             color="red"
             onPress={() => {
-              deletePlantAlert({ data });
+              deletePlantAlert({ data, navigation });
             }}
           />
         </View>

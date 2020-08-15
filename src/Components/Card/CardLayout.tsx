@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableNativeFeedback } from "react-native-gesture-handler";
-import CardDetails from "../../components/Card/CardDetails";
+import { CardDetails } from "../../components/Card/CardDetails";
 import { CardImage } from "../../components/Card/CardImage";
 import ProgressBar from "../../components/Card/ProgressBar";
 import SpeciesTitle from "../../components/Card/SpeciesTitle";
