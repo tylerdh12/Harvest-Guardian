@@ -4,7 +4,6 @@ import { ActivityIndicator, AsyncStorage } from "react-native";
 import { AppTabs } from "./AppTabs";
 import { AuthContext } from "./providers/AuthProvider";
 import { AuthStack } from "./stacks/Auth/AuthStack";
-import { Center } from "./components/Center";
 import { SafeAreaView } from "./components/Styles";
 
 interface RoutesProps {}
