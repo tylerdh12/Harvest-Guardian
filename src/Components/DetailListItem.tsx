@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingTop: 18,
     paddingBottom: 18,
-    borderBottomWidth: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: "darkgrey",
   },
   detailLabel: {
     width: "35%",
