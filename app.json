@@ -16,15 +16,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.jsstack.harvestguardian",
-      "userInterfaceStyle": "dark"
+      "bundleIdentifier": "com.jsstack.harvestguardian"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "android": {
-      "package": "com.jsstack.harvestguardian",
-      "userInterfaceStyle": "dark"
+      "package": "com.jsstack.harvestguardian"
     }
   }
 }
