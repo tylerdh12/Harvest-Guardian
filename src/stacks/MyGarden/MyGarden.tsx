@@ -16,13 +16,19 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    getPlants(setData, setLoading);
-  }, []);
+    navigation.addListener("focus", () => {
+      setRefreshing(true);
+      setLoading(true);
+      getPlants(setData, setLoading);
+      setRefreshing(false);
+      setLoading(false);
+    });
+  }, [navigation]);
 
   function onRefresh() {
-    setRefreshing: true;
+    setRefreshing(true);
     getPlants(setData, setLoading);
-    setRefreshing: false;
+    setRefreshing(false);
   }
 
   return (
@@ -35,8 +41,8 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
-          renderItem={({ item }) => (
-            <View style={{ padding: 8 }}>
+          renderItem={({ item, index }) => (
+            <View style={{ margin: 8 }}>
               <Swipeable
                 friction={2}
                 overshootLeft={false}
@@ -46,12 +52,10 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
                   <RightActionDelete
                     progress={progress}
                     dragX={dragX}
-                    onPress={(setData, setLoading) => {
+                    onPress={() => {
                       deletePlantAlert({
                         data: item,
-                        navigation,
-                        setData,
-                        setLoading,
+                        onRefresh: () => onRefresh(),
                       });
                     }}
                   />

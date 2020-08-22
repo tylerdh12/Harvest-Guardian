@@ -5,6 +5,7 @@ import { Alert, AsyncStorage } from "react-native";
 interface UtilsProps {
   setData?: any;
   setLoading?: any;
+  setRefreshing?: any;
   data?: any;
   navigation?: any;
 }
@@ -34,12 +35,7 @@ export function getPlants(setData, setLoading) {
   });
 }
 
-export const AddSeedToMyGarden = ({
-  data,
-  navigation,
-  setData,
-  setLoading,
-}) => {
+export const AddSeedToMyGarden = ({ data, navigation }) => {
   AsyncStorage.getItem("authBasic").then((authBasic) => {
     axios({
       method: "post",
@@ -61,8 +57,9 @@ export const AddSeedToMyGarden = ({
               text: "OK",
               onPress: () => {
                 console.log("OK Pressed");
-                navigation.navigate("MyGarden");
-                getPlants(setData, setLoading);
+                navigation.navigate("MyGarden", {
+                  setRefresh: true,
+                });
               },
             },
           ],
@@ -73,7 +70,7 @@ export const AddSeedToMyGarden = ({
   });
 };
 
-export function deletePlantAlert({ data, navigation, setData, setLoading }) {
+export function deletePlantAlert({ data, onRefresh }) {
   Alert.alert(
     "Are you sure?",
     `Would you still like to remove ${data.seed.species} ${data.seed.variety} from My Garden`,
@@ -81,11 +78,9 @@ export function deletePlantAlert({ data, navigation, setData, setLoading }) {
       {
         text: "Yes - Remove Please",
         onPress: async () =>
-          await deletePlantFromMyGarden({
+          deletePlantFromMyGarden({
             data,
-            navigation,
-            setData,
-            setLoading,
+            onRefresh,
           }),
       },
       {
@@ -98,12 +93,7 @@ export function deletePlantAlert({ data, navigation, setData, setLoading }) {
   );
 }
 
-export function deletePlantFromMyGarden({
-  data,
-  navigation,
-  setData,
-  setLoading,
-}) {
+export function deletePlantFromMyGarden({ data, onRefresh }) {
   AsyncStorage.getItem("authBasic").then((authBasic) => {
     axios({
       method: "delete",
@@ -120,9 +110,8 @@ export function deletePlantFromMyGarden({
           ? Alert.alert("Plant Has Been Removed", "", [
               {
                 text: "Ok",
-                onPress: async () => {
-                  await getPlants(setData, setLoading);
-                  navigation.navigate("MyGarden");
+                onPress: () => {
+                  onRefresh();
                 },
               },
             ])

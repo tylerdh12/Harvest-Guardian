@@ -137,7 +137,7 @@ function SeedDetails({ route, navigation }) {
             title="Add to Garden"
             color={theme.COLORS.PRIMARY}
             onPress={() => {
-              AddSeedToMyGarden({ data });
+              AddSeedToMyGarden({ data, navigation });
             }}
           />
         </View>
