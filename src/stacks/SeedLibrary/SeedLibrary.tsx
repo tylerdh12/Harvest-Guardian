@@ -114,6 +114,8 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
                       AddSeedToMyGarden({
                         data,
                         navigation,
+                        setData,
+                        setLoading,
                       });
                     }}
                   />

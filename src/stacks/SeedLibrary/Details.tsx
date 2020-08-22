@@ -136,8 +136,8 @@ function SeedDetails({ route, navigation }) {
           <Button
             title="Add to Garden"
             color={theme.COLORS.PRIMARY}
-            onPress={async () => {
-              await AddSeedToMyGarden({ data, navigation });
+            onPress={() => {
+              AddSeedToMyGarden({ data });
             }}
           />
         </View>
