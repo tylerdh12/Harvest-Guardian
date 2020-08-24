@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Image } from "react-native";
 import { DetailListItem } from "../../components/DetailListItem";
 import { ScrollView, View, ViewAlt } from "../../components/Styles";
+import { AuthContext } from "../../providers/AuthProvider";
 import theme from "../../theme";
 import { AddSeedToMyGarden } from "../../utils/Utils";
 
 // TODO Add dynamic value for zone
 function SeedDetails({ route, navigation }) {
   const [data, setData] = useState(route.params.data);
+  const User = useContext<any>(AuthContext);
 
+  let key = "_" + User.userData.zone.toString();
+  
   return (
     <ScrollView>
       <Image
@@ -76,10 +80,10 @@ function SeedDetails({ route, navigation }) {
         {data.water ? (
           <DetailListItem label="Water Requirements" dataText={data.water} />
         ) : null}
-        {data.zone._8b ? (
+        {data.zone.[key] ? (
           <DetailListItem
             label="Planting Months"
-            dataText={data.zone._8b.join(", ")}
+            dataText={data.zone.[key].join(", ")}
           />
         ) : null}
         {data.nutrient ? (
