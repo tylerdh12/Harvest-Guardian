@@ -145,7 +145,12 @@ function Details({ route, navigation }) {
             title="Delete"
             color="red"
             onPress={() => {
-              deletePlantAlert(data);
+              deletePlantAlert({
+                data,
+                onRefresh: () => {
+                  navigation.goBack();
+                },
+              });
             }}
           />
         </View>
