@@ -12,7 +12,7 @@ function SeedDetails({ route, navigation }) {
   const User = useContext<any>(AuthContext);
 
   let key = "_" + User.userData.zone.toString();
-  
+
   return (
     <ScrollView>
       <Image
@@ -80,10 +80,10 @@ function SeedDetails({ route, navigation }) {
         {data.water ? (
           <DetailListItem label="Water Requirements" dataText={data.water} />
         ) : null}
-        {data.zone.[key] ? (
+        {data.zone[key] ? (
           <DetailListItem
             label="Planting Months"
-            dataText={data.zone.[key].join(", ")}
+            dataText={data.zone[key].join(", ")}
           />
         ) : null}
         {data.nutrient ? (
@@ -141,7 +141,7 @@ function SeedDetails({ route, navigation }) {
             title="Add to Garden"
             color={theme.COLORS.PRIMARY}
             onPress={() => {
-              AddSeedToMyGarden({ data, navigation });
+              AddSeedToMyGarden(data);
             }}
           />
         </View>
