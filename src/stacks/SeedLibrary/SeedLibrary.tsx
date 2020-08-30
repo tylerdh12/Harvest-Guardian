@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
+import {
+  ActivityIndicator,
+  Button,
+  FlatList,
+  RefreshControl,
+  TextInput,
+} from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { CardLayout } from "../../components/Card/CardLayout";
 import { LeftActionAdd } from "../../components/Card/LeftActionAdd";
@@ -14,9 +20,10 @@ interface SeedLibraryProps {
 
 export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
   const [] = useState("");
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [refreshing] = useState(false);
   const [data, setData] = useState([]);
+  const [search, updateSearch] = useState("");
 
   function getSeeds() {
     axios
@@ -25,7 +32,7 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
         setData(res.data);
       })
       .catch((error) => alert(error))
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false));
   }
 
   function onRefresh() {
@@ -43,89 +50,94 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
-        // <>
-        //   <View
-        //     style={{
-        //       flexDirection: "row",
-        //       marginTop: 30,
-        //       marginBottom: 20,
-        //       borderRadius: 30,
-        //       shadowColor: "#000",
-        //       shadowOffset: { width: 6, height: 5 },
-        //       shadowOpacity: 0.2,
-        //       shadowRadius: 4,
-        //       elevation: 5,
-        //       width: "95%",
-        //       padding: 0,
-        //     }}
-        //   >
-        //     <TextInput
-        //       style={{
-        //         height: "100%",
-        //         borderWidth: 0,
-        //         borderTopLeftRadius: 30,
-        //         borderBottomLeftRadius: 30,
-        //         width: "78%",
-        //         margin: 0,
-        //         color: "black",
-        //         backgroundColor: "white",
-        //         paddingLeft: 15,
-        //         fontSize: 16,
-        //       }}
-        //       onChangeText={(text) => updateSearch(text)}
-        //       value={search}
-        //     />
-        //     <Button
-        //       title="Submit"
-        //       onPress={() => {
-        //         console.log(search);
-        //       }}
-        //     />
-        //   </View>
-        <FlatList
-          style={{ marginTop: 8 }}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-          renderItem={({ item }) => (
-            <View style={{ padding: 8 }}>
-              <Swipeable
-                friction={2}
-                overshootLeft={false}
-                overshootRight={false}
-                rightThreshold={50}
-                renderRightActions={(progress, dragX) => (
-                  <RightActionDelete
-                    progress={progress}
-                    dragX={dragX}
-                    onPress={() => {
-                      alert("Delete Pressed");
-                    }}
+        <>
+          <View
+            style={{
+              flexDirection: "row",
+              marginTop: 30,
+              marginBottom: 20,
+              borderRadius: 30,
+              shadowColor: "#000",
+              shadowOffset: { width: 6, height: 5 },
+              shadowOpacity: 0.2,
+              shadowRadius: 4,
+              elevation: 5,
+              width: "95%",
+              padding: 0,
+            }}
+          >
+            <TextInput
+              style={{
+                height: "100%",
+                borderWidth: 0,
+                borderTopLeftRadius: 30,
+                borderBottomLeftRadius: 30,
+                width: "78%",
+                margin: 0,
+                color: "black",
+                backgroundColor: "white",
+                paddingLeft: 15,
+                fontSize: 16,
+              }}
+              onChangeText={(text) => updateSearch(text)}
+              value={search}
+            />
+            <Button
+              title="Submit"
+              onPress={() => {
+                console.log(search);
+              }}
+            />
+          </View>
+          <FlatList
+            style={{ marginTop: 8 }}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            renderItem={({ item }) => (
+              <View style={{ padding: 8 }}>
+                <Swipeable
+                  friction={2}
+                  overshootLeft={false}
+                  overshootRight={false}
+                  rightThreshold={50}
+                  renderRightActions={(progress, dragX) => (
+                    <RightActionDelete
+                      progress={progress}
+                      dragX={dragX}
+                      onPress={() => {
+                        alert("Delete Pressed");
+                      }}
+                    />
+                  )}
+                  leftThreshold={50}
+                  renderLeftActions={(progress, dragX) => (
+                    <LeftActionAdd
+                      progress={progress}
+                      dragX={dragX}
+                      onPress={() => {
+                        const data = item;
+                        // console.log({ data });
+                        AddSeedToMyGarden({
+                          data,
+                          navigation,
+                        });
+                      }}
+                    />
+                  )}
+                >
+                  <CardLayout
+                    {...{ item }}
+                    navigation={navigation}
+                    type="seed"
                   />
-                )}
-                leftThreshold={50}
-                renderLeftActions={(progress, dragX) => (
-                  <LeftActionAdd
-                    progress={progress}
-                    dragX={dragX}
-                    onPress={() => {
-                      const data = item;
-                      // console.log({ data });
-                      AddSeedToMyGarden({
-                        data,
-                        navigation,
-                      });
-                    }}
-                  />
-                )}
-              >
-                <CardLayout {...{ item }} navigation={navigation} type="seed" />
-              </Swipeable>
-            </View>
-          )}
-          keyExtractor={(detail: any, idx) => detail + idx}
-          data={data}
-        />
+                </Swipeable>
+              </View>
+            )}
+            keyExtractor={(detail: any, idx) => detail + idx}
+            data={data}
+          />
+        </>
       )}
     </SafeAreaView>
   );

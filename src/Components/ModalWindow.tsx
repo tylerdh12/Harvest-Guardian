@@ -16,7 +16,6 @@ const ModalWindow = ({ title, children, size, space, color }) => {
       >
         <View
           style={{
-            marginTop: 20,
             height: "100%",
             shadowColor: "grey",
             shadowRadius: 5,
@@ -25,6 +24,7 @@ const ModalWindow = ({ title, children, size, space, color }) => {
               width: 0,
             },
             shadowOpacity: 1,
+            justifyContent: "center",
           }}
         >
           <ViewAlt

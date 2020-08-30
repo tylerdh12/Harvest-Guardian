@@ -1,6 +1,12 @@
 import axios from "axios";
 import { default as React, useContext, useState } from "react";
-import { ActivityIndicator, AsyncStorage, Button, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  AsyncStorage,
+  Button,
+  View,
+} from "react-native";
 import styled from "styled-components/native";
 import ModalWindow from "../../components/ModalWindow";
 import { ErrorText, Text, TextInput } from "../../components/Styles";
@@ -29,7 +35,7 @@ const BasicText = styled.Text`
 `;
 
 function Profile({ navigation }) {
-  const { logout, userData } = useContext(AuthContext);
+  const { logout, userData } = useContext<any>(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [password, changePassword] = useState("");
@@ -70,6 +76,24 @@ function Profile({ navigation }) {
     });
   }
 
+  const DeleteUserAlert = () => {
+    Alert.alert(
+      "Delete Account?",
+      "Are you sure you want to cancel your account?",
+      [
+        {
+          text: "Yes",
+          style: "destructive",
+          onPress: () => DeleteUserAccount(),
+        },
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+      ]
+    );
+  };
+
   function DeleteUserAccount() {
     setIsLoading(true);
     AsyncStorage.getItem("authBasic").then((authBasic) => {
@@ -88,7 +112,6 @@ function Profile({ navigation }) {
             console.log("Response Error 500");
             console.log(res);
           } else {
-            alert("User Account Has Been Deleted");
             logout();
           }
         })
@@ -103,8 +126,15 @@ function Profile({ navigation }) {
   }
 
   return (
-    <Container style={{alignItems: 'center'}}>
-      <View style={{ alignItems: "center", textAlign: "center" }}>
+    <Container style={{ alignItems: "center" }}>
+      <View
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+          flex: 1,
+          flexDirection: "column",
+        }}
+      >
         <View style={{ padding: 10, flexDirection: "row" }}>
           <Label>Name: </Label>
           <BasicText>
@@ -197,8 +227,9 @@ function Profile({ navigation }) {
         </ModalWindow>
         <Button
           title="Delete Account"
+          color="red"
           onPress={() => {
-            DeleteUserAccount();
+            DeleteUserAlert();
           }}
         />
       </View>
