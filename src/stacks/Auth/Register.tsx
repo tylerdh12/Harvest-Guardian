@@ -25,13 +25,18 @@ import {
 
 function Register({ navigation }) {
   const [firstName, changeFirstName] = useState("");
+  const [firstNameError, changeFirstNameError] = useState("");
   const [lastName, changeLastName] = useState("");
+  const [lastNameError, changeLastNameError] = useState("");
   const [zipCode, changeZipCode] = useState("");
+  const [zipCodeError, changeZipCodeError] = useState("");
   const [zone, setZone] = useState("");
   const [email, changeEmail] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [emailError, changeEmailError] = useState("");
   const [password, changePassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [reenterpassword, changeReenterPassword] = useState("");
+  const [reenterpasswordError, changeReenterPasswordError] = useState("");
 
   async function RegisterUser() {
     if (password === reenterpassword) {
