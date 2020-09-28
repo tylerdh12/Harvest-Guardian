@@ -126,9 +126,11 @@ function Login({ navigation }) {
 
   async function loginWithUserPass(username, password) {
     dispatch({ type: "login" });
+    const rawLogin = password;
     const token = encode(`${username}:${password}`);
     const authBasic = "Basic " + token;
     try {
+      await AsyncStorage.setItem("rawLogin", rawLogin);
       await AsyncStorage.setItem("authBasic", authBasic);
     } catch (error) {
       console.log(error);
@@ -158,10 +160,11 @@ function Login({ navigation }) {
           justifyContent: "center",
         }}
       >
-        <View style={{ width: "70%" }}>
+        <View style={{ width: "70%", alignItems: "center" }}>
           <Label>Email</Label>
 
           <TextInput
+            blurOnSubmit
             keyboardType="email-address"
             autoFocus={true}
             onChangeText={(e) =>
@@ -170,14 +173,16 @@ function Login({ navigation }) {
             value={username}
           />
         </View>
-        <View style={{ width: "70%" }}>
+        <View style={{ width: "70%", alignItems: "center" }}>
           <Label>Password</Label>
 
           <TextInput
+            blurOnSubmit
             secureTextEntry={true}
             onChangeText={(e) =>
               dispatch({ type: "field", field: "password", value: e })
             }
+            onSubmitEditing={() => loginWithUserPass(username, password)}
             value={password}
           />
         </View>
