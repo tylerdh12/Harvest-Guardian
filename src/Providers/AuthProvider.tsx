@@ -60,6 +60,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setUserData(null);
           AsyncStorage.removeItem("authBasic");
           AsyncStorage.removeItem("userData");
+          AsyncStorage.removeItem("rawLogin");
+          AsyncStorage.removeItem("EXPO_CONSTANTS_INSTALLATION_ID");
         },
       }}
     >
