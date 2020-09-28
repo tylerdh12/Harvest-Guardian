@@ -5,6 +5,7 @@
 /* -------------------------- Imports and Includes -------------------------- */
 
 import { encode } from "base-64";
+import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useReducer } from "react";
 import { AsyncStorage } from "react-native";
 import {
@@ -145,6 +146,7 @@ function Login({ navigation }) {
 
   return (
     <SafeAreaView>
+      <StatusBar style="light" />
       <Heading>Login</Heading>
 
       <View
