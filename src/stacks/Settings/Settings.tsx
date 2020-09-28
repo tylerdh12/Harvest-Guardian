@@ -3,13 +3,15 @@ import { default as React, useContext } from "react";
 import { TouchableOpacity } from "react-native";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Container, LinkTitle } from "./../../components/Styles";
+import Profile from "./Profile";
 
 function Settings({ navigation }) {
   const { logout, userData } = useContext(AuthContext);
 
   return (
     <Container>
-      <TouchableOpacity
+      <Profile navigation={navigation} />
+      {/*<TouchableOpacity
         style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("Profile");
@@ -53,7 +55,7 @@ function Settings({ navigation }) {
           <Ionicons name="ios-information-circle-outline" size={22} />
           {"  "}About
         </LinkTitle>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity
         style={{ padding: 5 }}
         onPress={() => {
