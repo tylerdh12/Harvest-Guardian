@@ -72,7 +72,7 @@ function loginReducer(state, action) {
     case "alreadyAuth": {
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
         isLoggedIn: false,
         authData: action.username,
       };
@@ -111,6 +111,7 @@ function Login({ navigation }) {
     AsyncStorage.getItem("userData").then((userData) => {
       if (userData !== null) {
         try {
+          dispatch({ type: "alreadyAuth" });
           AsyncStorage.getItem("authBasic").then((authBasic) => {
             login(authBasic);
           });
