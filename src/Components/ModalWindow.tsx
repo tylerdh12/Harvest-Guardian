@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Alert, Modal, TouchableHighlight } from "react-native";
+import { Alert, Dimensions, Modal, TouchableHighlight } from "react-native";
 import { Text, TouchableOpacity, View, ViewAlt } from "./Styles";
 
 const ModalWindow = ({ title, children, size, space, color }) => {
+  const { height } = Dimensions.get("window");
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View>
@@ -16,7 +17,7 @@ const ModalWindow = ({ title, children, size, space, color }) => {
       >
         <View
           style={{
-            height: "100%",
+            height: height,
             shadowColor: "grey",
             shadowRadius: 5,
             shadowOffset: {
@@ -24,7 +25,7 @@ const ModalWindow = ({ title, children, size, space, color }) => {
               width: 0,
             },
             shadowOpacity: 1,
-            justifyContent: "center",
+            paddingTop: 40,
           }}
         >
           <ViewAlt
