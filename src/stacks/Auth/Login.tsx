@@ -1,13 +1,12 @@
+import { Ionicons } from "@expo/vector-icons";
 /* -------------------------------------------------------------------------- */
 /* ------------------------------ Login Screen ------------------------------ */
 /* -------------------------------------------------------------------------- */
-
 /* -------------------------- Imports and Includes -------------------------- */
-
 import { encode } from "base-64";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useReducer } from "react";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Platform } from "react-native";
 import {
   Button,
   ButtonPrimary,
@@ -15,9 +14,12 @@ import {
   ButtonText,
   ErrorText,
   Heading,
+  KeyboardAvoidingView,
   Label,
+  LinkTitle,
   SafeAreaView,
   TextInput,
+  TouchableOpacity,
   View,
 } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -88,7 +90,7 @@ function loginReducer(state, action) {
 function Login({ navigation }) {
   /* -- Import useContext from Auth Context to Use login() and Error Reports -- */
 
-  const { login } = useContext(AuthContext);
+  const { login, logout } = useContext(AuthContext);
 
   /* ------------------- Reducer Variables to Control State ------------------- */
 
@@ -148,75 +150,115 @@ function Login({ navigation }) {
   /* ------------------------- Return for Login Stack ------------------------- */
 
   return (
-    <SafeAreaView>
-      <StatusBar style="light" />
-      <Heading>Login</Heading>
-
-      <View
-        style={{
-          width: "100%",
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <View style={{ width: "70%", alignItems: "center" }}>
-          <Label>Email</Label>
-
-          <TextInput
-            blurOnSubmit
-            keyboardType="email-address"
-            autoFocus={true}
-            onChangeText={(e) =>
-              dispatch({ type: "field", field: "username", value: e })
-            }
-            value={username}
-          />
-        </View>
-        <View style={{ width: "70%", alignItems: "center" }}>
-          <Label>Password</Label>
-
-          <TextInput
-            blurOnSubmit
-            secureTextEntry={true}
-            onChangeText={(e) =>
-              dispatch({ type: "field", field: "password", value: e })
-            }
-            onSubmitEditing={() => loginWithUserPass(username, password)}
-            value={password}
-          />
-        </View>
-        {error !== "" ? <ErrorText>{error}</ErrorText> : null}
-      </View>
-      <View
-        style={{
-          alignItems: "center",
-          flexDirection: "column",
-          justifyContent: "space-evenly",
-          margin: 15,
-        }}
-      >
-        <ButtonPrimary
-          disabled={isLoading}
+    <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+    >
+      <SafeAreaView>
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            borderRadius: "50%",
+            height: 25,
+            width: 25,
+            alignItems: "center",
+            justifyContent: "center",
+            bottom: 20,
+            right: 20,
+          }}
           onPress={() => {
-            loginWithUserPass(username, password);
+            let keys = [
+              "authBasic",
+              "userData",
+              "rawLogin",
+              "EXPO_CONSTANTS_INSTALLATION_ID",
+            ];
+            AsyncStorage.multiRemove(keys, (err) => {
+              alert(`${keys} removed`);
+            });
           }}
         >
-          {isLoading ? (
-            <ButtonPrimaryText>Logging In...</ButtonPrimaryText>
-          ) : (
-            <ButtonPrimaryText>Log In</ButtonPrimaryText>
-          )}
-        </ButtonPrimary>
-        <Button
-          onPress={() => {
-            navigation.navigate("Register");
+          <LinkTitle
+            style={{
+              margin: 0,
+              padding: 2,
+              textAlign: "center",
+              top: -10.5,
+              left: -7,
+              color: "grey",
+            }}
+          >
+            <Ionicons name="ios-warning" size={18} />
+          </LinkTitle>
+        </TouchableOpacity>
+        <StatusBar style="light" />
+        <Heading>Login</Heading>
+
+        <View
+          style={{
+            width: "100%",
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <ButtonText>Don't have an account?</ButtonText>
-        </Button>
-      </View>
-    </SafeAreaView>
+          <View style={{ width: "70%", alignItems: "center" }}>
+            <Label>Email</Label>
+
+            <TextInput
+              blurOnSubmit
+              keyboardType="email-address"
+              autoFocus={true}
+              onChangeText={(e) =>
+                dispatch({ type: "field", field: "username", value: e })
+              }
+              value={username}
+            />
+          </View>
+          <View style={{ width: "70%", alignItems: "center" }}>
+            <Label>Password</Label>
+
+            <TextInput
+              blurOnSubmit
+              secureTextEntry={true}
+              onChangeText={(e) =>
+                dispatch({ type: "field", field: "password", value: e })
+              }
+              onSubmitEditing={() => loginWithUserPass(username, password)}
+              value={password}
+            />
+          </View>
+          {error !== "" ? <ErrorText>{error}</ErrorText> : null}
+        </View>
+        <View
+          style={{
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            margin: 15,
+          }}
+        >
+          <ButtonPrimary
+            disabled={isLoading}
+            onPress={() => {
+              loginWithUserPass(username, password);
+            }}
+          >
+            {isLoading ? (
+              <ButtonPrimaryText>Logging In...</ButtonPrimaryText>
+            ) : (
+              <ButtonPrimaryText>Log In</ButtonPrimaryText>
+            )}
+          </ButtonPrimary>
+          <Button
+            onPress={() => {
+              navigation.navigate("Register");
+            }}
+          >
+            <ButtonText>Don't have an account?</ButtonText>
+          </Button>
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 
   /* --------------------------- End of Login Stack --------------------------- */

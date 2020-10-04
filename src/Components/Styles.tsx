@@ -24,6 +24,11 @@ export const ErrorText = styled.Text`
 
 /* ----------------------------- View Components ---------------------------- */
 
+export const KeyboardAvoidingView = styled.KeyboardAvoidingView`
+  flex: 1;
+  background: ${(props) => props.theme.background};
+`;
+
 export const SafeAreaView = styled.SafeAreaView`
   flex: 1;
   background: ${(props) => props.theme.background};
