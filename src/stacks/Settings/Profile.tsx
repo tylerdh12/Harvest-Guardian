@@ -36,7 +36,13 @@ const BasicText = styled.Text`
 `;
 
 const Profile = ({ navigation }) => {
-  const { logout, userData } = useContext<any>(AuthContext);
+  const {
+    logout,
+    userData,
+    authBasic,
+    setUserData,
+    setErrorMessage,
+  } = useContext<any>(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [password, changePassword] = useState("");
@@ -45,46 +51,73 @@ const Profile = ({ navigation }) => {
   const [zone, changeZone] = useState(userData.zone);
 
   useEffect(() => {
-    async () => {
-      await AsyncStorage.getItem("rawLogin").then((response) =>
-        response?.length > 0 ? setRawPassword(response) : console.log("noData")
-      );
-    };
+    // AsyncStorage.getItem("rawLogin").then((response) =>
+    //   response?.length > 0 ? setRawPassword(response) : console.log("noData")
+    // );
+    // axios({
+    //   method: "get",
+    //   url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
+    //   headers: {
+    //     Authorization: authBasic,
+    //   },
+    // })
+    //   .then((res) => {
+    //     setUserData(res.data);
+    //     console.log(res.data.email + " has Logged on");
+    //     AsyncStorage.setItem("userData", JSON.stringify(res.data));
+    //   })
+    //   .catch((err) => {
+    //     if (err) {
+    //       setErrorMessage(err.response.status);
+    //     }
+    //   });
   }, []);
 
   function submitZoneChange() {
     setIsLoading(true);
-    AsyncStorage.getItem("authBasic").then((authBasic) => {
-      axios({
-        method: "patch",
-        url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
-        headers: {
-          Authorization: authBasic,
-        },
-        data: {
-          first_name: userData.first_name,
-          last_name: userData.last_name,
-          email: userData.email,
-          password: userData.password,
-          zip_code: userData.zip_code,
-          account_type: userData.account_type,
-          zone: zone,
-          active: true,
-        },
-      })
-        .then((res) => {
-          if (res.status === 401) {
-            console.log("Response 401");
-            console.log(res);
-          } else if (res.status === 500) {
-            console.log("Response Error 500");
-            console.log(res);
-          } else {
-            console.log(`Zone has been changed to: ${zone}`);
-          }
-        })
-        .then(() => setIsLoading(false));
-    });
+    async () => {
+      await AsyncStorage.getItem("rawLogin").then((response) =>
+        !response
+          ? console.log("No password stored")
+          : response.length > 0
+          ? (setRawPassword(response), console.log(response))
+          : console.log("No response found")
+      );
+      setIsLoading(false);
+      console.log(rawPassword, zone);
+    };
+
+    // AsyncStorage.getItem("authBasic").then((authBasic) => {
+    //   axios({
+    //     method: "patch",
+    //     url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+    //     headers: {
+    //       Authorization: authBasic,
+    //     },
+    //     data: {
+    //       first_name: userData.first_name,
+    //       last_name: userData.last_name,
+    //       email: userData.email,
+    //       password: rawPassword,
+    //       zip_code: userData.zip_code,
+    //       account_type: userData.account_type,
+    //       zone: zone,
+    //       active: true,
+    //     },
+    //   })
+    //     .then((res) => {
+    //       if (res.status === 401) {
+    //         console.log("Response 401");
+    //         console.log(res);
+    //       } else if (res.status === 500) {
+    //         console.log("Response Error 500");
+    //         console.log(res);
+    //       } else {
+    //         console.log(`Zone has been changed to: ${zone}`);
+    //       }
+    //     })
+    //     .then(() => setIsLoading(false));
+    // });
   }
 
   function changeUserData() {
@@ -341,6 +374,12 @@ const Profile = ({ navigation }) => {
           color="red"
           onPress={() => {
             DeleteUserAlert();
+          }}
+        />
+        <Button
+          title="Logout"
+          onPress={() => {
+            logout();
           }}
         />
       </View>
