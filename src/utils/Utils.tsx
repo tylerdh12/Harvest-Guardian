@@ -51,7 +51,7 @@ export const AddSeedToMyGarden = ({ data, navigation }) => {
       } else {
         Alert.alert(
           "Seed Planted",
-          `${data.species} - ${data.variety} has been added to My Garden`,
+          `${data.species} has been added to My Garden`,
           [
             {
               text: "OK",
