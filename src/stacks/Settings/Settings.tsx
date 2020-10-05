@@ -1,8 +1,6 @@
-import { Ionicons } from "@expo/vector-icons";
 import { default as React, useContext } from "react";
-import { TouchableOpacity } from "react-native";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Container, LinkTitle } from "./../../components/Styles";
+import { Container } from "./../../components/Styles";
 import Profile from "./Profile";
 
 function Settings({ navigation }) {
@@ -55,18 +53,15 @@ function Settings({ navigation }) {
           <Ionicons name="ios-information-circle-outline" size={22} />
           {"  "}About
         </LinkTitle>
-      </TouchableOpacity> */}
+      </TouchableOpacity> 
       <TouchableOpacity
         style={{ padding: 5 }}
         onPress={() => {
           logout();
         }}
       >
-        <LinkTitle>
-          <Ionicons name="ios-power" size={22} />
-          {"  "}Logout
-        </LinkTitle>
-      </TouchableOpacity>
+        <LinkTitle>Logout</LinkTitle>
+      </TouchableOpacity>*/}
     </Container>
   );
 }
