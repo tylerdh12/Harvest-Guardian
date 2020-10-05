@@ -1,12 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Button,
-  FlatList,
-  RefreshControl,
-  TextInput,
-} from "react-native";
+import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { CardLayout } from "../../components/Card/CardLayout";
 import { LeftActionAdd } from "../../components/Card/LeftActionAdd";
@@ -51,44 +45,6 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
         <ActivityIndicator size="large" />
       ) : (
         <>
-          <View
-            style={{
-              flexDirection: "row",
-              marginTop: 30,
-              marginBottom: 20,
-              borderRadius: 30,
-              shadowColor: "#000",
-              shadowOffset: { width: 6, height: 5 },
-              shadowOpacity: 0.2,
-              shadowRadius: 4,
-              elevation: 5,
-              width: "95%",
-              padding: 0,
-            }}
-          >
-            <TextInput
-              style={{
-                height: "100%",
-                borderWidth: 0,
-                borderTopLeftRadius: 30,
-                borderBottomLeftRadius: 30,
-                width: "78%",
-                margin: 0,
-                color: "black",
-                backgroundColor: "white",
-                paddingLeft: 15,
-                fontSize: 16,
-              }}
-              onChangeText={(text) => updateSearch(text)}
-              value={search}
-            />
-            <Button
-              title="Submit"
-              onPress={() => {
-                console.log(search);
-              }}
-            />
-          </View>
           <FlatList
             style={{ marginTop: 8 }}
             refreshControl={
