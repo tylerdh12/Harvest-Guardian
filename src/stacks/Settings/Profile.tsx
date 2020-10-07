@@ -6,7 +6,7 @@ import {
   Alert,
   AsyncStorage,
   Button,
-  View,
+  View
 } from "react-native";
 import styled from "styled-components/native";
 import ModalWindow from "../../components/ModalWindow";
@@ -15,7 +15,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const Container = styled.View`
   flex: 0.6;
-  background: ${(props) => props.theme.background};
+  background: ${(props: { theme: { background: any; }; }) => props.theme.background};
   align-items: center;
   justify-content: center;
   padding-top: 30px;
@@ -26,13 +26,13 @@ const Label = styled.Text`
   text-align: center;
   padding-right: 18px;
   font-weight: 600;
-  color: ${(props) => props.theme.text};
+  color: ${(props: { theme: { text: any; }; }) => props.theme.text};
 `;
 const BasicText = styled.Text`
   font-size: 16px;
   text-align: center;
   padding-right: 18px;
-  color: ${(props) => props.theme.text};
+  color: ${(props: { theme: { text: any; }; }) => props.theme.text};
 `;
 
 const Profile = ({ navigation }) => {
@@ -76,7 +76,7 @@ const Profile = ({ navigation }) => {
   async function submitZoneChange() {
     setIsLoading(true);
 
-    await AsyncStorage.getItem("rawLogin").then((response) =>
+    await AsyncStorage.getItem("rawLogin").then((response: string | null) =>
       !response
         ? console.log("No password stored")
         : response.length > 0
@@ -330,7 +330,7 @@ const Profile = ({ navigation }) => {
                   maxWidth: 300,
                 }}
                 secureTextEntry={true}
-                onChangeText={(password) => changePassword(password)}
+                onChangeText={(password: React.SetStateAction<string>) => changePassword(password)}
                 value={password}
               />
               <Text
@@ -354,7 +354,7 @@ const Profile = ({ navigation }) => {
                   maxWidth: 300,
                 }}
                 secureTextEntry={true}
-                onChangeText={(password) => changeRetypePassword(password)}
+                onChangeText={(password: React.SetStateAction<string>) => changeRetypePassword(password)}
                 value={retypePassword}
               />
               {error !== "" ? <ErrorText>{error}</ErrorText> : null}
