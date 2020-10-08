@@ -14,8 +14,8 @@ export const Utils: React.FC<UtilsProps> = ({}) => {
   return null;
 };
 
-export function getPlants(setData, setLoading) {
-  AsyncStorage.getItem("authBasic").then((authBasic) => {
+export async function getPlants(setData, setLoading) {
+  await AsyncStorage.getItem("authBasic").then((authBasic) => {
     axios({
       method: "get",
       url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
@@ -35,8 +35,8 @@ export function getPlants(setData, setLoading) {
   });
 }
 
-export const AddSeedToMyGarden = ({ data, navigation }) => {
-  AsyncStorage.getItem("authBasic").then((authBasic) => {
+export const AddSeedToMyGarden = async ({ data, navigation }) => {
+  await AsyncStorage.getItem("authBasic").then((authBasic) => {
     axios({
       method: "post",
       url: "https://harvestguardian-rest-api.herokuapp.com/v1/plants",
@@ -49,29 +49,16 @@ export const AddSeedToMyGarden = ({ data, navigation }) => {
         console.log("Response 401");
         console.log(res);
       } else {
-        Alert.alert(
-          "Seed Planted",
-          `${data.species} has been added to My Garden`,
-          [
-            {
-              text: "OK",
-              onPress: () => {
-                console.log("OK Pressed");
-                navigation.navigate("MyGarden", {
-                  setRefresh: true,
-                });
-              },
-            },
-          ],
-          { cancelable: false }
-        );
+        navigation.navigate("MyGarden", {
+          setRefresh: true,
+        });
       }
     });
   });
 };
 
-export function deletePlantAlert({ data, onRefresh }) {
-  Alert.alert(
+export async function deletePlantAlert({ data, onRefresh }) {
+  await Alert.alert(
     "Are you sure?",
     `Would you still like to remove ${data.seed.species} ${data.seed.variety} from My Garden`,
     [
@@ -93,8 +80,8 @@ export function deletePlantAlert({ data, onRefresh }) {
   );
 }
 
-export function deletePlantFromMyGarden({ data, onRefresh }) {
-  AsyncStorage.getItem("authBasic").then((authBasic) => {
+export async function deletePlantFromMyGarden({ data, onRefresh }) {
+  await AsyncStorage.getItem("authBasic").then((authBasic) => {
     axios({
       method: "delete",
       url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${data._id}`,
@@ -107,14 +94,7 @@ export function deletePlantFromMyGarden({ data, onRefresh }) {
         console.log(res);
       } else if (res.status === 200) {
         res.data.deletedCount === 1
-          ? Alert.alert("Plant Has Been Removed", "", [
-              {
-                text: "Ok",
-                onPress: () => {
-                  onRefresh();
-                },
-              },
-            ])
+          ? onRefresh()
           : alert("Error Deleting Plant");
       }
     });

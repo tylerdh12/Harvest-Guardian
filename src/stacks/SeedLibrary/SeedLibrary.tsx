@@ -65,7 +65,7 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
                   //     }}
                   //   />
                   // )}
-                  leftThreshold={50}
+                  leftThreshold={70}
                   renderLeftActions={(progress, dragX) => (
                     <LeftActionAdd
                       progress={progress}

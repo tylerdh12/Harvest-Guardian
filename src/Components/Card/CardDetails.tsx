@@ -84,9 +84,6 @@ export const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
           <Text style={{ fontSize: 18, fontWeight: "600" }}>
             {item.species}
           </Text>
-          <Text style={{ fontSize: 15, fontWeight: "400" }}>
-            {item.variety}
-          </Text>
         </ViewAlt>
         <ViewAlt style={{ width: "50%" }}>
           <Text
@@ -115,4 +112,3 @@ export const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
     </>
   );
 };
-
