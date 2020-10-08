@@ -29,12 +29,6 @@ function SeedDetails({ route, navigation }) {
           marginTop: -30,
         }}
       >
-        {data.variety ? (
-          <DetailListItem label="Variety" dataText={data.variety} />
-        ) : null}
-        {data.description ? (
-          <DetailListItem label="Description" dataText={data.description} />
-        ) : null}
         {data.days_to_germinate ? (
           <DetailListItem
             label="Days To Germinate"
@@ -86,22 +80,10 @@ function SeedDetails({ route, navigation }) {
             dataText={data.zone[key].join(", ")}
           />
         ) : null}
-        {data.nutrient ? (
-          <DetailListItem
-            label="Nutrient Requirements"
-            dataText={data.nutrient.join(", ")}
-          />
-        ) : null}
         {data.soil_temp_low ? (
           <DetailListItem
             label="Soil Temperature Low"
             dataText={data.soil_temp_low}
-          />
-        ) : null}
-        {data.byproducts ? (
-          <DetailListItem
-            label="Byproduct"
-            dataText={data.byproducts.join(", ")}
           />
         ) : null}
         {data.companions ? (
@@ -110,17 +92,6 @@ function SeedDetails({ route, navigation }) {
             dataText={data.companions.join(", ")}
           />
         ) : null}
-        <DetailListItem label="Images" dataText={data.images} />
-        {data.complete === true ? (
-          <DetailListItem label="Complete Data" dataText="Yes" />
-        ) : (
-          <DetailListItem label="Complete Data" dataText="No" />
-        )}
-        {data.public === true ? (
-          <DetailListItem label="Public Seed" dataText="Yes" />
-        ) : (
-          <DetailListItem label="Public Seed" dataText="No" />
-        )}
         <View
           style={{
             justifyContent: "space-evenly",
@@ -129,14 +100,14 @@ function SeedDetails({ route, navigation }) {
             padding: 15,
           }}
         >
-          <Button
+          {/* <Button
             title="Edit"
             onPress={() => {
               navigation.navigate("EditSeedDetails", {
                 data: data,
               });
             }}
-          />
+          /> */}
           <Button
             title="Add to Garden"
             color={theme.COLORS.PRIMARY}
