@@ -35,6 +35,47 @@ export async function getPlants(setData, setLoading) {
   });
 }
 
+export async function addPlantAlert({ data, navigation }) {
+  // const [date, setDate] = useState("");
+  Alert.alert(
+    "Is this a seed or starter",
+    `A start adds the plant past the germination stage.`,
+    [
+      {
+        text: "Planting a Seed",
+        onPress: () => {
+          AddSeedToMyGarden({
+            data,
+            navigation,
+          });
+
+          console.log("Seed Pressed");
+        },
+      },
+      {
+        text: "Planting a Starter",
+        onPress: () => console.log("Starter Pressed"),
+      },
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+    ],
+    { cancelable: true }
+  );
+
+  // return (
+  //   <View>
+  //     <TextInput
+  //       style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+  //       onChangeText={(text) => setDate(text)}
+  //       value={date}
+  //     />
+  //   </View>
+  // );
+}
+
 export const AddSeedToMyGarden = async ({ data, navigation }) => {
   await AsyncStorage.getItem("authBasic").then((authBasic) => {
     axios({
@@ -58,7 +99,7 @@ export const AddSeedToMyGarden = async ({ data, navigation }) => {
 };
 
 export async function deletePlantAlert({ data, onRefresh }) {
-  await Alert.alert(
+  Alert.alert(
     "Are you sure?",
     `Would you still like to remove ${data.seed.species} ${data.seed.variety} from My Garden`,
     [

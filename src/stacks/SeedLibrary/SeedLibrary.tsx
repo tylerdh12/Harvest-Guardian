@@ -5,7 +5,7 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import { CardLayout } from "../../components/Card/CardLayout";
 import { LeftActionAdd } from "../../components/Card/LeftActionAdd";
 import { SafeAreaView, View } from "../../components/Styles";
-import { AddSeedToMyGarden } from "../../utils/Utils";
+import { addPlantAlert } from "../../utils/Utils";
 
 interface SeedLibraryProps {
   navigation: any;
@@ -65,20 +65,19 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
                   //     }}
                   //   />
                   // )}
+
                   leftThreshold={70}
+                  onSwipeableLeftOpen={() => {
+                    const data = item;
+                    // console.log({ data });
+                    addPlantAlert({
+                      data,
+                      navigation,
+                    });
+                  }}
+                  onSwipeableLeftWillOpen={() => console.log("will Open")}
                   renderLeftActions={(progress, dragX) => (
-                    <LeftActionAdd
-                      progress={progress}
-                      dragX={dragX}
-                      onPress={() => {
-                        const data = item;
-                        // console.log({ data });
-                        AddSeedToMyGarden({
-                          data,
-                          navigation,
-                        });
-                      }}
-                    />
+                    <LeftActionAdd progress={progress} dragX={dragX} />
                   )}
                 >
                   <CardLayout

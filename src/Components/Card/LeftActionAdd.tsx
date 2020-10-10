@@ -6,22 +6,21 @@ import { LeftAction } from "../Styles";
 interface LeftActionAddProps {
   progress: any;
   dragX: any;
-  onPress: any;
 }
 
 export const LeftActionAdd: React.FunctionComponent<LeftActionAddProps> = ({
   progress,
   dragX,
-  onPress,
 }) => {
+  console.log(progress);
   const scale = dragX.interpolate({
     inputRange: [0, 100],
-    outputRange: [0, 1],
-    extrapolate: "clamp",
+    outputRange: [0, 0.75],
+    extrapolate: "identity",
   });
 
   return (
-    <TouchableOpacity style={{ width: 80 }} onPress={onPress}>
+    <TouchableOpacity style={{ width: 100 }}>
       <LeftAction>
         <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
           <Ionicons name="ios-add-circle" size={70} />
