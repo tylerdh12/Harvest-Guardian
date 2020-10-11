@@ -5,11 +5,9 @@ import {
   FlatList,
   RefreshControl,
 } from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
 import { CardLayout } from "../../components/Card/CardLayout";
 import { SafeAreaView, Text, View, ViewAlt } from "../../components/Styles";
-import { deletePlantAlert, getPlants } from "../../utils/Utils";
-import { RightActionDelete } from "./../../components/Card/RightActionDelete";
+import { getPlants } from "../../utils/Utils";
 
 const { width } = Dimensions.get("window");
 interface MyGardenProps {
@@ -64,27 +62,11 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
             }
             renderItem={({ item, index }) => (
               <View style={{ margin: 8 }}>
-                <Swipeable
-                  friction={2}
-                  overshootLeft={false}
-                  overshootRight={false}
-                  rightThreshold={50}
-                  renderRightActions={(progress, dragX) => (
-                    <RightActionDelete progress={progress} dragX={dragX} />
-                  )}
-                  onSwipeableRightOpen={() => {
-                    deletePlantAlert({
-                      data: item,
-                      onRefresh: () => onRefresh(),
-                    });
-                  }}
-                >
-                  <CardLayout
-                    {...{ item }}
-                    navigation={navigation}
-                    type="plant"
-                  />
-                </Swipeable>
+                <CardLayout
+                  {...{ item }}
+                  navigation={navigation}
+                  type="plant"
+                />
               </View>
             )}
             keyExtractor={(plant: any, idx) => plant + idx}
