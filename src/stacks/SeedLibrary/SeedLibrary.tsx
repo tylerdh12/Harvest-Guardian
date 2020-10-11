@@ -1,11 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
 import { CardLayout } from "../../components/Card/CardLayout";
-import { LeftActionAdd } from "../../components/Card/LeftActionAdd";
 import { SafeAreaView, View } from "../../components/Styles";
-import { addPlantAlert } from "../../utils/Utils";
 
 interface SeedLibraryProps {
   navigation: any;
@@ -51,41 +48,7 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
             }
             renderItem={({ item }) => (
               <View style={{ padding: 8 }}>
-                <Swipeable
-                  friction={2}
-                  overshootLeft={false}
-                  // overshootRight={false}
-                  // rightThreshold={50}
-                  // renderRightActions={(progress, dragX) => (
-                  //   <RightActionDelete
-                  //     progress={progress}
-                  //     dragX={dragX}
-                  //     onPress={() => {
-                  //       alert("Delete Pressed");
-                  //     }}
-                  //   />
-                  // )}
-
-                  leftThreshold={70}
-                  onSwipeableLeftOpen={() => {
-                    const data = item;
-                    // console.log({ data });
-                    addPlantAlert({
-                      data,
-                      navigation,
-                    });
-                  }}
-                  onSwipeableLeftWillOpen={() => console.log("will Open")}
-                  renderLeftActions={(progress, dragX) => (
-                    <LeftActionAdd progress={progress} dragX={dragX} />
-                  )}
-                >
-                  <CardLayout
-                    {...{ item }}
-                    navigation={navigation}
-                    type="seed"
-                  />
-                </Swipeable>
+                <CardLayout {...{ item }} navigation={navigation} type="seed" />
               </View>
             )}
             keyExtractor={(detail: any, idx) => detail + idx}

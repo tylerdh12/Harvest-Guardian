@@ -4,9 +4,8 @@ import { DetailListItem } from "../../components/DetailListItem";
 import { ScrollView, View, ViewAlt } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
 import theme from "../../theme";
-import { AddSeedToMyGarden } from "../../utils/Utils";
+import { addPlantAlert } from "../../utils/Utils";
 
-// TODO Add dynamic value for zone
 function SeedDetails({ route, navigation }) {
   const [data, setData] = useState(route.params.data);
   const User = useContext<any>(AuthContext);
@@ -100,20 +99,11 @@ function SeedDetails({ route, navigation }) {
             padding: 15,
           }}
         >
-          {/* <Button
-            title="Edit"
-            onPress={() => {
-              navigation.navigate("EditSeedDetails", {
-                data: data,
-              });
-            }}
-          /> */}
           <Button
             title="Add to Garden"
             color={theme.COLORS.PRIMARY}
             onPress={() => {
-              // console.log({ data });
-              AddSeedToMyGarden({
+              addPlantAlert({
                 data,
                 navigation,
               });
