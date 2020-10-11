@@ -10,7 +10,6 @@ import { deletePlantAlert } from "../../utils/Utils";
 function Details({ route, navigation }) {
   const [data, setData] = useState(route.params.data);
   const User = useContext<any>(AuthContext);
-  console.log(data);
 
   let key = "_" + User.userData.zone.toString();
 
