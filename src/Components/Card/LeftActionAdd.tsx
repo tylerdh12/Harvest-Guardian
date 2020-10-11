@@ -12,15 +12,14 @@ export const LeftActionAdd: React.FunctionComponent<LeftActionAddProps> = ({
   progress,
   dragX,
 }) => {
-  console.log(progress);
   const scale = dragX.interpolate({
-    inputRange: [0, 100],
-    outputRange: [0, 0.75],
-    extrapolate: "identity",
+    inputRange: [0, 110],
+    outputRange: [0, 0.6],
+    extrapolate: "clamp",
   });
 
   return (
-    <TouchableOpacity style={{ width: 100 }}>
+    <TouchableOpacity style={{ width: 110 }}>
       <LeftAction>
         <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
           <Ionicons name="ios-add-circle" size={70} />

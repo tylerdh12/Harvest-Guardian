@@ -6,13 +6,11 @@ import { RightAction } from "../../components/Styles";
 interface RightActionDeleteProps {
   progress: any;
   dragX: any;
-  onPress: any;
 }
 
 export const RightActionDelete: React.FunctionComponent<RightActionDeleteProps> = ({
   progress,
   dragX,
-  onPress,
 }) => {
   const scale = dragX.interpolate({
     inputRange: [-100, 0],
@@ -21,7 +19,7 @@ export const RightActionDelete: React.FunctionComponent<RightActionDeleteProps> 
   });
 
   return (
-    <TouchableOpacity style={{ width: 80 }} onPress={onPress}>
+    <TouchableOpacity style={{ width: 80 }}>
       <RightAction>
         <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
           <Ionicons name="ios-trash" size={70} />

@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { encode } from "base-64";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useReducer } from "react";
-import { AsyncStorage, Platform, ActivityIndicator } from "react-native";
+import { ActivityIndicator, AsyncStorage, Platform } from "react-native";
 import {
   Button,
   ButtonPrimary,
@@ -159,7 +159,7 @@ function Login({ navigation }) {
         <TouchableOpacity
           style={{
             position: "absolute",
-            borderRadius: "50%",
+            borderRadius: 15,
             height: 25,
             width: 25,
             alignItems: "center",

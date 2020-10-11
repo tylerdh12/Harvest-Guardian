@@ -54,7 +54,6 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
           >
             <Text>Weather Widget</Text>
             <ViewAlt>
-              
               <Text>Now</Text>
             </ViewAlt>
           </ViewAlt>
@@ -71,17 +70,14 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
                   overshootRight={false}
                   rightThreshold={50}
                   renderRightActions={(progress, dragX) => (
-                    <RightActionDelete
-                      progress={progress}
-                      dragX={dragX}
-                      onPress={() => {
-                        deletePlantAlert({
-                          data: item,
-                          onRefresh: () => onRefresh(),
-                        });
-                      }}
-                    />
+                    <RightActionDelete progress={progress} dragX={dragX} />
                   )}
+                  onSwipeableRightOpen={() => {
+                    deletePlantAlert({
+                      data: item,
+                      onRefresh: () => onRefresh(),
+                    });
+                  }}
                 >
                   <CardLayout
                     {...{ item }}
