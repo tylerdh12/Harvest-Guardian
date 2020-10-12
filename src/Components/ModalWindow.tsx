@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { Alert, Dimensions, Modal, TouchableHighlight } from "react-native";
-import { Text, TouchableOpacity, View, ViewAlt } from "./Styles";
+import {
+  Alert,
+  Button,
+  Dimensions,
+  Modal,
+  TouchableHighlight,
+} from "react-native";
+import { Text, View, ViewAlt } from "./Styles";
 
-const ModalWindow = ({ title, children, size, space, color }) => {
+interface ModalWindowProps {
+  title: string;
+  children: any;
+  color?: string;
+}
+
+const ModalWindow = ({ title, children, color }) => {
   const { height } = Dimensions.get("window");
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View>
+    <>
       <Modal
         animationType="fade"
         transparent={true}
@@ -73,17 +85,14 @@ const ModalWindow = ({ title, children, size, space, color }) => {
         </View>
       </Modal>
 
-      <TouchableOpacity
-        style={{ backgroundColor: "transparent" }}
+      <Button
+        title={title}
+        color={color}
         onPress={() => {
           setModalVisible(true);
         }}
-      >
-        <Text style={{ fontSize: size, padding: space, color: color }}>
-          {title}
-        </Text>
-      </TouchableOpacity>
-    </View>
+      />
+    </>
   );
 };
 
