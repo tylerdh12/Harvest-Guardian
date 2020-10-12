@@ -2,7 +2,6 @@ import moment from "moment";
 import React, { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Text, ViewAlt } from "../Styles";
-import { Zone } from "./Zone";
 
 interface CardDetailsProps {
   item: any;
@@ -94,21 +93,11 @@ export const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
               fontWeight: "500",
             }}
           >
-            Days to Harvest
-          </Text>
-          <Text
-            style={{
-              textAlign: "right",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: "400",
-            }}
-          >
-            {item.days_to_harvest}
+            Harvest in {item.days_to_harvest} Days
           </Text>
         </ViewAlt>
       </ViewAlt>
-      <Zone item={item} zone={zone} />
+      {/* <Zone item={item} zone={zone} /> */}
     </>
   );
 };
