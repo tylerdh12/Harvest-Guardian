@@ -16,6 +16,10 @@ export const Text = styled.Text`
   color: ${(props) => props.theme.text};
 `;
 
+export const TextAlt = styled.Text`
+  color: ${(props) => props.theme.textAlt};
+`;
+
 export const ErrorText = styled.Text`
   color: ${(props) => props.theme.errorText};
   padding: 10px;
