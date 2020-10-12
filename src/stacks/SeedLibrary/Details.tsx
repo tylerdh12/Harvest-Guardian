@@ -1,43 +1,73 @@
+import { FontAwesome5 } from "@expo/vector-icons";
 import React, { useContext, useState } from "react";
-import { Button, Image } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import { DetailListItem } from "../../components/DetailListItem";
-import { ScrollView, View, ViewAlt } from "../../components/Styles";
+import { ScrollView, TouchableOpacity, ViewAlt } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
-import theme from "../../theme";
 import { addPlantAlert } from "../../utils/Utils";
 
 function SeedDetails({ route, navigation }) {
   const [data, setData] = useState(route.params.data);
   const User = useContext<any>(AuthContext);
 
-  let key = "_" + User.userData.zone.toString();
+  let key = `_${User.userData.zone.toString()}`;
 
   return (
-    <ScrollView>
+    <ScrollView
+      style={{ position: "relative" }}
+      overScrollMode="auto"
+      scrollsToTop="true"
+      showsVerticalScrollIndicator={false}
+    >
+      <TouchableOpacity
+        style={styles.addPlantButton}
+        onPress={() => {
+          addPlantAlert({
+            data,
+            navigation,
+          });
+        }}
+      >
+        <View style={styles.iconWrapper}>
+          <FontAwesome5
+            style={styles.addIcon}
+            name="plus"
+            size={16}
+            color="#403D3D"
+          />
+          <FontAwesome5
+            style={styles.plantIcon}
+            name="seedling"
+            size={29}
+            color="#403D3D"
+          />
+        </View>
+      </TouchableOpacity>
       <Image
-        style={{ width: "100%", height: 300 }}
+        style={styles.headerImage}
         source={{
           uri: `${data.images}`,
         }}
       />
-      <ViewAlt
-        style={{
-          paddingTop: 25,
-          borderTopRightRadius: 30,
-          borderTopLeftRadius: 30,
-          marginTop: -30,
-        }}
-      >
+      <ViewAlt style={styles.contentWrapperContainer}>
         {data.days_to_germinate ? (
           <DetailListItem
             label="Days To Germinate"
-            dataText={data.days_to_germinate}
+            dataText={data.days_to_germinate + " Days"}
           />
         ) : null}
         {data.days_to_harvest ? (
           <DetailListItem
-            label="Days To Harvest"
-            dataText={data.days_to_harvest}
+            label="To Harvest From Seed"
+            dataText={`${data.days_to_harvest} Days`}
+          />
+        ) : null}
+        {data.starter_age ? (
+          <DetailListItem
+            label="To Harvest From Start"
+            dataText={`${
+              parseInt(data.days_to_harvest) - parseInt(data.starter_age)
+            } Days`}
           />
         ) : null}
         {data.non_companions ? (
@@ -91,28 +121,45 @@ function SeedDetails({ route, navigation }) {
             dataText={data.companions.join(", ")}
           />
         ) : null}
-        <View
-          style={{
-            justifyContent: "space-evenly",
-            alignItems: "center",
-            flexDirection: "row",
-            padding: 15,
-          }}
-        >
-          <Button
-            title="Add to Garden"
-            color={theme.COLORS.PRIMARY}
-            onPress={() => {
-              addPlantAlert({
-                data,
-                navigation,
-              });
-            }}
-          />
-        </View>
       </ViewAlt>
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  addPlantButton: {
+    position: "absolute",
+    backgroundColor: "rgb(148, 224, 136)",
+    padding: 0,
+    top: 20,
+    right: 20,
+    width: 50,
+    height: 50,
+    zIndex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 25,
+  },
+  iconWrapper: {
+    backgroundColor: "transparent",
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    position: "relative",
+  },
+  addIcon: { position: "absolute", top: 25, left: 27 },
+  plantIcon: {
+    position: "absolute",
+    top: 10,
+    left: 8,
+  },
+  headerImage: { width: "100%", height: 300 },
+  contentWrapperContainer: {
+    paddingTop: 25,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    marginTop: -30,
+  },
+});
 
 export default SeedDetails;
