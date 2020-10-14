@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import { CardLayout } from "../../components/Card/CardLayout";
+import Loader from "../../components/LoadingScreens/Loader";
 import { SafeAreaView, View } from "../../components/Styles";
 
 interface SeedLibraryProps {
@@ -38,7 +39,7 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
   return (
     <SafeAreaView>
       {isLoading ? (
-        <ActivityIndicator size="large" />
+        <Loader />
       ) : (
         <>
           <FlatList

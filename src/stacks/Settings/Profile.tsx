@@ -2,13 +2,13 @@ import { Picker } from "@react-native-community/picker";
 import axios from "axios";
 import { default as React, useContext, useEffect, useState } from "react";
 import {
-  ActivityIndicator,
   Alert,
   AsyncStorage,
   Button,
-  View,
+  View
 } from "react-native";
 import styled from "styled-components/native";
+import Loader from "../../components/LoadingScreens/Loader";
 import ModalWindow from "../../components/ModalWindow";
 import { ErrorText, Text, TextInput } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -236,7 +236,7 @@ const Profile = ({ navigation }) => {
                 <Text style={{ marginBottom: 25, textAlign: "center" }}>
                   Please Wait...
                 </Text>
-                <ActivityIndicator size="large" />
+                <Loader />
               </View>
             ) : (
               <>
@@ -332,7 +332,7 @@ const Profile = ({ navigation }) => {
               <Text style={{ marginBottom: 25, textAlign: "center" }}>
                 Please Wait...
               </Text>
-              <ActivityIndicator size="large" />
+              <Loader />
             </View>
           ) : (
             <>

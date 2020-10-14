@@ -6,7 +6,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { encode } from "base-64";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useReducer } from "react";
-import { ActivityIndicator, AsyncStorage, Platform } from "react-native";
+import { AsyncStorage, Platform } from "react-native";
+import LoadingSeed from "../../components/LoadingScreens/LoadingSeed";
 import {
   Button,
   ButtonPrimary,
@@ -20,7 +21,7 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
 
@@ -193,7 +194,7 @@ function Login({ navigation }) {
           </LinkTitle>
         </TouchableOpacity>
         {isLoading ? (
-          <ActivityIndicator size="large" />
+          <LoadingSeed />
         ) : (
           <>
             <Heading>Login</Heading>

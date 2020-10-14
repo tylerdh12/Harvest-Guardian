@@ -1,10 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, AsyncStorage } from "react-native";
+import { AsyncStorage } from "react-native";
 import { AppTabs } from "./AppTabs";
+import Loader from "./components/LoadingScreens/Loader";
+import { SafeAreaView } from "./components/Styles";
 import { AuthContext } from "./providers/AuthProvider";
 import { AuthStack } from "./stacks/Auth/AuthStack";
-import { SafeAreaView } from "./components/Styles";
 
 interface RoutesProps {}
 
@@ -30,7 +31,7 @@ export const Routes = ({}) => {
   if (loading) {
     return (
       <SafeAreaView>
-        <ActivityIndicator size="large" />
+        <Loader />
       </SafeAreaView>
     );
   }
