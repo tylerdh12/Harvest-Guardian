@@ -105,6 +105,10 @@ export const TouchableOpacity = styled.TouchableOpacity`
   background: ${(props) => props.theme.backgroundAlt};
 `;
 
+export const TouchableOpacityAlt = styled.TouchableOpacity`
+  background: ${(props) => props.theme.background};
+`;
+
 /* ------------------------- Custom Card Components ------------------------- */
 
 export const CardWrapper = styled.TouchableHighlight`
@@ -125,9 +129,10 @@ export const CardBody = styled.View`
 
 export const Label = styled.Text`
   color: ${(props) => props.theme.text};
-  text-align: center;
-  padding: 10px;
-  font-weight: 500;
+  background-color: ${(props) => props.theme.background};
+  text-align: left;
+  padding: 15px;
+  font-weight: 300;
   font-size: 16px;
 `;
 
@@ -203,8 +208,9 @@ export const MenuLabel = styled.Text`
 `;
 export const BasicText = styled.Text`
   font-size: 16px;
-  text-align: center;
-  padding-right: 18px;
+  text-align: left;
+  padding: 15px;
+  background-color: ${(props) => props.theme.backgroundAlt};
   color: ${(props) => props.theme.text};
 `;
 

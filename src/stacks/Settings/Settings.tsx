@@ -1,15 +1,14 @@
+import { Ionicons } from "@expo/vector-icons";
 import { default as React, useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Container } from "./../../components/Styles";
-import Profile from "./Account/Profile";
+import { Container, LinkTitle, TouchableOpacityAlt } from "./../../components/Styles";
 
 function Settings({ navigation }) {
   const { logout, userData } = useContext(AuthContext);
 
   return (
     <Container>
-      <Profile navigation={navigation} />
-      {/*<TouchableOpacity
+      <TouchableOpacityAlt
         style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("Profile");
@@ -20,8 +19,8 @@ function Settings({ navigation }) {
           {"  "}
           Profile
         </LinkTitle>
-      </TouchableOpacity>
-      <TouchableOpacity
+      </TouchableOpacityAlt>
+      <TouchableOpacityAlt
         style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("Preferences");
@@ -31,8 +30,8 @@ function Settings({ navigation }) {
           <Ionicons name="ios-options" size={22} />
           {"  "}Preferences
         </LinkTitle>
-      </TouchableOpacity>
-      <TouchableOpacity
+      </TouchableOpacityAlt>
+      <TouchableOpacityAlt
         style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("Privacy");
@@ -42,8 +41,8 @@ function Settings({ navigation }) {
           <Ionicons name="ios-lock" size={22} />
           {"  "}Privacy
         </LinkTitle>
-      </TouchableOpacity>
-      <TouchableOpacity
+      </TouchableOpacityAlt>
+      <TouchableOpacityAlt
         style={{ padding: 5 }}
         onPress={() => {
           navigation.navigate("About");
@@ -53,15 +52,15 @@ function Settings({ navigation }) {
           <Ionicons name="ios-information-circle-outline" size={22} />
           {"  "}About
         </LinkTitle>
-      </TouchableOpacity> 
-      <TouchableOpacity
+      </TouchableOpacityAlt> 
+      <TouchableOpacityAlt
         style={{ padding: 5 }}
         onPress={() => {
           logout();
         }}
       >
         <LinkTitle>Logout</LinkTitle>
-      </TouchableOpacity>*/}
+      </TouchableOpacityAlt>
     </Container>
   );
 }

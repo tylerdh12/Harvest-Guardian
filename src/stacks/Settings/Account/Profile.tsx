@@ -3,49 +3,64 @@ import { default as React, useContext, useEffect, useState } from "react";
 import {
   Alert,
   AsyncStorage,
-  Button,
-  View
+  Button
 } from "react-native";
-import { BasicText, Container, Label } from "../../../components/Styles";
+import { BasicText, Label, View } from "../../../components/Styles";
 import { AuthContext } from "../../../providers/AuthProvider";
 
-const Profile = ({ navigation }) => {
+interface ProfileProps {
+  navigation: () => void;
+  userData?: {
+  __v: number
+  _id: string;
+  account_type: string;
+  active: boolean;
+  email: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  zip_code: number;
+  zone: string;
+  }
+}
+
+const Profile: React.FC<ProfileProps> = ({ navigation }) => {
   const {
     logout,
     userData,
     authBasic,
-    setUserData,
+    // setUserData,
     setErrorMessage,
   } = useContext<any>(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [password, changePassword] = useState("");
-  const [rawPassword, setRawPassword] = useState("");
-  const [retypePassword, changeRetypePassword] = useState("");
-  const [zone, changeZone] = useState(userData.zone);
+  const [user, setUser] = useState(userData)
 
-  useEffect(() => {
-    // AsyncStorage.getItem("rawLogin").then((response) =>
-    //   response?.length > 0 ? setRawPassword(response) : console.log("noData")
-    // );
-    // axios({
-    //   method: "get",
-    //   url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
-    //   headers: {
-    //     Authorization: authBasic,
-    //   },
-    // })
-    //   .then((res) => {
-    //     setUserData(res.data);
-    //     console.log(res.data.email + " has Logged on");
-    //     AsyncStorage.setItem("userData", JSON.stringify(res.data));
-    //   })
-    //   .catch((err) => {
-    //     if (err) {
-    //       setErrorMessage(err.response.status);
-    //     }
-    //   });
-  }, []);
+  useEffect(() =>{
+    setIsLoading(true);
+    axios({
+      method: "get",
+      url: "https://harvestguardian-rest-api.herokuapp.com/v1/user",
+      headers: {
+        Authorization: authBasic,
+      },
+    })
+      .then((res) => {
+        if(res.status === 200) {
+        setUser(res.data)
+        console.log(res.data)
+        console.log(res.data.email + " has fetched user data");
+        // AsyncStorage.setItem("userData", JSON.stringify(res.data));
+        setIsLoading(false);
+      }else{console.log("Error Fetching User Data")}
+      })
+      .catch((err) => {
+        if (err) {
+          setErrorMessage(err.message);
+          console.log(err)
+        }
+      });
+  }, [userData]);
 
   const DeleteUserAlert = () => {
     Alert.alert(
@@ -70,7 +85,7 @@ const Profile = ({ navigation }) => {
     AsyncStorage.getItem("authBasic").then((authBasic) => {
       axios({
         method: "delete",
-        url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+        url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${user._id}`,
         headers: {
           Authorization: authBasic,
         },
@@ -91,44 +106,44 @@ const Profile = ({ navigation }) => {
   }
 
   return (
-    <Container style={{ alignItems: "center" }}>
       <View
         style={{
-          alignItems: "center",
-          justifyContent: "center",
+          width: '100%',
           flex: 1,
           flexDirection: "column",
-        }}
-      >
-        <BasicText
-          style={{ margin: 8, padding: 10, textAlign: "center", fontSize: 22 }}
-        >
-          {userData.first_name} {userData.last_name}
-        </BasicText>
-
-        <BasicText
-          style={{ margin: 8, padding: 10, textAlign: "center", fontSize: 20 }}
-        >
-          {userData.email}
-        </BasicText>
-        <View style={{ margin: 6, padding: 10, flexDirection: "row" }}>
-          <Label style={{ fontSize: 18, margin: 0, padding: 5 }}>
-            Zip Code:{" "}
+          justifyContent: 'space-between'
+        }}>
+          <View style={{ marginBottom: 20}}>
+          <Label>
+            Full Name
           </Label>
-          <BasicText style={{ fontSize: 18, margin: 0, padding: 5 }}>
-            {userData.zip_code}
+          <BasicText
+          style={{  fontSize: 22 }}
+        >
+          {user.first_name} {user.last_name}
+        </BasicText>
+        <Label>
+            Email
+        </Label>
+        <BasicText
+          style={{ fontSize: 20 }}
+        >
+          {user.email}
+        </BasicText>
+          <Label>
+            Zip Code
+          </Label>
+          <BasicText>
+            {user.zip_code}
+          </BasicText>        
+          <Label>
+            Growing Zone
+          </Label>
+          <BasicText>
+            {user.zone}
           </BasicText>
         </View>
-        <View
-          style={{ padding: 10, flexDirection: "row", alignItems: "center" }}
-        >
-          <Label style={{ fontSize: 18, margin: 0, padding: 5 }}>
-            Growing Zone:{" "}
-          </Label>
-          <BasicText style={{ fontSize: 18, margin: 0, padding: 5 }}>
-            {userData.zone}
-          </BasicText>
-        </View>
+        <View style={{marginBottom: 20}}>
         <Button
           title="Delete Account"
           color="red"
@@ -141,9 +156,8 @@ const Profile = ({ navigation }) => {
           onPress={() => {
             logout();
           }}
-        />
+        /></View>
       </View>
-    </Container>
   );
 };
 

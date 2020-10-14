@@ -8,6 +8,7 @@ interface AuthProviderProps {
   logout?: () => void;
   setErrorMessages?: string;
   userData?: Object;
+  setUserData?: (userData) => void;
 }
 
 export const AuthContext = React.createContext({
