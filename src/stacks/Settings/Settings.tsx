@@ -1,7 +1,7 @@
 import { default as React, useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Container } from "./../../components/Styles";
-import Profile from "./Profile";
+import Profile from "./Account/Profile";
 
 function Settings({ navigation }) {
   const { logout, userData } = useContext(AuthContext);

@@ -3,7 +3,7 @@ import { default as React } from "react";
 import About from "./About";
 import Preferences from "./Preferences";
 import Privacy from "./Privacy";
-import Profile from "./Profile";
+import Profile from "./Account/Profile";
 import Settings from "./Settings";
 
 const Stack = createStackNavigator();
