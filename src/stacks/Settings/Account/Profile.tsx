@@ -1,3 +1,5 @@
+import { Feather } from "@expo/vector-icons";
+import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
 import { default as React, useContext, useEffect, useState } from "react";
 import {
@@ -5,8 +7,10 @@ import {
   AsyncStorage,
   Button
 } from "react-native";
-import { BasicText, Label, View } from "../../../components/Styles";
+import { BasicText, Label, TouchableOpacityAlt, View } from "../../../components/Styles";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { ChangePassword } from "./ChangePassword";
+import { ChangeZone } from "./ChangeZone";
 
 interface ProfileProps {
   navigation: () => void;
@@ -48,7 +52,6 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
       .then((res) => {
         if(res.status === 200) {
         setUser(res.data)
-        console.log(res.data)
         console.log(res.data.email + " has fetched user data");
         // AsyncStorage.setItem("userData", JSON.stringify(res.data));
         setIsLoading(false);
@@ -114,36 +117,54 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
           justifyContent: 'space-between'
         }}>
           <View style={{ marginBottom: 20}}>
-          <Label>
-            Full Name
-          </Label>
+            <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}}>
+              <Label>
+                Full Name
+              </Label>
+<TouchableOpacityAlt onPress={() => {console.log("Edit Name Button Pressed")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
+            </View>
+            <BasicText
+            style={{  fontSize: 22 }}
+          >
+            {user.first_name} {user.last_name}
+          </BasicText>
+            <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}}>
+              <Label>
+                  Email
+              </Label>
+<TouchableOpacityAlt onPress={() => {console.log("Edit Email Button Pressed")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
+            </View>
           <BasicText
-          style={{  fontSize: 22 }}
-        >
-          {user.first_name} {user.last_name}
-        </BasicText>
-        <Label>
-            Email
-        </Label>
-        <BasicText
-          style={{ fontSize: 20 }}
-        >
-          {user.email}
-        </BasicText>
-          <Label>
-            Zip Code
-          </Label>
+            style={{ fontSize: 20 }}
+          >
+            {user.email}
+          </BasicText>
+          <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}}>
+              <Label>
+                  Zip Code
+              </Label>
+<TouchableOpacityAlt onPress={() => {console.log("Edit Zip Code Button Pressed")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
+            </View>
           <BasicText>
             {user.zip_code}
           </BasicText>        
-          <Label>
-            Growing Zone
-          </Label>
+          <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}}>
+              <Label>
+                  Growing Zone
+              </Label>
+<TouchableOpacityAlt onPress={() => {console.log("Edit Growing Zone Button Pressed")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
+            </View>
           <BasicText>
             {user.zone}
           </BasicText>
         </View>
         <View style={{marginBottom: 20}}>
+        <Button
+          title="Change Password"
+          onPress={() => {
+          console.log("Change Password Button Pressed")
+        }}
+        />
         <Button
           title="Delete Account"
           color="red"
@@ -162,3 +183,43 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 };
 
 export default Profile;
+
+
+
+
+const Stack = createStackNavigator();
+
+export const ProfileStack = ({}) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Settings"
+        component={ChangePassword}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#403D3D",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="About"
+        component={ChangeZone}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#403D3D",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
