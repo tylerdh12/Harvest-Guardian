@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
-import { AsyncStorage } from "react-native";
+import { ActivityIndicator, AsyncStorage, Platform } from "react-native";
 import { AppTabs } from "./AppTabs";
 import Loader from "./components/LoadingScreens/Loader";
 import { SafeAreaView } from "./components/Styles";
@@ -31,7 +31,7 @@ export const Routes = ({}) => {
   if (loading) {
     return (
       <SafeAreaView>
-        <Loader />
+        {Platform.OS === 'ios' ? <Loader /> : <ActivityIndicator /> }
       </SafeAreaView>
     );
   }

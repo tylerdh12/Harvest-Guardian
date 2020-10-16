@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { encode } from "base-64";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useReducer } from "react";
-import { AsyncStorage, Platform } from "react-native";
+import { ActivityIndicator, AsyncStorage, Platform } from "react-native";
 import LoadingSeed from "../../components/LoadingScreens/LoadingSeed";
 import {
   Button,
@@ -194,7 +194,7 @@ function Login({ navigation }) {
           </LinkTitle>
         </TouchableOpacity>
         {isLoading ? (
-          <LoadingSeed />
+          Platform.OS === 'ios' ? <LoadingSeed /> : <ActivityIndicator /> 
         ) : (
           <>
             <Heading>Login</Heading>

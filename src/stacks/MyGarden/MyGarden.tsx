@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   Dimensions,
   FlatList,
-  RefreshControl
+  Platform, RefreshControl
 } from "react-native";
 import { CardLayout } from "../../components/Card/CardLayout";
 import Loader from "../../components/LoadingScreens/Loader";
@@ -38,7 +39,7 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
   return (
     <SafeAreaView>
       {isLoading ? (
-        <Loader />
+        Platform.OS === 'ios' ? <Loader /> : <ActivityIndicator />
       ) : (
         <FlatList
           style={{ marginTop: 8 }}

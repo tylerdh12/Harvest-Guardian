@@ -1,7 +1,7 @@
 import { Picker } from '@react-native-community/picker';
 import axios from "axios";
 import React, { useContext, useState } from 'react';
-import { AsyncStorage } from 'react-native';
+import { ActivityIndicator, AsyncStorage, Platform } from 'react-native';
 import Loader from '../../../components/LoadingScreens/Loader';
 import { Button, ErrorText, Text, View } from "../../../components/Styles";
 import { AuthContext } from '../../../providers/AuthProvider';
@@ -78,7 +78,7 @@ export const ChangeZone: React.FC<ChangeZoneProps> = ({}) => {
               <Text style={{ marginBottom: 25, textAlign: "center" }}>
                 Please Wait...
               </Text>
-              <Loader />
+              {Platform.OS === 'ios' ? <Loader /> : <ActivityIndicator /> }
             </View>
           ) : (
           <>

@@ -1,9 +1,11 @@
 import axios from "axios";
 import { default as React, useContext, useState } from "react";
 import {
-    AsyncStorage,
-    Button,
-    View
+  ActivityIndicator,
+  AsyncStorage,
+  Button,
+  Platform,
+  View
 } from "react-native";
 import Loader from "../../../components/LoadingScreens/Loader";
 import { ErrorText, Text, TextInput } from "../../../components/Styles";
@@ -80,7 +82,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({}) => {
                 <Text style={{ marginBottom: 25, textAlign: "center" }}>
                   Please Wait...
                 </Text>
-                <Loader />
+                {Platform.OS === 'ios' ? <Loader /> : <ActivityIndicator /> }
               </View>
             ) : (
               <>
