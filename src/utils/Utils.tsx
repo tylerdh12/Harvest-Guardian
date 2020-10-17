@@ -46,6 +46,7 @@ export async function addPlantAlert({ data, navigation }) {
         onPress: () => {
           AddSeedToMyGarden({
             data,
+            date_planted: new Date(),
             navigation,
           });
 
@@ -54,7 +55,19 @@ export async function addPlantAlert({ data, navigation }) {
       },
       {
         text: "Planting a Starter",
-        onPress: () => console.log("Starter Pressed"),
+        onPress: () => {
+          console.log("Starter Pressed")
+          var dt = new Date();
+          dt.setDate( dt.getDate() - parseInt(data.starter_age) )
+          console.log(dt)
+          AddSeedToMyGarden({
+            data,
+            date_planted: dt,
+            navigation,
+          })
+          
+          console.log("Starter Pressed");
+        }
       },
       {
         text: "Cancel",
@@ -76,7 +89,7 @@ export async function addPlantAlert({ data, navigation }) {
   // );
 }
 
-export const AddSeedToMyGarden = async ({ data, navigation }) => {
+export const AddSeedToMyGarden = async ({date_planted, data, navigation }) => {
   await AsyncStorage.getItem("authBasic").then((authBasic) => {
     axios({
       method: "post",
@@ -84,7 +97,10 @@ export const AddSeedToMyGarden = async ({ data, navigation }) => {
       headers: {
         Authorization: authBasic,
       },
-      data: data,
+      data: {
+        _id: data._id,
+        date_planted: date_planted
+      },
     }).then((res) => {
       if (res.status === 401) {
         console.log("Response 401");
