@@ -5,6 +5,8 @@ import Preferences from "./Preferences";
 import Privacy from "./Privacy";
 import Profile from "./Account/Profile";
 import Settings from "./Settings";
+import { ChangePassword } from "./Account/ChangePassword";
+import { ChangeZone } from "./Account/ChangeZone";
 
 const Stack = createStackNavigator();
 
@@ -70,6 +72,34 @@ export const SettingsStack = ({}) => {
       <Stack.Screen
         name="About"
         component={About}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#403D3D",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#403D3D",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="ChangeZone"
+        component={ChangeZone}
         options={{
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",

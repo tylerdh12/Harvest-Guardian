@@ -5,10 +5,10 @@ import {
   AsyncStorage,
   Button,
   Platform,
-  View
+  
 } from "react-native";
 import Loader from "../../../components/LoadingScreens/Loader";
-import { ErrorText, Text, TextInput } from "../../../components/Styles";
+import { ErrorText, Text, TextInput, View } from "../../../components/Styles";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 interface ChangePasswordProps {
@@ -73,7 +73,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({}) => {
   }
 
         return (
-            <View>
+            <View style={{flex: 1, alignItems: 'center'}}>
             {isLoading ? (
               <View style={{ padding: 25 }}>
                 <Text style={{ marginBottom: 5, textAlign: "center" }}>

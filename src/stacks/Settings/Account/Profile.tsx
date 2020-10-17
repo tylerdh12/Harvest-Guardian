@@ -152,7 +152,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
               <Label>
                   Growing Zone
               </Label>
-<TouchableOpacityAlt onPress={() => {console.log("Edit Growing Zone Button Pressed")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
+<TouchableOpacityAlt onPress={() => {navigation.navigate("ChangeZone")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
             </View>
           <BasicText>
             {user.zone}
@@ -162,7 +162,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
         <Button
           title="Change Password"
           onPress={() => {
-          console.log("Change Password Button Pressed")
+          navigation.navigate("ChangePassword")
         }}
         />
         <Button

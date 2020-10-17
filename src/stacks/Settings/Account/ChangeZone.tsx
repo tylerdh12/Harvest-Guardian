@@ -1,9 +1,9 @@
 import { Picker } from '@react-native-community/picker';
 import axios from "axios";
 import React, { useContext, useState } from 'react';
-import { ActivityIndicator, AsyncStorage, Platform } from 'react-native';
+import { ActivityIndicator, AsyncStorage, Platform, Button } from 'react-native';
 import Loader from '../../../components/LoadingScreens/Loader';
-import { Button, ErrorText, Text, View } from "../../../components/Styles";
+import { ErrorText, Text, View } from "../../../components/Styles";
 import { AuthContext } from '../../../providers/AuthProvider';
 
 interface ChangeZoneProps {
@@ -70,7 +70,8 @@ export const ChangeZone: React.FC<ChangeZoneProps> = ({}) => {
   }
 
         return (
-            isLoading ? (
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            {isLoading ? (
             <View style={{ padding: 25 }}>
               <Text style={{ marginBottom: 5, textAlign: "center" }}>
                 Changing Growing Zone
@@ -119,13 +120,12 @@ export const ChangeZone: React.FC<ChangeZoneProps> = ({}) => {
                   <Picker.Item label="13b" value="13b" />
                 </Picker>
               </View>
-              {error !== "" ? <ErrorText>{error}</ErrorText> : null}
               <Button
                 title="Change Zone"
                 onPress={submitZoneChange}
-                color="green"
                 accessibilityLabel="Submit change zone"
               />
             </>
-        ))
+        )}
+        </View>)
 }
