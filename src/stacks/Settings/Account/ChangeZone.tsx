@@ -6,11 +6,7 @@ import Loader from '../../../components/LoadingScreens/Loader';
 import { ErrorText, Text, View } from "../../../components/Styles";
 import { AuthContext } from '../../../providers/AuthProvider';
 
-interface ChangeZoneProps {
-
-}
-
-export const ChangeZone: React.FC<ChangeZoneProps> = ({}) => {
+export const ChangeZone = ({navigation}) => {
     const {
     logout,
     userData,
@@ -56,9 +52,12 @@ export const ChangeZone: React.FC<ChangeZoneProps> = ({}) => {
                     console.log(res);
                   } else {
                     console.log(`Zone has been changed to: ${zone}`);
+                    navigation.goBack();
                   }
                 })
-                .then(() => setIsLoading(false));
+                .then(() => {
+                  setIsLoading(false)
+                });
             })
           : console.log("No response found")
       );

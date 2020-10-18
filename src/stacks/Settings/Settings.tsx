@@ -11,7 +11,7 @@ function Settings({ navigation }) {
       <TouchableOpacityAlt
         style={{ padding: 5 }}
         onPress={() => {
-          navigation.push("Profile", {navigation});
+          navigation.push("Profile");
         }}
       >
         <LinkTitle>

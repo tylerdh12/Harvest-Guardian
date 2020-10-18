@@ -26,9 +26,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [password, changePassword] = useState("");
-  const [rawPassword, setRawPassword] = useState("");
   const [retypePassword, changeRetypePassword] = useState("");
-  const [zone, changeZone] = useState(userData.zone);
 
     function changeUserData() {
     setIsLoading(true);

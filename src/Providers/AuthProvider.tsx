@@ -14,8 +14,9 @@ interface AuthProviderProps {
 export const AuthContext = React.createContext({
   authBasic: null,
   userData: null,
+  setUserData: (object) => {},
   errorMessage: "",
-  setErrorMessage: "",
+  setErrorMessage: (string) => {},
   login: (authBasic) => {},
   logout: () => {},
 });
@@ -51,6 +52,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       value={{
         authBasic,
         userData,
+        setUserData,
         errorMessage,
         setErrorMessage,
         login: (authBasic) => {

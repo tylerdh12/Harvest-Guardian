@@ -9,11 +9,8 @@ import {
 } from "react-native";
 import { BasicText, Label, TouchableOpacityAlt, View } from "../../../components/Styles";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { ChangePassword } from "./ChangePassword";
-import { ChangeZone } from "./ChangeZone";
 
 interface ProfileProps {
-  navigation: () => void;
   userData?: {
   __v: number
   _id: string;
@@ -26,6 +23,7 @@ interface ProfileProps {
   zip_code: number;
   zone: string;
   }
+  navigation: any;
 }
 
 const Profile: React.FC<ProfileProps> = ({ navigation }) => {
@@ -33,14 +31,14 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
     logout,
     userData,
     authBasic,
-    // setUserData,
+    setUserData,
     setErrorMessage,
   } = useContext<any>(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [user, setUser] = useState(userData)
 
   useEffect(() =>{
+    navigation.addListener("focus", () => {
     setIsLoading(true);
     axios({
       method: "get",
@@ -51,7 +49,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
     })
       .then((res) => {
         if(res.status === 200) {
-        setUser(res.data)
+        setUserData(res.data)
         console.log(res.data.email + " has fetched user data");
         // AsyncStorage.setItem("userData", JSON.stringify(res.data));
         setIsLoading(false);
@@ -63,7 +61,8 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
           console.log(err)
         }
       });
-  }, [userData]);
+    });
+  }, [navigation]);
 
   const DeleteUserAlert = () => {
     Alert.alert(
@@ -88,7 +87,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
     AsyncStorage.getItem("authBasic").then((authBasic) => {
       axios({
         method: "delete",
-        url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${user._id}`,
+        url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
         headers: {
           Authorization: authBasic,
         },
@@ -121,48 +120,42 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
               <Label>
                 Full Name
               </Label>
-<TouchableOpacityAlt onPress={() => {console.log("Edit Name Button Pressed")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
             </View>
-            <BasicText
-            style={{  fontSize: 22 }}
-          >
-            {user.first_name} {user.last_name}
+            <BasicText>
+            {userData.first_name} {userData.last_name}
           </BasicText>
             <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}}>
               <Label>
                   Email
               </Label>
-<TouchableOpacityAlt onPress={() => {console.log("Edit Email Button Pressed")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
             </View>
-          <BasicText
-            style={{ fontSize: 20 }}
-          >
-            {user.email}
+          <BasicText>
+            {userData.email}
           </BasicText>
           <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}}>
               <Label>
                   Zip Code
               </Label>
-<TouchableOpacityAlt onPress={() => {console.log("Edit Zip Code Button Pressed")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
+<TouchableOpacityAlt onPress={() => {navigation.push("Change Zip Code")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
             </View>
           <BasicText>
-            {user.zip_code}
+            {userData.zip_code}
           </BasicText>        
           <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}}>
               <Label>
                   Growing Zone
               </Label>
-<TouchableOpacityAlt onPress={() => {navigation.navigate("ChangeZone")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
+<TouchableOpacityAlt onPress={() => {navigation.push("Change Zone")}}><Feather style={{paddingRight: 20}} name="edit-3" size={22} color="white" /></TouchableOpacityAlt>
             </View>
           <BasicText>
-            {user.zone}
+            {userData.zone}
           </BasicText>
         </View>
         <View style={{marginBottom: 20}}>
         <Button
           title="Change Password"
           onPress={() => {
-          navigation.navigate("ChangePassword")
+          navigation.push("Change Password")
         }}
         />
         <Button
@@ -183,43 +176,3 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 };
 
 export default Profile;
-
-
-
-
-const Stack = createStackNavigator();
-
-export const ProfileStack = ({}) => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Settings"
-        component={ChangePassword}
-        options={{
-          headerStyle: {
-            backgroundColor: "rgb(148, 224, 136)",
-          },
-          headerTintColor: "#403D3D",
-          headerTitleStyle: {
-            fontWeight: "700",
-            fontSize: 20,
-          },
-        }}
-      />
-      <Stack.Screen
-        name="About"
-        component={ChangeZone}
-        options={{
-          headerStyle: {
-            backgroundColor: "rgb(148, 224, 136)",
-          },
-          headerTintColor: "#403D3D",
-          headerTitleStyle: {
-            fontWeight: "700",
-            fontSize: 20,
-          },
-        }}
-      />
-    </Stack.Navigator>
-  );
-};

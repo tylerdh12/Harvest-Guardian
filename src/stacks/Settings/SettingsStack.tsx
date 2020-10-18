@@ -7,6 +7,7 @@ import Profile from "./Account/Profile";
 import Settings from "./Settings";
 import { ChangePassword } from "./Account/ChangePassword";
 import { ChangeZone } from "./Account/ChangeZone";
+import { ChangeZip } from "./Account/ChangeZip";
 
 const Stack = createStackNavigator();
 
@@ -84,7 +85,7 @@ export const SettingsStack = ({}) => {
         }}
       />
       <Stack.Screen
-        name="ChangePassword"
+        name="Change Password"
         component={ChangePassword}
         options={{
           headerStyle: {
@@ -98,8 +99,22 @@ export const SettingsStack = ({}) => {
         }}
       />
       <Stack.Screen
-        name="ChangeZone"
+        name="Change Zone"
         component={ChangeZone}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#403D3D",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Change Zip Code"
+        component={ChangeZip}
         options={{
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
