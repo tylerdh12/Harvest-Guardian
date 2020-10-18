@@ -5,15 +5,12 @@ import {
   AsyncStorage,
   Button,
   Platform,
-  
 } from "react-native";
 import Loader from "../../../components/LoadingScreens/Loader";
 import { ErrorText, Text, TextInput, View } from "../../../components/Styles";
 import { AuthContext } from "../../../providers/AuthProvider";
 
-interface ChangePasswordProps {
-
-}
+interface ChangePasswordProps {}
 
 export const ChangePassword: React.FC<ChangePasswordProps> = ({}) => {
   const {
@@ -28,7 +25,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({}) => {
   const [password, changePassword] = useState("");
   const [retypePassword, changeRetypePassword] = useState("");
 
-    function changeUserData() {
+  function changeUserData() {
     setIsLoading(true);
     AsyncStorage.getItem("authBasic").then((authBasic) => {
       axios({
@@ -63,93 +60,90 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({}) => {
     });
   }
 
-
   function SubmitHandler() {
     password === retypePassword
       ? changeUserData()
       : setError("Passwords Don't Match");
   }
 
-        return (
-            <View style={{flex: 1, alignItems: 'center'}}>
-            {isLoading ? (
-              <View style={{ padding: 25 }}>
-                <Text style={{ marginBottom: 5, textAlign: "center" }}>
-                  Changing Password
-                </Text>
-                <Text style={{ marginBottom: 25, textAlign: "center" }}>
-                  Please Wait...
-                </Text>
-                {Platform.OS === 'ios' ? <Loader /> : <ActivityIndicator /> }
-              </View>
-            ) : (
-              <>
-                <Text
-                  style={{
-                    padding: 4,
-                    fontWeight: "400",
-                    fontSize: 16,
-                    marginTop: 20,
-                  }}
-                >
-                  Password
-                </Text>
-                <TextInput
-                  style={{
-                    height: 40,
-                    borderColor: "gray",
-                    borderWidth: 2,
-                    borderRadius: 5,
-                    padding: 5,
-                    marginBottom: 10,
-                    width: "60%",
-                    maxWidth: 300,
-                  }}
-                  secureTextEntry={true}
-                  onChangeText={(password: React.SetStateAction<string>) =>
-                    changePassword(password)
-                  }
-                  value={password}
-                />
-                <Text
-                  style={{
-                    padding: 4,
-                    fontWeight: "400",
-                    fontSize: 16,
-                  }}
-                >
-                  Retype Password
-                </Text>
-                <TextInput
-                  style={{
-                    height: 40,
-                    borderColor: "gray",
-                    borderWidth: 2,
-                    borderRadius: 5,
-                    padding: 5,
-                    marginBottom: 10,
-                    width: "60%",
-                    maxWidth: 300,
-                  }}
-                  secureTextEntry={true}
-                  onChangeText={(password: React.SetStateAction<string>) =>
-                    changeRetypePassword(password)
-                  }
-                  value={retypePassword}
-                />
-                {error !== "" ? <ErrorText>{error}</ErrorText> : null}
-                <Button
-                  title="Change Password"
-                  onPress={SubmitHandler}
-                  color="green"
-                  accessibilityLabel="Submit a new password"
-                />
-              </>
-            )}
+  return (
+    <View style={{ flex: 1, alignItems: "center" }}>
+      {isLoading ? (
+        <View style={{ padding: 25 }}>
+          <Text style={{ marginBottom: 5, textAlign: "center" }}>
+            Changing Password
+          </Text>
+          <Text style={{ marginBottom: 25, textAlign: "center" }}>
+            Please Wait...
+          </Text>
+          {Platform.OS === "ios" ? <Loader /> : <ActivityIndicator />}
         </View>
-        );
-}
+      ) : (
+        <>
+          <Text
+            style={{
+              padding: 4,
+              fontWeight: "400",
+              fontSize: 16,
+              marginTop: 20,
+            }}
+          >
+            Password
+          </Text>
+          <TextInput
+            style={{
+              height: 40,
+              borderColor: "gray",
+              borderWidth: 2,
+              borderRadius: 5,
+              padding: 5,
+              marginBottom: 10,
+              width: "60%",
+              maxWidth: 300,
+            }}
+            secureTextEntry={true}
+            onChangeText={(password: React.SetStateAction<string>) =>
+              changePassword(password)
+            }
+            value={password}
+          />
+          <Text
+            style={{
+              padding: 4,
+              fontWeight: "400",
+              fontSize: 16,
+            }}
+          >
+            Retype Password
+          </Text>
+          <TextInput
+            style={{
+              height: 40,
+              borderColor: "gray",
+              borderWidth: 2,
+              borderRadius: 5,
+              padding: 5,
+              marginBottom: 10,
+              width: "60%",
+              maxWidth: 300,
+            }}
+            secureTextEntry={true}
+            onChangeText={(password: React.SetStateAction<string>) =>
+              changeRetypePassword(password)
+            }
+            value={retypePassword}
+          />
+          {error !== "" ? <ErrorText>{error}</ErrorText> : null}
+          <Button
+            title="Change Password"
+            onPress={SubmitHandler}
+            color="green"
+            accessibilityLabel="Submit a new password"
+          />
+        </>
+      )}
+    </View>
+  );
+};
 
-interface ChangeZoneProps {
-
-}
+interface ChangeZoneProps {}

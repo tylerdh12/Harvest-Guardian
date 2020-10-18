@@ -21,7 +21,7 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
 
@@ -194,7 +194,11 @@ function Login({ navigation }) {
           </LinkTitle>
         </TouchableOpacity>
         {isLoading ? (
-          Platform.OS === 'ios' ? <LoadingSeed /> : <ActivityIndicator /> 
+          Platform.OS === "ios" ? (
+            <LoadingSeed />
+          ) : (
+            <ActivityIndicator />
+          )
         ) : (
           <>
             <Heading>Login</Heading>
