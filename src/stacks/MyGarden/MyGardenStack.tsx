@@ -18,9 +18,9 @@ export const MyGardenStack = ({ route, navigation }) => {
         name="MyGarden"
         options={{
           headerTitle: "My Garden",
-          headerRight: (notificationsList) => (
-            <NotificationModal notify={notificationsList} />
-          ),
+          // headerRight: (notificationsList) => (
+          //   <NotificationModal notify={notificationsList} />
+          // ),
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },

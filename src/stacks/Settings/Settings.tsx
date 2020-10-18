@@ -1,7 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { default as React, useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Container, LinkTitle, TouchableOpacityAlt } from "./../../components/Styles";
+import {
+  Container,
+  LinkTitle,
+  TouchableOpacityAlt,
+} from "./../../components/Styles";
 
 function Settings({ navigation }) {
   const { logout, userData } = useContext(AuthContext);
@@ -52,7 +56,7 @@ function Settings({ navigation }) {
           <Ionicons name="ios-information-circle-outline" size={22} />
           {"  "}About
         </LinkTitle>
-      </TouchableOpacityAlt> 
+      </TouchableOpacityAlt>
       <TouchableOpacityAlt
         style={{ padding: 5 }}
         onPress={() => {

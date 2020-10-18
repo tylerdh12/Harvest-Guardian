@@ -201,12 +201,6 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
             DeleteUserAlert();
           }}
         />
-        <Button
-          title="Logout"
-          onPress={() => {
-            logout();
-          }}
-        />
       </View>
     </View>
   );

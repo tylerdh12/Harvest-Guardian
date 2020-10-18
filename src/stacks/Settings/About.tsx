@@ -22,7 +22,7 @@ function About({ navigation }: any) {
     <Container>
       <View style={{ width: "70%" }}>
         <BasicText>
-          Harvest Guardian is an application that hopes to help you gardening
+          Harvest Guardian is an application that hopes to help your gardening
           experience by helping you keep track of your plants and by helping
           provide knowledge and tips for a greener more bountiful garden.
         </BasicText>
