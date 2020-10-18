@@ -9,6 +9,7 @@ import {
 
 function Settings({ navigation }) {
   const { logout, userData } = useContext(AuthContext);
+  console.log(userData);
 
   return (
     <Container>
@@ -57,6 +58,19 @@ function Settings({ navigation }) {
           {"  "}About
         </LinkTitle>
       </TouchableOpacityAlt>
+      {userData.account_type === "admin" ? (
+        <TouchableOpacityAlt
+          style={{ padding: 5 }}
+          onPress={() => {
+            navigation.navigate("Admin");
+          }}
+        >
+          <LinkTitle>
+            <Ionicons name="ios-information-circle-outline" size={22} />
+            {"  "}Admin
+          </LinkTitle>
+        </TouchableOpacityAlt>
+      ) : null}
       <TouchableOpacityAlt
         style={{ padding: 5 }}
         onPress={() => {
