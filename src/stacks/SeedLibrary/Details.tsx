@@ -11,6 +11,7 @@ function SeedDetails({ route, navigation }) {
   const User = useContext<any>(AuthContext);
 
   let key = `_${User.userData.zone.toString()}`;
+  console.log(data)
 
   return (
     <ScrollView
