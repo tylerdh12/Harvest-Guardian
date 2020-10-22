@@ -7,8 +7,6 @@ import { SafeAreaView } from "./components/Styles";
 import { AuthContext } from "./providers/AuthProvider";
 import { AuthStack } from "./stacks/Auth/AuthStack";
 
-interface RoutesProps {}
-
 export const Routes = ({}) => {
   const { login, userData, authBasic } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
@@ -17,7 +15,6 @@ export const Routes = ({}) => {
     AsyncStorage.getItem("authBasic")
       .then((userString) => {
         if (userString) {
-          //decode is
           login(authBasic);
         }
         setLoading(false);

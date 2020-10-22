@@ -11,6 +11,7 @@ export type SettingsParamList = {
   Preferences: undefined;
   Privacy: undefined;
   About: undefined;
+  Admin: undefined;
 };
 
 export type SettingsStackNavProps<T extends keyof SettingsParamList> = {

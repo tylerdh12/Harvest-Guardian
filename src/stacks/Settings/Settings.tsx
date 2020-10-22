@@ -9,7 +9,6 @@ import {
 
 function Settings({ navigation }) {
   const { logout, userData } = useContext(AuthContext);
-  console.log(userData);
 
   return (
     <Container>

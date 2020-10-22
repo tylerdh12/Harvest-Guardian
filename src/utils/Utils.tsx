@@ -157,3 +157,62 @@ export async function deletePlantFromMyGarden({ data, onRefresh }) {
     });
   });
 }
+
+export const AddSeedToLibrary = async ({ data, setIsLoading }) => {
+  setIsLoading(true);
+  // console.log({
+  //     species: data.species,
+  //     days_to_harvest: parseInt(data.days_to_harvest),
+  //     days_to_germinate: parseInt(data.days_to_germinate),
+  //     starter_age: parseInt(data.starter_age),
+  //     depth: parseInt(data.depth),
+  //     spacing: parseInt(data.spacing)
+  //   })
+  await axios({
+    method: "post",
+    url: "https://harvestguardian-rest-api.herokuapp.com/v1/seeds/",
+    data: {
+      species: data.species,
+      days_to_harvest: parseInt(data.days_to_harvest),
+      days_to_germinate: parseInt(data.days_to_germinate),
+      starter_age: parseInt(data.starter_age),
+      depth: parseInt(data.depth),
+      spacing: parseInt(data.spacing)
+    },
+  }).then((res) => {
+    if (res.status === 401) {
+      setIsLoading(false);
+      console.log("Response 401");
+      console.log(res);
+    } else if (res.status === 500) {
+      setIsLoading(false);
+      console.log("Response ");
+      console.log(res);
+    } else if (res.status === 201) {
+      setIsLoading(false);
+      alert("Seed has been added to Seed Library")
+    } else {
+      setIsLoading(false);
+      console.log('There has been an error with submitting a seed to the Library')
+    }
+  });
+  setIsLoading(false);
+};
+
+export async function deleteSeedFromLibrary({ data, onRefresh }) {
+  await AsyncStorage.getItem("authBasic").then((authBasic) => {
+    axios({
+      method: "delete",
+      url: `https://harvestguardian-rest-api.herokuapp.com/v1/seeds/${data._id}`,
+    }).then((res) => {
+      if (res.status === 401) {
+        console.log("Response 401");
+        console.log(res);
+      } else if (res.status === 200) {
+        res.data.deletedCount === 1
+          ? onRefresh()
+          : alert("Error Deleting Seed");
+      }
+    });
+  });
+}

@@ -1,10 +1,10 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import React, { useContext, useState } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, Button} from "react-native";
 import { DetailListItem } from "../../components/DetailListItem";
 import { ScrollView, TouchableOpacity, ViewAlt } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
-import { addPlantAlert } from "../../utils/Utils";
+import { addPlantAlert, deleteSeedFromLibrary } from "../../utils/Utils";
 
 function SeedDetails({ route, navigation }) {
   const [data, setData] = useState(route.params.data);
@@ -123,6 +123,18 @@ function SeedDetails({ route, navigation }) {
           />
         ) : null}
       </ViewAlt>
+      <Button
+            title="Delete"
+            color="red"
+            onPress={() => {
+              deleteSeedFromLibrary({
+                data,
+                onRefresh: () => {
+                  navigation.goBack();
+                },
+              });
+            }}
+          />
     </ScrollView>
   );
 }

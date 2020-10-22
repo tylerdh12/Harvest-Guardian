@@ -34,7 +34,7 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
 
   useEffect(() => {
     getSeeds();
-  }, []);
+  }, [navigation]);
 
   return (
     <SafeAreaView>

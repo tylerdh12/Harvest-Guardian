@@ -1,10 +1,78 @@
-import React, { useState } from "react";
-import Input from "../../../components/Input";
-import { Container, TextInput, Label } from "../../../components/Styles";
+import React, { useEffect, useState } from "react";
+import { Platform } from "react-native";
+import { TextInput, View, Text, ScrollView, ButtonPrimary, ButtonPrimaryText, KeyboardAvoidingView, SafeAreaView } from "../../../components/Styles";
+import { AddSeedToLibrary } from "../../../utils/Utils";
 
-interface CreateSeedProps {
+
+export default function CreateSeed() {
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const [formData, updateFormData] = useState({})
+
+  const [species, updateSpecies] = useState("")
+  const [days_to_harvest, updateDaysToHarvest] = useState("")
+  const [days_to_germinate, updateDaysToGerminate] = useState("")
+  const [starter_age, updateStarterAge] = useState("")
+  const [depth, updateDepth] = useState("")
+  const [spacing, updateSpacing] = useState("")
+
+  useEffect(() => {
+    (async () => (
+      await updateFormData({
+        species, days_to_harvest, days_to_germinate, starter_age, depth, spacing
+      })
+    ))();
+  }, [species, days_to_harvest, days_to_germinate, starter_age, depth, spacing])
+
+  return (
+    <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+>
+      <ScrollView>
+      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
+        <Text style={{padding: 6}}>* Species:</Text>
+        <TextInput value={species} onChangeText={(text: React.SetStateAction<string>) => updateSpecies(text)} />
+      </View>
+      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
+        <Text style={{padding: 6}}>* Days to Harvest: (days)</Text>
+        <TextInput value={days_to_harvest} onChangeText={(text: React.SetStateAction<string>) => updateDaysToHarvest(text)} keyboardType="numeric" />
+      </View>
+      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
+        <Text style={{padding: 6}}>Days to Germinate: (days)</Text>
+        <TextInput value={days_to_germinate} onChangeText={(text: React.SetStateAction<string>) => updateDaysToGerminate(text)} keyboardType="numeric" />
+      </View>
+      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
+        <Text style={{padding: 6}}>Starter Age: (days)</Text>
+        <TextInput value={starter_age} onChangeText={(text: React.SetStateAction<string>) => updateStarterAge(text)} keyboardType="numeric" />
+      </View>
+      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
+        <Text style={{padding: 6}}>Depth: (cm)</Text>
+        <TextInput value={depth} onChangeText={(text: React.SetStateAction<string>) => updateDepth(text)} keyboardType="numeric" />
+      </View>
+      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
+        <Text style={{padding: 6}}>Spacing: (cm)</Text>
+        <TextInput value={spacing} onChangeText={(text: React.SetStateAction<string>) => updateSpacing(text)} keyboardType="numeric" />
+      </View>
+      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
+        <ButtonPrimary style={{marginTop: 20}}
+        onPress={()=> {
+          AddSeedToLibrary({data: formData, setIsLoading})
+        }}
+        >
+          {isLoading ?
+          (<ButtonPrimaryText>Adding Seed...</ButtonPrimaryText>)
+          : (<ButtonPrimaryText>Submit</ButtonPrimaryText>) 
+          }
+        </ButtonPrimary>
+      </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
+
+/* NOTE - Data Structure 
   species: string;
-  variety: string;
   description: string;
   days_to_germinate: string;
   days_to_harvest: string;
@@ -53,82 +121,4 @@ interface CreateSeedProps {
   }
   public: boolean;
   complete: boolean;
-}
-
-export const CreateSeed: React.FC<CreateSeedProps> = ({}) => {
-
-  const [species, changeSpecies] = useState("");
-
-  return (
-    <Container>
-      <Input 
-        title="Species"
-        type="none"
-        maxLength={30}
-        completeType="off"
-        keyboard="default"
-      />
-    </Container>
-  );
-};
-
-
-
-
-// {
-//   byproducts: [],
-//   companions:  [],
-//   complete: false,
-//   days_to_germinate: "",
-//   days_to_harvest: "",
-//   depth: "",
-//   description: "",
-//   height: "",
-//   images: [
-//     "",
-//   ],
-//   non_companions: [
-//     "",
-//   ],
-//   nutrient: [
-//     "",
-//   ],
-//   public: true,
-//   soil_temp_high: ,
-//   soil_temp_low: ,
-//   sow_indoor: "",
-//   sow_outdoor: "",
-//   spacing: "",
-//   species: "",
-//   starter_age: "",
-//   sun: "",
-//   variety: "",
-//   water: "",
-//   zone: {
-//     "_10a": [],
-//     "_10b": [],
-//     "_11a": [],
-//     "_11b": [],
-//     "_12a": [],
-//     "_12b": [],
-//     "_13a": [],
-//     "_13b": [],
-//     "_1a": [],
-//     "_1b": [],
-//     "_2a": [],
-//     "_2b": [],
-//     "_3a": [],
-//     "_3b": [],
-//     "_4a": [],
-//     "_4b": [],
-//     "_5a": [],
-//     "_5b": [],
-//     "_6a": [],
-//     "_6b": [],
-//     "_7a": [],
-//     "_7b": [],
-//     "_8a": [],
-//     "_8b": [],
-//     "_9a": [],
-//     "_9b": [],
-//   }
+  */

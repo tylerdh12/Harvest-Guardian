@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { default as React } from "react";
 import { AdminPanel } from "./AdminPanel";
-import { CreateSeed } from "./CreateSeed";
+import CreateSeed  from "./CreateSeed";
 
 const Stack = createStackNavigator();
 
@@ -12,6 +12,7 @@ export const Admin = ({}) => {
         name="Admin Panel"
         component={AdminPanel}
         options={{
+          headerTitle:"Admin Panel",
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
@@ -26,6 +27,7 @@ export const Admin = ({}) => {
         name="Create Seed"
         component={CreateSeed}
         options={{
+          headerTitle:"Create a New Seed",
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
