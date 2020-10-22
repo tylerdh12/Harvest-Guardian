@@ -1,31 +1,15 @@
 import { default as React } from "react";
-import { View } from "react-native";
-import styled from "styled-components/native";
+import { BasicText, Container, View, Text } from "../../components/Styles";
 
-const Container = styled.View`
-  flex: 1;
-  background: ${(props) => props.theme.background};
-  align-items: center;
-  justify-content: center;
-  padding-top: 30px;
-`;
-
-const BasicText = styled.Text`
-  font-size: 16px;
-  text-align: center;
-  padding-right: 18px;
-  color: ${(props) => props.theme.text};
-`;
-
-function About({ navigation }: any) {
+function About() {
   return (
-    <Container>
+    <Container> 
       <View style={{ width: "70%" }}>
-        <BasicText>
+        <Text style={{textAlign: 'center'}}>
           Harvest Guardian is an application that hopes to help your gardening
           experience by helping you keep track of your plants and by helping
           provide knowledge and tips for a greener more bountiful garden.
-        </BasicText>
+        </Text>
       </View>
       <View
         style={{
@@ -37,9 +21,9 @@ function About({ navigation }: any) {
         }}
       ></View>
       <View style={{ width: "70%" }}>
-        <BasicText>
+        <Text style={{textAlign: 'center'}}>
           Please view the github repo to request changes and features.
-        </BasicText>
+        </Text>
       </View>
     </Container>
   );
