@@ -6,10 +6,13 @@ import { AddSeedToLibrary } from "../../../utils/Utils";
 
 export default function CreateSeed() {
 
+  // For setting the Loading state of the Submit Button
   const [isLoading, setIsLoading] = useState(false)
 
+  // The Complete list of Form Data collected as an Object
   const [formData, updateFormData] = useState({})
 
+  // Each individual Form element State
   const [species, updateSpecies] = useState("")
   const [days_to_harvest, updateDaysToHarvest] = useState("")
   const [days_to_germinate, updateDaysToGerminate] = useState("")
@@ -17,6 +20,7 @@ export default function CreateSeed() {
   const [depth, updateDepth] = useState("")
   const [spacing, updateSpacing] = useState("")
 
+  // Used for syncing state for each input after input value change (ASYNC)
   useEffect(() => {
     (async () => (
       await updateFormData({
@@ -27,51 +31,51 @@ export default function CreateSeed() {
 
   return (
     <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
->
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+    >
       <ScrollView>
-      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
-        <Text style={{padding: 6}}>* Species:</Text>
-        <TextInput value={species} onChangeText={(text: React.SetStateAction<string>) => updateSpecies(text)} />
-      </View>
-      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
-        <Text style={{padding: 6}}>* Days to Harvest: (days)</Text>
-        <TextInput value={days_to_harvest} onChangeText={(text: React.SetStateAction<string>) => updateDaysToHarvest(text)} keyboardType="numeric" />
-      </View>
-      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
-        <Text style={{padding: 6}}>Days to Germinate: (days)</Text>
-        <TextInput value={days_to_germinate} onChangeText={(text: React.SetStateAction<string>) => updateDaysToGerminate(text)} keyboardType="numeric" />
-      </View>
-      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
-        <Text style={{padding: 6}}>Starter Age: (days)</Text>
-        <TextInput value={starter_age} onChangeText={(text: React.SetStateAction<string>) => updateStarterAge(text)} keyboardType="numeric" />
-      </View>
-      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
-        <Text style={{padding: 6}}>Depth: (cm)</Text>
-        <TextInput value={depth} onChangeText={(text: React.SetStateAction<string>) => updateDepth(text)} keyboardType="numeric" />
-      </View>
-      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
-        <Text style={{padding: 6}}>Spacing: (cm)</Text>
-        <TextInput value={spacing} onChangeText={(text: React.SetStateAction<string>) => updateSpacing(text)} keyboardType="numeric" />
-      </View>
-      <View style={{alignItems: 'center', width: "100%", marginTop: 4}}>
-        <ButtonPrimary style={{marginTop: 20}}
-        onPress={()=> {
-          AddSeedToLibrary({data: formData, setIsLoading})
-        }}
-        >
-          {isLoading ?
-          (<ButtonPrimaryText>Adding Seed...</ButtonPrimaryText>)
-          : (<ButtonPrimaryText>Submit</ButtonPrimaryText>) 
-          }
-        </ButtonPrimary>
-      </View>
+        <View style={{ alignItems: 'center', width: "100%", marginTop: 4 }}>
+          <Text style={{ padding: 6 }}>* Species:</Text>
+          <TextInput value={species} onChangeText={(text: React.SetStateAction<string>) => updateSpecies(text)} />
+        </View>
+        <View style={{ alignItems: 'center', width: "100%", marginTop: 4 }}>
+          <Text style={{ padding: 6 }}>* Days to Harvest: (days)</Text>
+          <TextInput value={days_to_harvest} onChangeText={(text: React.SetStateAction<string>) => updateDaysToHarvest(text)} keyboardType="numeric" />
+        </View>
+        <View style={{ alignItems: 'center', width: "100%", marginTop: 4 }}>
+          <Text style={{ padding: 6 }}>Days to Germinate: (days)</Text>
+          <TextInput value={days_to_germinate} onChangeText={(text: React.SetStateAction<string>) => updateDaysToGerminate(text)} keyboardType="numeric" />
+        </View>
+        <View style={{ alignItems: 'center', width: "100%", marginTop: 4 }}>
+          <Text style={{ padding: 6 }}>Starter Age: (days)</Text>
+          <TextInput value={starter_age} onChangeText={(text: React.SetStateAction<string>) => updateStarterAge(text)} keyboardType="numeric" />
+        </View>
+        <View style={{ alignItems: 'center', width: "100%", marginTop: 4 }}>
+          <Text style={{ padding: 6 }}>Depth: (cm)</Text>
+          <TextInput value={depth} onChangeText={(text: React.SetStateAction<string>) => updateDepth(text)} keyboardType="numeric" />
+        </View>
+        <View style={{ alignItems: 'center', width: "100%", marginTop: 4 }}>
+          <Text style={{ padding: 6 }}>Spacing: (cm)</Text>
+          <TextInput value={spacing} onChangeText={(text: React.SetStateAction<string>) => updateSpacing(text)} keyboardType="numeric" />
+        </View>
+        <View style={{ alignItems: 'center', width: "100%", marginTop: 4 }}>
+          <ButtonPrimary style={{ marginTop: 20 }}
+            onPress={() => {
+              AddSeedToLibrary({ data: formData, setIsLoading })
+            }}
+          >
+            {isLoading ?
+              (<ButtonPrimaryText>Adding Seed...</ButtonPrimaryText>)
+              : (<ButtonPrimaryText>Submit</ButtonPrimaryText>)
+            }
+          </ButtonPrimary>
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
-/* NOTE - Data Structure 
+/* NOTE - Data Structure
   species: string;
   description: string;
   days_to_germinate: string;

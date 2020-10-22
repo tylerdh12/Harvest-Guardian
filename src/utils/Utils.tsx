@@ -10,7 +10,7 @@ interface UtilsProps {
   navigation?: any;
 }
 
-export const Utils: React.FC<UtilsProps> = ({}) => {
+export const Utils: React.FC<UtilsProps> = ({ }) => {
   return null;
 };
 
@@ -58,14 +58,14 @@ export async function addPlantAlert({ data, navigation }) {
         onPress: () => {
           console.log("Starter Pressed")
           var dt = new Date();
-          dt.setDate( dt.getDate() - parseInt(data.starter_age) )
+          dt.setDate(dt.getDate() - parseInt(data.starter_age))
           console.log(dt)
           AddSeedToMyGarden({
             data,
             date_planted: dt,
             navigation,
           })
-          
+
           console.log("Starter Pressed");
         }
       },
@@ -89,7 +89,7 @@ export async function addPlantAlert({ data, navigation }) {
   // );
 }
 
-export const AddSeedToMyGarden = async ({date_planted, data, navigation }) => {
+export const AddSeedToMyGarden = async ({ date_planted, data, navigation }) => {
   await AsyncStorage.getItem("authBasic").then((authBasic) => {
     axios({
       method: "post",
