@@ -1,17 +1,17 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import React, { useContext, useState } from "react";
-import { Image, StyleSheet, View, Button} from "react-native";
+import { Image, View, Button} from "react-native";
 import { DetailListItem } from "../../components/DetailListItem";
 import { ScrollView, TouchableOpacity, ViewAlt } from "../../components/Styles";
 import { AuthContext } from "../../providers/AuthProvider";
 import { addPlantAlert, deleteSeedFromLibrary } from "../../utils/Utils";
+import {styles} from "./../../components/Styles/Styles"
 
-function SeedDetails({ route, navigation }) {
+export default function SeedDetails({ route, navigation }) {
   const [data, setData] = useState(route.params.data);
   const User = useContext<any>(AuthContext);
 
   let key = `_${User.userData.zone.toString()}`;
-  console.log(data)
 
   return (
     <ScrollView
@@ -138,41 +138,3 @@ function SeedDetails({ route, navigation }) {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  addPlantButton: {
-    position: "absolute",
-    backgroundColor: "rgb(148, 224, 136)",
-    padding: 0,
-    top: 20,
-    right: 20,
-    width: 50,
-    height: 50,
-    zIndex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 25,
-  },
-  iconWrapper: {
-    backgroundColor: "transparent",
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    position: "relative",
-  },
-  addIcon: { position: "absolute", top: 25, left: 27 },
-  plantIcon: {
-    position: "absolute",
-    top: 10,
-    left: 8,
-  },
-  headerImage: { width: "100%", height: 300 },
-  contentWrapperContainer: {
-    paddingTop: 25,
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
-    marginTop: -30,
-  },
-});
-
-export default SeedDetails;
