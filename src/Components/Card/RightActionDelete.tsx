@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Animated, StyleSheet, TouchableOpacity } from "react-native";
+import { Animated, TouchableOpacity } from "react-native";
 import { RightAction } from "../../components/Styles";
+import { styles } from "../Styles/Styles";
 
 interface RightActionDeleteProps {
   progress: any;
@@ -28,11 +29,3 @@ export const RightActionDelete: React.FunctionComponent<RightActionDeleteProps> 
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  actionText: {
-    color: "#fff",
-    fontWeight: "700",
-    padding: 20,
-  },
-});

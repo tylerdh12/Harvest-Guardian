@@ -34,4 +34,59 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     marginTop: -30,
   },
+  borderBottom: {
+    flexDirection: "row",
+    paddingTop: 18,
+    paddingBottom: 18,
+    borderBottomWidth: 4,
+  },
+  detailLabel: {
+    width: "35%",
+    textAlign: "left",
+    paddingLeft: 12,
+    fontSize: 15,
+    fontWeight: "500",
+  },
+  dataDetails: {
+    textAlign: "right",
+    paddingRight: 12,
+    width: "65%",
+    fontSize: 15,
+    fontWeight: "300",
+  },
+  wrapper: {
+    paddingTop: 0,
+    margin: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 31,
+
+    backgroundColor: "#dd2c00",
+  },
+  actionText: {
+    color: "#fff",
+    fontWeight: "700",
+    padding: 20,
+  },
+  img: {
+    width: "100%",
+    height: 160,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  zoneHeading: {
+    textAlign: "center",
+    fontWeight: "600",
+    marginTop: 8,
+  },
+  zoneBody: {
+    textAlign: "center",
+    fontWeight: "400",
+    padding: 4,
+    marginTop: 8,
+  },
 });

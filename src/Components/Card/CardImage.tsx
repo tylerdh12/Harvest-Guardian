@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, StyleSheet } from "react-native";
+import { Image } from "react-native";
+import { styles } from "../Styles/Styles";
 
 interface CardImageProps {
   image: any;
@@ -17,12 +18,3 @@ export const CardImage: React.FunctionComponent<CardImageProps> = ({
     />
   );
 };
-
-const styles = StyleSheet.create({
-  img: {
-    width: "100%",
-    height: 160,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-  },
-});

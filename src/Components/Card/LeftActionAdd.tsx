@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Animated, StyleSheet, TouchableOpacity } from "react-native";
+import { Animated, TouchableOpacity } from "react-native";
 import { LeftAction } from "../Styles";
+import { styles } from "../Styles/Styles";
 
 interface LeftActionAddProps {
   progress: any;
@@ -28,11 +29,3 @@ export const LeftActionAdd: React.FunctionComponent<LeftActionAddProps> = ({
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  actionText: {
-    color: "#fff",
-    fontWeight: "700",
-    padding: 20,
-  },
-});

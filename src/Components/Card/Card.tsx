@@ -1,31 +1,15 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Animated, TouchableOpacity, View } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RightAction, ViewAlt } from "../Styles";
+import { styles } from "../Styles/Styles";
 
 interface CardProps {
   onLeftPress?: any;
   onRightPress?: any;
   children: any;
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    paddingTop: 0,
-    margin: 15,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 31,
-
-    backgroundColor: "#dd2c00",
-  },
-  actionText: {
-    color: "#fff",
-    fontWeight: "700",
-    padding: 20,
-  },
-});
 
 const RightActions = ({ dragX, onPress }) => {
   const scale = dragX.interpolate({

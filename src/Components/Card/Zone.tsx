@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
+import { styles } from "../Styles/Styles";
 import { Text } from "./../Styles";
 
 interface ZoneProps {
@@ -16,17 +17,3 @@ export const Zone: React.FunctionComponent<ZoneProps> = ({ zone, item }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  zoneHeading: {
-    textAlign: "center",
-    fontWeight: "600",
-    marginTop: 8,
-  },
-  zoneBody: {
-    textAlign: "center",
-    fontWeight: "400",
-    padding: 4,
-    marginTop: 8,
-  },
-});

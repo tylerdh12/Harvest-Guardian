@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Text } from "../../components/Styles";
+import { styles } from "../Styles/Styles";
 
 interface Props {
   species: Text;
@@ -11,10 +11,3 @@ const SpeciesTitle = ({ species }: Props) => {
 };
 
 export default SpeciesTitle;
-
-const styles = StyleSheet.create({
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-  },
-});
