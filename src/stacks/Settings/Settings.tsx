@@ -61,7 +61,7 @@ function Settings({ navigation }) {
         <TouchableOpacityAlt
           style={{ padding: 5 }}
           onPress={() => {
-            navigation.navigate("Admin");
+            navigation.navigate("Admin Panel");
           }}
         >
           <LinkTitle>

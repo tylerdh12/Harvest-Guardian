@@ -8,7 +8,8 @@ import Settings from "./Settings";
 import { ChangePassword } from "./Account/ChangePassword";
 import { ChangeZone } from "./Account/ChangeZone";
 import { ChangeZip } from "./Account/ChangeZip";
-import { Admin } from "./Admin/Admin";
+import { AdminPanel } from "./Admin/AdminPanel";
+import CreateSeed from "./Admin/CreateSeed";
 
 const Stack = createStackNavigator();
 
@@ -128,9 +129,25 @@ export const SettingsStack = ({}) => {
         }}
       />
       <Stack.Screen
-        name="Admin"
-        component={Admin}
+        name="Admin Panel"
+        component={AdminPanel}
         options={{
+          headerTitle:"Admin Panel",
+          headerStyle: {
+            backgroundColor: "rgb(148, 224, 136)",
+          },
+          headerTintColor: "#403D3D",
+          headerTitleStyle: {
+            fontWeight: "700",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Create Seed"
+        component={CreateSeed}
+        options={{
+          headerTitle:"Create a New Seed",
           headerStyle: {
             backgroundColor: "rgb(148, 224, 136)",
           },
