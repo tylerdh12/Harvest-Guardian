@@ -1,5 +1,5 @@
 export type AppParamMist = {
-  Home: "Home";
-  SeedLibrary: "SeedLibrary";
-  Settings: "Settings";
-};
+	Home: 'Home'
+	SeedLibrary: 'SeedLibrary'
+	Settings: 'Settings'
+}

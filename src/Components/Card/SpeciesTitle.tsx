@@ -1,13 +1,13 @@
-import React from "react";
-import { Text } from "../../components/Styles";
-import { styles } from "../Styles/Styles";
+import React from 'react'
+import { Text } from '../../components/Styles'
+import { styles } from '../Styles/Styles'
 
 interface Props {
-  species: Text;
+	species: Text
 }
 
 const SpeciesTitle = ({ species }: Props) => {
-  return <Text style={styles.cardTitle}>{species}</Text>;
-};
+	return <Text style={styles.cardTitle}>{species}</Text>
+}
 
-export default SpeciesTitle;
+export default SpeciesTitle
