@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "format": "prettier --write \"src/**/*.+(js|jsx|md|ts|tsx|css|sass|less|graphql|yml|yaml|scss|vue)\"",
+    "format": "prettier --write \"**/*.+(js|jsx|md|ts|tsx|css|sass|less|graphql|yml|yaml|scss|vue)\"",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
