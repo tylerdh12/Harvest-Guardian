@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Platform } from 'react-native'
+import { Platform, TouchableOpacity } from 'react-native'
 import {
 	TextInput,
 	View,
@@ -38,7 +38,7 @@ export default function CreateSeed() {
 	const [non_companions, updateNonCompanions] = useState([])
 	const [byproducts, updateByproducts] = useState([])
 	const [nutrient, updateNutrient] = useState([])
-	const [zone_1a, updateZone1a] = useState([])
+	const [zone_1a, updateZone1a] = useState(false)
 	const [zone_1b, updateZone1b] = useState([])
 	const [zone_2a, updateZone2a] = useState([])
 	const [zone_2b, updateZone2b] = useState([])
@@ -65,8 +65,57 @@ export default function CreateSeed() {
 	const [zone_13a, updateZone13a] = useState([])
 	const [zone_13b, updateZone13b] = useState([])
 
-	let dataList = {
-		species,
+	// Used for syncing state for each input after input value change
+	useEffect(() => {
+		(() =>
+			updateFormData({
+				species,
+				days_to_harvest,
+				days_to_germinate,
+				starter_age,
+				depth,
+				spacing,
+				height,
+				soil_temp_high,
+				soil_temp_low,
+				sun,
+				water,
+				images,
+				companions,
+				non_companions,
+				byproducts,
+				description,
+				nutrient,
+				sow_indoor,
+				sow_outdoor,
+				zone_1a,
+				zone_1b,
+				zone_2a,
+				zone_2b,
+				zone_3a,
+				zone_3b,
+				zone_4a,
+				zone_4b,
+				zone_5a,
+				zone_5b,
+				zone_6a,
+				zone_6b,
+				zone_7a,
+				zone_7b,
+				zone_8a,
+				zone_8b,
+				zone_9a,
+				zone_9b,
+				zone_10a,
+				zone_10b,
+				zone_11a,
+				zone_11b,
+				zone_12a,
+				zone_12b,
+				zone_13a,
+				zone_13b
+			}))()
+	}, [species,
 		days_to_harvest,
 		days_to_germinate,
 		starter_age,
@@ -110,16 +159,7 @@ export default function CreateSeed() {
 		zone_12a,
 		zone_12b,
 		zone_13a,
-		zone_13b,
-	}
-
-	// Used for syncing state for each input after input value change (ASYNC)
-	useEffect(() => {
-		;(() =>
-			updateFormData({
-				dataList,
-			}))()
-	}, [dataList])
+		zone_13b])
 
 	return (
 		<KeyboardAvoidingView
@@ -287,8 +327,8 @@ export default function CreateSeed() {
 						{isLoading ? (
 							<ButtonPrimaryText>Adding Seed...</ButtonPrimaryText>
 						) : (
-							<ButtonPrimaryText>Submit</ButtonPrimaryText>
-						)}
+								<ButtonPrimaryText>Submit</ButtonPrimaryText>
+							)}
 					</ButtonPrimary>
 				</View>
 			</ScrollView>
