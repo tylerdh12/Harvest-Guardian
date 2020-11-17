@@ -1,5 +1,5 @@
 import React from 'react'
-import { BottomBorderView, Text } from './../components/Styles'
+import { BottomBorderView, Text } from './Styles'
 import { styles } from './Styles/Styles'
 
 export const DetailListItem = (_props: any) => {

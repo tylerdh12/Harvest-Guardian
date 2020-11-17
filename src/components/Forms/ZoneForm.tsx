@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Text } from "./../Styles"
+import { Text } from "../Styles"
 
 export const ZoneForm = () => {
     const [zone_1a, updateZone1a] = useState(false)

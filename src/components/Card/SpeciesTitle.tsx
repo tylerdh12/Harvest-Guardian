@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from '../../components/Styles'
+import { Text } from '../Styles'
 import { styles } from '../Styles/Styles'
 
 interface Props {
