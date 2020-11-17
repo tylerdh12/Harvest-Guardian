@@ -10,7 +10,7 @@ interface UtilsProps {
 	navigation?: any
 }
 
-export const Utils: React.FC<UtilsProps> = ({}) => {
+export const Utils: React.FC<UtilsProps> = ({ }) => {
 	return null
 }
 
@@ -251,4 +251,22 @@ export async function deleteSeedFromLibrary({ data, onRefresh }) {
 			}
 		})
 	})
+}
+
+// Conversion Utility Functions
+
+export const fahrenheitToCelsius = (temp) => {
+	return ((temp - 32) * 5) / 9
+}
+
+export const celsiusToFahrenheit = (temp) => {
+	return ((temp / 5) * 9) - 32
+}
+
+export const imperialToMetric = (inches) => {
+	return inches * 2.54
+}
+
+export const metricToImperial = (centimeters) => {
+	return centimeters / 2.54
 }
