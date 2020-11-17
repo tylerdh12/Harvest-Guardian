@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { StatusBar } from 'react-native'
 import { Appearance, AppearanceProvider } from 'react-native-appearance'
-import { ThemeProvider } from 'styled-components/native'
+import { ThemeProvider } from '../components/node_modules/styled-components/native'
 import darkTheme from './dark'
 import lightTheme from './light'
 

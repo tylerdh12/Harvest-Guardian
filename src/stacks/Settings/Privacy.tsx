@@ -1,6 +1,6 @@
 import { default as React } from 'react'
 import { View } from 'react-native'
-import styled from 'styled-components/native'
+import styled from '../../components/node_modules/styled-components/native'
 import { Text } from '../../components/Styles'
 
 const Container = styled.View`
