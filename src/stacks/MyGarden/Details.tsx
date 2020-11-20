@@ -74,14 +74,14 @@ function Details({ route, navigation }) {
 						}
 					/>
 				) : null}
-				{data.seed.height ? (
-					<DetailListItem label="Plant Height" dataText={data.seed.height} />
-				) : null}
 				{data.seed.depth ? (
 					<DetailListItem label="Seed Depth" dataText={data.seed.depth} />
 				) : null}
 				{data.seed.spacing ? (
 					<DetailListItem label="Seed Spacing" dataText={data.seed.spacing} />
+				) : null}
+				{data.seed.height ? (
+					<DetailListItem label="Plant Height" dataText={data.seed.height} />
 				) : null}
 				{data.seed.water ? (
 					<DetailListItem

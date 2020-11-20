@@ -116,6 +116,12 @@ export default function SeedDetails({ route, navigation }) {
 						dataText={data.soil_temp_low}
 					/>
 				) : null}
+				{data.soil_temp_low ? (
+					<DetailListItem
+						label="Soil Temperature Low"
+						dataText={data.soil_temp_high}
+					/>
+				) : null}
 				{data.companions ? (
 					<DetailListItem
 						label="Companion Plants"
