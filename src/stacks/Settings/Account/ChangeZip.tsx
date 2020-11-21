@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
-import { ActivityIndicator, AsyncStorage, Platform, Button } from 'react-native'
+import { ActivityIndicator, Platform, Button } from 'react-native'
 import Loader from '../../../components/LoadingScreens/Loader'
 import { ErrorText, Text, TextInput, View } from '../../../components/Styles'
 import { AuthContext } from '../../../providers/AuthProvider'
+import * as SecureStore from 'expo-secure-store'
 
 interface ChangeZipProps {
 	userData?: {
@@ -32,11 +33,11 @@ export const ChangeZip: React.FC<ChangeZipProps> = ({ navigation }) => {
 	async function submitZipChange() {
 		setIsLoading(true)
 		try {
-			await AsyncStorage.getItem('rawLogin').then(response =>
+			await SecureStore.getItemAsync('rawLogin').then(response =>
 				!response
 					? console.log('No password stored')
 					: response.length > 0
-					? AsyncStorage.getItem('authBasic').then(authBasic => {
+					? SecureStore.getItemAsync('authBasic').then(authBasic => {
 							axios({
 								method: 'patch',
 								url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,

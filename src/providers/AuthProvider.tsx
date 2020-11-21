@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { AsyncStorage } from 'react-native'
+import * as SecureStore from 'expo-secure-store'
 
 interface AuthProviderProps {
 	children: any
@@ -38,7 +38,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			.then(res => {
 				setUserData(res.data)
 				console.log(res.data.email + ' has Logged on')
-				AsyncStorage.setItem('userData', JSON.stringify(res.data))
+				SecureStore.setItemAsync('userData', JSON.stringify(res.data))
+				SecureStore.setItemAsync('userData', JSON.stringify(res.data))
 			})
 			.catch(err => {
 				if (err) {
@@ -61,10 +62,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				logout: () => {
 					console.log(userData.email + ' Logged out')
 					setUserData(null)
-					AsyncStorage.removeItem('authBasic')
-					AsyncStorage.removeItem('userData')
-					AsyncStorage.removeItem('rawLogin')
-					AsyncStorage.removeItem('EXPO_CONSTANTS_INSTALLATION_ID')
+					SecureStore.deleteItemAsync('userData')
+					SecureStore.deleteItemAsync('authBasic')
+					SecureStore.deleteItemAsync('userData')
+					SecureStore.deleteItemAsync('rawLogin')
+					SecureStore.deleteItemAsync('EXPO_CONSTANTS_INSTALLATION_ID')
 				},
 			}}
 		>

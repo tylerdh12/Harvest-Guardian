@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { encode } from 'base-64'
 import { StatusBar } from 'expo-status-bar'
 import React, { useContext, useEffect, useReducer } from 'react'
-import { ActivityIndicator, AsyncStorage, Platform } from 'react-native'
+import { ActivityIndicator, Platform } from 'react-native'
 import LoadingSeed from '../../components/LoadingScreens/LoadingSeed'
 import {
 	Button,
@@ -24,6 +24,7 @@ import {
 	View,
 } from '../../components/Styles'
 import { AuthContext } from '../../providers/AuthProvider'
+import * as SecureStore from 'expo-secure-store'
 
 /* --------------------------- Login Stack Reducer -------------------------- */
 
@@ -108,14 +109,14 @@ function Login({ navigation }) {
 		isLoggedIn: false,
 	})
 
-	/* --------- useEffect Calls Auto Login if authBasic in AsyncStorage -------- */
+	/* --------- useEffect Calls Auto Login if authBasic in SecureStorage -------- */
 
 	useEffect(() => {
-		AsyncStorage.getItem('userData').then(userData => {
+		SecureStore.getItemAsync('userData').then(userData => {
 			if (userData !== null) {
 				try {
 					dispatch({ type: 'alreadyAuth' })
-					AsyncStorage.getItem('authBasic').then(authBasic => {
+					SecureStore.getItemAsync('authBasic').then(authBasic => {
 						login(authBasic)
 					})
 				} catch (error) {
@@ -133,15 +134,15 @@ function Login({ navigation }) {
 		const token = encode(`${username}:${password}`)
 		const authBasic = 'Basic ' + token
 		try {
-			await AsyncStorage.setItem('rawLogin', rawLogin)
-			await AsyncStorage.setItem('authBasic', authBasic)
+			await SecureStore.setItemAsync('rawLogin', rawLogin)
+			await SecureStore.setItemAsync('authBasic', authBasic)
 		} catch (error) {
 			console.log(error)
 		}
 
 		await login(authBasic)
 
-		AsyncStorage.getItem('userData').then(userData => {
+		SecureStore.getItemAsync('userData').then(userData => {
 			if (userData === null) {
 				dispatch({ type: 'error', message: 'Invalid Email or Password' })
 			}
@@ -175,8 +176,9 @@ function Login({ navigation }) {
 							'rawLogin',
 							'EXPO_CONSTANTS_INSTALLATION_ID',
 						]
-						AsyncStorage.multiRemove(keys, err => {
-							alert(`${keys} removed`)
+						keys.map(key => {
+							SecureStore.deleteItemAsync(key)
+							alert(key + ' has been removed')
 						})
 					}}
 				>

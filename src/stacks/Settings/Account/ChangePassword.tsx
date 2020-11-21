@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { default as React, useContext, useState } from 'react'
-import { ActivityIndicator, AsyncStorage, Button, Platform } from 'react-native'
+import { ActivityIndicator, Button, Platform } from 'react-native'
 import Loader from '../../../components/LoadingScreens/Loader'
 import { ErrorText, Text, TextInput, View } from '../../../components/Styles'
 import { AuthContext } from '../../../providers/AuthProvider'
+import * as SecureStore from 'expo-secure-store'
 
 interface ChangePasswordProps {}
 
@@ -22,7 +23,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({}) => {
 
 	function changeUserData() {
 		setIsLoading(true)
-		AsyncStorage.getItem('authBasic').then(authBasic => {
+		SecureStore.getItemAsync('authBasic').then(authBasic => {
 			axios({
 				method: 'patch',
 				url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,

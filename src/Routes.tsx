@@ -1,18 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native'
 import React, { useContext, useEffect, useState } from 'react'
-import { ActivityIndicator, AsyncStorage, Platform } from 'react-native'
+import { ActivityIndicator, Platform } from 'react-native'
 import { AppTabs } from './AppTabs'
 import Loader from './components/LoadingScreens/Loader'
 import { SafeAreaView } from './components/Styles'
 import { AuthContext } from './providers/AuthProvider'
 import { AuthStack } from './stacks/Auth/AuthStack'
+import * as SecureStore from 'expo-secure-store'
 
 export const Routes = ({}) => {
 	const { login, userData, authBasic } = useContext(AuthContext)
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		AsyncStorage.getItem('authBasic')
+		SecureStore.getItemAsync('authBasic')
 			.then(userString => {
 				if (userString) {
 					login(authBasic)

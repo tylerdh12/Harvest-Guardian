@@ -2,7 +2,7 @@ import { Feather } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack'
 import axios from 'axios'
 import { default as React, useContext, useEffect, useState } from 'react'
-import { Alert, AsyncStorage, Button } from 'react-native'
+import { Alert, Button } from 'react-native'
 import {
 	BasicText,
 	Label,
@@ -10,6 +10,7 @@ import {
 	View,
 } from '../../../components/Styles'
 import { AuthContext } from '../../../providers/AuthProvider'
+import * as SecureStore from 'expo-secure-store'
 
 interface ProfileProps {
 	userData?: {
@@ -52,7 +53,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 					if (res.status === 200) {
 						setUserData(res.data)
 						console.log(res.data.email + ' has fetched user data')
-						// AsyncStorage.setItem("userData", JSON.stringify(res.data));
+						// SecureStore.setItemAsync("userData", JSON.stringify(res.data));
 						setIsLoading(false)
 					} else {
 						console.log('Error Fetching User Data')
@@ -87,7 +88,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 
 	function DeleteUserAccount() {
 		setIsLoading(true)
-		AsyncStorage.getItem('authBasic').then(authBasic => {
+		SecureStore.getItemAsync('authBasic').then(authBasic => {
 			axios({
 				method: 'delete',
 				url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,

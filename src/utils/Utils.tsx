@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
-import { Alert, AsyncStorage } from 'react-native'
+import { Alert } from 'react-native'
+import * as SecureStore from 'expo-secure-store'
 
 interface UtilsProps {
 	setData?: any
@@ -10,12 +11,12 @@ interface UtilsProps {
 	navigation?: any
 }
 
-export const Utils: React.FC<UtilsProps> = ({ }) => {
+export const Utils: React.FC<UtilsProps> = ({}) => {
 	return null
 }
 
 export async function getPlants(setData, setLoading) {
-	await AsyncStorage.getItem('authBasic').then(authBasic => {
+	await SecureStore.getItemAsync('authBasic').then(authBasic => {
 		axios({
 			method: 'get',
 			url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
@@ -90,7 +91,7 @@ export async function addPlantAlert({ data, navigation }) {
 }
 
 export const AddSeedToMyGarden = async ({ date_planted, data, navigation }) => {
-	await AsyncStorage.getItem('authBasic').then(authBasic => {
+	await SecureStore.getItemAsync('authBasic').then(authBasic => {
 		axios({
 			method: 'post',
 			url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
@@ -138,7 +139,7 @@ export async function deletePlantAlert({ data, onRefresh }) {
 }
 
 export async function deletePlantFromMyGarden({ data, onRefresh }) {
-	await AsyncStorage.getItem('authBasic').then(authBasic => {
+	await SecureStore.getItemAsync('authBasic').then(authBasic => {
 		axios({
 			method: 'delete',
 			url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${data._id}`,
@@ -238,7 +239,7 @@ export const AddSeedToLibrary = async ({ data, setIsLoading }) => {
 }
 
 export async function deleteSeedFromLibrary({ data, onRefresh }) {
-	await AsyncStorage.getItem('authBasic').then(authBasic => {
+	await SecureStore.getItemAsync('authBasic').then(authBasic => {
 		axios({
 			method: 'delete',
 			url: `https://harvestguardian-rest-api.herokuapp.com/v1/seeds/${data._id}`,
@@ -255,18 +256,18 @@ export async function deleteSeedFromLibrary({ data, onRefresh }) {
 
 // Conversion Utility Functions
 
-export const fahrenheitToCelsius = (temp) => {
+export const fahrenheitToCelsius = temp => {
 	return ((temp - 32) * 5) / 9
 }
 
-export const celsiusToFahrenheit = (temp) => {
-	return ((temp / 5) * 9) - 32
+export const celsiusToFahrenheit = temp => {
+	return (temp / 5) * 9 - 32
 }
 
-export const imperialToMetric = (inches) => {
+export const imperialToMetric = inches => {
 	return inches * 2.54
 }
 
-export const metricToImperial = (centimeters) => {
+export const metricToImperial = centimeters => {
 	return centimeters / 2.54
 }

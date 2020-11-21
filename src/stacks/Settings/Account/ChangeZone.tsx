@@ -1,10 +1,11 @@
 import { Picker } from '@react-native-community/picker'
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
-import { ActivityIndicator, AsyncStorage, Platform, Button } from 'react-native'
+import { ActivityIndicator, Platform, Button } from 'react-native'
 import Loader from '../../../components/LoadingScreens/Loader'
 import { ErrorText, Text, View } from '../../../components/Styles'
 import { AuthContext } from '../../../providers/AuthProvider'
+import * as SecureStore from 'expo-secure-store'
 
 export const ChangeZone = ({ navigation }) => {
 	const {
@@ -21,45 +22,46 @@ export const ChangeZone = ({ navigation }) => {
 	async function submitZoneChange() {
 		setIsLoading(true)
 		try {
-			await AsyncStorage.getItem('rawLogin').then((response: string | null) =>
-				!response
-					? console.log('No password stored')
-					: response.length > 0
-					? AsyncStorage.getItem('authBasic').then(authBasic => {
-							axios({
-								method: 'patch',
-								url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
-								headers: {
-									Authorization: authBasic,
-								},
-								data: {
-									first_name: userData.first_name,
-									last_name: userData.last_name,
-									email: userData.email,
-									password: response,
-									zip_code: userData.zip_code,
-									account_type: userData.account_type,
-									zone: zone,
-									active: true,
-								},
-							})
-								.then(res => {
-									if (res.status === 401) {
-										console.log('Response 401')
-										console.log(res)
-									} else if (res.status === 500) {
-										console.log('Response Error 500')
-										console.log(res)
-									} else {
-										console.log(`Zone has been changed to: ${zone}`)
-										navigation.goBack()
-									}
+			await SecureStore.getItemAsync('rawLogin').then(
+				(response: string | null) =>
+					!response
+						? console.log('No password stored')
+						: response.length > 0
+						? SecureStore.getItemAsync('authBasic').then(authBasic => {
+								axios({
+									method: 'patch',
+									url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+									headers: {
+										Authorization: authBasic,
+									},
+									data: {
+										first_name: userData.first_name,
+										last_name: userData.last_name,
+										email: userData.email,
+										password: response,
+										zip_code: userData.zip_code,
+										account_type: userData.account_type,
+										zone: zone,
+										active: true,
+									},
 								})
-								.then(() => {
-									setIsLoading(false)
-								})
-					  })
-					: console.log('No response found'),
+									.then(res => {
+										if (res.status === 401) {
+											console.log('Response 401')
+											console.log(res)
+										} else if (res.status === 500) {
+											console.log('Response Error 500')
+											console.log(res)
+										} else {
+											console.log(`Zone has been changed to: ${zone}`)
+											navigation.goBack()
+										}
+									})
+									.then(() => {
+										setIsLoading(false)
+									})
+						  })
+						: console.log('No response found'),
 			)
 		} catch (error) {
 			console.log(error)
