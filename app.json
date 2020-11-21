@@ -1,33 +1,33 @@
 {
-  "expo": {
-    "name": "Harvest Guardian",
-    "slug": "Harvest_Guardian",
-    "description": "A gardening app to help you garden smarter.",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "privacy": "public",
-    "platforms": ["ios", "android"],
-    "githubUrl": "https://github.com/tylerdh12/Harvest-Guardian",
-    "primaryColor": "#94e088",
-    "userInterfaceStyle": "dark",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "bundleIdentifier": "com.jsstack.harvestguardian"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "android": {
-      "package": "com.jsstack.harvestguardian"
-    }
-  }
+	"expo": {
+		"name": "Harvest Guardian",
+		"slug": "Harvest_Guardian",
+		"description": "A gardening app to help you garden smarter.",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/icon.png",
+		"privacy": "public",
+		"platforms": ["ios", "android"],
+		"githubUrl": "https://github.com/tylerdh12/Harvest-Guardian",
+		"primaryColor": "#94e088",
+		"userInterfaceStyle": "dark",
+		"splash": {
+			"image": "./assets/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"bundleIdentifier": "com.jsstack.harvestguardian"
+		},
+		"web": {
+			"favicon": "./assets/favicon.png"
+		},
+		"android": {
+			"package": "com.jsstack.harvestguardian"
+		}
+	}
 }

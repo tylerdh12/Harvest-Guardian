@@ -8,6 +8,7 @@ import { Picker } from '@react-native-community/picker'
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Platform } from 'react-native'
+import { GrowingZoneSelector } from '../../components/Forms/GrowingZoneSelector'
 import {
 	Button,
 	ButtonPrimary,
@@ -103,7 +104,7 @@ function Register({ navigation }) {
 							justifyContent: 'center',
 						}}
 					>
-						<View style={{ width: '70%' }}>
+						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>First Name</Label>
 							<TextInput
 								autoFocus={true}
@@ -111,14 +112,14 @@ function Register({ navigation }) {
 								value={firstName}
 							/>
 						</View>
-						<View style={{ width: '70%' }}>
+						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Last Name</Label>
 							<TextInput
 								onChangeText={lastName => changeLastName(lastName)}
 								value={lastName}
 							/>
 						</View>
-						<View style={{ width: '70%' }}>
+						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Zip Code</Label>
 							<TextInput
 								autoCompleteType="postal-code"
@@ -134,7 +135,7 @@ function Register({ navigation }) {
 								value={zipCode}
 							/>
 						</View>
-						<View style={{ width: '70%' }}>
+						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Email</Label>
 							<TextInput
 								autoCompleteType="email"
@@ -143,7 +144,7 @@ function Register({ navigation }) {
 								value={email}
 							/>
 						</View>
-						<View style={{ width: '70%' }}>
+						<View style={{ width: '70%', alignItems: 'center' }}>
 							{passwordError !== '' ? (
 								<ErrorText style={{ padding: 10 }}>{passwordError}</ErrorText>
 							) : null}
@@ -154,7 +155,7 @@ function Register({ navigation }) {
 								value={password}
 							/>
 						</View>
-						<View style={{ width: '70%' }}>
+						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Re-enter Password</Label>
 							<TextInput
 								secureTextEntry={true}
@@ -164,42 +165,7 @@ function Register({ navigation }) {
 								value={reenterpassword}
 							/>
 						</View>
-						<View style={{ width: '70%', alignItems: 'center', height: 250 }}>
-							<Label>Growing Zone</Label>
-							<Picker
-								itemStyle={{ color: 'white' }}
-								selectedValue={zone}
-								style={{ height: 30, width: 100 }}
-								onValueChange={(itemValue, itemIndex) => setZone(itemValue)}
-							>
-								<Picker.Item label="1a" value="1a" />
-								<Picker.Item label="1b" value="1b" />
-								<Picker.Item label="2a" value="2a" />
-								<Picker.Item label="2b" value="2b" />
-								<Picker.Item label="3a" value="3a" />
-								<Picker.Item label="3b" value="3b" />
-								<Picker.Item label="4a" value="4a" />
-								<Picker.Item label="4b" value="4b" />
-								<Picker.Item label="5a" value="5a" />
-								<Picker.Item label="5b" value="5b" />
-								<Picker.Item label="6a" value="6a" />
-								<Picker.Item label="6b" value="6b" />
-								<Picker.Item label="7a" value="7a" />
-								<Picker.Item label="7b" value="7b" />
-								<Picker.Item label="8a" value="8a" />
-								<Picker.Item label="8b" value="8b" />
-								<Picker.Item label="9a" value="9a" />
-								<Picker.Item label="9b" value="9b" />
-								<Picker.Item label="10a" value="10a" />
-								<Picker.Item label="10b" value="10b" />
-								<Picker.Item label="11a" value="11a" />
-								<Picker.Item label="11b" value="11b" />
-								<Picker.Item label="12a" value="12a" />
-								<Picker.Item label="12b" value="12b" />
-								<Picker.Item label="13a" value="13a" />
-								<Picker.Item label="13b" value="13b" />
-							</Picker>
-						</View>
+						<GrowingZoneSelector zone={zone} setZone={setZone} />
 					</View>
 				</ScrollView>
 

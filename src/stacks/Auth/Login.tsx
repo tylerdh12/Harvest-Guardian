@@ -158,43 +158,6 @@ function Login({ navigation }) {
 			<StatusBar style="light" />
 
 			<SafeAreaView>
-				<TouchableOpacity
-					style={{
-						position: 'absolute',
-						borderRadius: 15,
-						height: 25,
-						width: 25,
-						alignItems: 'center',
-						justifyContent: 'center',
-						bottom: 20,
-						right: 20,
-					}}
-					onPress={() => {
-						let keys = [
-							'authBasic',
-							'userData',
-							'rawLogin',
-							'EXPO_CONSTANTS_INSTALLATION_ID',
-						]
-						keys.map(key => {
-							SecureStore.deleteItemAsync(key)
-							alert(key + ' has been removed')
-						})
-					}}
-				>
-					<LinkTitle
-						style={{
-							margin: 0,
-							padding: 2,
-							textAlign: 'center',
-							top: -10.5,
-							left: -7,
-							color: 'grey',
-						}}
-					>
-						<Ionicons name="ios-warning" size={18} />
-					</LinkTitle>
-				</TouchableOpacity>
 				{isLoading ? (
 					Platform.OS === 'ios' ? (
 						<LoadingSeed />
