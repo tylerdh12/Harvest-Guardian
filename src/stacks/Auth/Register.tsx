@@ -23,6 +23,7 @@ import {
 	TextInput,
 	View,
 } from '../../components/Styles'
+import { ValidatePassword } from '../../utils/Utils'
 
 /* ----------------------------- Register Stack ----------------------------- */
 
@@ -37,6 +38,7 @@ function Register({ navigation }) {
 	const [email, changeEmail] = useState('')
 	const [emailError, changeEmailError] = useState('')
 	const [password, changePassword] = useState('')
+	const [validPassword, setValidPassword] = useState(true)
 	const [passwordError, setPasswordError] = useState('')
 	const [reenterpassword, changeReenterPassword] = useState('')
 	const [reenterpasswordError, changeReenterPasswordError] = useState('')
@@ -151,49 +153,60 @@ function Register({ navigation }) {
 							<Label>Password</Label>
 							<TextInput
 								secureTextEntry={true}
-								onChangeText={password => changePassword(password)}
+								onChangeText={password => {
+									ValidatePassword(password, validPassword, setValidPassword)
+									changePassword(password)
+								}}
 								value={password}
 							/>
+							{validPassword ? null : (
+								<ErrorText>8 characters or longer</ErrorText>
+							)}
 						</View>
 						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Re-enter Password</Label>
 							<TextInput
 								secureTextEntry={true}
-								onChangeText={reenterPassword =>
+								onChangeText={reenterPassword => {
+									ValidatePassword(
+										reenterPassword,
+										validPassword,
+										setValidPassword,
+									)
 									changeReenterPassword(reenterPassword)
-								}
+								}}
 								value={reenterpassword}
 							/>
 						</View>
 						<GrowingZoneSelector zone={zone} setZone={setZone} />
 					</View>
-				</ScrollView>
 
-				<View
-					style={{
-						marginTop: 10,
-						alignItems: 'center',
-						flexDirection: 'column',
-						justifyContent: 'space-evenly',
-					}}
-				>
-					<ButtonPrimary
-						style={{ margin: 10 }}
-						onPress={() => {
-							RegisterUser()
+					<View
+						style={{
+							marginTop: 10,
+							alignItems: 'center',
+							flexDirection: 'column',
+							justifyContent: 'space-evenly',
 						}}
 					>
-						<ButtonPrimaryText>Register</ButtonPrimaryText>
-					</ButtonPrimary>
-					<Button
-						style={{ margin: 10 }}
-						onPress={() => {
-							navigation.navigate('Login')
-						}}
-					>
-						<ButtonText>Already have an account?</ButtonText>
-					</Button>
-				</View>
+						<ButtonPrimary
+							style={{ margin: 10 }}
+							onPress={() => {
+								RegisterUser()
+							}}
+						>
+							<ButtonPrimaryText>Register</ButtonPrimaryText>
+						</ButtonPrimary>
+						<Button
+							style={{ margin: 10 }}
+							onPress={() => {
+								navigation.navigate('Login')
+							}}
+						>
+							<ButtonText>Already have an account?</ButtonText>
+						</Button>
+					</View>
+				</ScrollView>
 			</SafeAreaView>
 		</KeyboardAvoidingView>
 	)

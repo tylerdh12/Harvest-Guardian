@@ -254,6 +254,12 @@ export async function deleteSeedFromLibrary({ data, onRefresh }) {
 	})
 }
 
+// Validate Password
+
+export const ValidatePassword = (password, validPassword, setValidPassword) => {
+	password.length >= 8 ? setValidPassword(true) : setValidPassword(false)
+}
+
 // Conversion Utility Functions
 
 export const fahrenheitToCelsius = temp => {
