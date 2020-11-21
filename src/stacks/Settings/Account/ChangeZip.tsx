@@ -89,7 +89,11 @@ export const ChangeZip: React.FC<ChangeZipProps> = ({ navigation }) => {
 					<Text style={{ marginBottom: 25, textAlign: 'center' }}>
 						Please Wait...
 					</Text>
-					{Platform.OS === 'ios' ? <Loader /> : <ActivityIndicator />}
+					{Platform.OS === 'ios' ? (
+						<Loader />
+					) : (
+						<ActivityIndicator size="large" />
+					)}
 				</View>
 			) : (
 				<>

@@ -43,7 +43,7 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 				Platform.OS === 'ios' ? (
 					<Loader />
 				) : (
-					<ActivityIndicator />
+					<ActivityIndicator size="large" />
 				)
 			) : (
 				<FlatList

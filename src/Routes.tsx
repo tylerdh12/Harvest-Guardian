@@ -29,7 +29,11 @@ export const Routes = ({}) => {
 	if (loading) {
 		return (
 			<SafeAreaView>
-				{Platform.OS === 'ios' ? <Loader /> : <ActivityIndicator />}
+				{Platform.OS === 'ios' ? (
+					<Loader />
+				) : (
+					<ActivityIndicator size="large" />
+				)}
 			</SafeAreaView>
 		)
 	}

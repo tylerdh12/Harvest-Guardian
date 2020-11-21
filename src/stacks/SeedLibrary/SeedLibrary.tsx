@@ -47,7 +47,7 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
 				Platform.OS === 'ios' ? (
 					<Loader />
 				) : (
-					<ActivityIndicator />
+					<ActivityIndicator size="large" />
 				)
 			) : (
 				<>

@@ -199,7 +199,7 @@ function Login({ navigation }) {
 					Platform.OS === 'ios' ? (
 						<LoadingSeed />
 					) : (
-						<ActivityIndicator />
+						<ActivityIndicator size="large" />
 					)
 				) : (
 					<>
