@@ -75,13 +75,22 @@ function Details({ route, navigation }) {
 					/>
 				) : null}
 				{data.seed.depth ? (
-					<DetailListItem label="Seed Depth" dataText={data.seed.depth} />
+					<DetailListItem
+						label="Seed Depth"
+						dataText={data.seed.depth + ' in'}
+					/>
 				) : null}
 				{data.seed.spacing ? (
-					<DetailListItem label="Seed Spacing" dataText={data.seed.spacing} />
+					<DetailListItem
+						label="Seed Spacing"
+						dataText={data.seed.spacing + ' in'}
+					/>
 				) : null}
 				{data.seed.height ? (
-					<DetailListItem label="Plant Height" dataText={data.seed.height} />
+					<DetailListItem
+						label="Plant Height"
+						dataText={data.seed.height + ' in'}
+					/>
 				) : null}
 				{data.seed.water ? (
 					<DetailListItem
@@ -109,14 +118,14 @@ function Details({ route, navigation }) {
 						padding: 15,
 					}}
 				>
-					{/* <Button
-            title="Edit"
-            onPress={() => {
-              navigation.navigate("EditPlantDetails", {
-                data: data,
-              });
-            }}
-          /> */}
+					<Button
+						title="Edit"
+						onPress={() => {
+							navigation.navigate('EditPlantDetails', {
+								data: data,
+							})
+						}}
+					/>
 					<Button
 						title="Delete"
 						color="red"

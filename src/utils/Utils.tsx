@@ -1,19 +1,96 @@
+/* -------------------------------------------------------------------------- */
+/* ---------------------------- Utility Functions --------------------------- */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------- Imports and Includes -------------------------- */
+
 import axios from 'axios'
-import React from 'react'
 import { Alert } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 
-interface UtilsProps {
-	setData?: any
-	setLoading?: any
-	setRefreshing?: any
-	data?: any
-	navigation?: any
+/* -------------------------- User Registration ----------------------------- */
+
+export async function RegisterUser({
+	navigation,
+	password,
+	reenterPassword,
+	firstName,
+	lastName,
+	zipCode,
+	email,
+	zone,
+}) {
+	if (password === reenterPassword) {
+		const newUser = {
+			first_name: firstName,
+			last_name: lastName,
+			zip_code: zipCode,
+			email: email,
+			password: password,
+			zone: zone,
+			account_type: 'user',
+			active: true,
+		}
+
+		axios({
+			method: 'post',
+			url: 'https://harvestguardian-rest-api.herokuapp.com/v1/user',
+
+			data: newUser,
+		}).then(res => {
+			if (res.status === 401) {
+				console.log('Response 401')
+				console.log(res)
+			} else if (res.status === 201) {
+				navigation.navigate('Login')
+			} else {
+				console.log(res)
+			}
+		})
+
+		console.log(newUser)
+	}
 }
 
-export const Utils: React.FC<UtilsProps> = ({}) => {
-	return null
+export const getGrowingZoneWithZip = (zipCode, setZone) => {
+	axios({
+		method: 'GET',
+		url: `https://phzmapi.org/${zipCode}.json`,
+	}).then(res => {
+		if (res.status === 200) {
+			setZone(res.data.zone)
+		} else {
+			console.log(res)
+		}
+	})
 }
+
+/* ------------------------- Validate Password ------------------------------ */
+
+export async function ValidatePassword({
+	password,
+	setValidPassword,
+	setPasswordError,
+}) {
+	// prettier-ignore
+	const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+	// prettier-ignore
+	const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+	// prettier-ignore
+	const simpleRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
+
+	if (simpleRegex.test(password)) {
+		setValidPassword(false)
+	} else if (mediumRegex.test(password)) {
+		setValidPassword(true)
+	} else if (strongRegex.test(password)) {
+		setValidPassword(true)
+	} else {
+		setValidPassword(false)
+	}
+}
+
+/* ------------------------- My Garden Functions ---------------------------- */
 
 export async function getPlants(setData, setLoading) {
 	await SecureStore.getItemAsync('authBasic').then(authBasic => {
@@ -252,12 +329,6 @@ export async function deleteSeedFromLibrary({ data, onRefresh }) {
 			}
 		})
 	})
-}
-
-// Validate Password
-
-export const ValidatePassword = (password, validPassword, setValidPassword) => {
-	password.length >= 8 ? setValidPassword(true) : setValidPassword(false)
 }
 
 // Conversion Utility Functions

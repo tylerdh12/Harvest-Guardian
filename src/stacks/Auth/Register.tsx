@@ -4,8 +4,6 @@
 
 /* -------------------------- Imports and Includes -------------------------- */
 
-import { Picker } from '@react-native-community/picker'
-import axios from 'axios'
 import React, { useState } from 'react'
 import { Platform } from 'react-native'
 import { GrowingZoneSelector } from '../../components/Forms/GrowingZoneSelector'
@@ -23,73 +21,24 @@ import {
 	TextInput,
 	View,
 } from '../../components/Styles'
-import { ValidatePassword } from '../../utils/Utils'
+import {
+	ValidatePassword,
+	RegisterUser,
+	getGrowingZoneWithZip,
+} from '../../utils/Utils'
 
 /* ----------------------------- Register Stack ----------------------------- */
 
 function Register({ navigation }) {
 	const [firstName, changeFirstName] = useState('')
-	const [firstNameError, changeFirstNameError] = useState('')
 	const [lastName, changeLastName] = useState('')
-	const [lastNameError, changeLastNameError] = useState('')
 	const [zipCode, changeZipCode] = useState('')
-	const [zipCodeError, changeZipCodeError] = useState('')
 	const [zone, setZone] = useState('')
 	const [email, changeEmail] = useState('')
-	const [emailError, changeEmailError] = useState('')
 	const [password, changePassword] = useState('')
 	const [validPassword, setValidPassword] = useState(true)
+	const [reenterPassword, changeReenterPassword] = useState('')
 	const [passwordError, setPasswordError] = useState('')
-	const [reenterpassword, changeReenterPassword] = useState('')
-	const [reenterpasswordError, changeReenterPasswordError] = useState('')
-
-	async function RegisterUser() {
-		if (password === reenterpassword) {
-			const newUser = {
-				first_name: firstName,
-				last_name: lastName,
-				zip_code: zipCode,
-				email: email,
-				password: password,
-				zone: zone,
-				account_type: 'user',
-				active: true,
-			}
-
-			axios({
-				method: 'post',
-				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/user',
-
-				data: newUser,
-			}).then(res => {
-				if (res.status === 401) {
-					console.log('Response 401')
-					console.log(res)
-				} else if (res.status === 201) {
-					navigation.navigate('Login')
-				} else {
-					console.log(res)
-				}
-			})
-
-			console.log(newUser)
-		} else {
-			setPasswordError("Passwords Don't Match")
-		}
-	}
-
-	function getGrowingZoneWithZip(zipCode) {
-		axios({
-			method: 'GET',
-			url: `https://phzmapi.org/${zipCode}.json`,
-		}).then(res => {
-			if (res.status === 200) {
-				setZone(res.data.zone)
-			} else {
-				console.log(res)
-			}
-		})
-	}
 
 	return (
 		<KeyboardAvoidingView
@@ -131,7 +80,7 @@ function Register({ navigation }) {
 								onChangeText={zipCode => {
 									changeZipCode(zipCode)
 									if (zipCode.length === 5) {
-										getGrowingZoneWithZip(zipCode)
+										getGrowingZoneWithZip(zipCode, setZone)
 									}
 								}}
 								value={zipCode}
@@ -147,35 +96,34 @@ function Register({ navigation }) {
 							/>
 						</View>
 						<View style={{ width: '70%', alignItems: 'center' }}>
-							{passwordError !== '' ? (
-								<ErrorText style={{ padding: 10 }}>{passwordError}</ErrorText>
-							) : null}
 							<Label>Password</Label>
 							<TextInput
 								secureTextEntry={true}
 								onChangeText={password => {
-									ValidatePassword(password, validPassword, setValidPassword)
+									ValidatePassword({
+										password,
+										setValidPassword,
+										setPasswordError,
+									})
 									changePassword(password)
 								}}
 								value={password}
 							/>
-							{validPassword ? null : (
-								<ErrorText>8 characters or longer</ErrorText>
-							)}
+							{validPassword === false ? (
+								<ErrorText>
+									8 characters 1 uppercase 1 lowercase 1 special character 1
+									number
+								</ErrorText>
+							) : null}
 						</View>
 						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Re-enter Password</Label>
 							<TextInput
 								secureTextEntry={true}
 								onChangeText={reenterPassword => {
-									ValidatePassword(
-										reenterPassword,
-										validPassword,
-										setValidPassword,
-									)
 									changeReenterPassword(reenterPassword)
 								}}
-								value={reenterpassword}
+								value={reenterPassword}
 							/>
 						</View>
 						<GrowingZoneSelector zone={zone} setZone={setZone} />
@@ -192,7 +140,16 @@ function Register({ navigation }) {
 						<ButtonPrimary
 							style={{ margin: 10 }}
 							onPress={() => {
-								RegisterUser()
+								RegisterUser({
+									navigation,
+									password,
+									reenterPassword,
+									firstName,
+									lastName,
+									zipCode,
+									email,
+									zone,
+								})
 							}}
 						>
 							<ButtonPrimaryText>Register</ButtonPrimaryText>

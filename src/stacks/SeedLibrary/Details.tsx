@@ -10,6 +10,7 @@ import { styles } from './../../components/Styles/Styles'
 export default function SeedDetails({ route, navigation }) {
 	const [data, setData] = useState(route.params.data)
 	const User = useContext<any>(AuthContext)
+	console.log(data)
 
 	let key = `_${User.userData.zone.toString()}`
 
@@ -93,13 +94,23 @@ export default function SeedDetails({ route, navigation }) {
 					<DetailListItem label="Sowing Outdoor" dataText={data.sow_outdoor} />
 				) : null}
 				{data.height ? (
-					<DetailListItem label="Plant Height" dataText={data.height} />
+					<DetailListItem label="Plant Height" dataText={data.height + ' in'} />
 				) : null}
 				{data.depth ? (
-					<DetailListItem label="Seed Depth" dataText={data.depth} />
+					<DetailListItem
+						label="Seed Depth"
+						dataText={
+							data.depth != Number
+								? data.depth.$numberDecimal + ' in'
+								: data.depth + ' in'
+						}
+					/>
 				) : null}
 				{data.spacing ? (
-					<DetailListItem label="Seed Spacing" dataText={data.spacing} />
+					<DetailListItem
+						label="Seed Spacing"
+						dataText={data.spacing + ' in'}
+					/>
 				) : null}
 				{data.water ? (
 					<DetailListItem label="Water Requirements" dataText={data.water} />

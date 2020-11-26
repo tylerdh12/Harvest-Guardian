@@ -17,10 +17,8 @@ import {
 	Heading,
 	KeyboardAvoidingView,
 	Label,
-	LinkTitle,
 	SafeAreaView,
 	TextInput,
-	TouchableOpacity,
 	View,
 } from '../../components/Styles'
 import { AuthContext } from '../../providers/AuthProvider'
