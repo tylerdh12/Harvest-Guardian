@@ -1,6 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 import { View } from 'react-native'
+import { harvestProgress, harvestProgressColor } from '../../utils/Utils'
 import { ViewAlt } from '../Styles'
 
 interface progressBarProps {
@@ -14,29 +15,6 @@ const ProgressBar: React.FunctionComponent<progressBarProps> = ({
 	days_to_harvest,
 	days_to_germinate,
 }) => {
-	function harvestProgress(date_planted, days_to_harvest) {
-		const daysPlantedToNow = moment().diff(date_planted, 'days')
-
-		return (daysPlantedToNow / parseInt(days_to_harvest)) * 100 < 100
-			? (daysPlantedToNow / parseInt(days_to_harvest)) * 100
-			: 100
-	}
-
-	function harvestProgressColor(
-		date_planted,
-		days_to_harvest,
-		days_to_germinate,
-	) {
-		const daysPlantedToNow = moment().diff(date_planted, 'days')
-		if (daysPlantedToNow <= parseInt(days_to_germinate)) {
-			return 'yellow'
-		} else if (daysPlantedToNow <= parseInt(days_to_harvest)) {
-			return 'rgb(148, 224, 136)'
-		} else {
-			return 'tomato'
-		}
-	}
-
 	return (
 		<View
 			style={{

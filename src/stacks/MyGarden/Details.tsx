@@ -4,7 +4,7 @@ import { Button, Image } from 'react-native'
 import { DetailListItem } from '../../components/DetailListItem'
 import { ScrollView, View, ViewAlt } from '../../components/Styles'
 import { AuthContext } from '../../providers/AuthProvider'
-import { deletePlantAlert } from '../../utils/Utils'
+import { deletePlantAlert, harvestProgress } from '../../utils/Utils'
 
 // TODO Add dynamic value for zone
 function Details({ route, navigation }) {
@@ -42,7 +42,10 @@ function Details({ route, navigation }) {
 				{data.seed.days_to_harvest ? (
 					<DetailListItem
 						label="Days To Harvest"
-						dataText={data.seed.days_to_harvest}
+						dataText={Math.floor(
+							data.seed.days_to_harvest -
+								harvestProgress(data.date_planted, data.seed.days_to_harvest),
+						)}
 					/>
 				) : null}
 				{data.seed.zone[key] ? (
@@ -65,6 +68,12 @@ function Details({ route, navigation }) {
 				) : null}
 				{data.seed.sun ? (
 					<DetailListItem label="Sun Requirements" dataText={data.seed.sun} />
+				) : null}
+				{data.seed.water ? (
+					<DetailListItem
+						label="Water Requirements"
+						dataText={data.seed.water}
+					/>
 				) : null}
 				{data.seed.soil_temp_low || data.seed.soil_temp_high ? (
 					<DetailListItem
@@ -90,12 +99,6 @@ function Details({ route, navigation }) {
 					<DetailListItem
 						label="Plant Height"
 						dataText={data.seed.height + ' in'}
-					/>
-				) : null}
-				{data.seed.water ? (
-					<DetailListItem
-						label="Water Requirements"
-						dataText={data.seed.water}
 					/>
 				) : null}
 				{data.seed.companions ? (

@@ -10,7 +10,6 @@ import { styles } from './../../components/Styles/Styles'
 export default function SeedDetails({ route, navigation }) {
 	const [data, setData] = useState(route.params.data)
 	const User = useContext<any>(AuthContext)
-	console.log(data)
 
 	let key = `_${User.userData.zone.toString()}`
 
@@ -72,19 +71,10 @@ export default function SeedDetails({ route, navigation }) {
 						} Days`}
 					/>
 				) : null}
-				{data.non_companions ? (
+				{data.zone[key] ? (
 					<DetailListItem
-						label="Anti-Companion Plants"
-						dataText={data.non_companions.join(', ')}
-					/>
-				) : null}
-				{data.sun ? (
-					<DetailListItem label="Sun Requirements" dataText={data.sun} />
-				) : null}
-				{data.soil_temp_high ? (
-					<DetailListItem
-						label="Soil Temperature High"
-						dataText={data.soil_temp_high}
+						label="Planting Months"
+						dataText={data.zone[key].join(', ')}
 					/>
 				) : null}
 				{data.sow_indoor !== '' ? (
@@ -93,15 +83,26 @@ export default function SeedDetails({ route, navigation }) {
 				{data.sow_outdoor !== '' ? (
 					<DetailListItem label="Sowing Outdoor" dataText={data.sow_outdoor} />
 				) : null}
-				{data.height ? (
-					<DetailListItem label="Plant Height" dataText={data.height + ' in'} />
+				{data.sun ? (
+					<DetailListItem label="Sun Requirements" dataText={data.sun} />
 				) : null}
-				{data.depth ? (
+				{data.water ? (
+					<DetailListItem label="Water Requirements" dataText={data.water} />
+				) : null}
+				{data.soil_temp_low ? (
+					<DetailListItem
+						label="Soil Temperature Range"
+						dataText={data.soil_temp_low + ' - ' + data.soil_temp_high}
+					/>
+				) : null}
+				{data.depth || data.depth.$numberDecimal ? (
 					<DetailListItem
 						label="Seed Depth"
 						dataText={
 							data.depth != Number
-								? data.depth.$numberDecimal + ' in'
+								? data.depth.$numberDecimal < 1
+									? data.depth.$numberDecimal + ' in'
+									: ''
 								: data.depth + ' in'
 						}
 					/>
@@ -112,31 +113,19 @@ export default function SeedDetails({ route, navigation }) {
 						dataText={data.spacing + ' in'}
 					/>
 				) : null}
-				{data.water ? (
-					<DetailListItem label="Water Requirements" dataText={data.water} />
-				) : null}
-				{data.zone[key] ? (
-					<DetailListItem
-						label="Planting Months"
-						dataText={data.zone[key].join(', ')}
-					/>
-				) : null}
-				{data.soil_temp_low ? (
-					<DetailListItem
-						label="Soil Temperature Low"
-						dataText={data.soil_temp_low}
-					/>
-				) : null}
-				{data.soil_temp_low ? (
-					<DetailListItem
-						label="Soil Temperature Low"
-						dataText={data.soil_temp_high}
-					/>
+				{data.height ? (
+					<DetailListItem label="Plant Height" dataText={data.height + ' in'} />
 				) : null}
 				{data.companions ? (
 					<DetailListItem
 						label="Companion Plants"
 						dataText={data.companions.join(', ')}
+					/>
+				) : null}
+				{data.non_companions ? (
+					<DetailListItem
+						label="Anti-Companion Plants"
+						dataText={data.non_companions.join(', ')}
 					/>
 				) : null}
 			</ViewAlt>

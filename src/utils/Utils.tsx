@@ -7,6 +7,7 @@
 import axios from 'axios'
 import { Alert } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
+import moment from 'moment'
 
 /* -------------------------- User Registration ----------------------------- */
 
@@ -329,6 +330,31 @@ export async function deleteSeedFromLibrary({ data, onRefresh }) {
 			}
 		})
 	})
+}
+
+// Harvest Progress
+
+export const harvestProgress = (date_planted, days_to_harvest) => {
+	const daysPlantedToNow = moment().diff(date_planted, 'days')
+
+	return (daysPlantedToNow / parseInt(days_to_harvest)) * 100 < 100
+		? (daysPlantedToNow / parseInt(days_to_harvest)) * 100
+		: 100
+}
+
+export const harvestProgressColor = (
+	date_planted,
+	days_to_harvest,
+	days_to_germinate,
+) => {
+	const daysPlantedToNow = moment().diff(date_planted, 'days')
+	if (daysPlantedToNow <= parseInt(days_to_germinate)) {
+		return 'yellow'
+	} else if (daysPlantedToNow <= parseInt(days_to_harvest)) {
+		return 'rgb(148, 224, 136)'
+	} else {
+		return 'tomato'
+	}
 }
 
 // Conversion Utility Functions
