@@ -61,15 +61,26 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 					data={data}
 					ListEmptyComponent={() => {
 						return (
-							<ViewAlt style={{ width: 350, alignItems: 'center', borderRadius: 15, marginTop: 25}}>
-							<TouchableNativeFeedback
-								onPress={() => {
-									navigation.navigate('Seed Library')
+							<ViewAlt
+								style={{
+									width: 350,
+									alignItems: 'center',
+									borderRadius: 15,
+									marginTop: 25,
 								}}
 							>
-									<Text style={{ fontSize: 22, fontWeight: '700', padding: 25 }}>+ Add a new Seed</Text>
+								<TouchableNativeFeedback
+									onPress={() => {
+										navigation.navigate('Seed Library')
+									}}
+								>
+									<Text
+										style={{ fontSize: 22, fontWeight: '700', padding: 25 }}
+									>
+										+ Add a new Seed
+									</Text>
 								</TouchableNativeFeedback>
-								</ViewAlt>
+							</ViewAlt>
 						)
 					}}
 				/>
