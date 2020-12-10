@@ -6,6 +6,7 @@ import {
 	Platform,
 	RefreshControl,
 } from 'react-native'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import { CardLayout } from '../../components/Card/CardLayout'
 import Loader from '../../components/LoadingScreens/Loader'
 import { SafeAreaView, Text, View, ViewAlt } from '../../components/Styles'
@@ -60,18 +61,15 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 					data={data}
 					ListEmptyComponent={() => {
 						return (
-							<View
-								style={{
-									flex: 1,
-									flexDirection: 'column',
-									alignItems: 'center',
-									justifyContent: 'center',
+							<ViewAlt style={{ width: 350, alignItems: 'center', borderRadius: 15, marginTop: 25}}>
+							<TouchableNativeFeedback
+								onPress={() => {
+									navigation.navigate('Seed Library')
 								}}
 							>
-								<ViewAlt style={{ padding: 12, borderRadius: 10 }}>
-									<Text>Add a new Seed</Text>
+									<Text style={{ fontSize: 22, fontWeight: '700', padding: 25 }}>+ Add a new Seed</Text>
+								</TouchableNativeFeedback>
 								</ViewAlt>
-							</View>
 						)
 					}}
 				/>
