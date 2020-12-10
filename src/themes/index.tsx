@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components/native'
 import darkTheme from './dark'
 import lightTheme from './light'
 
-const defaultMode = Appearance.getColorScheme() 
+const defaultMode = Appearance.getColorScheme()
 
 const ThemeContext = createContext({
 	mode: defaultMode,

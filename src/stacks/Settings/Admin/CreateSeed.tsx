@@ -67,7 +67,7 @@ export default function CreateSeed() {
 
 	// Used for syncing state for each input after input value change
 	useEffect(() => {
-		(() =>
+		;(() =>
 			updateFormData({
 				species,
 				days_to_harvest,
@@ -113,9 +113,10 @@ export default function CreateSeed() {
 				zone_12a,
 				zone_12b,
 				zone_13a,
-				zone_13b
+				zone_13b,
 			}))()
-	}, [species,
+	}, [
+		species,
 		days_to_harvest,
 		days_to_germinate,
 		starter_age,
@@ -159,7 +160,8 @@ export default function CreateSeed() {
 		zone_12a,
 		zone_12b,
 		zone_13a,
-		zone_13b])
+		zone_13b,
+	])
 
 	return (
 		<KeyboardAvoidingView
@@ -327,8 +329,8 @@ export default function CreateSeed() {
 						{isLoading ? (
 							<ButtonPrimaryText>Adding Seed...</ButtonPrimaryText>
 						) : (
-								<ButtonPrimaryText>Submit</ButtonPrimaryText>
-							)}
+							<ButtonPrimaryText>Submit</ButtonPrimaryText>
+						)}
 					</ButtonPrimary>
 				</View>
 			</ScrollView>

@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { CardLayout } from '../../components/Card/CardLayout'
 import Loader from '../../components/LoadingScreens/Loader'
-import { SafeAreaView, View } from '../../components/Styles'
+import { SafeAreaView, Text, View, ViewAlt } from '../../components/Styles'
 import { getPlants } from '../../utils/Utils'
 
 const { width } = Dimensions.get('window')
@@ -58,6 +58,22 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 					)}
 					keyExtractor={(plant: any, idx) => plant + idx}
 					data={data}
+					ListEmptyComponent={() => {
+						return (
+							<View
+								style={{
+									flex: 1,
+									flexDirection: 'column',
+									alignItems: 'center',
+									justifyContent: 'center',
+								}}
+							>
+								<ViewAlt style={{ padding: 12, borderRadius: 10 }}>
+									<Text>Add a new Seed</Text>
+								</ViewAlt>
+							</View>
+						)
+					}}
 				/>
 			)}
 		</SafeAreaView>
