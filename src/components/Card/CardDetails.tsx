@@ -1,6 +1,5 @@
 import moment from 'moment'
-import React, { useContext } from 'react'
-import { AuthContext } from '../../providers/AuthProvider'
+import React from 'react'
 import { Text, ViewAlt } from '../Styles'
 
 interface CardDetailsProps {
@@ -16,9 +15,6 @@ export const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
 	type,
 	item,
 }) => {
-	const { userData } = useContext(AuthContext)
-	const zone = userData.zone
-
 	const datePlanted = date_planted => {
 		return moment(date_planted).format('l')
 	}
