@@ -117,71 +117,71 @@ export async function getPlants(setData, setLoading) {
 export async function addPlantAlert({ data, navigation }) {
 	// const [date, setDate] = useState("");
 	{
-		data.starter_age > 0 && data.starter_age !== "undefined"
-			? (Alert.alert(
-		'Is this a seed or starter',
-		`A start adds the plant past the germination stage.`,
-		[
-			{
-				text: 'Planting a Seed',
-				onPress: () => {
-					AddSeedToMyGarden({
-						data,
-						date_planted: new Date(),
-						navigation,
-					})
+		data.starter_age > 0 && data.starter_age !== 'undefined'
+			? Alert.alert(
+					'Is this a seed or starter',
+					`A start adds the plant past the germination stage.`,
+					[
+						{
+							text: 'Planting a Seed',
+							onPress: () => {
+								AddSeedToMyGarden({
+									data,
+									date_planted: new Date(),
+									navigation,
+								})
 
-					console.log('Seed Pressed')
-				},
-			},
-			{
-				text: 'Planting a Starter',
-				onPress: () => {
-					console.log('Starter Pressed')
-					var dt = new Date()
-					dt.setDate(dt.getDate() - parseInt(data.starter_age))
-					console.log(dt)
-					AddSeedToMyGarden({
-						data,
-						date_planted: dt,
-						navigation,
-					})
+								console.log('Seed Pressed')
+							},
+						},
+						{
+							text: 'Planting a Starter',
+							onPress: () => {
+								console.log('Starter Pressed')
+								var dt = new Date()
+								dt.setDate(dt.getDate() - parseInt(data.starter_age))
+								console.log(dt)
+								AddSeedToMyGarden({
+									data,
+									date_planted: dt,
+									navigation,
+								})
 
-					console.log('Starter Pressed')
-				},
-			},
-			{
-				text: 'Cancel',
-				onPress: () => console.log('Cancel Pressed'),
-				style: 'cancel',
-			},
-		],
-		{ cancelable: true },
-	))
-			: (Alert.alert(
-		'would you like to plant this seed?',
-		``,
-		[
-			{
-				text: 'Plant my Seed',
-				onPress: () => {
-					AddSeedToMyGarden({
-						data,
-						date_planted: new Date(),
-						navigation,
-					})
+								console.log('Starter Pressed')
+							},
+						},
+						{
+							text: 'Cancel',
+							onPress: () => console.log('Cancel Pressed'),
+							style: 'cancel',
+						},
+					],
+					{ cancelable: true },
+			  )
+			: Alert.alert(
+					'would you like to plant this seed?',
+					``,
+					[
+						{
+							text: 'Plant my Seed',
+							onPress: () => {
+								AddSeedToMyGarden({
+									data,
+									date_planted: new Date(),
+									navigation,
+								})
 
-					console.log('Seed Pressed')
-				},
-			},
-			{
-				text: 'Cancel',
-				onPress: () => console.log('Cancel Pressed'),
-				style: 'cancel',
-			},
-		],
-		{ cancelable: true },
-	))
+								console.log('Seed Pressed')
+							},
+						},
+						{
+							text: 'Cancel',
+							onPress: () => console.log('Cancel Pressed'),
+							style: 'cancel',
+						},
+					],
+					{ cancelable: true },
+			  )
 	}
 }
 

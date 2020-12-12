@@ -62,7 +62,9 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
 							</View>
 						)}
 						keyExtractor={(detail: any, idx) => detail + idx}
-						data={data.sort((a:any, b:any) => a.species.localeCompare(b.species))}
+						data={data.sort((a: any, b: any) =>
+							a.species.localeCompare(b.species),
+						)}
 					/>
 				</>
 			)}
