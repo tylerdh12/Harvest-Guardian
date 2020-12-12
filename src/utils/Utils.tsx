@@ -116,7 +116,9 @@ export async function getPlants(setData, setLoading) {
 
 export async function addPlantAlert({ data, navigation }) {
 	// const [date, setDate] = useState("");
-	Alert.alert(
+	{
+		data.starter_age > 0 && data.starter_age !== "undefined"
+			? (Alert.alert(
 		'Is this a seed or starter',
 		`A start adds the plant past the germination stage.`,
 		[
@@ -155,17 +157,32 @@ export async function addPlantAlert({ data, navigation }) {
 			},
 		],
 		{ cancelable: true },
-	)
+	))
+			: (Alert.alert(
+		'would you like to plant this seed?',
+		``,
+		[
+			{
+				text: 'Plant my Seed',
+				onPress: () => {
+					AddSeedToMyGarden({
+						data,
+						date_planted: new Date(),
+						navigation,
+					})
 
-	// return (
-	//   <View>
-	//     <TextInput
-	//       style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-	//       onChangeText={(text) => setDate(text)}
-	//       value={date}
-	//     />
-	//   </View>
-	// );
+					console.log('Seed Pressed')
+				},
+			},
+			{
+				text: 'Cancel',
+				onPress: () => console.log('Cancel Pressed'),
+				style: 'cancel',
+			},
+		],
+		{ cancelable: true },
+	))
+	}
 }
 
 export const AddSeedToMyGarden = async ({ date_planted, data, navigation }) => {
