@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableWithoutFeedback, StyleSheet } from 'react-native'
 import { CardDetails } from './CardDetails'
 import { CardImage } from './CardImage'
 import ProgressBar from './ProgressBar'
@@ -18,14 +18,14 @@ export const CardLayout: React.FunctionComponent<CardLayoutProps> = ({
 	type,
 }) => {
 	return (
-		<TouchableOpacity
+		<TouchableWithoutFeedback
 			onPress={() => {
 				navigation.navigate('Details', {
 					data: item,
 				})
 			}}
 		>
-			<View style={{ backgroundColor: 'transparent' }}>
+			<View style={styles.cardWrapper}>
 				{type === 'plant' ? (
 					<>
 						<CardImage image={item.seed.images} />
@@ -48,6 +48,15 @@ export const CardLayout: React.FunctionComponent<CardLayoutProps> = ({
 					</>
 				)}
 			</View>
-		</TouchableOpacity>
+		</TouchableWithoutFeedback>
 	)
 }
+
+const styles = StyleSheet.create({
+	cardWrapper: {
+		marginTop: 30,
+		marginBottom: 10,
+		marginHorizontal: 5,
+		backgroundColor: 'transparent',
+	},
+})

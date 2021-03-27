@@ -5,14 +5,15 @@ import {
 	FlatList,
 	Platform,
 	RefreshControl,
+	StyleSheet,
 } from 'react-native'
-import { TouchableNativeFeedback } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native'
 import { CardLayout } from '../../components/Card/CardLayout'
 import Loader from '../../components/LoadingScreens/Loader'
 import { SafeAreaView, Text, View, ViewAlt } from '../../components/Styles'
 import { getPlants } from '../../utils/Utils'
 
-const { width } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 interface MyGardenProps {
 	navigation: any
 }
@@ -39,7 +40,14 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 	}
 
 	return (
-		<SafeAreaView style={{ width: '100%' }}>
+		<SafeAreaView
+			style={{
+				flex: 1,
+				width: '100%',
+				alignItems: 'center',
+				justifyContent: 'center',
+			}}
+		>
 			{isLoading ? (
 				Platform.OS === 'ios' ? (
 					<Loader />
@@ -48,43 +56,47 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 				)
 			) : (
 				<FlatList
-					style={{ marginTop: 0, width: '100%' }}
+					style={{
+						flex: 1,
+						width: '100%',
+					}}
 					refreshControl={
 						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 					}
 					renderItem={({ item, index }) => (
-						<View
-							style={{
-								margin: 15,
-							}}
-						>
-							<CardLayout {...{ item }} navigation={navigation} type="plant" />
-						</View>
+						<CardLayout {...{ item }} navigation={navigation} type="plant" />
 					)}
 					keyExtractor={(plant: any, idx) => plant + idx}
 					data={data}
 					ListEmptyComponent={() => {
 						return (
-							<ViewAlt
-								style={{
-									width: 350,
-									alignItems: 'center',
-									borderRadius: 15,
-									marginTop: 25,
-								}}
-							>
-								<TouchableNativeFeedback
-									onPress={() => {
-										navigation.navigate('Seed Library')
+							<View style={[styles.fullSize, { width: width, height: height }]}>
+								<ViewAlt
+									style={{
+										width: 350,
+										borderRadius: 15,
+										alignItems: 'center',
+										justifyContent: 'center',
 									}}
 								>
-									<Text
-										style={{ fontSize: 22, fontWeight: '700', padding: 25 }}
+									<TouchableOpacity
+										onPress={() => {
+											navigation.navigate('Seed Library')
+										}}
 									>
-										+ Add a new Seed
-									</Text>
-								</TouchableNativeFeedback>
-							</ViewAlt>
+										<Text
+											style={{
+												fontSize: 22,
+												fontWeight: '700',
+												padding: 25,
+												alignItems: 'center',
+											}}
+										>
+											+ Add a new Seed
+										</Text>
+									</TouchableOpacity>
+								</ViewAlt>
+							</View>
 						)
 					}}
 				/>
@@ -92,3 +104,10 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 		</SafeAreaView>
 	)
 }
+
+const styles = StyleSheet.create({
+	fullSize: {
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+})
