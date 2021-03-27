@@ -5,9 +5,10 @@
 /* -------------------------- Imports and Includes -------------------------- */
 
 import axios from 'axios'
-import { Alert } from 'react-native'
+import { Alert, Platform } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import moment from 'moment'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 /* -------------------------- User Registration ----------------------------- */
 
@@ -94,24 +95,45 @@ export async function ValidatePassword({
 /* ------------------------- My Garden Functions ---------------------------- */
 
 export async function getPlants(setData, setLoading) {
-	await SecureStore.getItemAsync('authBasic').then(authBasic => {
-		axios({
-			method: 'get',
-			url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
-			headers: {
-				Authorization: authBasic,
-			},
-		})
-			.then(res => {
-				if (res.status === 401) {
-					console.log('Response 401')
-					console.log(res)
-				} else {
-					setData(res.data)
-				}
+	if (Platform.OS === 'web') {
+		await AsyncStorage.getItem('authBasic').then(authBasic => {
+			axios({
+				method: 'get',
+				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
+				headers: {
+					Authorization: authBasic,
+				},
 			})
-			.then(() => setLoading(false))
-	})
+				.then(res => {
+					if (res.status === 401) {
+						console.log('Response 401')
+						console.log(res)
+					} else {
+						setData(res.data)
+					}
+				})
+				.then(() => setLoading(false))
+		})
+	} else {
+		await SecureStore.getItemAsync('authBasic').then(authBasic => {
+			axios({
+				method: 'get',
+				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
+				headers: {
+					Authorization: authBasic,
+				},
+			})
+				.then(res => {
+					if (res.status === 401) {
+						console.log('Response 401')
+						console.log(res)
+					} else {
+						setData(res.data)
+					}
+				})
+				.then(() => setLoading(false))
+		})
+	}
 }
 
 export async function addPlantAlert({ data, navigation }) {
@@ -186,28 +208,53 @@ export async function addPlantAlert({ data, navigation }) {
 }
 
 export const AddSeedToMyGarden = async ({ date_planted, data, navigation }) => {
-	await SecureStore.getItemAsync('authBasic').then(authBasic => {
-		axios({
-			method: 'post',
-			url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
-			headers: {
-				Authorization: authBasic,
-			},
-			data: {
-				_id: data._id,
-				date_planted: date_planted,
-			},
-		}).then(res => {
-			if (res.status === 401) {
-				console.log('Response 401')
-				console.log(res)
-			} else {
-				navigation.navigate('MyGarden', {
-					setRefresh: true,
-				})
-			}
+	if (Platform.OS === 'web') {
+		await AsyncStorage.getItem('authBasic').then(authBasic => {
+			axios({
+				method: 'post',
+				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
+				headers: {
+					Authorization: authBasic,
+				},
+				data: {
+					_id: data._id,
+					date_planted: date_planted,
+				},
+			}).then(res => {
+				if (res.status === 401) {
+					console.log('Response 401')
+					console.log(res)
+				} else {
+					navigation.navigate('MyGarden', {
+						setRefresh: true,
+					})
+				}
+			})
 		})
-	})
+	} else {
+		await SecureStore.getItemAsync('authBasic').then(authBasic => {
+			axios({
+				method: 'post',
+				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
+				headers: {
+					Authorization: authBasic,
+				},
+				data: {
+					_id: data._id,
+					date_planted: date_planted,
+				},
+			}).then(res => {
+				if (res.status === 401) {
+					console.log('Response 401')
+					console.log(res)
+				} else {
+					navigation.navigate('MyGarden', {
+						setRefresh: true,
+					})
+				}
+			})
+		})
+	}
 }
 
 export async function deletePlantAlert({ data, onRefresh }) {
@@ -234,24 +281,45 @@ export async function deletePlantAlert({ data, onRefresh }) {
 }
 
 export async function deletePlantFromMyGarden({ data, onRefresh }) {
-	await SecureStore.getItemAsync('authBasic').then(authBasic => {
-		axios({
-			method: 'delete',
-			url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${data._id}`,
-			headers: {
-				Authorization: authBasic,
-			},
-		}).then(res => {
-			if (res.status === 401) {
-				console.log('Response 401')
-				console.log(res)
-			} else if (res.status === 200) {
-				res.data.deletedCount === 1
-					? onRefresh()
-					: alert('Error Deleting Plant')
-			}
+	if (Platform.OS === 'web') {
+		await AsyncStorage.getItem('authBasic').then(authBasic => {
+			axios({
+				method: 'delete',
+				url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${data._id}`,
+				headers: {
+					Authorization: authBasic,
+				},
+			}).then(res => {
+				if (res.status === 401) {
+					console.log('Response 401')
+					console.log(res)
+				} else if (res.status === 200) {
+					res.data.deletedCount === 1
+						? onRefresh()
+						: alert('Error Deleting Plant')
+				}
+			})
 		})
-	})
+	} else {
+		await SecureStore.getItemAsync('authBasic').then(authBasic => {
+			axios({
+				method: 'delete',
+				url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${data._id}`,
+				headers: {
+					Authorization: authBasic,
+				},
+			}).then(res => {
+				if (res.status === 401) {
+					console.log('Response 401')
+					console.log(res)
+				} else if (res.status === 200) {
+					res.data.deletedCount === 1
+						? onRefresh()
+						: alert('Error Deleting Plant')
+				}
+			})
+		})
+	}
 }
 
 export const AddSeedToLibrary = async ({ data, setIsLoading }) => {
@@ -334,19 +402,39 @@ export const AddSeedToLibrary = async ({ data, setIsLoading }) => {
 }
 
 export async function deleteSeedFromLibrary({ data, onRefresh }) {
-	await SecureStore.getItemAsync('authBasic').then(authBasic => {
-		axios({
-			method: 'delete',
-			url: `https://harvestguardian-rest-api.herokuapp.com/v1/seeds/${data._id}`,
-		}).then(res => {
-			if (res.status === 401) {
-				console.log('Response 401')
-				console.log(res)
-			} else if (res.status === 200) {
-				res.data.deletedCount === 1 ? onRefresh() : alert('Error Deleting Seed')
-			}
+	if (Platform.OS === 'web') {
+		await AsyncStorage.getItem('authBasic').then(authBasic => {
+			axios({
+				method: 'delete',
+				url: `https://harvestguardian-rest-api.herokuapp.com/v1/seeds/${data._id}`,
+			}).then(res => {
+				if (res.status === 401) {
+					console.log('Response 401')
+					console.log(res)
+				} else if (res.status === 200) {
+					res.data.deletedCount === 1
+						? onRefresh()
+						: alert('Error Deleting Seed')
+				}
+			})
 		})
-	})
+	} else {
+		await SecureStore.getItemAsync('authBasic').then(authBasic => {
+			axios({
+				method: 'delete',
+				url: `https://harvestguardian-rest-api.herokuapp.com/v1/seeds/${data._id}`,
+			}).then(res => {
+				if (res.status === 401) {
+					console.log('Response 401')
+					console.log(res)
+				} else if (res.status === 200) {
+					res.data.deletedCount === 1
+						? onRefresh()
+						: alert('Error Deleting Seed')
+				}
+			})
+		})
+	}
 }
 
 // Harvest Progress

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
+import { View, StyleSheet, Dimensions, Platform } from 'react-native'
 import { Container, Text } from '../../components/Styles'
 import { useTheme } from '../../themes'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import * as SecureStore from 'expo-secure-store'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function Preferences() {
 	const theme = useTheme()
@@ -12,13 +13,21 @@ function Preferences() {
 
 	useEffect(() => {
 		return () => {
-			SecureStore.setItemAsync('metric', JSON.stringify(metric))
+			if (Platform.OS === 'web') {
+				AsyncStorage.setItem('metric', JSON.stringify(metric))
+			} else {
+				SecureStore.setItemAsync('metric', JSON.stringify(metric))
+			}
 		}
 	}, [metric])
 
 	useEffect(() => {
 		return () => {
-			SecureStore.setItemAsync('celsius', JSON.stringify(celsius))
+			if (Platform.OS === 'web') {
+				AsyncStorage.setItem('celsius', JSON.stringify(celsius))
+			} else {
+				SecureStore.setItemAsync('celsius', JSON.stringify(celsius))
+			}
 		}
 	}, [celsius])
 

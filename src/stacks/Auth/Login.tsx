@@ -23,6 +23,7 @@ import {
 } from '../../components/Styles'
 import { AuthContext } from '../../providers/AuthProvider'
 import * as SecureStore from 'expo-secure-store'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 /* --------------------------- Login Stack Reducer -------------------------- */
 
@@ -110,18 +111,33 @@ function Login({ navigation }) {
 	/* --------- useEffect Calls Auto Login if authBasic in SecureStorage -------- */
 
 	useEffect(() => {
-		SecureStore.getItemAsync('userData').then(userData => {
-			if (userData !== null) {
-				try {
-					dispatch({ type: 'alreadyAuth' })
-					SecureStore.getItemAsync('authBasic').then(authBasic => {
-						login(authBasic)
-					})
-				} catch (error) {
-					console.log(error)
+		if (Platform.OS === 'web') {
+			AsyncStorage.getItem('userData').then(userData => {
+				if (userData !== null) {
+					try {
+						dispatch({ type: 'alreadyAuth' })
+						AsyncStorage.getItem('authBasic').then(authBasic => {
+							login(authBasic)
+						})
+					} catch (error) {
+						console.log(error)
+					}
 				}
-			}
-		})
+			})
+		} else {
+			SecureStore.getItemAsync('userData').then(userData => {
+				if (userData !== null) {
+					try {
+						dispatch({ type: 'alreadyAuth' })
+						SecureStore.getItemAsync('authBasic').then(authBasic => {
+							login(authBasic)
+						})
+					} catch (error) {
+						console.log(error)
+					}
+				}
+			})
+		}
 	}, [])
 
 	/* ------- Primary Login Function Handler requires username, password ------- */
@@ -132,19 +148,32 @@ function Login({ navigation }) {
 		const token = encode(`${username}:${password}`)
 		const authBasic = 'Basic ' + token
 		try {
-			await SecureStore.setItemAsync('rawLogin', rawLogin)
-			await SecureStore.setItemAsync('authBasic', authBasic)
+			if (Platform.OS === 'web') {
+				await AsyncStorage.setItem('rawLogin', rawLogin)
+				await AsyncStorage.setItem('authBasic', authBasic)
+			} else {
+				await SecureStore.setItemAsync('rawLogin', rawLogin)
+				await SecureStore.setItemAsync('authBasic', authBasic)
+			}
 		} catch (error) {
 			console.log(error)
 		}
 
 		await login(authBasic)
 
-		SecureStore.getItemAsync('userData').then(userData => {
-			if (userData === null) {
-				dispatch({ type: 'error', message: 'Invalid Email or Password' })
-			}
-		})
+		if (Platform.OS === 'web') {
+			AsyncStorage.getItem('userData').then(userData => {
+				if (userData === null) {
+					dispatch({ type: 'error', message: 'Invalid Email or Password' })
+				}
+			})
+		} else {
+			SecureStore.getItemAsync('userData').then(userData => {
+				if (userData === null) {
+					dispatch({ type: 'error', message: 'Invalid Email or Password' })
+				}
+			})
+		}
 	}
 
 	/* ------------------------- Return for Login Stack ------------------------- */

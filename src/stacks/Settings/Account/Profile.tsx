@@ -2,7 +2,7 @@ import { Feather } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack'
 import axios from 'axios'
 import { default as React, useContext, useEffect, useState } from 'react'
-import { Alert, Button } from 'react-native'
+import { Alert, Button, Platform } from 'react-native'
 import {
 	BasicText,
 	Label,
@@ -11,6 +11,7 @@ import {
 } from '../../../components/Styles'
 import { AuthContext } from '../../../providers/AuthProvider'
 import * as SecureStore from 'expo-secure-store'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface ProfileProps {
 	userData?: {
@@ -88,27 +89,51 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 
 	function DeleteUserAccount() {
 		setIsLoading(true)
-		SecureStore.getItemAsync('authBasic').then(authBasic => {
-			axios({
-				method: 'delete',
-				url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
-				headers: {
-					Authorization: authBasic,
-				},
-			})
-				.then(res => {
-					if (res.status === 401) {
-						console.log('Response 401')
-						console.log(res)
-					} else if (res.status === 500) {
-						console.log('Response Error 500')
-						console.log(res)
-					} else {
-						logout()
-					}
+		if (Platform.OS === 'web') {
+			AsyncStorage.getItem('authBasic').then(authBasic => {
+				axios({
+					method: 'delete',
+					url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+					headers: {
+						Authorization: authBasic,
+					},
 				})
-				.then(() => setIsLoading(false))
-		})
+					.then(res => {
+						if (res.status === 401) {
+							console.log('Response 401')
+							console.log(res)
+						} else if (res.status === 500) {
+							console.log('Response Error 500')
+							console.log(res)
+						} else {
+							logout()
+						}
+					})
+					.then(() => setIsLoading(false))
+			})
+		} else {
+			SecureStore.getItemAsync('authBasic').then(authBasic => {
+				axios({
+					method: 'delete',
+					url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+					headers: {
+						Authorization: authBasic,
+					},
+				})
+					.then(res => {
+						if (res.status === 401) {
+							console.log('Response 401')
+							console.log(res)
+						} else if (res.status === 500) {
+							console.log('Response Error 500')
+							console.log(res)
+						} else {
+							logout()
+						}
+					})
+					.then(() => setIsLoading(false))
+			})
+		}
 	}
 
 	return (

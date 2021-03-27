@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { Platform } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface AuthProviderProps {
 	children: any
@@ -38,8 +40,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			.then(res => {
 				setUserData(res.data)
 				console.log(res.data.email + ' has Logged on')
-				SecureStore.setItemAsync('userData', JSON.stringify(res.data))
-				SecureStore.setItemAsync('userData', JSON.stringify(res.data))
+				if (Platform.OS === 'web') {
+					AsyncStorage.setItem('userData', JSON.stringify(res.data))
+				} else {
+					SecureStore.setItemAsync('userData', JSON.stringify(res.data))
+				}
 			})
 			.catch(err => {
 				if (err) {
@@ -62,11 +67,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				logout: () => {
 					console.log(userData.email + ' Logged out')
 					setUserData(null)
-					SecureStore.deleteItemAsync('userData')
-					SecureStore.deleteItemAsync('authBasic')
-					SecureStore.deleteItemAsync('userData')
-					SecureStore.deleteItemAsync('rawLogin')
-					SecureStore.deleteItemAsync('EXPO_CONSTANTS_INSTALLATION_ID')
+					if (Platform.OS === 'web') {
+						AsyncStorage.removeItem('userData')
+						AsyncStorage.removeItem('authBasic')
+						AsyncStorage.removeItem('userData')
+						AsyncStorage.removeItem('rawLogin')
+						AsyncStorage.removeItem('EXPO_CONSTANTS_INSTALLATION_ID')
+					} else {
+						SecureStore.deleteItemAsync('userData')
+						SecureStore.deleteItemAsync('authBasic')
+						SecureStore.deleteItemAsync('userData')
+						SecureStore.deleteItemAsync('rawLogin')
+						SecureStore.deleteItemAsync('EXPO_CONSTANTS_INSTALLATION_ID')
+					}
 				},
 			}}
 		>
