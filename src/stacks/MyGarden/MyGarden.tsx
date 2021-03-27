@@ -39,7 +39,7 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 	}
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={{ width: '100%' }}>
 			{isLoading ? (
 				Platform.OS === 'ios' ? (
 					<Loader />
@@ -48,12 +48,16 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 				)
 			) : (
 				<FlatList
-					style={{ marginTop: 8 }}
+					style={{ marginTop: 0, width: '100%' }}
 					refreshControl={
 						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 					}
 					renderItem={({ item, index }) => (
-						<View style={{ margin: 8 }}>
+						<View
+							style={{
+								margin: 15,
+							}}
+						>
 							<CardLayout {...{ item }} navigation={navigation} type="plant" />
 						</View>
 					)}

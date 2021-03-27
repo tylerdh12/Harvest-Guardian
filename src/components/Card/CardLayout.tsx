@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableNativeFeedback } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native'
 import { CardDetails } from './CardDetails'
 import { CardImage } from './CardImage'
 import ProgressBar from './ProgressBar'
@@ -18,7 +18,7 @@ export const CardLayout: React.FunctionComponent<CardLayoutProps> = ({
 	type,
 }) => {
 	return (
-		<TouchableNativeFeedback
+		<TouchableOpacity
 			onPress={() => {
 				navigation.navigate('Details', {
 					data: item,
@@ -48,6 +48,6 @@ export const CardLayout: React.FunctionComponent<CardLayoutProps> = ({
 					</>
 				)}
 			</View>
-		</TouchableNativeFeedback>
+		</TouchableOpacity>
 	)
 }
