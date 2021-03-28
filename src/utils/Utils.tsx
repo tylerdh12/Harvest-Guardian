@@ -10,6 +10,8 @@ import * as SecureStore from 'expo-secure-store'
 import moment from 'moment'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+//TODO: Separate utilities into category files
+
 /* -------------------------- User Registration ----------------------------- */
 
 export async function RegisterUser({

@@ -7,6 +7,8 @@ import { AuthContext } from '../../providers/AuthProvider'
 import { addPlantAlert, deleteSeedFromLibrary } from '../../utils/Utils'
 import { styles } from './../../components/Styles/Styles'
 
+// TODO: Look to redesign details screen to be more visually appealing
+
 export default function SeedDetails({ route, navigation }) {
 	const [data, setData] = useState(route.params.data)
 	const User = useContext<any>(AuthContext)
@@ -23,7 +25,8 @@ export default function SeedDetails({ route, navigation }) {
 			<TouchableOpacity
 				style={styles.addPlantButton}
 				onPress={() => {
-					addPlantAlert({
+					console.log('Add Seed to Library has been Clicked')
+					navigation.push('Create', {
 						data,
 						navigation,
 					})
