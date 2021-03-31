@@ -52,14 +52,15 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
 			) : (
 				<>
 					<FlatList
-						style={{ marginTop: 8 }}
+						style={{
+							flex: 1,
+							width: '100%',
+						}}
 						refreshControl={
 							<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 						}
 						renderItem={({ item }) => (
-							<View style={{ padding: 8 }}>
-								<CardLayout {...{ item }} navigation={navigation} type="seed" />
-							</View>
+							<CardLayout {...{ item }} navigation={navigation} type="seed" />
 						)}
 						keyExtractor={(detail: any, idx) => detail + idx}
 						data={data.sort((a: any, b: any) =>
