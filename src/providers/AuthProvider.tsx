@@ -39,7 +39,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		})
 			.then(res => {
 				setUserData(res.data)
-				console.log(res.data.email + ' has Logged on')
 				if (Platform.OS === 'web') {
 					AsyncStorage.setItem('userData', JSON.stringify(res.data))
 				} else {
@@ -65,7 +64,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 					return getUserData(authBasic)
 				},
 				logout: () => {
-					console.log(userData.email + ' Logged out')
 					setUserData(null)
 					if (Platform.OS === 'web') {
 						AsyncStorage.removeItem('userData')
