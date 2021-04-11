@@ -61,7 +61,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5faa00f71620cb0017da7e36',
@@ -127,7 +126,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5faa01741620cb0017da7e37',
@@ -194,7 +192,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5faa01ca1620cb0017da7e38',
@@ -273,7 +270,6 @@ export const Plants = [
 		soil_temp_low: 60,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3a17ac06b7001740c243',
@@ -346,7 +342,6 @@ export const Plants = [
 		soil_temp_low: 45,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3a4cac06b7001740c244',
@@ -398,7 +393,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3a71ac06b7001740c245',
@@ -450,7 +444,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3a8cac06b7001740c246',
@@ -518,7 +511,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3aaeac06b7001740c247',
@@ -570,7 +562,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3ad1ac06b7001740c248',
@@ -633,7 +624,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3aedac06b7001740c249',
@@ -700,7 +690,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3b12ac06b7001740c24a',
@@ -752,7 +741,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3b30ac06b7001740c24b',
@@ -814,7 +802,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3b51ac06b7001740c24c',
@@ -876,7 +863,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3b6dac06b7001740c24d',
@@ -928,7 +914,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3ba7ac06b7001740c24e',
@@ -980,7 +965,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3bc1ac06b7001740c24f',
@@ -1048,7 +1032,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3bdaac06b7001740c250',
@@ -1102,7 +1085,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3befac06b7001740c251',
@@ -1167,7 +1149,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3c05ac06b7001740c252',
@@ -1221,7 +1202,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3c1aac06b7001740c253',
@@ -1289,7 +1269,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3c43ac06b7001740c254',
@@ -1363,7 +1342,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3c58ac06b7001740c255',
@@ -1415,7 +1393,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3c6fac06b7001740c256',
@@ -1469,7 +1446,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3c8aac06b7001740c257',
@@ -1523,7 +1499,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3ca7ac06b7001740c258',
@@ -1575,7 +1550,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3cc7ac06b7001740c259',
@@ -1637,7 +1611,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3ce0ac06b7001740c25a',
@@ -1689,7 +1662,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3cfbac06b7001740c25b',
@@ -1743,7 +1715,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3d1dac06b7001740c25c',
@@ -1797,7 +1768,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3d36ac06b7001740c25d',
@@ -1868,7 +1838,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3d51ac06b7001740c25e',
@@ -1922,7 +1891,6 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 	{
 		_id: '5fab3d6bac06b7001740c25f',
@@ -1974,6 +1942,5 @@ export const Plants = [
 		soil_temp_low: null,
 		complete: false,
 		public: false,
-		__v: 0,
 	},
 ]
