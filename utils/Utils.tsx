@@ -107,6 +107,7 @@ export async function getPlants(setData, setLoading) {
 				},
 			})
 				.then(res => {
+					console.log(res)
 					if (res.status === 401) {
 						console.log('Response 401')
 						console.log(res)
