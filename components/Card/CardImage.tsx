@@ -9,12 +9,5 @@ interface CardImageProps {
 export const CardImage: React.FunctionComponent<CardImageProps> = ({
 	image,
 }) => {
-	return (
-		<Image
-			source={{
-				uri: `${image}`,
-			}}
-			style={styles.img}
-		/>
-	)
+	return <Image source={image} style={styles.img} />
 }

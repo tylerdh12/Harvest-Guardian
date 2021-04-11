@@ -47,12 +47,7 @@ export default function SeedDetails({ route, navigation }) {
 					/>
 				</View>
 			</TouchableOpacity>
-			<Image
-				style={styles.headerImage}
-				source={{
-					uri: `${data.images}`,
-				}}
-			/>
+			<Image style={styles.headerImage} source={data.images} />
 			<ViewAlt style={styles.contentWrapperContainer}>
 				{data.days_to_germinate ? (
 					<DetailListItem
