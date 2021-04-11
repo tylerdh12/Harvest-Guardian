@@ -9,18 +9,15 @@ import { deletePlantAlert, harvestProgress } from '../../utils/Utils'
 // TODO Add dynamic value for zone
 function Details({ route, navigation }) {
 	const [data, setData] = useState(route.params.data)
+	const [plant, setPlant] = useState(route.params.plant)
+
 	const User = useContext<any>(AuthContext)
 
 	let key = '_' + User.userData.zone.toString()
 
 	return (
 		<ScrollView>
-			<Image
-				style={{ width: '100%', height: 300 }}
-				source={{
-					uri: `${data.seed.images}`,
-				}}
-			/>
+			<Image style={{ width: '100%', height: 300 }} source={plant.images} />
 			<ViewAlt
 				style={{
 					paddingTop: 25,
@@ -33,84 +30,72 @@ function Details({ route, navigation }) {
 					label="Date Planted"
 					dataText={moment(data.date_planted).format('l')}
 				/>
-				{data.seed.days_to_germinate ? (
+				{plant.days_to_germinate ? (
 					<DetailListItem
 						label="Days To Germinate"
-						dataText={data.seed.days_to_germinate}
+						dataText={plant.days_to_germinate}
 					/>
 				) : null}
-				{data.seed.days_to_harvest ? (
+				{plant.days_to_harvest ? (
 					<DetailListItem
 						label="Days To Harvest"
 						dataText={Math.floor(
-							data.seed.days_to_harvest -
-								harvestProgress(data.date_planted, data.seed.days_to_harvest),
+							plant.days_to_harvest -
+								harvestProgress(data.date_planted, plant.days_to_harvest),
 						)}
 					/>
 				) : null}
-				{data.seed.zone[key] ? (
+				{plant.zone[key] ? (
 					<DetailListItem
 						label="Planting Months"
-						dataText={data.seed.zone[key].join(', ')}
+						dataText={plant.zone[key].join(', ')}
 					/>
 				) : null}
-				{data.seed.sow_indoor !== '' ? (
-					<DetailListItem
-						label="Sowing Indoor"
-						dataText={data.seed.sow_indoor}
-					/>
+				{plant.sow_indoor !== '' ? (
+					<DetailListItem label="Sowing Indoor" dataText={plant.sow_indoor} />
 				) : null}
-				{data.seed.sow_outdoor !== '' ? (
-					<DetailListItem
-						label="Sowing Outdoor"
-						dataText={data.seed.sow_outdoor}
-					/>
+				{plant.sow_outdoor !== '' ? (
+					<DetailListItem label="Sowing Outdoor" dataText={plant.sow_outdoor} />
 				) : null}
-				{data.seed.sun ? (
-					<DetailListItem label="Sun Requirements" dataText={data.seed.sun} />
+				{plant.sun ? (
+					<DetailListItem label="Sun Requirements" dataText={plant.sun} />
 				) : null}
-				{data.seed.water ? (
-					<DetailListItem
-						label="Water Requirements"
-						dataText={data.seed.water}
-					/>
+				{plant.water ? (
+					<DetailListItem label="Water Requirements" dataText={plant.water} />
 				) : null}
-				{data.seed.soil_temp_low || data.seed.soil_temp_high ? (
+				{plant.soil_temp_low || plant.soil_temp_high ? (
 					<DetailListItem
 						label="Soil Temperature Range"
 						dataText={
-							data.seed.soil_temp_high + ' - ' + data.seed.soil_temp_low + ' °F'
+							plant.soil_temp_high + ' - ' + plant.soil_temp_low + ' °F'
 						}
 					/>
 				) : null}
-				{data.seed.depth ? (
-					<DetailListItem
-						label="Seed Depth"
-						dataText={data.seed.depth + ' in'}
-					/>
+				{plant.depth ? (
+					<DetailListItem label="Seed Depth" dataText={plant.depth + ' in'} />
 				) : null}
-				{data.seed.spacing ? (
+				{plant.spacing ? (
 					<DetailListItem
 						label="Seed Spacing"
-						dataText={data.seed.spacing + ' in'}
+						dataText={plant.spacing + ' in'}
 					/>
 				) : null}
-				{data.seed.height ? (
+				{plant.height ? (
 					<DetailListItem
 						label="Plant Height"
-						dataText={data.seed.height + ' in'}
+						dataText={plant.height + ' in'}
 					/>
 				) : null}
-				{data.seed.companions ? (
+				{plant.companions ? (
 					<DetailListItem
 						label="Companion Plants"
-						dataText={data.seed.companions.join(', ')}
+						dataText={plant.companions.join(', ')}
 					/>
 				) : null}
-				{data.seed.non_companions ? (
+				{plant.non_companions ? (
 					<DetailListItem
 						label="Anti-Companion Plants"
-						dataText={data.seed.non_companions.join(', ')}
+						dataText={plant.non_companions.join(', ')}
 					/>
 				) : null}
 				<View

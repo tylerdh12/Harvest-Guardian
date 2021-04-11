@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { TouchableWithoutFeedback, StyleSheet } from 'react-native'
 import { CardDetails } from './CardDetails'
 import { CardImage } from './CardImage'
 import ProgressBar from './ProgressBar'
 import SpeciesTitle from './SpeciesTitle'
 import { CardBody, View } from '../Styles'
+import { Plants } from './../../data/plants.js'
 
 interface CardLayoutProps {
 	navigation: any
@@ -17,24 +18,38 @@ export const CardLayout: React.FunctionComponent<CardLayoutProps> = ({
 	item,
 	type,
 }) => {
+	const [plant, setPlant] = useState({ ...item })
+
+	useEffect(() => {
+		for (let i = 0; i < Plants.length; i++) {
+			if (Plants[i]._id === item.seed) {
+				setPlant(Plants[i])
+			}
+		}
+	}, [])
+
+	console.log(plant)
+
 	return (
 		<TouchableWithoutFeedback
 			onPress={() => {
+				console.log(item)
 				navigation.navigate('Details', {
 					data: item,
+					plant,
 				})
 			}}
 		>
 			<View style={styles.cardWrapper}>
 				{type === 'plant' ? (
 					<>
-						<CardImage image={item.seed.images} />
+						<CardImage image={plant.images} />
 						<CardBody>
-							<SpeciesTitle species={item.seed.species} />
+							<SpeciesTitle species={plant.species} />
 							<ProgressBar
 								date_planted={item.date_planted}
-								days_to_harvest={item.seed.days_to_harvest}
-								days_to_germinate={item.seed.days_to_germinate}
+								days_to_harvest={plant.days_to_harvest}
+								days_to_germinate={plant.days_to_germinate}
 							/>
 							<CardDetails type={type} item={item} />
 						</CardBody>
