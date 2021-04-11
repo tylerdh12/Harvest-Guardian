@@ -1,6 +1,6 @@
 import { Picker } from '@react-native-community/picker'
 import React from 'react'
-import { Label, View } from '../../components/Styles'
+import { Label, View } from '../Styles'
 
 interface Props {}
 

@@ -1,3 +1,3 @@
-import { Providers } from './src/providers/Providers'
+import { Providers } from './providers/Providers'
 
 export default Providers
