@@ -10,8 +10,6 @@ interface SeedLibraryProps {
 }
 
 export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
-	const data = Plants
-
 	return (
 		<SafeAreaView>
 			<>
@@ -24,7 +22,7 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
 						<CardLayout {...{ item }} navigation={navigation} type="seed" />
 					)}
 					keyExtractor={(detail: any, idx) => detail + idx}
-					data={data.sort((a: any, b: any) =>
+					data={Plants.sort((a: any, b: any) =>
 						a.species.localeCompare(b.species),
 					)}
 				/>

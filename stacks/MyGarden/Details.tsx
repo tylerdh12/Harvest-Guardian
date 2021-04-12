@@ -1,5 +1,5 @@
 import moment from 'moment'
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Button, Image } from 'react-native'
 import { DetailListItem } from '../../components/DetailListItem'
 import { ScrollView, View, ViewAlt } from '../../components/Styles'
@@ -8,8 +8,8 @@ import { deletePlantAlert, harvestProgress } from '../../utils/Utils'
 
 // TODO Add dynamic value for zone
 function Details({ route, navigation }) {
-	const [data, setData] = useState(route.params.data)
-	const [plant, setPlant] = useState(route.params.plant)
+	const data = route.params.data
+	const plant = route.params.plant
 
 	const User = useContext<any>(AuthContext)
 

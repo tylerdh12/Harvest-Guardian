@@ -4,7 +4,7 @@ import { Image, View, Button } from 'react-native'
 import { DetailListItem } from '../../components/DetailListItem'
 import { ScrollView, TouchableOpacity, ViewAlt } from '../../components/Styles'
 import { AuthContext } from '../../providers/AuthProvider'
-import { addPlantAlert, deleteSeedFromLibrary } from '../../utils/Utils'
+import { deleteSeedFromLibrary } from '../../utils/Utils'
 import { styles } from './../../components/Styles/Styles'
 
 // TODO: Look to redesign details screen to be more visually appealing

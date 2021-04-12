@@ -63,7 +63,7 @@ export const MyGarden: React.FC<MyGardenProps> = ({ navigation }) => {
 					refreshControl={
 						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 					}
-					renderItem={({ item, index }) => (
+					renderItem={({ item }) => (
 						<CardLayout {...{ item }} navigation={navigation} type="plant" />
 					)}
 					keyExtractor={(plant: any, idx) => plant + idx}

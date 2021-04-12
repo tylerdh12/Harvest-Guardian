@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { SafeAreaView, Text } from '../../components/Styles'
 
 function EditPlantDetails({ route, navigation }) {
-	const [data, setData] = useState(route.params.data)
+	const data = route.params.data
 
 	function apiCall(x: any) {
 		return x

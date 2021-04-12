@@ -28,15 +28,12 @@ export const CardLayout: React.FunctionComponent<CardLayoutProps> = ({
 		}
 	}, [])
 
-	console.log(plant)
-
 	return (
 		<TouchableWithoutFeedback
 			onPress={() => {
-				console.log(item)
 				navigation.navigate('Details', {
 					data: item,
-					plant,
+					plant: plant,
 				})
 			}}
 		>
@@ -51,14 +48,14 @@ export const CardLayout: React.FunctionComponent<CardLayoutProps> = ({
 								days_to_harvest={plant.days_to_harvest}
 								days_to_germinate={plant.days_to_germinate}
 							/>
-							<CardDetails type={type} item={item} />
+							<CardDetails type={type} item={item} plant={plant} />
 						</CardBody>
 					</>
 				) : (
 					<>
 						<CardImage image={item.images} />
 						<CardBody>
-							<CardDetails type={type} item={item} />
+							<CardDetails type={type} item={item} plant={plant} />
 						</CardBody>
 					</>
 				)}

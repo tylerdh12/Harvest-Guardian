@@ -3,27 +3,28 @@ import React from 'react'
 import { Text, ViewAlt } from '../Styles'
 
 interface CardDetailsProps {
-	item: any
-	date_planted?: any
-	days_to_harvest?: any
-	type: any
-	species?: string
-	variety?: string
+	item: {
+		date_planted: Date
+		species?: String
+		days_to_harvest?: Number
+	}
+	plant: {
+		days_to_harvest: Number
+	}
+	type: string
 }
 
 export const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
 	type,
 	item,
+	plant,
 }) => {
 	const datePlanted = date_planted => {
 		return moment(date_planted).format('l')
 	}
 
-	function dateToBeHarvested(date_planted, days_to_harvest) {
-		const dateToHarvest = moment(date_planted).add(
-			parseInt(days_to_harvest),
-			'days',
-		)
+	function dateToBeHarvested(planted, harvest) {
+		const dateToHarvest = moment(planted).add(parseInt(harvest), 'days')
 		const numberOfDays = moment().diff(dateToHarvest, 'days')
 		if (Math.sign(numberOfDays) == -1) {
 			return moment(dateToHarvest).format('l')
@@ -68,7 +69,7 @@ export const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
 						fontWeight: '500',
 					}}
 				>
-					{dateToBeHarvested(item.date_planted, item.seed.days_to_harvest)}
+					{dateToBeHarvested(item.date_planted, plant.days_to_harvest)}
 				</Text>
 			</ViewAlt>
 		</ViewAlt>
@@ -93,7 +94,6 @@ export const CardDetails: React.FunctionComponent<CardDetailsProps> = ({
 					</Text>
 				</ViewAlt>
 			</ViewAlt>
-			{/* <Zone item={item} zone={zone} /> */}
 		</>
 	)
 }
