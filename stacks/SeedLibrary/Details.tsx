@@ -1,16 +1,15 @@
 import { FontAwesome5 } from '@expo/vector-icons'
-import React, { useContext, useState } from 'react'
-import { Image, View, Button } from 'react-native'
+import React, { useContext } from 'react'
+import { Image, View } from 'react-native'
 import { DetailListItem } from '../../components/DetailListItem'
 import { ScrollView, TouchableOpacity, ViewAlt } from '../../components/Styles'
 import { AuthContext } from '../../providers/AuthProvider'
-import { deleteSeedFromLibrary } from '../../utils/Utils'
 import { styles } from './../../components/Styles/Styles'
 
 // TODO: Look to redesign details screen to be more visually appealing
 
 export default function SeedDetails({ route, navigation }) {
-	const [data, setData] = useState(route.params.data)
+	const data = route.params.data
 	const User = useContext<any>(AuthContext)
 
 	let key = `_${User.userData.zone.toString()}`
@@ -25,7 +24,6 @@ export default function SeedDetails({ route, navigation }) {
 			<TouchableOpacity
 				style={styles.addPlantButton}
 				onPress={() => {
-					console.log('Add Seed to Library has been Clicked')
 					navigation.push('Create', {
 						data,
 						navigation,
@@ -127,18 +125,6 @@ export default function SeedDetails({ route, navigation }) {
 					/>
 				) : null}
 			</ViewAlt>
-			<Button
-				title="Delete"
-				color="red"
-				onPress={() => {
-					deleteSeedFromLibrary({
-						data,
-						onRefresh: () => {
-							navigation.goBack()
-						},
-					})
-				}}
-			/>
 		</ScrollView>
 	)
 }

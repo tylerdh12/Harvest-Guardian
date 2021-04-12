@@ -177,7 +177,6 @@ export async function addPlantAlert({ data, navigation }) {
 						},
 						{
 							text: 'Cancel',
-							onPress: () => console.log('Cancel Pressed'),
 							style: 'cancel',
 						},
 					],
@@ -201,7 +200,6 @@ export async function addPlantAlert({ data, navigation }) {
 						},
 						{
 							text: 'Cancel',
-							onPress: () => console.log('Cancel Pressed'),
 							style: 'cancel',
 						},
 					],
@@ -261,26 +259,10 @@ export const AddSeedToMyGarden = async ({ date_planted, data, navigation }) => {
 }
 
 export async function deletePlantAlert({ data, onRefresh }) {
-	Alert.alert(
-		'Are you sure?',
-		`Would you still like to remove ${data.seed.species} ${data.seed.variety} from My Garden`,
-		[
-			{
-				text: 'Yes - Remove Please',
-				onPress: async () =>
-					deletePlantFromMyGarden({
-						data,
-						onRefresh,
-					}),
-			},
-			{
-				text: 'Cancel',
-				onPress: () => console.log('Cancel Pressed'),
-				style: 'cancel',
-			},
-		],
-		{ cancelable: false },
-	)
+	deletePlantFromMyGarden({
+		data,
+		onRefresh,
+	})
 }
 
 export async function deletePlantFromMyGarden({ data, onRefresh }) {

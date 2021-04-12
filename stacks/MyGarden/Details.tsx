@@ -107,14 +107,6 @@ function Details({ route, navigation }) {
 					}}
 				>
 					<Button
-						title="Edit"
-						onPress={() => {
-							navigation.navigate('EditPlantDetails', {
-								data: data,
-							})
-						}}
-					/>
-					<Button
 						title="Delete"
 						color="red"
 						onPress={() => {

@@ -1,7 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 import { Text } from 'react-native'
-import NotificationModal from '../../components/NotificationModal'
 import { TouchableOpacity } from '../../components/Styles'
 import theme from '../../theme'
 import Details from './Details'
@@ -11,16 +10,13 @@ import { MyGarden } from './MyGarden'
 const Stack = createStackNavigator()
 
 export const MyGardenStack = ({ route, navigation }) => {
-	const notificationsList = ['Test Notifications', 'Second Notification']
 	return (
 		<Stack.Navigator initialRouteName="MyGarden">
 			<Stack.Screen
 				name="MyGarden"
 				options={{
 					headerTitle: 'My Garden',
-					// headerRight: (notificationsList) => (
-					//   <NotificationModal notify={notificationsList} />
-					// ),
+
 					headerStyle: {
 						backgroundColor: 'rgb(148, 224, 136)',
 					},
