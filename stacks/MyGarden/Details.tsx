@@ -2,7 +2,15 @@ import moment from 'moment'
 import React, { useContext } from 'react'
 import { Button, Image } from 'react-native'
 import { DetailListItem } from '../../components/DetailListItem'
-import { ScrollView, View, ViewAlt } from '../../components/Styles'
+import { StepsMaker } from '../../components/StepsMaker'
+import {
+	BottomBorderView,
+	ScrollView,
+	View,
+	ViewAlt,
+	Text,
+} from '../../components/Styles'
+import { styles } from '../../components/Styles/Styles'
 import { AuthContext } from '../../providers/AuthProvider'
 import { deletePlantAlert, harvestProgress } from '../../utils/Utils'
 
@@ -36,26 +44,83 @@ function Details({ route, navigation }) {
 						dataText={plant.days_to_germinate}
 					/>
 				) : null}
-				{plant.days_to_harvest ? (
+				{plant.days_to_harvest_short ? (
 					<DetailListItem
 						label="Days To Harvest"
 						dataText={Math.floor(
 							plant.days_to_harvest -
-								harvestProgress(data.date_planted, plant.days_to_harvest),
+								harvestProgress(data.date_planted, plant.days_to_harvest_short),
 						)}
 					/>
 				) : null}
-				{plant.zone[key] ? (
+				{plant.zone[key].length > 0 ? (
 					<DetailListItem
 						label="Planting Months"
 						dataText={plant.zone[key].join(', ')}
 					/>
 				) : null}
-				{plant.sow_indoor !== '' ? (
-					<DetailListItem label="Sowing Indoor" dataText={plant.sow_indoor} />
+				{plant.indoorSeed.length > 0 ? (
+					<BottomBorderView style={styles.borderBottom}>
+						<ViewAlt>
+							<Text style={styles.detailLabel}>Sow Indoor: </Text>
+							<ViewAlt
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'flex-start',
+									justifyContent: 'center',
+									paddingHorizontal: 12,
+									paddingTop: 4,
+								}}
+							>
+								{plant.indoorSeed?.map((value, index) => {
+									return <StepsMaker step={value} index={index} key={index} />
+								})}
+							</ViewAlt>
+						</ViewAlt>
+					</BottomBorderView>
 				) : null}
-				{plant.sow_outdoor !== '' ? (
-					<DetailListItem label="Sowing Outdoor" dataText={plant.sow_outdoor} />
+				{plant.outdoorSeed.length > 0 ? (
+					<BottomBorderView style={styles.borderBottom}>
+						<ViewAlt>
+							<Text style={styles.detailLabel}>Sow Outdoor: </Text>
+							<ViewAlt
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'flex-start',
+									justifyContent: 'center',
+									paddingHorizontal: 12,
+									paddingTop: 4,
+								}}
+							>
+								{plant.outdoorSeed.map((value, index) => {
+									return <StepsMaker step={value} index={index} key={index} />
+								})}
+							</ViewAlt>
+						</ViewAlt>
+					</BottomBorderView>
+				) : null}
+				{plant.starter.length > 0 ? (
+					<BottomBorderView style={styles.borderBottom}>
+						<ViewAlt>
+							<Text style={styles.detailLabel}>Starter: </Text>
+							<ViewAlt
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'flex-start',
+									justifyContent: 'center',
+									paddingHorizontal: 12,
+									paddingTop: 4,
+								}}
+							>
+								{plant.starter.map((value, index) => {
+									return <StepsMaker step={value} index={index} key={index} />
+								})}
+							</ViewAlt>
+						</ViewAlt>
+					</BottomBorderView>
 				) : null}
 				{plant.sun ? (
 					<DetailListItem label="Sun Requirements" dataText={plant.sun} />
@@ -86,13 +151,13 @@ function Details({ route, navigation }) {
 						dataText={plant.height + ' in'}
 					/>
 				) : null}
-				{plant.companions ? (
+				{plant.companions.length > 0 ? (
 					<DetailListItem
 						label="Companion Plants"
 						dataText={plant.companions.join(', ')}
 					/>
 				) : null}
-				{plant.non_companions ? (
+				{plant.non_companions.length > 0 ? (
 					<DetailListItem
 						label="Anti-Companion Plants"
 						dataText={plant.non_companions.join(', ')}

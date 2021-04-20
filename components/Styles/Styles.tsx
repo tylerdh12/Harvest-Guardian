@@ -89,4 +89,10 @@ export const styles = StyleSheet.create({
 		padding: 4,
 		marginTop: 8,
 	},
+	lightThemeText: {
+		color: 'black',
+	},
+	darkThemeText: {
+		color: 'white',
+	},
 })

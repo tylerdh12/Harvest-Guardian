@@ -91,7 +91,7 @@ function loginReducer(state, action) {
 function Login({ navigation }) {
 	/* -- Import useContext from Auth Context to Use login() and Error Reports -- */
 
-	const { login, logout } = useContext(AuthContext)
+	const { login } = useContext(AuthContext)
 
 	/* ------------------- Reducer Variables to Control State ------------------- */
 

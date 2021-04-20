@@ -5,6 +5,8 @@ import { DetailListItem } from '../../components/DetailListItem'
 import { ScrollView, TouchableOpacity, ViewAlt } from '../../components/Styles'
 import { AuthContext } from '../../providers/AuthProvider'
 import { styles } from './../../components/Styles/Styles'
+import { BottomBorderView, Text } from './../../components/Styles'
+import { StepsMaker } from '../../components/StepsMaker'
 
 // TODO: Look to redesign details screen to be more visually appealing
 
@@ -13,7 +15,6 @@ export default function SeedDetails({ route, navigation }) {
 	const User = useContext<any>(AuthContext)
 
 	let key = `_${User.userData.zone.toString()}`
-
 	return (
 		<ScrollView
 			style={{ position: 'relative' }}
@@ -67,18 +68,77 @@ export default function SeedDetails({ route, navigation }) {
 						} Days`}
 					/>
 				) : null}
-				{data.zone[key] ? (
+				{data.zone[key].length > 0 ? (
 					<DetailListItem
 						label="Planting Months"
 						dataText={data.zone[key].join(', ')}
 					/>
 				) : null}
-				{data.sow_indoor !== '' ? (
-					<DetailListItem label="Sowing Indoor" dataText={data.sow_indoor} />
+
+				{data.indoorSeed.length > 0 ? (
+					<BottomBorderView style={styles.borderBottom}>
+						<ViewAlt>
+							<Text style={styles.detailLabel}>Sow Indoor: </Text>
+							<ViewAlt
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'flex-start',
+									justifyContent: 'center',
+									paddingHorizontal: 12,
+									paddingTop: 4,
+								}}
+							>
+								{data.indoorSeed?.map((value, index) => {
+									return <StepsMaker step={value} index={index} key={index} />
+								})}
+							</ViewAlt>
+						</ViewAlt>
+					</BottomBorderView>
 				) : null}
-				{data.sow_outdoor !== '' ? (
-					<DetailListItem label="Sowing Outdoor" dataText={data.sow_outdoor} />
+				{data.outdoorSeed.length > 0 ? (
+					<BottomBorderView style={styles.borderBottom}>
+						<ViewAlt>
+							<Text style={styles.detailLabel}>Sow Outdoor: </Text>
+							<ViewAlt
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'flex-start',
+									justifyContent: 'center',
+									paddingHorizontal: 12,
+									paddingTop: 4,
+								}}
+							>
+								{data.outdoorSeed.map((value, index) => {
+									return <StepsMaker step={value} index={index} key={index} />
+								})}
+							</ViewAlt>
+						</ViewAlt>
+					</BottomBorderView>
 				) : null}
+				{data.starter.length > 0 ? (
+					<BottomBorderView style={styles.borderBottom}>
+						<ViewAlt>
+							<Text style={styles.detailLabel}>Starter: </Text>
+							<ViewAlt
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'flex-start',
+									justifyContent: 'center',
+									paddingHorizontal: 12,
+									paddingTop: 4,
+								}}
+							>
+								{data.starter.map((value, index) => {
+									return <StepsMaker step={value} index={index} key={index} />
+								})}
+							</ViewAlt>
+						</ViewAlt>
+					</BottomBorderView>
+				) : null}
+
 				{data.sun ? (
 					<DetailListItem label="Sun Requirements" dataText={data.sun} />
 				) : null}
@@ -92,16 +152,7 @@ export default function SeedDetails({ route, navigation }) {
 					/>
 				) : null}
 				{data.depth || data.depth.$numberDecimal ? (
-					<DetailListItem
-						label="Seed Depth"
-						dataText={
-							data.depth != Number
-								? data.depth.$numberDecimal < 1
-									? data.depth.$numberDecimal + ' in'
-									: ''
-								: data.depth + ' in'
-						}
-					/>
+					<DetailListItem label="Seed Depth" dataText={data.depth + ' in'} />
 				) : null}
 				{data.spacing ? (
 					<DetailListItem
@@ -112,13 +163,13 @@ export default function SeedDetails({ route, navigation }) {
 				{data.height ? (
 					<DetailListItem label="Plant Height" dataText={data.height + ' in'} />
 				) : null}
-				{data.companions ? (
+				{data.companions.length > 0 ? (
 					<DetailListItem
 						label="Companion Plants"
 						dataText={data.companions.join(', ')}
 					/>
 				) : null}
-				{data.non_companions ? (
+				{data.non_companions.length > 0 ? (
 					<DetailListItem
 						label="Anti-Companion Plants"
 						dataText={data.non_companions.join(', ')}
