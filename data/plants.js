@@ -2,7 +2,7 @@ export const Plants = [
 	{
 		_id: '5faa00621620cb0017da7e35',
 		species: 'Arugula',
-		images: require('../assets/plant_images/arugula.jpg'),
+		images: require('../assets/images/plant_images/arugula.jpg'),
 		description:
 			'Arugula is a fast-growing, cool-season salad green that adds a tangy, mustard-like flavor to salads.',
 		requirements: [
@@ -163,7 +163,7 @@ export const Plants = [
 	{
 		_id: '5faa00f71620cb0017da7e36',
 		species: 'Asparagus',
-		images: require('../assets/plant_images/asparagus.jpg'),
+		images: require('../assets/images/plant_images/asparagus.jpg'),
 		description:
 			'Asparagus is grown from 1-year-old plants or "crowns," which are planted in early spring as soon as the soil can be worked. Asparagus plants take three growing seasons to reach full production, although light harvesting can begin in the second year. Once established, an asparagus planting will provide abundant harvests for fifteen to twenty-five years. Allow ten to twenty plants per person (15 to 30 feet of row).',
 		requirements: [
@@ -283,7 +283,7 @@ export const Plants = [
 	{
 		_id: '5faa01741620cb0017da7e37',
 		species: 'Beets',
-		images: require('../assets/plant_images/beets.jpg'),
+		images: require('../assets/images/plant_images/beets.jpg'),
 		description:
 			"Beets come in a glistening array of colors, from garnet red to red-and-white striped to deep gold to creamy white, but the real hidden treasure is that the entire beet, from its robust and flavorful root to its buttery green top, is sweet and delicious. Beets' original ancestors were leafy plants, without bulbous roots, that grew in the moderate climates of the Mediterranean region. Like their cousin, Swiss chard, beet greens are packed with nutrition. However, it's the roots for which beets are best known.",
 		requirements: [],
@@ -374,7 +374,7 @@ export const Plants = [
 	{
 		_id: '5faa01ca1620cb0017da7e38',
 		species: 'Bell Pepper',
-		images: require('../assets/plant_images/bell_pepper.jpg'),
+		images: require('../assets/images/plant_images/bell_pepper.jpg'),
 		description: '',
 		requirements: [],
 		depth: 0.25,
@@ -484,7 +484,7 @@ export const Plants = [
 		nutrient: [],
 		byproducts: [],
 		species: 'Broccoli',
-		images: require('../assets/plant_images/broccoli.jpg'),
+		images: require('../assets/images/plant_images/broccoli.jpg'),
 		description: '',
 		days_to_germinate: 10,
 		days_to_harvest: 150,
@@ -574,7 +574,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/brussels_sprouts.jpg'),
+		images: require('../assets/images/plant_images/brussels_sprouts.jpg'),
 		species: 'Brussels Sprouts',
 		description: '',
 		days_to_germinate: null,
@@ -624,7 +624,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/cabbage.jpg'),
+		images: require('../assets/images/plant_images/cabbage.jpg'),
 		species: 'Cabbage',
 		description: '',
 		days_to_germinate: null,
@@ -688,7 +688,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/carrots.jpg'),
+		images: require('../assets/images/plant_images/carrots.jpg'),
 		species: 'Carrots',
 		description:
 			"Store-bought carrots are no match for crisp, sweet carrots freshly harvested from the garden. Besides tasting good, carrots are packed with nutrients. The saying that carrots are good for your eyes isn't just an old wives's tale. Carrots contain a pigment called carotene that converts to vitamin A when you digest it. This vitamin helps us to see in reduced light and at night. Choose varieties according to use and when you want to harvest. To prolong the harvest, stagger your carrot seed starting, beginning three to four weeks before the average last spring frost date.",
@@ -745,7 +745,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/cauliflower.jpg'),
+		images: require('../assets/images/plant_images/cauliflower.jpg'),
 		species: 'Cauliflower',
 		description: '',
 		days_to_germinate: null,
@@ -804,7 +804,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/celery.jpg'),
+		images: require('../assets/images/plant_images/celery.jpg'),
 		species: 'Celery',
 		description:
 			"Celery has a reputation for being a fussy, hard-to-grow vegetable, but with the right climate and some care, you can grow large, tender plants. Celery requires about 125 days of a long, relatively cool growing season. For a summer harvest, start plants indoors ten to twelve weeks before the last spring frost date. Where the fall climate is mild, try a midsummer seeding in the garden. Some gardeners prefer to blanch celery for a milder taste when eaten raw. If you're pressed for time, try a self-blanching variety.",
@@ -874,7 +874,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/cucumber.jpg'),
+		images: require('../assets/images/plant_images/cucumber.jpg'),
 		species: 'Cucumber',
 		description:
 			"For a heat-loving plant, the cucumber has all the connotations of coolness attached to it. Sliced cucumbers are still recommended to soothe hot, tired eyelids and for skin irritations. And there's nothing like sliced cucumbers in a summer salad to beat the heat. There are many cucumber types, including picklers, slicers, gherkins, white, and bush cukes. The art of pickling and preserving cucumbers is centuries old. You can pickle or preserve any small cucumber, or eat picklers fresh right off the vine, so experiment with different varieties, regardless of how you intend to use them. In general, picklers are smallish, often warty, green, used for small sweet pickles or large dills, but the can also be eaten fresh. Slicers form 5- to 8-inch cylindrical cucumbers, used for slicing and serving fresh. Cucumbers grow best with long, hot, humid days with maximum sunshine and warm nights. Plants are extremely susceptible to frost.",
@@ -931,7 +931,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/edamame.jpg'),
+		images: require('../assets/images/plant_images/edamame.jpg'),
 		species: 'Edamame',
 		description: '',
 		days_to_germinate: null,
@@ -989,7 +989,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/eggplant.jpg'),
+		images: require('../assets/images/plant_images/eggplant.jpg'),
 		species: 'Eggplant',
 		description:
 			"Long and thin or round and fat, eggplants range from egg- to melon-sized and come in a rainbow of colors, including purple, pink, white, orange, and green. They're used in hors d'oeuvres, main courses, grilled dishes, and pickled condiments. Eggplants are attractive, tender herbaceous perennials normally grown as annuals. Their purple flowers and large, purple-tinged leaves combine with colorful fruit to make them a stunning addition for a vegetable or flower garden. Eggplants are a warm-weather crop, thriving in heat and humidity that makes other crops wilt. It's best to grow eggplants in a part of the garden where you haven't grown related crops, including tomatoes, potatoes, and peppers, within the last 3 or 4 years. Many pests of eggplants are pests of these related plants too.",
@@ -1055,7 +1055,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/garlic.jpg'),
+		images: require('../assets/images/plant_images/garlic.jpg'),
 		species: 'Garlic',
 		description:
 			'With a strong, pungent flavor, garlic is prized for its wide and indispensable use as a kitchen herb. You can buy garlic bulbs or sets from garden stores or mail-order sources. There are three types of garlic: Elephant, hardneck and softneck. ,Elephant, garlic is actually a bulbing leek and a good variety to look for if you want large, mild-flavored clusters. Elephant bulbs can weigh as much as 1lb. with 4-6 large cloves. Hardneck garlic will produce bulbs of 6-12 cloves while softneck produces 8-24 smaller cloves. Hardneck garlic does best in cold winter areas, while softneck garlic is a good choice for mild winter climates.',
@@ -1113,7 +1113,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/green_beans.jpg'),
+		images: require('../assets/images/plant_images/green_beans.jpg'),
 		species: 'Green Beans',
 		description: '',
 		days_to_germinate: null,
@@ -1163,7 +1163,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/kale.jpg'),
+		images: require('../assets/images/plant_images/kale.jpg'),
 		species: 'Kale',
 		description: '',
 		days_to_germinate: null,
@@ -1227,7 +1227,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/lettuce.jpg'),
+		images: require('../assets/images/plant_images/lettuce.jpg'),
 		species: 'Lettuce',
 		description:
 			'"Lettuce" is synonymous with "salad" for people all over the world. It\'s by far the world\'s most popular salad plant and has been cultivated for more than 2,000 years. The uninitiated may think lettuce is lettuce. Not so! There\'s a wonderful diversity of varieties. Each has a distinct flavor, texture and color, so you can have remarkably different salads just by varying the lettuces you use. Lettuce is a cool-weather crop. Sow seeds as soon as the ground can be worked in the spring and follow with small sowings at 10- to 14-day intervals until late spring in warm summer areas or early summer in the North.',
@@ -1285,7 +1285,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/okra.jpg'),
+		images: require('../assets/images/plant_images/okra.jpg'),
 		species: 'Okra',
 		description:
 			"A member of the hibiscus family, okra has one of the most beautiful blooms in the vegetable garden. Okra is used as a natural thickener for soups and stews and is an essential ingredient in gumbo. Okra is considered a \"southern\" crop because it thrive in hot weather. However, okra can be grown anywhere, although it bears most abundantly in regions with long, hot summers. Okra is often stewed with tomatoes, deep fried, pickled, boiled or steamed and served with butter, as well as eaten raw, fresh from the garden. Some folks don't like okra's gummy quality when it's boiled or steamed, and it seems to be more popular when combined with other vegetables, fried or pickled.",
@@ -1354,7 +1354,7 @@ export const Plants = [
 		non_companions: ['asparagus', 'peas'],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/onions.jpg'),
+		images: require('../assets/images/plant_images/onions.jpg'),
 		species: 'Onions',
 		description:
 			"There are hundreds of types of onions, varying in size and form, as well as sweetness/pungency. They are essential ingredients in cuisines across the globe. Onions are a cool-weather crop. Because they require a relatively long growing season, they are usually started from sets, which are simply small onion bulbs. However, the selection of onion varieties available as sets is often limited, so if you want to try unusual varieties you'll have to start them indoors from seed. In general, the stronger-flavored onions keep longer, while mild, sweet varieties are more perishable.",
@@ -1412,7 +1412,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/parsnip.jpg'),
+		images: require('../assets/images/plant_images/parsnip.jpg'),
 		species: 'Parsnip',
 		description:
 			'Parsnips were popular with the ancient Greeks and Romans, and have been grown in America since the first colonists brought them over from Europe. Although they take a long time to mature, their flavor is worth the wait. Parsnips are tasty by themselves, as well as in soups and in stews. Parsnips require a long growing season (100 to 130 days) to mature. They tolerate frosts and can be harvested just before the ground freezes or left in the ground over the winter. Time seed sowing for harvest just after the average first fall frost date. In areas with mild winters, you can also sow seeds in the fall from September through November. Purchase fresh seeds each year.',
@@ -1484,7 +1484,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/peas.jpg'),
+		images: require('../assets/images/plant_images/peas.jpg'),
 		species: 'Peas',
 		description:
 			'Green peas are a garden favorite. Whether you grow English peas for shelling, or edible-podded snow and snap peas, there\'s nothing like the taste of fresh, sweet peas in spring. Plant dwarf varieties to save space and produce early harvests. Plant tall or pole varieties for bigger harvests over a longer period of time. Peas are a cool-weather crop that can withstand frost. Northern gardeners can often plant their first crop near the end of March, as soon as the garden has thawed and the soil can be worked. Because shelling peas (the kind you remove from the pod before eating) were derived from varieties that thrived in England, they are sometimes called "English peas." This helps distinguish them from edible-podded snow and snap peas, both of which have similar cultural requirements, as well as southern peas -- black-eyeds, crowders and creams, for example.',
@@ -1562,7 +1562,7 @@ export const Plants = [
 		],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/potatoes.jpg'),
+		images: require('../assets/images/plant_images/potatoes.jpg'),
 		species: 'Potatoes',
 		description:
 			'The potato ranks with grains such as wheat, rice, and corn as one of the most important staple crops in the world. There has a resurgence of interest in home-grown potatoes, especially now that they are available in a wide variety of colors, shapes, and tastes. Most gardeners plant "seed" potatoes, a confusing term since these aren\'t seeds at all but rather small potato tubers. For best results, purchase certified seed potatoes; these will have been inspected to ensure they are free from disease. Avoid planting supermarket potatoes, because they may have been treated with a growth inhibitor to prevent them from sprouting. Consider trying some unusual varieties, such as fingerlings or blue potatoes.',
@@ -1620,7 +1620,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/pumpkin.jpg'),
+		images: require('../assets/images/plant_images/pumpkin.jpg'),
 		species: 'Pumpkin',
 		description: '',
 		days_to_germinate: null,
@@ -1670,7 +1670,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/radish.jpg'),
+		images: require('../assets/images/plant_images/radish.jpg'),
 		species: 'Radish',
 		description:
 			'Radishes are some of the easiest vegetables to grow. In this country, most radishes are eaten raw in salads. However, in other cuisines, radishes are an important food source, often preserved by drying or pickling. Radish varieties vary in size, color, shape, and taste --some are very pungent, while others are quite mild. Plant short-season or spring varieties in spring or fall, depending on local temperatures. Ideal growing temperature is 60 degrees F to 65 degrees F. Cooler or warmer weather results in harsher-tasting radishes. Plants will mature in 18 to 45 days, depending on variety. Plant winter types in the summer or fall, depending on the variety; they mature in 45 to 70 days.',
@@ -1728,7 +1728,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/rhubarb.jpg'),
+		images: require('../assets/images/plant_images/rhubarb.jpg'),
 		species: 'Rhubarb',
 		description:
 			"Although technically a vegetable, rhubarb is generally used as a fruit in desserts and jams. Attractive and easy to grow, rhubarb has a place in every home garden. Rhubarb is a perennial vegetable; put it where it won't be disturbed. Purchase and plant rhubarb roots (not seeds) in early spring as soon as the soil can be worked. Three to five plants should provide enough for an average family.",
@@ -1786,7 +1786,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/rutabaga.jpg'),
+		images: require('../assets/images/plant_images/rutabaga.jpg'),
 		species: 'Rutabaga',
 		description: '',
 		days_to_germinate: null,
@@ -1844,7 +1844,7 @@ export const Plants = [
 		non_companions: ['potatoes'],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/spinach.jpg'),
+		images: require('../assets/images/plant_images/spinach.jpg'),
 		species: 'Spinach',
 		description:
 			"Tasty, nutritious spinach is one of the first crops planted in spring. It's higher in iron, calcium and vitamins than most cultivated greens, and it's one of the best vegetable sources of vitamins A, B and C. Spinach must have at least 6 weeks of cool weather from seeding to harvest. Preparing a spot for spinach in the garden is best done in the fall so that, come spring, you can sow the seeds outdoors as soon as the ground thaws. Or, if you live where winters are mild, you can prepare soil and plant in fall.",
@@ -1902,7 +1902,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/zucchini.jpg'),
+		images: require('../assets/images/plant_images/zucchini.jpg'),
 		species: 'Zucchini',
 		description: '',
 		days_to_germinate: null,
@@ -1952,7 +1952,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/sweet_potatoes.jpg'),
+		images: require('../assets/images/plant_images/sweet_potatoes.jpg'),
 		species: 'Sweet Potatoes',
 		description:
 			"Sweet potatoes are a long-season, tropical vegetable, so it's no surprise that they're grown mostly in southern states. However, it's possible for northern gardeners to grow these tasty, highly nutritious vegetables. Most sweet potato varieties require at least 4 frost-free months to grow big potatoes. Sweet potatoes thrive in hot weather. The plants are very tender, can't take frost, and refuse to grow in cool soil. Plants yield best if night temperatures average 72 degrees F. Sweet potatoes are grown from \"slips,\" or sprouts, which are available at nurseries in southern states or by mail. If you are growing your own slips, begin sprouting them about 8 weeks before planting.",
@@ -2010,7 +2010,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/swiss_chard.jpg'),
+		images: require('../assets/images/plant_images/swiss_chard.jpg'),
 		species: 'Swiss Chard',
 		description:
 			"Chard, also called Swiss chard, is a favorite green of many gardeners because it grows well in both cool and warm weather. This ability to grow through the summer sets it apart from most greens, and should put chard at the top of your planting list! It's delicious served steamed or stir- fried, while young, small leaves are tender enough to add to salads. Chard is a good choice for container growing, especially the decorative varieties with colored stalks. Chard is actually a bottomless beet. Although a member of the beet family, it doesn't develop bulbous roots. However, like beets, the large, fleshy stalks and broad, crisp leaves are packed with minerals. Chard comes in different colors. Varieties such as 'Lucullus' and 'Fordhook Giant' are green with white stems. 'Rhubarb' and 'Ruby Red' have bright red stems and reddish-green leaves. And 'Bright Lights' is like a sunset in your garden, with stems ranging from yellow to intense orange to fuchsia, purple, pink and white, with crinkly green leaves. All varieties of chard are good from a nutritional standpoint, being high in vitamin A.",
@@ -2085,7 +2085,7 @@ export const Plants = [
 		non_companions: ['brassicas', 'dill', 'corn', 'kohlrabi', 'potatoes'],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/tomato.jpg'),
+		images: require('../assets/images/plant_images/tomato.jpg'),
 		species: 'Tomatoes',
 		description:
 			'A favorite of home gardeners, tomatoes are easy to grow, and just a few plants will supply an abundant harvest. With hundreds of varieties to choose from, and more being introduced every year, there is a tomato for every garden situation and every personal taste. The size of the fruit is no indication of plant size -- tiny "currant" tomatoes might grow on huge, vining (indeterminate) plants, while large "beefsteak" varieties can be found on more manageable bush (determinate) plants. Newer hybrid varieties have been bred for disease resistance, but don\'t overlook heirlooms that are famous for their rich flavors. By planting early-, mid-, and late-season varieties, you can extend the harvest.',
@@ -2143,7 +2143,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/turnip.jpg'),
+		images: require('../assets/images/plant_images/turnip.jpg'),
 		species: 'Turnip',
 		description:
 			"Relatively obscure in this country, turnips are a staple in many European kitchens. Turnips mature in about 2 months. Fall crops are usually sweeter and more tender than spring crops, and insects are less of a problem late in the season. Young turnips are so tender you can peel and eat them just as you would an apple. Many southern gardeners prefer to grow turnips for the greens. Both the roots and greens are very nutritious. To stretch the turnip harvest over a 2- or 3-month period, plant two or three varieties in the first planting. The roots will mature at different times instead of all at once. You can also harvest some turnips very early as greens, and small roots for eating fresh. Any turnip can be grown for its greens if harvested young, so you don't need to plant special varieties, even if you want more greens than roots.",
@@ -2201,7 +2201,7 @@ export const Plants = [
 		non_companions: [],
 		nutrient: [],
 		byproducts: [],
-		images: require('../assets/plant_images/winter_squash.jpg'),
+		images: require('../assets/images/plant_images/winter_squash.jpg'),
 		species: 'Winter Squash',
 		description: '',
 		days_to_germinate: null,
