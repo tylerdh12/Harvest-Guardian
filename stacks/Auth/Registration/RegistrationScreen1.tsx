@@ -4,9 +4,10 @@
 
 /* -------------------------- Imports and Includes -------------------------- */
 
+import { string } from 'prop-types'
 import React, { useState } from 'react'
 import { Platform } from 'react-native'
-import { GrowingZoneSelector } from '../../components/Forms/GrowingZoneSelector'
+import { GrowingZoneSelector } from '../../../components/Forms/GrowingZoneSelector'
 import {
 	Button,
 	ButtonPrimary,
@@ -20,12 +21,12 @@ import {
 	ScrollView,
 	TextInput,
 	View,
-} from '../../components/Styles'
+} from '../../../components/Styles'
 import {
 	ValidatePassword,
 	RegisterUser,
 	getGrowingZoneWithZip,
-} from '../../utils/Utils'
+} from '../../../utils/Utils'
 
 /* ----------------------------- Register Stack ----------------------------- */
 
@@ -36,10 +37,15 @@ function Register({ navigation }) {
 	const [zone, setZone] = useState('')
 	const [email, changeEmail] = useState('')
 	const [password, changePassword] = useState('')
-	const [validPassword, setValidPassword] = useState(true)
 	const [reenterPassword, changeReenterPassword] = useState('')
-	const [passwordError, setPasswordError] = useState([])
-	console.log(passwordError)
+
+	// Password Validation states
+	const [hasLowercase, setHasLowercase] = useState()
+	const [hasUppercase, setHasUppercase] = useState()
+	const [hasNumber, setHasNumber] = useState()
+	const [hasSpecialChar, setHasSpecialChar] = useState()
+	const [isValidLength, setIsValidLength] = useState()
+	const [isValidPassword, setIsValidPassword] = useState()
 
 	return (
 		<KeyboardAvoidingView
@@ -56,7 +62,7 @@ function Register({ navigation }) {
 							justifyContent: 'center',
 						}}
 					>
-						{/* <View style={{ width: '70%', alignItems: 'center' }}>
+						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>First Name</Label>
 							<TextInput
 								autoFocus={true}
@@ -70,7 +76,7 @@ function Register({ navigation }) {
 								onChangeText={lastName => changeLastName(lastName)}
 								value={lastName}
 							/>
-						</View> */}
+						</View>
 						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Email</Label>
 							<TextInput
@@ -87,21 +93,27 @@ function Register({ navigation }) {
 								onChangeText={password => {
 									ValidatePassword({
 										password,
-										setValidPassword,
-										setPasswordError,
-										passwordErrors,
+										setHasLowercase,
+										setHasUppercase,
+										setHasNumber,
+										setHasSpecialChar,
+										setIsValidLength,
 									})
 									changePassword(password)
 								}}
 								value={password}
 							/>
-							{/* {passwordError.length > 1
-								? passwordError.map(error => {
-										return <ErrorText key={error}>{error}</ErrorText>
-								  })
-								: null} */}
+							{hasLowercase ? <ErrorText>1 lowercase letter</ErrorText> : null}
+							{hasUppercase ? <ErrorText>1 uppercase letter</ErrorText> : null}
+							{hasNumber ? <ErrorText>1 number</ErrorText> : null}
+							{hasSpecialChar ? (
+								<ErrorText>1 special character</ErrorText>
+							) : null}
+							{isValidLength ? (
+								<ErrorText>At least 8 characters long</ErrorText>
+							) : null}
 						</View>
-						{/* <View style={{ width: '70%', alignItems: 'center' }}>
+						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Re-enter Password</Label>
 							<TextInput
 								secureTextEntry={true}
@@ -110,7 +122,7 @@ function Register({ navigation }) {
 								}}
 								value={reenterPassword}
 							/>
-						</View> */}
+						</View>
 						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Zip Code</Label>
 							<TextInput

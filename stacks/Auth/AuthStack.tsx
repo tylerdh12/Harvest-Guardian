@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 import Login from './Login'
 import Register from './Register'
+import RegistrationScreen1 from './Registration/RegistrationScreen1'
 
 /* ------------------------------ Define Stack ------------------------------ */
 
@@ -28,7 +29,7 @@ export const AuthStack = ({}) => {
 					header: () => null,
 				}}
 				name="Register"
-				component={Register}
+				component={RegistrationScreen1}
 			/>
 		</Stack.Navigator>
 	)

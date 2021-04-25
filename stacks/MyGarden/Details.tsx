@@ -16,8 +16,8 @@ import { deletePlantAlert, harvestProgress } from '../../utils/Utils'
 
 // TODO Add dynamic value for zone
 function Details({ route, navigation }) {
-	const data = route.params.data
-	const plant = route.params.plant
+	const data = route.params.data // Users plants stored in database
+	const plant = route.params.plant // List of all seeds stored locally
 
 	const User = useContext<any>(AuthContext)
 

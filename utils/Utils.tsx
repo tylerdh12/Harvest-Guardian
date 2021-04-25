@@ -9,6 +9,7 @@ import { Alert, Platform } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import moment from 'moment'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useState } from 'react'
 
 //TODO: Separate utilities into category files
 
@@ -100,11 +101,50 @@ export const getGrowingZoneWithZip = (zipCode, setZone) => {
 
 /* ------------------------- Validate Password ------------------------------ */
 
-export async function ValidatePassword({
+export function validateLowercaseLetter(string) {
+	// prettier-ignore
+	const lowercase = new RegExp("^(?=.*[a-z])")
+
+	return lowercase.test(string)
+}
+
+export function validateUppercaseLetter(string) {
+	// prettier-ignore
+	const uppercase = new RegExp("^(?=.*[A-Z])")
+
+	return uppercase.test(string)
+}
+
+export function validateNumber(string) {
+	// prettier-ignore
+	const number = new RegExp("^(?=.*[0-9])")
+
+	return number.test(string)
+}
+
+export function validateSpecialCharacter(string) {
+	// prettier-ignore
+	const special = new RegExp("^(?=.*[!@#$%^&*])")
+
+	return special.test(string)
+}
+
+export function validateLength(string, length) {
+	// prettier-ignore
+	const stringLength = new RegExp(`^(?=.{${length},})`)
+
+	return stringLength.test(string)
+}
+
+export function ValidatePassword({
 	password,
-	setValidPassword,
-	setPasswordError,
+	setHasLowercase,
+	setHasUppercase,
+	setHasNumber,
+	setHasSpecialChar,
+	setIsValidLength,
 }) {
+	//8 characters 1 uppercase 1 lowercase 1 special character 1 number
 	// prettier-ignore
 	const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 	// prettier-ignore
@@ -112,15 +152,18 @@ export async function ValidatePassword({
 	// prettier-ignore
 	const simpleRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
 
-	if (simpleRegex.test(password)) {
-		setValidPassword(false)
-	} else if (mediumRegex.test(password)) {
-		setValidPassword(true)
-	} else if (strongRegex.test(password)) {
-		setValidPassword(true)
-	} else {
-		setValidPassword(false)
-	}
+	validateLowercaseLetter(password)
+		? setHasLowercase(false)
+		: setHasLowercase(true)
+
+	validateUppercaseLetter(password)
+		? setHasUppercase(false)
+		: setHasUppercase(true)
+	validateNumber(password) ? setHasNumber(false) : setHasNumber(true)
+	validateSpecialCharacter(password)
+		? setHasSpecialChar(false)
+		: setHasSpecialChar(true)
+	validateLength(password, 8) ? setIsValidLength(false) : setIsValidLength(true)
 }
 
 /* ------------------------- My Garden Functions ---------------------------- */
