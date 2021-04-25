@@ -215,6 +215,17 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 			</View>
 			<View style={{ marginBottom: 20 }}>
 				<Button
+					title="Clear Onboarding"
+					onPress={async () => {
+						try {
+							await AsyncStorage.removeItem('@setViewedOnboarding')
+							console.log('Clear onboarding')
+						} catch (error) {
+							console.log('Error @clearOnboarding: ' + error)
+						}
+					}}
+				/>
+				<Button
 					title="Change Password"
 					onPress={() => {
 						navigation.push('Change Password')
