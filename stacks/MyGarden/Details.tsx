@@ -48,7 +48,7 @@ function Details({ route, navigation }) {
 					<DetailListItem
 						label="Days To Harvest"
 						dataText={Math.floor(
-							plant.days_to_harvest -
+							plant.days_to_harvest_short -
 								harvestProgress(data.date_planted, plant.days_to_harvest_short),
 						)}
 					/>
