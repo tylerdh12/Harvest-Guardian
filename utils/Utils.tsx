@@ -12,6 +12,35 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 //TODO: Separate utilities into category files
 
+export const getUserData = async (
+	authBasic,
+	setAuthBasic,
+	setUserData,
+	setErrorMessage,
+) => {
+	setAuthBasic(authBasic)
+	await axios({
+		method: 'get',
+		url: 'https://harvestguardian-rest-api.herokuapp.com/v1/user',
+		headers: {
+			Authorization: authBasic,
+		},
+	})
+		.then(res => {
+			setUserData(res.data)
+			if (Platform.OS === 'web') {
+				AsyncStorage.setItem('userData', JSON.stringify(res.data))
+			} else {
+				SecureStore.setItemAsync('userData', JSON.stringify(res.data))
+			}
+		})
+		.catch(err => {
+			if (err) {
+				setErrorMessage(err.response.status)
+			}
+		})
+}
+
 /* -------------------------- User Registration ----------------------------- */
 
 export async function RegisterUser({

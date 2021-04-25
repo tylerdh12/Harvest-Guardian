@@ -1,8 +1,8 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { Platform } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { getUserData } from '../utils/Utils'
 
 interface AuthProviderProps {
 	children: any
@@ -28,30 +28,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [errorMessage, setErrorMessage] = useState('')
 	const [authBasic, setAuthBasic] = useState(null)
 
-	async function getUserData(authBasic) {
-		setAuthBasic(authBasic)
-		await axios({
-			method: 'get',
-			url: 'https://harvestguardian-rest-api.herokuapp.com/v1/user',
-			headers: {
-				Authorization: authBasic,
-			},
-		})
-			.then(res => {
-				setUserData(res.data)
-				if (Platform.OS === 'web') {
-					AsyncStorage.setItem('userData', JSON.stringify(res.data))
-				} else {
-					SecureStore.setItemAsync('userData', JSON.stringify(res.data))
-				}
-			})
-			.catch(err => {
-				if (err) {
-					setErrorMessage(err.response.status)
-				}
-			})
-	}
-
 	return (
 		<AuthContext.Provider
 			value={{
@@ -61,7 +37,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				errorMessage,
 				setErrorMessage,
 				login: authBasic => {
-					return getUserData(authBasic)
+					return getUserData(
+						authBasic,
+						setAuthBasic,
+						setUserData,
+						setErrorMessage,
+					)
 				},
 				logout: () => {
 					setUserData(null)
