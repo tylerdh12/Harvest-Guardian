@@ -1,12 +1,7 @@
 import React, { useEffect, useRef } from 'react'
-import { AntDesign } from '@expo/vector-icons'
-import { StyleSheet, TouchableOpacity, View, Animated } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native'
 import Svg, { G, Circle } from 'react-native-svg'
-
-// interface NextButtonProps {
-// 	percentage: number
-// 	scrollTo: any
-// }
+import { AntDesign } from '@expo/vector-icons'
 
 const NextButton = ({ percentage, scrollTo }) => {
 	const size = 128
@@ -31,13 +26,16 @@ const NextButton = ({ percentage, scrollTo }) => {
 	}, [percentage])
 
 	useEffect(() => {
-		progressAnimation.addListener(value => {
-			const strokeDashoffset =
-				circumference - (circumference * value.value) / 100
-			if (progressRef?.current) {
-				progressRef.current.setNativeProps({ strokeDashoffset })
-			}
-		})
+		progressAnimation.addListener(
+			value => {
+				const strokeDashoffset =
+					circumference - (circumference * value.value) / 100
+				if (progressRef?.current) {
+					progressRef.current.setNativeProps({ strokeDashoffset })
+				}
+			},
+			[percentage],
+		)
 		return () => {
 			progressAnimation.removeAllListeners()
 		}
@@ -56,13 +54,12 @@ const NextButton = ({ percentage, scrollTo }) => {
 					/>
 					<Circle
 						ref={progressRef}
-						stroke="#f4338f"
+						stroke="#F4338F"
 						cx={center}
 						cy={center}
 						r={radius}
 						strokeWidth={strokeWidth}
 						strokeDasharray={circumference}
-						strokeDashoffset={circumference}
 					/>
 				</G>
 			</Svg>
@@ -76,7 +73,6 @@ const NextButton = ({ percentage, scrollTo }) => {
 		</View>
 	)
 }
-
 export default NextButton
 
 const styles = StyleSheet.create({
@@ -87,7 +83,7 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		position: 'absolute',
-		backgroundColor: '#f4338f',
+		backgroundColor: '#f4338F',
 		borderRadius: 100,
 		padding: 20,
 	},

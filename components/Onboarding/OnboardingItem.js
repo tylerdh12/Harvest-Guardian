@@ -1,17 +1,14 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
-
-// interface ItemProps {
-// 	item: {
-// 		id: string
-// 		title: string
-// 		description: string
-// 		image: any
-// 	}
-// }
+import {
+	View,
+	Text,
+	StyleSheet,
+	Image,
+	useWindowDimensions,
+} from 'react-native'
 
 const OnboardingItem = ({ item }) => {
-	const width = Dimensions.get('window').width
+	const { width } = useWindowDimensions()
 
 	return (
 		<View style={[styles.container, { width }]}>
@@ -26,13 +23,14 @@ const OnboardingItem = ({ item }) => {
 		</View>
 	)
 }
+
 export default OnboardingItem
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
 		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	image: {
 		flex: 0.7,
@@ -41,7 +39,6 @@ const styles = StyleSheet.create({
 	title: {
 		fontWeight: '800',
 		fontSize: 28,
-		marginBottom: 10,
 		color: '#493d8a',
 		textAlign: 'center',
 	},

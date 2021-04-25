@@ -13,23 +13,22 @@ import Onboarding from './components/Onboarding/Onboarding.js'
 export const Routes = ({}) => {
 	const { login, userData, authBasic } = useContext(AuthContext)
 	const [loading, setLoading] = useState(false)
-	const [viewedOnboarding, setViewedOnboarding] = useState(false)
+	// const [viewedOnboarding, setViewedOnboarding] = useState(false)
 
-	const checkOnboarding = async () => {
-		try {
-			console.log('Onboarding before Setting: ' + viewedOnboarding)
-			const value = await AsyncStorage.getItem('@viewedOnboarding')
-			console.log('Value of Async Data: ' + value)
-			value === null || value
-				? setViewedOnboarding(false)
-				: setViewedOnboarding(true)
-		} catch (error) {
-			console.log('Error @checkOnboarding: ' + error)
-		} finally {
-			console.log('Onboarding after Setting: ' + viewedOnboarding)
-			setLoading(false)
-		}
-	}
+	// const checkOnboarding = async () => {
+	// 	console.log('Onboarding before Setting: ' + viewedOnboarding)
+
+	// 	try {
+	// 		const value = await AsyncStorage.getItem('@viewedOnboarding')
+	// 		console.log('Value of Async Data: ' + value)
+	// 		value ? setViewedOnboarding(true) : setViewedOnboarding(false)
+	// 	} catch (error) {
+	// 		console.log('Error @checkOnboarding: ' + error)
+	// 	} finally {
+	// 		console.log('Onboarding after Setting: ' + viewedOnboarding)
+	// 		setLoading(false)
+	// 	}
+	// }
 
 	// get Async Storage '@viewedOnboarding'
 
@@ -57,8 +56,6 @@ export const Routes = ({}) => {
 				console.error('Async Storage Login Error: ' + err)
 			}
 		} else {
-			checkOnboarding()
-
 			try {
 				SecureStore.getItemAsync('authBasic')
 					.then(userString => {

@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react'
-import { StyleSheet, View, FlatList, Animated } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Animated } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import OnboardingItem from './OnboardingItem'
-import slides from './slides'
 import Paginator from './Paginator'
 import NextButton from './NextButton'
+import slides from './slides'
 
 const Onboarding = () => {
 	const [currentIndex, setCurrentIndex] = useState(0)
@@ -18,15 +19,13 @@ const Onboarding = () => {
 	const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current
 
 	const scrollTo = async () => {
-		// console.log(currentIndex)
-		// console.log(slides.length - 1)
 		if (currentIndex < slides.length - 1) {
 			slidesRef.current.scrollToIndex({ index: currentIndex + 1 })
-		} else if (currentIndex === slides.length - 1) {
+		} else {
 			try {
 				await AsyncStorage.setItem('@viewedOnboarding', 'true')
-			} catch (error) {
-				console.log('Error @setItem: ' + error)
+			} catch (err) {
+				consol.log('Error @setItem: ', err)
 			}
 		}
 	}
@@ -44,7 +43,9 @@ const Onboarding = () => {
 					keyExtractor={item => item.id}
 					onScroll={Animated.event(
 						[{ nativeEvent: { contentOffset: { x: scrollX } } }],
-						{ useNativeDriver: false },
+						{
+							useNativeDriver: false,
+						},
 					)}
 					scrollEventThrottle={32}
 					onViewableItemsChanged={viewableItemsChanged}
@@ -66,7 +67,7 @@ export default Onboarding
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
 		justifyContent: 'center',
+		alignItems: 'center',
 	},
 })
