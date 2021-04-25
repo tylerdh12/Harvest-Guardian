@@ -45,7 +45,7 @@ function Register({ navigation }) {
 			behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
 		>
 			<SafeAreaView>
-				<Heading>Create a New Account</Heading>
+				<Heading>Register a New Account</Heading>
 				<ScrollView style={{ width: '100%' }}>
 					<View
 						style={{
@@ -55,7 +55,7 @@ function Register({ navigation }) {
 							justifyContent: 'center',
 						}}
 					>
-						<View style={{ width: '70%', alignItems: 'center' }}>
+						{/* <View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>First Name</Label>
 							<TextInput
 								autoFocus={true}
@@ -69,23 +69,7 @@ function Register({ navigation }) {
 								onChangeText={lastName => changeLastName(lastName)}
 								value={lastName}
 							/>
-						</View>
-						<View style={{ width: '70%', alignItems: 'center' }}>
-							<Label>Zip Code</Label>
-							<TextInput
-								autoCompleteType="postal-code"
-								keyboardType="number-pad"
-								maxLength={5}
-								textContentType="postalCode"
-								onChangeText={zipCode => {
-									changeZipCode(zipCode)
-									if (zipCode.length === 5) {
-										getGrowingZoneWithZip(zipCode, setZone)
-									}
-								}}
-								value={zipCode}
-							/>
-						</View>
+						</View> */}
 						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Email</Label>
 							<TextInput
@@ -116,7 +100,7 @@ function Register({ navigation }) {
 								</ErrorText>
 							) : null}
 						</View>
-						<View style={{ width: '70%', alignItems: 'center' }}>
+						{/* <View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Re-enter Password</Label>
 							<TextInput
 								secureTextEntry={true}
@@ -124,6 +108,22 @@ function Register({ navigation }) {
 									changeReenterPassword(reenterPassword)
 								}}
 								value={reenterPassword}
+							/>
+						</View> */}
+						<View style={{ width: '70%', alignItems: 'center' }}>
+							<Label>Zip Code</Label>
+							<TextInput
+								autoCompleteType="postal-code"
+								keyboardType="number-pad"
+								maxLength={5}
+								textContentType="postalCode"
+								onChangeText={zipCode => {
+									changeZipCode(zipCode)
+									if (zipCode.length === 5) {
+										getGrowingZoneWithZip(zipCode, setZone)
+									}
+								}}
+								value={zipCode}
 							/>
 						</View>
 						<GrowingZoneSelector zone={zone} setZone={setZone} />
