@@ -42,7 +42,7 @@ function Settings({ navigation }) {
 				}}
 			>
 				<LinkTitle>
-					<Ionicons name="ios-lock" size={22} />
+					<Ionicons name="lock-closed-outline" size={22} />
 					{'  '}Privacy
 				</LinkTitle>
 			</TouchableOpacityAlt>
