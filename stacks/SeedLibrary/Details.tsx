@@ -110,9 +110,14 @@ export default function SeedDetails({ route, navigation }) {
 									paddingTop: 4,
 								}}
 							>
-								{data.outdoorSeed.map((value, index) => {
-									return <StepsMaker step={value} index={index} key={index} />
-								})}
+								{data.outdoorSeed.map(
+									(
+										value: { directions: string; image: string },
+										index: number,
+									) => {
+										return <StepsMaker step={value} index={index} key={index} />
+									},
+								)}
 							</ViewAlt>
 						</ViewAlt>
 					</BottomBorderView>

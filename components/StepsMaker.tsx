@@ -14,7 +14,7 @@ interface Props {
 const window = Dimensions.get('window')
 const screen = Dimensions.get('screen')
 
-export const StepsMaker: React.FC<Props> = ({ step, index, key }) => {
+export const StepsMaker: React.FC<Props> = ({ step, index }) => {
 	const [dimensions, setDimensions] = useState({ window, screen })
 
 	const onChange = ({ window, screen }) => {
@@ -30,7 +30,7 @@ export const StepsMaker: React.FC<Props> = ({ step, index, key }) => {
 
 	return (
 		<Text
-			key={key}
+			key={index}
 			style={(styles.text, { width: dimensions.window.width - 25 })}
 		>
 			Step {index + 1}: {step.directions}

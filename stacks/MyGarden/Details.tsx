@@ -94,9 +94,14 @@ function Details({ route, navigation }) {
 									paddingTop: 4,
 								}}
 							>
-								{plant.outdoorSeed.map((value, index) => {
-									return <StepsMaker step={value} index={index} key={index} />
-								})}
+								{plant.outdoorSeed.map(
+									(
+										value: { directions: string; image: string },
+										index: number,
+									) => {
+										return <StepsMaker step={value} index={index} key={index} />
+									},
+								)}
 							</ViewAlt>
 						</ViewAlt>
 					</BottomBorderView>
