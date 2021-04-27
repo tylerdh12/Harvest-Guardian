@@ -45,7 +45,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 			setIsLoading(true)
 			axios({
 				method: 'get',
-				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/user',
+				url: 'https://harvestguardian-rest-api.herokuapp.com/api/v1/user',
 				headers: {
 					Authorization: authBasic,
 				},
@@ -93,7 +93,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 			AsyncStorage.getItem('authBasic').then(authBasic => {
 				axios({
 					method: 'delete',
-					url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+					url: `https://harvestguardian-rest-api.herokuapp.com/api/v1/user/${userData._id}`,
 					headers: {
 						Authorization: authBasic,
 					},
@@ -115,7 +115,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 			SecureStore.getItemAsync('authBasic').then(authBasic => {
 				axios({
 					method: 'delete',
-					url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+					url: `https://harvestguardian-rest-api.herokuapp.com/api/v1/user/${userData._id}`,
 					headers: {
 						Authorization: authBasic,
 					},

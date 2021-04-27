@@ -22,7 +22,7 @@ export const getUserData = async (
 	setAuthBasic(authBasic)
 	await axios({
 		method: 'get',
-		url: 'https://harvestguardian-rest-api.herokuapp.com/v1/user',
+		url: 'https://harvestguardian-rest-api.herokuapp.com/api/v1/user',
 		headers: {
 			Authorization: authBasic,
 		},
@@ -68,7 +68,7 @@ export async function RegisterUser({
 
 		axios({
 			method: 'post',
-			url: 'https://harvestguardian-rest-api.herokuapp.com/v1/user',
+			url: 'https://harvestguardian-rest-api.herokuapp.com/api/v1/user',
 
 			data: newUser,
 		}).then(res => {
@@ -173,7 +173,7 @@ export async function getPlants(setData, setLoading) {
 		await AsyncStorage.getItem('authBasic').then(authBasic => {
 			axios({
 				method: 'get',
-				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
+				url: 'https://harvestguardian-rest-api.herokuapp.com/api/v1/plants',
 				headers: {
 					Authorization: authBasic,
 				},
@@ -192,7 +192,7 @@ export async function getPlants(setData, setLoading) {
 		await SecureStore.getItemAsync('authBasic').then(authBasic => {
 			axios({
 				method: 'get',
-				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
+				url: 'https://harvestguardian-rest-api.herokuapp.com/api/v1/plants',
 				headers: {
 					Authorization: authBasic,
 				},
@@ -284,7 +284,7 @@ export const AddSeedToMyGarden = async ({ date_planted, data, navigation }) => {
 		await AsyncStorage.getItem('authBasic').then(authBasic => {
 			axios({
 				method: 'post',
-				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
+				url: 'https://harvestguardian-rest-api.herokuapp.com/api/v1/plants',
 				headers: {
 					Authorization: authBasic,
 				},
@@ -307,7 +307,7 @@ export const AddSeedToMyGarden = async ({ date_planted, data, navigation }) => {
 		await SecureStore.getItemAsync('authBasic').then(authBasic => {
 			axios({
 				method: 'post',
-				url: 'https://harvestguardian-rest-api.herokuapp.com/v1/plants',
+				url: 'https://harvestguardian-rest-api.herokuapp.com/api/v1/plants',
 				headers: {
 					Authorization: authBasic,
 				},
@@ -341,7 +341,7 @@ export async function deletePlantFromMyGarden({ data, onRefresh }) {
 		await AsyncStorage.getItem('authBasic').then(authBasic => {
 			axios({
 				method: 'delete',
-				url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${data._id}`,
+				url: `https://harvestguardian-rest-api.herokuapp.com/api/v1/plants/${data._id}`,
 				headers: {
 					Authorization: authBasic,
 				},
@@ -360,7 +360,7 @@ export async function deletePlantFromMyGarden({ data, onRefresh }) {
 		await SecureStore.getItemAsync('authBasic').then(authBasic => {
 			axios({
 				method: 'delete',
-				url: `https://harvestguardian-rest-api.herokuapp.com/v1/plants/${data._id}`,
+				url: `https://harvestguardian-rest-api.herokuapp.com/api/v1/plants/${data._id}`,
 				headers: {
 					Authorization: authBasic,
 				},
@@ -383,7 +383,7 @@ export const AddSeedToLibrary = async ({ data, setIsLoading }) => {
 	// console.log(data)
 	await axios({
 		method: 'post',
-		url: 'https://harvestguardian-rest-api.herokuapp.com/v1/seeds/',
+		url: 'https://harvestguardian-rest-api.herokuapp.com/api/v1/seeds/',
 		data: {
 			species: data.species,
 			description: data.description,
@@ -462,7 +462,7 @@ export async function deleteSeedFromLibrary({ data, onRefresh }) {
 		await AsyncStorage.getItem('authBasic').then(authBasic => {
 			axios({
 				method: 'delete',
-				url: `https://harvestguardian-rest-api.herokuapp.com/v1/seeds/${data._id}`,
+				url: `https://harvestguardian-rest-api.herokuapp.com/api/v1/seeds/${data._id}`,
 			}).then(res => {
 				if (res.status === 401) {
 					console.log('Response 401')
@@ -478,7 +478,7 @@ export async function deleteSeedFromLibrary({ data, onRefresh }) {
 		await SecureStore.getItemAsync('authBasic').then(authBasic => {
 			axios({
 				method: 'delete',
-				url: `https://harvestguardian-rest-api.herokuapp.com/v1/seeds/${data._id}`,
+				url: `https://harvestguardian-rest-api.herokuapp.com/api/v1/seeds/${data._id}`,
 			}).then(res => {
 				if (res.status === 401) {
 					console.log('Response 401')

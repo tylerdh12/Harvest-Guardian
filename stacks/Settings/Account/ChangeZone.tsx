@@ -31,7 +31,7 @@ export const ChangeZone = ({ navigation }) => {
 						? AsyncStorage.getItem('authBasic').then(authBasic => {
 								axios({
 									method: 'patch',
-									url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+									url: `https://harvestguardian-rest-api.herokuapp.com/api/v1/user/${userData._id}`,
 									headers: {
 										Authorization: authBasic,
 									},
@@ -73,7 +73,7 @@ export const ChangeZone = ({ navigation }) => {
 							? SecureStore.getItemAsync('authBasic').then(authBasic => {
 									axios({
 										method: 'patch',
-										url: `https://harvestguardian-rest-api.herokuapp.com/v1/user/${userData._id}`,
+										url: `https://harvestguardian-rest-api.herokuapp.com/api/v1/user/${userData._id}`,
 										headers: {
 											Authorization: authBasic,
 										},
