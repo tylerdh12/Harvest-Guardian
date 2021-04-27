@@ -75,7 +75,6 @@ export const ButtonPrimary = styled.TouchableOpacity`
 	justify-content: center;
 	width: 300px;
 	height: 45px;
-	margin: 10px;
 	border-radius: 8px;
 `
 

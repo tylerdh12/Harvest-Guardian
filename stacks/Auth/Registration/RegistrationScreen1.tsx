@@ -4,7 +4,6 @@
 
 /* -------------------------- Imports and Includes -------------------------- */
 
-import { string } from 'prop-types'
 import React, { useState } from 'react'
 import { Platform } from 'react-native'
 import { GrowingZoneSelector } from '../../../components/Forms/GrowingZoneSelector'
@@ -52,7 +51,7 @@ function Register({ navigation }) {
 			behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
 		>
 			<SafeAreaView>
-				<Heading>Register a New Account</Heading>
+				<Heading>Create Account</Heading>
 				<ScrollView style={{ width: '100%' }}>
 					<View
 						style={{
@@ -89,6 +88,7 @@ function Register({ navigation }) {
 						<View style={{ width: '70%', alignItems: 'center' }}>
 							<Label>Password</Label>
 							<TextInput
+								blurOnSubmit
 								secureTextEntry={true}
 								onChangeText={password => {
 									ValidatePassword({

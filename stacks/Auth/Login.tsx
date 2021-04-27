@@ -192,7 +192,7 @@ function Login({ navigation }) {
 					)
 				) : (
 					<>
-						<Heading>Login</Heading>
+						<Heading>Sign In</Heading>
 
 						<View
 							style={{
@@ -235,7 +235,7 @@ function Login({ navigation }) {
 								alignItems: 'center',
 								flexDirection: 'column',
 								justifyContent: 'space-evenly',
-								margin: 15,
+								marginHorizontal: 15,
 							}}
 						>
 							<ButtonPrimary
@@ -245,9 +245,9 @@ function Login({ navigation }) {
 								}}
 							>
 								{isLoading ? (
-									<ButtonPrimaryText>Logging In...</ButtonPrimaryText>
+									<ButtonPrimaryText>Signing In...</ButtonPrimaryText>
 								) : (
-									<ButtonPrimaryText>Log In</ButtonPrimaryText>
+									<ButtonPrimaryText>Sign In</ButtonPrimaryText>
 								)}
 							</ButtonPrimary>
 							<Button

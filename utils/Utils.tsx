@@ -9,9 +9,6 @@ import { Alert, Platform } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import moment from 'moment'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useState } from 'react'
-
-//TODO: Separate utilities into category files
 
 export const getUserData = async (
 	authBasic,
@@ -29,6 +26,7 @@ export const getUserData = async (
 	})
 		.then(res => {
 			setUserData(res.data)
+			console.log(res.data)
 			if (Platform.OS === 'web') {
 				AsyncStorage.setItem('userData', JSON.stringify(res.data))
 			} else {

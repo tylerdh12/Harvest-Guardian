@@ -2,6 +2,17 @@
 
 Garden Smarter
 
+---
+
+### ToDo
+
+- [] TODO: Restructure returns of user data and plants
+- [] TODO: Update the way data is stored so it can be accessed offline
+- [] TODO: Create offline state
+- [] TODO: Create Offline Screen
+- [] TODO: Work on settings calls and toggles
+- [] TODO: Move separate sections of registration to only minimum
+
 ### Table of Contents
 
 You're sections headers will be used to reference location of destination.
