@@ -2,7 +2,7 @@ import { Feather } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack'
 import axios from 'axios'
 import { default as React, useContext, useEffect, useState } from 'react'
-import { Alert, Button, Platform } from 'react-native'
+import { Alert, Button, Platform, ScrollView } from 'react-native'
 import {
 	BasicText,
 	Label,
@@ -53,7 +53,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 				.then(res => {
 					if (res.status === 200) {
 						setUserData(res.data)
-						console.log(res.data.email + ' has fetched user data')
+						console.log(res.data)
 						// SecureStore.setItemAsync("userData", JSON.stringify(res.data));
 						setIsLoading(false)
 					} else {
@@ -143,75 +143,83 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 				flex: 1,
 				flexDirection: 'column',
 				justifyContent: 'space-between',
+				alignItems: 'center',
 			}}
 		>
-			<View style={{ marginBottom: 20 }}>
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-					}}
-				>
-					<Label>Name</Label>
-				</View>
-				<BasicText>{userData.name}</BasicText>
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-					}}
-				>
-					<Label>Email</Label>
-				</View>
-				<BasicText>{userData.email}</BasicText>
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-					}}
-				>
-					<Label>Zip Code</Label>
-					<TouchableOpacityAlt
-						onPress={() => {
-							navigation.push('Change Zip Code')
+			<ScrollView
+				style={{
+					width: '100%',
+					maxWidth: 500,
+				}}
+			>
+				<View style={{ marginBottom: 20 }}>
+					<View
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
 						}}
 					>
-						<Feather
-							style={{ paddingRight: 20 }}
-							name="edit-3"
-							size={22}
-							color="white"
-						/>
-					</TouchableOpacityAlt>
-				</View>
-				<BasicText>{userData.zip}</BasicText>
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-					}}
-				>
-					<Label>Growing Zone</Label>
-					<TouchableOpacityAlt
-						onPress={() => {
-							navigation.push('Change Zone')
+						<Label>Name</Label>
+					</View>
+					<BasicText>{userData.name}</BasicText>
+					<View
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
 						}}
 					>
-						<Feather
-							style={{ paddingRight: 20 }}
-							name="edit-3"
-							size={22}
-							color="white"
-						/>
-					</TouchableOpacityAlt>
+						<Label>Email</Label>
+					</View>
+					<BasicText>{userData.email}</BasicText>
+					<View
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+						}}
+					>
+						<Label>Zip Code</Label>
+						<TouchableOpacityAlt
+							onPress={() => {
+								navigation.push('Change Zip Code')
+							}}
+						>
+							<Feather
+								style={{ paddingRight: 20 }}
+								name="edit-3"
+								size={22}
+								color="white"
+							/>
+						</TouchableOpacityAlt>
+					</View>
+					<BasicText>{userData.zip}</BasicText>
+					<View
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+						}}
+					>
+						<Label>Growing Zone</Label>
+						<TouchableOpacityAlt
+							onPress={() => {
+								navigation.push('Change Zone')
+							}}
+						>
+							<Feather
+								style={{ paddingRight: 20 }}
+								name="edit-3"
+								size={22}
+								color="white"
+							/>
+						</TouchableOpacityAlt>
+					</View>
+					<BasicText>{userData.zone}</BasicText>
 				</View>
-				<BasicText>{userData.zone}</BasicText>
-			</View>
-			<View style={{ marginBottom: 20 }}>
+			</ScrollView>
+			<View style={{ width: '100%', maxWidth: 500 }}>
 				<Button
 					title="Clear Onboarding"
 					onPress={async () => {
