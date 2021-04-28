@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
 	},
 	img: {
 		width: '100%',
-		height: 160,
+		height: 220,
 		borderTopLeftRadius: 30,
 		borderTopRightRadius: 30,
 	},

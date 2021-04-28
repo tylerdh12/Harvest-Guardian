@@ -56,7 +56,7 @@ export async function RegisterUser({
 		const newUser = {
 			first_name: firstName,
 			last_name: lastName,
-			zip_code: zipCode,
+			zip: zipCode,
 			email: email,
 			password: password,
 			zone: zone,

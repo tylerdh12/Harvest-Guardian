@@ -17,10 +17,10 @@ interface ChangeZipProps {
 		first_name: string
 		last_name: string
 		password: string
-		zip_code: number
+		zip: number
 		zone: string
 	}
-	zip_code: number
+	zip: number
 	navigation: any
 }
 
@@ -29,7 +29,7 @@ export const ChangeZip: React.FC<ChangeZipProps> = ({ navigation }) => {
 		AuthContext,
 	)
 	const [isLoading, setIsLoading] = useState(false)
-	const [zipCode, changeZip] = useState(userData.zip_code)
+	const [zipCode, changeZip] = useState(userData.zip)
 
 	async function submitZipChange() {
 		setIsLoading(true)
@@ -51,7 +51,7 @@ export const ChangeZip: React.FC<ChangeZipProps> = ({ navigation }) => {
 										last_name: userData.last_name,
 										email: userData.email,
 										password: response,
-										zip_code: zipCode,
+										zip: zipCode,
 										account_type: userData.account_type,
 										zone: userData.zone,
 										active: true,
@@ -92,7 +92,7 @@ export const ChangeZip: React.FC<ChangeZipProps> = ({ navigation }) => {
 										last_name: userData.last_name,
 										email: userData.email,
 										password: response,
-										zip_code: zipCode,
+										zip: zipCode,
 										account_type: userData.account_type,
 										zone: userData.zone,
 										active: true,

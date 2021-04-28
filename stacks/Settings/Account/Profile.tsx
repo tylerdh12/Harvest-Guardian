@@ -23,7 +23,7 @@ interface ProfileProps {
 		first_name: string
 		last_name: string
 		password: string
-		zip_code: number
+		zip: number
 		zone: string
 	}
 	navigation: any
@@ -153,11 +153,9 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 						alignItems: 'center',
 					}}
 				>
-					<Label>Full Name</Label>
+					<Label>Name</Label>
 				</View>
-				<BasicText>
-					{userData.first_name} {userData.last_name}
-				</BasicText>
+				<BasicText>{userData.name}</BasicText>
 				<View
 					style={{
 						flexDirection: 'row',
@@ -189,7 +187,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 						/>
 					</TouchableOpacityAlt>
 				</View>
-				<BasicText>{userData.zip_code}</BasicText>
+				<BasicText>{userData.zip}</BasicText>
 				<View
 					style={{
 						flexDirection: 'row',

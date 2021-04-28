@@ -70,5 +70,8 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		marginHorizontal: 5,
 		backgroundColor: 'transparent',
+		width: '100%',
+		maxWidth: 500,
+		alignSelf: 'center',
 	},
 })

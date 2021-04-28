@@ -18,6 +18,7 @@ export const SeedLibrary: React.FC<SeedLibraryProps> = ({ navigation }) => {
 						flex: 1,
 						width: '100%',
 					}}
+					showsVerticalScrollIndicator={false}
 					renderItem={({ item }) => (
 						<CardLayout {...{ item }} navigation={navigation} type="seed" />
 					)}
