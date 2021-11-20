@@ -2,6 +2,17 @@
 
 Garden Smarter
 
+---
+
+### ToDo
+
+- [] TODO: Restructure returns of user data and plants
+- [] TODO: Update the way data is stored so it can be accessed offline
+- [] TODO: Create offline state
+- [] TODO: Create Offline Screen
+- [] TODO: Work on settings calls and toggles
+- [] TODO: Move separate sections of registration to only minimum
+
 ### Table of Contents
 
 You're sections headers will be used to reference location of destination.
@@ -16,12 +27,13 @@ You're sections headers will be used to reference location of destination.
 
 ## Description
 
-Harvest Guardian is a gardening application to help track your plants and will also help teach you gardening tips. 
+Harvest Guardian is a gardening application to help track your plants and will
+also help teach you gardening tips.
 
 #### Technologies
 
 - TypeScript
-- Use of GQL Api
+- Express Api
 - Yarn
 - React Native
 - Expo
@@ -34,7 +46,8 @@ Harvest Guardian is a gardening application to help track your plants and will a
 
 ## How To Use
 
-To get started download the project. Then Use Yarn install inside the project folder. Then start the project using expo start.
+To get started download the project. Then Use Yarn install inside the project
+folder. Then start the project using expo start.
 
 ## Additional Resources
 
@@ -48,25 +61,24 @@ To get started download the project. Then Use Yarn install inside the project fo
 
 MIT License
 
-Copyright (c) [2020][Tyler Harper DBA JSStack Development]
+Copyright (c) [2020][tyler harper dba jsstack development]
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [Back To The Top](#table-of-contents)
 
@@ -74,8 +86,7 @@ SOFTWARE.
 
 ## Author Info
 
-Future support for this application will be supported by:
-Tyler Harper
+Future support for this application will be supported by: Tyler Harper
 
 - Twitter - [@jsstackdev](https://twitter.com/jsstackdev)
 - Website - [Tyler Harper](https://resume.jsstack.dev)
